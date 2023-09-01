@@ -1,0 +1,83 @@
+.header{
+    background-color: #D73648;
+}
+
+.ui-container{
+    height: calc(100% - 64px);
+}
+
+.layer-menus{
+    background-color:white;
+}
+
+.edit-layer{
+    padding: 0;
+}
+
+.viewport{
+    background-color:azure;
+    padding: 0;
+}
+
+.layer-history{
+
+}
+
+.tab-bar{
+    padding: 0;
+}
+
+.tab-btn{
+    background-color: white;
+    border: none;
+    padding: 0;
+    padding: 1rem 0;
+}
+
+.tab-btn:hover{
+    background-color:gainsboro
+}
+
+.list-btn{
+    background-color: #D73648;
+    border: none;
+    color: white;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2px;
+}
+
+.list-btn:hover{
+    background-color: #d35765;
+}
+
+.machine-icon-frame{
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    padding: 0;
+    border-radius: 2px;
+}
+
+.list-btn-title{
+    color: white;
+    text-align: left;
+}
+
+.list-btn-bullets{
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.list-btn-bullets > li{
+    color: white;
+    text-align: left;
+}
+
+.history-item-num{
+    text-align: right;
+    color: white;
+}
+
+.new-layer{
+    color:white;
+    padding: 0;
+}
