@@ -19,10 +19,6 @@
     padding: 0;
 }
 
-.layer-history{
-
-}
-
 .tab-bar{
     padding: 0;
 }
@@ -30,7 +26,6 @@
 .tab-btn{
     background-color: white;
     border: none;
-    padding: 0;
     padding: 1rem 0;
 }
 
@@ -44,6 +39,10 @@
     color: white;
     padding: 1rem 1.5rem;
     margin-bottom: 2px;
+}
+
+.list-btn > *{
+    color: white;
 }
 
 .list-btn:hover{

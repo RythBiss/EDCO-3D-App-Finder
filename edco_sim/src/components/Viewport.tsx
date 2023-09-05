@@ -29,7 +29,6 @@ export default function Viewport() {
       renderer.render( scene, camera );
     }
 
-
     let onWindowResize = function () {
       camera.aspect = mountRef.current.offsetWidth / mountRef.current.offsetHeight;
       camera.updateProjectionMatrix();
