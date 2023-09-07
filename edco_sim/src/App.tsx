@@ -9,9 +9,6 @@ import Viewport from './components/Viewport'
 function App() {
 
   class Layer{
-    surface: string;
-    machine: string;
-    tooling: string;
 
     constructor(){
       this.surface = '';
@@ -19,9 +16,12 @@ function App() {
       this.tooling = '';
     }
 
+    surface: string;
+    machine: string;
+    tooling: string;
+
     setSurface(newSurface: string): void{
       this.surface = newSurface;
-      console.log(this.surface)
     }
     
     setMachine(newMachine: string): void{
@@ -34,10 +34,6 @@ function App() {
   }
 
   let layerObj = new Layer;
-
-  useEffect(() => {
-    console.log(layerObj.surface)
-  })
 
   return (
     <>

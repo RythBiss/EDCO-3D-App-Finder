@@ -46,7 +46,15 @@
 }
 
 .list-btn:hover{
-    background-color: #d35765;
+    background-color: #dd4e5f;
+}
+
+.btn-wrapper > *{
+    pointer-events: none;
+}
+
+.btn-active{
+    background-color: #e75a6b;
 }
 
 .machine-icon-frame{
