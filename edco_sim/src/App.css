@@ -27,6 +27,7 @@
     background-color: white;
     border: none;
     padding: 1rem 0;
+    margin: 0;
 }
 
 .tab-btn:hover{
@@ -38,7 +39,7 @@
     border: none;
     color: white;
     padding: 1rem 1.5rem;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
 }
 
 .list-btn > *{
@@ -46,7 +47,7 @@
 }
 
 .list-btn:hover{
-    background-color: #dd4e5f;
+    background-color: #eb7987;
 }
 
 .btn-wrapper > *{

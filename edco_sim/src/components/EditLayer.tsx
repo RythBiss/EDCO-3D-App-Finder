@@ -14,17 +14,17 @@ const menus = [
 ]
 
   return (
-    <div className='col-3 h-100 z-0 shadow edit-layer layer-menus'>
-        <div className='container-fluid'>
+    <div className='col-3 h-100 z-0 shadow'>
+        <div className='edit-layer'>
             <div className='row'>
-                <div className='col tab-bar'>
-                    <button type="button" className="tab-btn w-100" onClick={() => setDisplayMenu(0)}>SURFACE</button>
+                <div className='col px-0'>
+                    <button type="button" className="w-100 tab-btn" onClick={() => setDisplayMenu(0)}>SURFACE</button>
                 </div>
-                <div className='col tab-bar'>
-                    <button type="button" className="tab-btn w-100" onClick={() => setDisplayMenu(1)}>MACHINE</button>
+                <div className='col px-0'>
+                    <button type="button" className="w-100 tab-btn" onClick={() => setDisplayMenu(1)}>MACHINE</button>
                 </div>
-                <div className='col tab-bar'>
-                    <button type="button" className="tab-btn w-100" onClick={() => setDisplayMenu(2)}>TOOLING</button>
+                <div className='col px-0'>
+                    <button type="button" className="w-100 tab-btn" onClick={() => setDisplayMenu(2)}>TOOLING</button>
                 </div>
             </div>
             {menus[displayMenu]}

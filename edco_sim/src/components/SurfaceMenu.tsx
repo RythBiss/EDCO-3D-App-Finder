@@ -27,17 +27,11 @@ export default function SurfaceMenu(props:any) {
         props.layerObject.setSurface(newLayer);
         setSelectedSurface(newLayer);
     }
-
-
-
-    useEffect(() => {
-        console.log(selectedSurface)
-    }, [selectedSurface])
     
 
     
   return (
-    <div className='edit-menu'>
+    <div className='col edit-menu'>
         <ListButton lable={'First Layer Surfaces'} onClick={() => handleMenuState(1)} />
         {openedMenu == 1 && surfacesFirstLayer.map((layer, i) => 
             <ListButton key={i} lable={layer} indent={1} active={selectedSurface == layer ? true : false} onClick={() => setSurface(layer)} />
