@@ -18,7 +18,7 @@ export default function Viewport() {
     const loader = new GLTFLoader();
   
     const geometry = new THREE.BoxGeometry( 4, 0.375, 4 );
-    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    const material = new THREE.MeshBasicMaterial( { color: 0xc7c4c0 } );
     const cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
   
@@ -33,8 +33,6 @@ export default function Viewport() {
       camera.aspect = mountRef.current.offsetWidth / mountRef.current.offsetHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(mountRef.current.offsetWidth, window.innerHeight - 64);
-
-      console.log(mountRef.current.offsetHeight)
     }
 
     window.addEventListener("resize", onWindowResize, false);

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import {  } from 'react'
 import './App.css'
 import EditLayer from './components/EditLayer'
 import Header from './components/Header'
@@ -9,7 +9,6 @@ import Viewport from './components/Viewport'
 function App() {
 
   class Layer{
-
     constructor(){
       this.surface = '';
       this.machine = '';

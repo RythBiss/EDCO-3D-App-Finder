@@ -6,7 +6,7 @@ export default function SurfaceMenu(props:any) {
     const surfacesFirstLayer = ['vinyl', 'linoleum', 'ceramic', 'carpet'];
     const surfacesSecondLayer = ['adhesives', 'glues', 'thinsets', 'industrial buildup'];
     const surfacesThirdLayer = ['residual adhesive', 'sealers', 'thin mil coatings', 'paint'];
-    const surfacesFourthLayer = ['leveling', 'CSP 1-9'];
+    const surfacesFourthLayer = ['leveling', 'Soft Concrete', 'Medium Concrete', 'Hard Concrete'];
 
 
 

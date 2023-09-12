@@ -24,7 +24,7 @@ const menus = [
                     <button type="button" className="w-100 tab-btn" onClick={() => setDisplayMenu(1)}>MACHINE</button>
                 </div>
                 <div className='col px-0'>
-                    <button type="button" className="w-100 tab-btn" onClick={() => setDisplayMenu(2)}>TOOLING</button>
+                    <button type="button" className="w-100 tab-btn" onClick={() => setDisplayMenu(2)}>FINISH</button>
                 </div>
             </div>
             {menus[displayMenu]}

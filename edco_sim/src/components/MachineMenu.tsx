@@ -14,19 +14,19 @@ const machinesByApplication: any = {
     image: 'https://portal.edcoinc.com/storage/product-slider/8-manual-tile-shark-floor-stripper/TS-8-Machine-Slider.jpg'
   },
   SEC: {
-    apps: ['adhesives', 'glues', 'thinsets', 'industrial buildup', 'residual adhesive', 'sealers', 'thin mil coatings', 'paint', 'leveling', 'CSP 1-9'],
+    apps: ['adhesives', 'glues', 'thinsets', 'industrial buildup', 'residual adhesive', 'sealers', 'thin mil coatings', 'paint', 'leveling', 'Soft Concrete', 'Medium Concrete', 'Hard Concrete'],
     image: 'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-single-disc-floor-grinder/SEC-NG-Machine-Slider.jpg'
   },
   TG10: {
-    apps: ['residual adhesive', 'sealers', 'thin mil coatings', 'paint','leveling', 'CSP 1-9'],
+    apps: ['residual adhesive', 'sealers', 'thin mil coatings', 'paint','leveling', 'Soft Concrete', 'Medium Concrete', 'Hard Concrete'],
     image: 'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Gas-Machine-Slider.jpg'
   },
   CPM8: {
-    apps: ['leveling', 'CSP 1-9'],
+    apps: ['leveling', 'Soft Concrete', 'Medium Concrete', 'Hard Concrete'],
     image: 'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8-Gas-Machine-Slider.jpg'
   },
   CD5: {
-    apps: ['leveling', 'CSP 1-9'],
+    apps: ['leveling', 'Soft Concrete', 'Medium Concrete', 'Hard Concrete'],
     image: 'https://portal.edcoinc.com/storage/product-slider/5-head-crete-crusher-r/CD-5-Machine-Slider.jpg'
   }
 }
@@ -41,7 +41,6 @@ const [matchingMachines, setMatchingMachines] = useState<string[]>([]);
 const setMachine = (newMachine: string, ) => {
     props.layerObject.setMachine(newMachine);
     setSelectedMachine(newMachine);
-    console.log(props.layerObject)
 }
 
 
@@ -69,7 +68,7 @@ useEffect(() => {
 
 
   return (
-    <div className='edit-menu'>
+    <div className='col edit-menu'>
         {matchingMachines.map((machine, i) => 
             <ListButton key={i} lable={machine} icon={machinesByApplication[machine].image} active={selectedMachine == machine ? true : false} onClick={() => setMachine(machine)} />
         )}
