@@ -1,4 +1,4 @@
-import {  } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import EditLayer from './components/EditLayer'
 import Header from './components/Header'
@@ -7,6 +7,10 @@ import Viewport from './components/Viewport'
 
 
 function App() {
+
+  const [layerList, setLayerList] = useState<Layer[]>([])
+  const [currentLayer, setCurrentLayer] = useState<Layer>()
+
 
   class Layer{
     constructor(){
@@ -32,16 +36,27 @@ function App() {
     }
   }
 
-  let layerObj = new Layer;
+  const createNewLayer = () => {
+    if(currentLayer == undefined){
+      setCurrentLayer(new Layer);
+    }else{
+      setLayerList(layerList?.concat(currentLayer));
+      setCurrentLayer(new Layer);
+    }
+  }
+
+  useEffect(() => {
+    createNewLayer()
+  }, [])
 
   return (
     <>
       <Header />
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100'>
-          <EditLayer layerObject={layerObj} />
+          <EditLayer layerObject={currentLayer} />
           <Viewport />
-          <LayerHistory />
+          <LayerHistory newLayer={createNewLayer} history={layerList} current={currentLayer} />
         </div>
       </div>
     </>

@@ -51,12 +51,23 @@ export default function ToolingMenu(props: any) {
       name: '5-Point Bit',
       machines: ['CD5'],
       image: 'https://edcostore.com/wp-content/uploads/2017/06/18810_5PointCarbideBit-450x450.jpg'
-    }
+    },
+    NinePoint: {
+      apps: ['leveling', 'Soft Concrete', 'Medium Concrete', 'Hard Concrete'],
+      name: '9-Point Bit',
+      machines: ['CD5'],
+      image: 'https://edcostore.com/wp-content/uploads/2017/06/18820_9PointCarbideBit-450x450.jpg'
+    },
   }
 
   const [selectedMachine, setSelectedMachine] = useState('');
   const [selectedSurface, setSelectedSurface] = useState('');
   const [matchingTooling, setMatchingTooling] = useState<string[]>([]);
+
+  const setTooling = (newTooling: string, ) => {
+    props.layerObject.setTooling(newTooling);
+    setSelectedSurface(newTooling);
+  }
 
   useEffect(() => {
     setSelectedMachine(props.layerObject.machine);
@@ -93,7 +104,7 @@ export default function ToolingMenu(props: any) {
   return (
     <div className='col edit-menu'>
       {matchingTooling.map((tool: any, i: any) => 
-            <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} icon={toolsByApplicationAndMachine[tool].image}  /> //active={selectedMachine == machine ? true : false} onClick={() => setMachine(machine)}
+            <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name)} />
         )}
     </div>
   )
