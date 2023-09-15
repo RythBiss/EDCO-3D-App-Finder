@@ -1,3 +1,8 @@
+:root{
+    --active: #eb7987;
+    --hover: #e75a6b;
+}
+
 .header{
     background-color: #D73648;
 }
@@ -31,8 +36,17 @@
     margin: 0;
 }
 
+.tab-btn-active{
+    background-color: var(--active);
+    border: none;
+    padding: 1rem 0;
+    margin: 0;
+    color: white;
+}
+
 .tab-btn:hover{
-    background-color:gainsboro
+    background-color:var(--hover);
+    color: white;
 }
 
 .list-btn{
@@ -48,7 +62,7 @@
 }
 
 .list-btn:hover{
-    background-color: #eb7987;
+    background-color: var(--hover);
 }
 
 .btn-wrapper > *{
@@ -56,7 +70,7 @@
 }
 
 .btn-active{
-    background-color: #e75a6b;
+    background-color: var(--active);
 }
 
 .machine-icon-frame{

@@ -10,6 +10,7 @@ function App() {
 
   const [layerList, setLayerList] = useState<Layer[]>([])
   const [currentLayer, setCurrentLayer] = useState<Layer>()
+  const [updateState, toggle] = useState(false);
 
 
   class Layer{
@@ -25,14 +26,21 @@ function App() {
 
     setSurface(newSurface: string): void{
       this.surface = newSurface;
+      this.machine = '';
+      this.tooling = '';
+
+      toggle(prevState => !prevState)
     }
     
     setMachine(newMachine: string): void{
       this.machine = newMachine;
+      this.tooling = '';
+      toggle(prevState => !prevState)
     }
 
     setTooling(newTooling: string): void{
       this.tooling = newTooling;
+      toggle(prevState => !prevState)
     }
   }
 
@@ -48,6 +56,10 @@ function App() {
   useEffect(() => {
     createNewLayer()
   }, [])
+
+  useEffect(() => {
+    console.log('app: ', currentLayer)
+  }, [currentLayer])
 
   return (
     <>

@@ -10,7 +10,7 @@ const machinesByApplication: any = {
     image: 'https://portal.edcoinc.com/storage/product-slider/alr-steel-chisel-scalers/ALR-5-Machine-Slider.jpg'
   },
   TS8: {
-    apps: ['vinyl', 'linoleum', 'ceramic', 'carpet'],
+    apps: ['vinyl', 'linoleum', 'carpet'],
     image: 'https://portal.edcoinc.com/storage/product-slider/8-manual-tile-shark-floor-stripper/TS-8-Machine-Slider.jpg'
   },
   SEC: {

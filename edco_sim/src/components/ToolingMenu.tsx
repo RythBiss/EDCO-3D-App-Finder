@@ -11,7 +11,7 @@ export default function ToolingMenu(props: any) {
       image: 'https://edcostore.com/wp-content/uploads/2017/06/C10302_4_SteelChisel-450x450.jpg'
     },
     Scraper: {
-      apps: ['vinyl', 'linoleum', 'ceramic', 'carpet'],
+      apps: ['vinyl', 'linoleum', 'carpet'],
       name: 'Scrapper Blades',
       machines: ['ALR'],
       image: 'https://edcostore.com/wp-content/uploads/2017/06/C10305_ScraperBlades.jpg'
@@ -20,7 +20,7 @@ export default function ToolingMenu(props: any) {
       apps: ['vinyl', 'linoleum', 'carpet'],
       name: '8" Rigid Scrapper Blade',
       machines: ['TS8'],
-      image: 'https://edcostore.com/wp-content/uploads/2017/06/C10305_ScraperBlades.jpg'
+      image: 'https://edcostore.com/wp-content/uploads/2017/12/28030_TileSharkBlade-450x450.jpg'
     },
     MagnaBlades: {
       apps: ['adhesives', 'glues', 'paint'],

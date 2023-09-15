@@ -4,7 +4,7 @@ export default function HistoryItem(props:any) {
 
     useEffect(() => {
         console.log('history item: ', props.layerObject)
-    }, [])
+    }, [props.layerObject])
     
 
   return (
@@ -14,13 +14,15 @@ export default function HistoryItem(props:any) {
                 <div className='row justify-content-around align-items-center'>
                     <div className='col'>
                         <ul className='list-btn-bullets'>
-                            <li>SURFACE: {props.layerObject.surface}</li>
-                            <li>MACHINE: {props.layerObject.machine}</li>
-                            <li>TOOLING: {props.layerObject.tooling}</li>
+                            <li>SURFACE: {props?.layerObject?.surface}</li>
+                            <li>MACHINE: {props?.layerObject?.machine}</li>
+                            <li>TOOLING: {props?.layerObject?.tooling}</li>
                         </ul>
                     </div>
                     <div className='col history-item-num'>
-                        1
+                        {props.layerIndex > 0 && props.layerIndex + 1}
+                        {props.layerIndex == 0 && 1}
+                        {props.layerIndex == 'Active' && 'Active Layer'}
                     </div>
                 </div>
             </div>
