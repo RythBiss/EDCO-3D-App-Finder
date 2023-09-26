@@ -2,10 +2,10 @@ import React, { useEffect, useRef } from 'react'
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import Bump from '/textures/test texture.png';
+import Bump from '/bump.png'
 
 export default function Viewport() {
-3
+
   const mountRef = useRef(null);
 
   useEffect(() => {
@@ -18,12 +18,10 @@ export default function Viewport() {
     const camera = new THREE.PerspectiveCamera( 75, mountRef.current.offsetWidth / mountRef.current.offsetHeight, 0.1, 1000 );
     const controls = new OrbitControls( camera, renderer.domElement );
     const loader = new GLTFLoader();
-
-
   
     const geometry = new THREE.BoxGeometry( 4, 0.375, 4, 512, 64, 512 );
     const material = new THREE.MeshStandardMaterial( { color: 0xc7c4c0 } );
-    // const cube = new THREE.Mesh( geometry, material );
+    const cube = new THREE.Mesh( geometry, material );
 
     const plane = new THREE.PlaneGeometry( 1000, 1000 );
     const planeMaterial = new THREE.MeshStandardMaterial( { color: 0xffffff } );
@@ -36,13 +34,13 @@ export default function Viewport() {
     const ambLight = new THREE.AmbientLight( 0x404040, 10 );
   
     scene.add( light );
-    // scene.add( cube );
+    scene.add( cube );
     scene.add( ambLight );
     scene.add( ground );
 
     light.castShadow = true;
-    // cube.castShadow = true;
-    // cube.receiveShadow = true;
+    cube.castShadow = true;
+    cube.receiveShadow = true;
     ground.castShadow = false;
     ground.receiveShadow = true;
   
@@ -52,6 +50,9 @@ export default function Viewport() {
     ground.rotation.x = Math.PI / -2;
     ground.position.y = -0.19;
 
+
+
+
     const texture = new THREE.TextureLoader().load( Bump );
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
@@ -60,15 +61,6 @@ export default function Viewport() {
     material.bumpMap = texture;
     material.displacementMap = texture;
     material.displacementScale = 0.025;
-
-
-    const objLoader = new THREE.ObjectLoader();
-    objLoader.setPath('/models/');
-    objLoader.load('Concrete Slab.obj', function(object){
-      scene.add(object);
-    })
-
-
 
 
     
