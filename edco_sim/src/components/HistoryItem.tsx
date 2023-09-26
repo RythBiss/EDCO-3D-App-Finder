@@ -1,11 +1,7 @@
 import React, { useEffect } from 'react'
 
 export default function HistoryItem(props:any) {
-
-    useEffect(() => {
-        console.log('history item: ', props.layerObject)
-    }, [props.layerObject])
-    
+   
 
   return (
     <div className='row'>

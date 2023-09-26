@@ -11,6 +11,7 @@ function App() {
   const [layerList, setLayerList] = useState<Layer[]>([])
   const [currentLayer, setCurrentLayer] = useState<Layer>()
   const [updateState, toggle] = useState(false);
+  const [activeCSP, setActiveCSP] = useState(1);
 
 
   class Layer{
@@ -38,8 +39,9 @@ function App() {
       toggle(prevState => !prevState)
     }
 
-    setTooling(newTooling: string): void{
+    setTooling(newTooling: string, CSP: number): void{
       this.tooling = newTooling;
+      setActiveCSP(CSP);
       toggle(prevState => !prevState)
     }
   }
@@ -57,17 +59,13 @@ function App() {
     createNewLayer()
   }, [])
 
-  useEffect(() => {
-    console.log('app: ', currentLayer)
-  }, [currentLayer])
-
   return (
     <>
       <Header />
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100'>
           <EditLayer layerObject={currentLayer} />
-          <Viewport />
+          <Viewport CSP={activeCSP} />
           <LayerHistory newLayer={createNewLayer} history={layerList} current={currentLayer} />
         </div>
       </div>
