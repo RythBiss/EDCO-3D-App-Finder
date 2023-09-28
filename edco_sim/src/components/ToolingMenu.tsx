@@ -33,7 +33,7 @@ export default function ToolingMenu(props: any) {
       CSP: 0
     },
     DymaDots: {
-      apps: ['thin mil coatings', 'sealers', 'thinset', 'leveling', 'residual adhesive', 'Soft Concrete', 'Medium Concrete', 'Hard Concrete'],
+      apps: ['thin mil coatings', 'sealers', 'thinsets', 'leveling', 'residual adhesive', 'Soft Concrete', 'Medium Concrete', 'Hard Concrete'],
       name: 'Dyma-Dots',
       machines: ['SEC', 'TG10'],
       image: 'https://edcostore.com/wp-content/uploads/2017/04/QC2B-MC-0030_DoubleDotGray-450x450.jpg',

@@ -11,6 +11,7 @@ import CSP4 from '/CSPs/4.png'
 import CSP3 from '/CSPs/3.png'
 import CSP2 from '/CSPs/2.png'
 import CSP1 from '/CSPs/1.png'
+import CSP0 from '/CSPs/0.png'
 
 export default function Viewport(props: any) {
 
@@ -45,10 +46,13 @@ export default function Viewport(props: any) {
     const base = 0.01;
     const multiplier = 0.002;
 
-    if(CSP >= 1 && CSP <= 9){
+    if(CSP >= 0 && CSP <= 9){
       console.log('valid decimal');
       setDisplacementScaleState(base + (multiplier * CSP));
       switch(CSP){
+        case 0:
+          setCSPTexture(CSP0);
+          break;
         case 1:
           setCSPTexture(CSP1);
           break;
@@ -95,17 +99,18 @@ export default function Viewport(props: any) {
   
     const geometry = new THREE.BoxGeometry( 4, 0.375, 4, 512, 64, 512 );
     const material = new THREE.MeshStandardMaterial( { color: 0xffffff } );
-    const cube = new THREE.Mesh( geometry, material );
 
-    const plane = new THREE.PlaneGeometry( 1000, 1000 );
+    const plane = new THREE.PlaneGeometry( 4, 4 );
     const planeMaterial = new THREE.MeshStandardMaterial( { color: 0xffffff } );
-    const ground = new THREE.Mesh( plane, planeMaterial );
+    const ground = new THREE.Mesh( plane, material );
+    const cube = new THREE.Mesh( geometry, planeMaterial );
+
 
     const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
     
-    const light = new THREE.PointLight(0xFFFFFF, 100, 100)
-    const ambLight = new THREE.AmbientLight( 0x404040, 10 );
-  
+    const light = new THREE.PointLight(0xffffff, 100, 100)
+    const ambLight = new THREE.AmbientLight( 0xffffff, 0.65 );
+  3
     scene.add( light );
     scene.add( directionalLight );
     scene.add( cube );
@@ -119,10 +124,12 @@ export default function Viewport(props: any) {
     ground.receiveShadow = true;
   
     camera.position.z = 4;
+    camera.position.y = 0.5;
     light.position.set(-2.5, 10, 2.5);
     scene.background = new THREE.Color("rgb(227, 249, 255)");
     ground.rotation.x = Math.PI / -2;
     ground.position.y = -0.19;
+    cube.position.y -= 0.378
 
 
     const texture = new THREE.TextureLoader().load( CSPTexture );
