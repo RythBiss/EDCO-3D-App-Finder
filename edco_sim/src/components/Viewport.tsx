@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -17,72 +17,84 @@ export default function Viewport(props: any) {
 
   const mountRef = useRef(null);
   const [displacementScaleState, setDisplacementScaleState] = useState(0.01);
-  const [CSPTexture, setCSPTexture] = useState(CSP1);
+  const [CSPTexture, setCSPTexture] = useState(CSP0);
+  const [CSPTexturePrev, setCSPTexturePrev] = useState<any>('none');
   const [hoistedTexture, setHoistTexture] = useState<THREE.Texture>();
   const [hoistedMaterial, setHoistMaterial] = useState<THREE.MeshStandardMaterial>();
+  const [hoistedMaterialPrev, setHoistMaterialPrev] = useState<THREE.MeshStandardMaterial>();
 
   const updateTexture = (texture: any, material: any) => {
-    console.log(texture)
-    console.log(material)
     if(texture !== undefined && material !== undefined){
       const texture = new THREE.TextureLoader().load( CSPTexture );
       texture.wrapS = THREE.RepeatWrapping;
       texture.wrapT = THREE.RepeatWrapping;
-      texture.repeat.set( 1, 1 );
+      texture.repeat.set( 0.5, 1 );
 
       material.bumpMap = texture;
       material.displacementMap = texture;
       material.displacementScale = displacementScaleState;
+
+      if(props?.history?.CSP !== undefined) {
+        console.log('hoisted: ') 
+        console.log(hoistedMaterialPrev) 
+        //get the left panel to show last texture used.
+      }
+
+      if(CSPTexture == CSP0){
+        material.color.setHex(0xdbca9c)
+      }else{
+        material.color.setHex(0xdedede)
+      }
     }
   }
 
   useEffect(() => {
-    changeCSP(props.CSP)
+    changeCSP(props.CSP, setCSPTexture)
+    if(props?.history?.CSP !== undefined) {
+      changeCSP(props.history.CSP, setCSPTexturePrev)
+    }
     updateTexture(hoistedTexture, hoistedMaterial)
-    console.log(props.CSP)
-  })
+  }, [props])
 
-  const changeCSP = (CSP: number) => {
+  const changeCSP = (CSP: number, CSPState: any) => {
     const base = 0.01;
-    const multiplier = 0.002;
+    const multiplier = 0.003;
 
     if(CSP >= 0 && CSP <= 9){
-      console.log('valid decimal');
       setDisplacementScaleState(base + (multiplier * CSP));
       switch(CSP){
         case 0:
-          setCSPTexture(CSP0);
+          CSPState(CSP0);
           break;
         case 1:
-          setCSPTexture(CSP1);
+          CSPState(CSP1);
           break;
         case 2:
-          setCSPTexture(CSP2);
+          CSPState(CSP2);
           break;
         case 3:
-          setCSPTexture(CSP3);
+          CSPState(CSP3);
           break;
         case 4:
-          setCSPTexture(CSP4);
+          CSPState(CSP4);
           break;
         case 5:
-          setCSPTexture(CSP5);
+          CSPState(CSP5);
           break;
         case 6:
-          setCSPTexture(CSP6);
+          CSPState(CSP6);
           break;
         case 7:
-          setCSPTexture(CSP7);
+          CSPState(CSP7);
           break;
         case 8:
-          setCSPTexture(CSP8);
+          CSPState(CSP8);
           break;
         case 9:
-          setCSPTexture(CSP9);
+          CSPState(CSP9);
           break;
       }
     }else{
-      console.log('decimal not in range');
     }
   }
 
@@ -99,36 +111,43 @@ export default function Viewport(props: any) {
   
     const geometry = new THREE.BoxGeometry( 4, 0.375, 4, 512, 64, 512 );
     const material = new THREE.MeshStandardMaterial( { color: 0xffffff } );
+    const materialPrev = new THREE.MeshStandardMaterial( { color: 0xD73648 } );
 
-    const plane = new THREE.PlaneGeometry( 4, 4 );
+    const plane = new THREE.PlaneGeometry( 2, 4, 256, 256 );
     const planeMaterial = new THREE.MeshStandardMaterial( { color: 0xffffff } );
     const ground = new THREE.Mesh( plane, material );
+    const groundPrev = new THREE.Mesh( plane, materialPrev );
     const cube = new THREE.Mesh( geometry, planeMaterial );
 
 
     const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
     
-    const light = new THREE.PointLight(0xffffff, 100, 100)
-    const ambLight = new THREE.AmbientLight( 0xffffff, 0.65 );
-  3
+    const light = new THREE.PointLight(0xffffff, 100)
+    const ambLight = new THREE.AmbientLight( 0xffffff, 0.25 );
+    
     scene.add( light );
     scene.add( directionalLight );
     scene.add( cube );
     scene.add( ambLight );
     scene.add( ground );
+    scene.add( groundPrev );
 
     light.castShadow = true;
     cube.castShadow = true;
     cube.receiveShadow = true;
-    ground.castShadow = false;
+    ground.castShadow = true;
     ground.receiveShadow = true;
   
     camera.position.z = 4;
     camera.position.y = 0.5;
-    light.position.set(-2.5, 10, 2.5);
+    light.position.set(0,5,5);
     scene.background = new THREE.Color("rgb(227, 249, 255)");
     ground.rotation.x = Math.PI / -2;
+    groundPrev.rotation.x = Math.PI / -2;
     ground.position.y = -0.19;
+    groundPrev.position.y = -0.18;
+    ground.position.x = 1;
+    groundPrev.position.x = -1;
     cube.position.y -= 0.378
 
 
@@ -138,6 +157,7 @@ export default function Viewport(props: any) {
 
     setHoistMaterial(material);
     setHoistTexture(texture);
+    setHoistMaterialPrev(materialPrev);
     
     function animate() {
       requestAnimationFrame( animate );

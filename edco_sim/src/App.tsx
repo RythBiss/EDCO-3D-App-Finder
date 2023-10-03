@@ -19,11 +19,13 @@ function App() {
       this.surface = '';
       this.machine = '';
       this.tooling = '';
+      this.CSP = 0;
     }
 
     surface: string;
     machine: string;
     tooling: string;
+    CSP: number;
 
     setSurface(newSurface: string): void{
       this.surface = newSurface;
@@ -41,6 +43,7 @@ function App() {
 
     setTooling(newTooling: string, CSP: number): void{
       this.tooling = newTooling;
+      this.CSP = CSP;
       setActiveCSP(CSP);
       toggle(prevState => !prevState)
     }
@@ -65,7 +68,7 @@ function App() {
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100'>
           <EditLayer layerObject={currentLayer} />
-          <Viewport CSP={activeCSP} />
+          <Viewport CSP={activeCSP} history={layerList[layerList.length - 1]} />
           <LayerHistory newLayer={createNewLayer} history={layerList} current={currentLayer} />
         </div>
       </div>

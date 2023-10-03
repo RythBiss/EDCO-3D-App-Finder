@@ -28,9 +28,9 @@ export default function ToolingMenu(props: any) {
     MagnaBlades: {
       apps: ['adhesives', 'glues', 'paint'],
       name: 'Magna-Blades',
-      machines: ['SEC'],
+      machines: ['SEC', 'TG10'],
       image: 'https://edcostore.com/wp-content/uploads/2017/04/12501LC_MagnaBlade-450x450.jpg',
-      CSP: 0
+      CSP: 1
     },
     DymaDots: {
       apps: ['thin mil coatings', 'sealers', 'thinsets', 'leveling', 'residual adhesive', 'Soft Concrete', 'Medium Concrete', 'Hard Concrete'],
