@@ -15,10 +15,12 @@ import CSP0 from '/CSPs/0.png'
 
 export default function Viewport(props: any) {
 
+  const baseDeformScale = 0.01;
+
   const mountRef = useRef(null);
-  const [displacementScaleState, setDisplacementScaleState] = useState(0.01);
-  const [CSPTexture, setCSPTexture] = useState(CSP0);
-  const [CSPTexturePrev, setCSPTexturePrev] = useState<any>('none');
+  const [displacementScaleState, setDisplacementScaleState] = useState(baseDeformScale);
+  const [CSPTexture, setCSPTexture] = useState<string>(CSP0);
+  const [CSPTexturePrev, setCSPTexturePrev] = useState<string>('none');
   const [hoistedTexture, setHoistTexture] = useState<THREE.Texture>();
   const [hoistedMaterial, setHoistMaterial] = useState<THREE.MeshStandardMaterial>();
   const [hoistedMaterialPrev, setHoistMaterialPrev] = useState<THREE.MeshStandardMaterial>();
@@ -34,10 +36,15 @@ export default function Viewport(props: any) {
       material.displacementMap = texture;
       material.displacementScale = displacementScaleState;
 
-      if(props?.history?.CSP !== undefined) {
-        console.log('hoisted: ') 
-        console.log(hoistedMaterialPrev) 
-        //get the left panel to show last texture used.
+      if(props?.history?.CSP !== undefined && hoistedMaterialPrev !== undefined) {
+        const texturePrev = new THREE.TextureLoader().load( CSPTexturePrev );
+        texturePrev.wrapS = THREE.RepeatWrapping;
+        texturePrev.wrapT = THREE.RepeatWrapping;
+        texturePrev.repeat.set( 0.5, 1 );
+        
+        hoistedMaterialPrev.bumpMap = texturePrev;
+        hoistedMaterialPrev.displacementMap = texturePrev;
+        hoistedMaterialPrev.displacementScale = displacementScaleState;
       }
 
       if(CSPTexture == CSP0){
@@ -54,11 +61,11 @@ export default function Viewport(props: any) {
       changeCSP(props.history.CSP, setCSPTexturePrev)
     }
     updateTexture(hoistedTexture, hoistedMaterial)
-  }, [props])
+  })
 
   const changeCSP = (CSP: number, CSPState: any) => {
-    const base = 0.01;
-    const multiplier = 0.003;
+    const base = baseDeformScale;
+    const multiplier = 0.001;
 
     if(CSP >= 0 && CSP <= 9){
       setDisplacementScaleState(base + (multiplier * CSP));
@@ -109,11 +116,11 @@ export default function Viewport(props: any) {
     const controls = new OrbitControls( camera, renderer.domElement );
     const loader = new GLTFLoader();
   
-    const geometry = new THREE.BoxGeometry( 4, 0.375, 4, 512, 64, 512 );
+    const geometry = new THREE.BoxGeometry( 4, 0.375, 4 );
     const material = new THREE.MeshStandardMaterial( { color: 0xffffff } );
-    const materialPrev = new THREE.MeshStandardMaterial( { color: 0xD73648 } );
+    const materialPrev = new THREE.MeshStandardMaterial( { color: 0xbab5a9 } );
 
-    const plane = new THREE.PlaneGeometry( 2, 4, 256, 256 );
+    const plane = new THREE.PlaneGeometry( 2, 4, 1*1000, 2*1000 );
     const planeMaterial = new THREE.MeshStandardMaterial( { color: 0xffffff } );
     const ground = new THREE.Mesh( plane, material );
     const groundPrev = new THREE.Mesh( plane, materialPrev );
@@ -145,10 +152,10 @@ export default function Viewport(props: any) {
     ground.rotation.x = Math.PI / -2;
     groundPrev.rotation.x = Math.PI / -2;
     ground.position.y = -0.19;
-    groundPrev.position.y = -0.18;
+    groundPrev.position.y = -0.19;
     ground.position.x = 1;
     groundPrev.position.x = -1;
-    cube.position.y -= 0.378
+    cube.position.y -= 0.378;
 
 
     const texture = new THREE.TextureLoader().load( CSPTexture );
@@ -158,6 +165,12 @@ export default function Viewport(props: any) {
     setHoistMaterial(material);
     setHoistTexture(texture);
     setHoistMaterialPrev(materialPrev);
+    
+    const texturePrev = new THREE.TextureLoader().load( '' );
+    materialPrev.bumpMap = texturePrev;
+    materialPrev.bumpMap = texturePrev;
+    materialPrev.displacementMap = texturePrev;
+    materialPrev.displacementScale = displacementScaleState;
     
     function animate() {
       requestAnimationFrame( animate );
