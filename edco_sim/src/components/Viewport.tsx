@@ -19,8 +19,8 @@ export default function Viewport(props: any) {
 
   const mountRef = useRef(null);
   const [displacementScaleState, setDisplacementScaleState] = useState(baseDeformScale);
-  const [CSPTexture, setCSPTexture] = useState<string>(CSP0);
-  const [CSPTexturePrev, setCSPTexturePrev] = useState<string>('none');
+  const [CSPTexture, setCSPTexture] = useState<string>('');
+  const [CSPTexturePrev, setCSPTexturePrev] = useState<string>('');
   const [hoistedTexture, setHoistTexture] = useState<THREE.Texture>();
   const [hoistedMaterial, setHoistMaterial] = useState<THREE.MeshStandardMaterial>();
   const [hoistedMaterialPrev, setHoistMaterialPrev] = useState<THREE.MeshStandardMaterial>();
@@ -61,14 +61,11 @@ export default function Viewport(props: any) {
       changeCSP(props.history.CSP, setCSPTexturePrev)
     }
     updateTexture(hoistedTexture, hoistedMaterial)
+    console.log(CSPTexture)
   })
 
   const changeCSP = (CSP: number, CSPState: any) => {
-    const base = baseDeformScale;
-    const multiplier = 0.001;
-
     if(CSP >= 0 && CSP <= 9){
-      setDisplacementScaleState(base + (multiplier * CSP));
       switch(CSP){
         case 0:
           CSPState(CSP0);
@@ -99,6 +96,9 @@ export default function Viewport(props: any) {
           break;
         case 9:
           CSPState(CSP9);
+          break;
+        default:
+          console.log('default');
           break;
       }
     }else{
@@ -158,7 +158,7 @@ export default function Viewport(props: any) {
     cube.position.y -= 0.378;
 
 
-    const texture = new THREE.TextureLoader().load( CSPTexture );
+    const texture = new THREE.TextureLoader().load( '' );
 
     updateTexture(texture, material);
 

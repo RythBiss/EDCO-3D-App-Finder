@@ -11,7 +11,7 @@ function App() {
   const [layerList, setLayerList] = useState<Layer[]>([])
   const [currentLayer, setCurrentLayer] = useState<Layer>()
   const [updateState, toggle] = useState(false);
-  const [activeCSP, setActiveCSP] = useState(1);
+  const [activeCSP, setActiveCSP] = useState(-1);
 
 
   class Layer{
@@ -68,7 +68,7 @@ function App() {
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100'>
           <EditLayer layerObject={currentLayer} />
-          <Viewport CSP={activeCSP} history={layerList[layerList.length - 1]} />
+          <Viewport CSP={activeCSP} history={layerList[layerList.length - 1]} current={currentLayer} />
           <LayerHistory newLayer={createNewLayer} history={layerList} current={currentLayer} />
         </div>
       </div>
