@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import CSP9 from '/CSPs/9.png'
+import CSP9 from '/CSPs/CSP 9 Diff.png'
+import CSP9b from '/CSPs/CSP 9 Bump.png'
 import CSP8 from '/CSPs/8.png'
 import CSP7 from '/CSPs/7.png'
 import CSP6 from '/CSPs/6.png'
@@ -12,6 +13,7 @@ import CSP3 from '/CSPs/3.png'
 import CSP2 from '/CSPs/2.png'
 import CSP1 from '/CSPs/1.png'
 import CSP0 from '/CSPs/0.png'
+import linoleumVinyl from '/CSPs/linoleumVinyl.png'
 
 export default function Viewport(props: any) {
 
@@ -115,6 +117,12 @@ export default function Viewport(props: any) {
     const camera = new THREE.PerspectiveCamera( 75, mountRef.current.offsetWidth / mountRef.current.offsetHeight, 0.1, 1000 );
     const controls = new OrbitControls( camera, renderer.domElement );
     const loader = new GLTFLoader();
+
+    loader.load('/Models/rubber.gltf', (gltfScene) => {
+
+      let Model = gltfScene.scene;      
+      scene.add(Model)
+    })
   
     const geometry = new THREE.BoxGeometry( 4, 0.375, 4 );
     const material = new THREE.MeshStandardMaterial( { color: 0xffffff } );
@@ -134,10 +142,7 @@ export default function Viewport(props: any) {
     
     scene.add( light );
     scene.add( directionalLight );
-    scene.add( cube );
     scene.add( ambLight );
-    scene.add( ground );
-    scene.add( groundPrev );
 
     light.castShadow = true;
     cube.castShadow = true;
@@ -145,8 +150,8 @@ export default function Viewport(props: any) {
     ground.castShadow = true;
     ground.receiveShadow = true;
   
-    camera.position.z = 4;
-    camera.position.y = 0.5;
+    camera.position.y = 1.4;
+    camera.rotation.x = -1.5708;
     light.position.set(0,5,5);
     scene.background = new THREE.Color("rgb(227, 249, 255)");
     ground.rotation.x = Math.PI / -2;
