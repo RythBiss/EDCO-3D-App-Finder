@@ -43,7 +43,7 @@ const machinesByApplication: any = {
   },
   //make trip hazard surface
   CPL8: {
-    apps: ['leveling', 'Soft Concrete', 'Medium Concrete', 'Hard Concrete'],
+    apps: ['leveling', 'rubber', 'Soft Concrete', 'Medium Concrete', 'Hard Concrete'],
     image: 'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8-Gas-Machine-Slider.jpg'
   },
   CPM8: {
