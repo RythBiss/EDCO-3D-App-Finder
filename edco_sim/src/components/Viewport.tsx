@@ -2,18 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import CSP9 from '/CSPs/CSP 9 Diff.png'
-import CSP9b from '/CSPs/CSP 9 Bump.png'
-import CSP8 from '/CSPs/8.png'
-import CSP7 from '/CSPs/7.png'
-import CSP6 from '/CSPs/6.png'
-import CSP5 from '/CSPs/5.png'
-import CSP4 from '/CSPs/4.png'
-import CSP3 from '/CSPs/3.png'
-import CSP2 from '/CSPs/2.png'
-import CSP1 from '/CSPs/1.png'
-import CSP0 from '/CSPs/0.png'
-import linoleumVinyl from '/CSPs/linoleumVinyl.png'
 
 export default function Viewport(props: any) {
 
@@ -47,12 +35,6 @@ export default function Viewport(props: any) {
         hoistedMaterialPrev.bumpMap = texturePrev;
         hoistedMaterialPrev.displacementMap = texturePrev;
         hoistedMaterialPrev.displacementScale = displacementScaleState;
-      }
-
-      if(CSPTexture == CSP0){
-        material.color.setHex(0xdbca9c)
-      }else{
-        material.color.setHex(0xdedede)
       }
     }
   }
@@ -114,15 +96,28 @@ export default function Viewport(props: any) {
     renderer.shadowMap.enabled = true;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera( 75, mountRef.current.offsetWidth / mountRef.current.offsetHeight, 0.1, 1000 );
+    const camera = new THREE.PerspectiveCamera( 75, mountRef.current.offsetWidth / mountRef.current.offsetHeight, 0.01, 1000 );
     const controls = new OrbitControls( camera, renderer.domElement );
     const loader = new GLTFLoader();
 
-    loader.load('/Models/rubber.gltf', (gltfScene) => {
+    const surface1 = 'CSP 1';
+    const surface2 = 'VCT';
 
-      let Model = gltfScene.scene;      
-      scene.add(Model)
+    loader.load(`/Models/${surface1}.gltf`, (gltfScene) => {
+
+      let Model1 = gltfScene.scene;
+      Model1.rotation.y = 3.14159;      
+      
+
+      loader.load(`/Models/${surface2}.gltf`, (gltfScene) => {
+
+        let Model2 = gltfScene.scene;
+        scene.add(Model1)
+        scene.add(Model2)
+      })
     })
+
+
   
     const geometry = new THREE.BoxGeometry( 4, 0.375, 4 );
     const material = new THREE.MeshStandardMaterial( { color: 0xffffff } );
@@ -153,7 +148,7 @@ export default function Viewport(props: any) {
     camera.position.y = 1.4;
     camera.rotation.x = -1.5708;
     light.position.set(0,5,5);
-    scene.background = new THREE.Color("rgb(227, 249, 255)");
+    scene.background = new THREE.Color("rgb(245, 245, 245)");
     ground.rotation.x = Math.PI / -2;
     groundPrev.rotation.x = Math.PI / -2;
     ground.position.y = -0.19;
