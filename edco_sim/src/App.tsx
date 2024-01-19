@@ -20,12 +20,32 @@ function App() {
       this.machine = '';
       this.tooling = '';
       this.CSP = 0;
+
+      this.onConcrete = false;
+      this.materialRemoved = '';
+      this.materialThickness = 0;
+      this.finishedSurface = '';
+      this.jobSize = 0;
+      this.greenConcrete = false;
+      this.dustControl = false;
+      this.edger = false;
+      this.powerType = '';
     }
 
     surface: string;
     machine: string;
     tooling: string;
     CSP: number;
+
+    onConcrete: boolean;
+    materialRemoved: string;
+    materialThickness: number;
+    finishedSurface: string;
+    jobSize: number;
+    greenConcrete: boolean;
+    dustControl: boolean;
+    edger: boolean;
+    powerType: string;
 
     setSurface(newSurface: string): void{
       this.surface = newSurface;

@@ -14,11 +14,11 @@ const menus = [
 ]
 
   return (
-    <div className='col-2 h-100 z-0 shadow'>
+    <div className='col-3 h-100 z-0 shadow'>
         <div className='edit-layer'>
             <div className='row'>
                 <div className='col px-0'>
-                    <button type="button" className={`w-100 tab-btn ${displayMenu == 0 && 'tab-btn-active'}`} onClick={() => setDisplayMenu(0)}>SURFACE</button>
+                    <button type="button" className={`w-100 tab-btn ${displayMenu == 0 && 'tab-btn-active'}`} onClick={() => setDisplayMenu(0)}>JOBSITE</button>
                 </div>
                 <div className='col px-0'>
                     <button type="button" className={`w-100 tab-btn ${displayMenu == 1 && 'tab-btn-active'}`} onClick={() => setDisplayMenu(1)}>MACHINE</button>

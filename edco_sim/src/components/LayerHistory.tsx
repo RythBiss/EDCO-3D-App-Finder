@@ -5,7 +5,7 @@ import ListButton from './ListButton'
 export default function LayerHistory(props: any) {
 
   return (
-    <div className='col-3 container-fluid shadow z-0 layer-history layer-menus'>
+    <div className='col-2 container-fluid shadow z-0 layer-history layer-menus'>
       {props.history.map((obj: object, key: number) => 
         <HistoryItem key={key} layerObject={obj} layerIndex={key} />
       )}

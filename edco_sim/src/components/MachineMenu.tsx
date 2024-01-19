@@ -6,11 +6,11 @@ export default function EditLayer(props: any) {
 
 const machinesByApplication: any = {
   ALR: {
-    apps: ['vinyl', 'linoleum', 'ceramic', 'carpet', 'shingles', 'rubber', 'mastics', 'paint', 'ice', 'concrete', 'asphalt', 'corrosion', 'oil', 'glue'],
+    apps: ['vinyl', 'linoleum', 'ceramic', 'carpet', 'rubber', 'mastic', 'paint', 'ice', 'concrete', 'asphalt', 'corrosion', 'oil', 'glue'],
     image: 'https://portal.edcoinc.com/storage/product-slider/alr-steel-chisel-scalers/ALR-5-Machine-Slider.jpg'
   },
   ALRBS: {
-    apps: ['vinyl', 'linoleum', 'ceramic', 'carpet', 'shingles', 'rubber', 'mastics', 'paint', 'ice', 'concrete', 'asphalt', 'corrosion', 'oil', 'glue'],
+    apps: ['vinyl', 'linoleum', 'ceramic', 'carpet', 'rubber', 'mastic', 'paint', 'ice', 'concrete', 'asphalt', 'corrosion', 'oil', 'glue'],
     image: 'https://portal.edcoinc.com/storage/product-slider/alr-steel-chisel-scalers/ALR-5-Machine-Slider.jpg'
   },
   TS8: {
