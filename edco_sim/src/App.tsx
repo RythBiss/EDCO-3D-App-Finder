@@ -47,6 +47,14 @@ function App() {
     edger: boolean;
     powerType: string;
 
+    setMaterialRemoved(value: string){
+      this.materialRemoved = value;
+
+      toggle(prevState => !prevState);
+    }
+
+
+
     setSurface(newSurface: string): void{
       this.surface = newSurface;
       this.machine = '';

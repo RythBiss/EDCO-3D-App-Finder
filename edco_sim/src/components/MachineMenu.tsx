@@ -41,7 +41,7 @@ const machinesByApplication: any = {
     apps: ['leveling', 'rubber', 'epoxy', 'Soft Concrete', 'Medium Concrete', 'Hard Concrete'],
     image: 'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Gas-Machine-Slider.jpg'
   },
-  //make trip hazard surface
+  //make trip hazard surface`
   CPL8: {
     apps: ['leveling', 'rubber', 'Soft Concrete', 'Medium Concrete', 'Hard Concrete'],
     image: 'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8-Gas-Machine-Slider.jpg'

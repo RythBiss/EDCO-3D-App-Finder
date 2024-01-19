@@ -9,7 +9,7 @@ export default function SurfaceMenu(props:any) {
     // const surfacesFourthLayer = ['leveling', 'Soft Concrete', 'Medium Concrete', 'Hard Concrete'];
 
     const qOneAnswers = ['Yes', 'No'];
-    const qTwoAnswers = ['Concrete', 'Vinyl', 'Linoleum', 'Ceramic', 'Carpet', 'Rubber', 'Mastic', 'Paint', 'Glue'];
+    const qTwoAnswers = ['Concrete', 'Trip Hazard', 'High Spots', 'Vinyl', 'Linoleum', 'Ceramic', 'Carpet', 'Rubber', 'Mastic', 'Paint', 'Glue'];
     const qThreeAnswers = ['1/32"', '1/16"', '1/8"', '1/4"'];
     const qFourAnswers = ['Vinyl', 'Linoleum', 'Ceramic', 'Carpet', 'Rubber', 'Paint'];
     const qFiveAnswers = ['< 250', '< 500', '< 750', '< 1000', '> 1000'];
@@ -19,10 +19,8 @@ export default function SurfaceMenu(props:any) {
     const qNineAnswers = ['Gas', 'Electric', 'Propane', 'Air'];
 
 
-
     const [openedMenu, setOpenedMenu] = useState(0);
     const [selectedQuestion, setSelectedQuestion] = useState('');
-
 
 
     const handleMenuState = (newState: number) => {
@@ -52,9 +50,9 @@ export default function SurfaceMenu(props:any) {
     const setMaterialRemoved = (res: string) => {
         const material =  res.toLowerCase();
 
-        props.layerObject.materialRemoved = material;
+        props.layerObject.setMaterialRemoved(material);
 
-        console.log(props.layerObject.materialRemoved)
+        //console.log(props.layerObject.materialRemoved)
     }
 
     const setMaterialThickness = (res: string) => {
@@ -148,7 +146,7 @@ export default function SurfaceMenu(props:any) {
         {openedMenu == 2 && qTwoAnswers.map((layer, i) => 
             <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setMaterialRemoved(layer)} />
         )}
-        <ListButton lable={'What is the thickness of the material?'} onClick={() => handleMenuState(3)} />
+        <ListButton lable={'How much material is being removed?'} onClick={() => handleMenuState(3)} />
         {openedMenu == 3 && qThreeAnswers.map((layer, i) => 
             <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setMaterialThickness(layer)} />
         )}
