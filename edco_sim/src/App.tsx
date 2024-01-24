@@ -96,7 +96,7 @@ function App() {
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100'>
           <EditLayer layerObject={currentLayer} />
-          <Viewport CSP={activeCSP} history={layerList[layerList.length - 1]} current={currentLayer} />
+          <Viewport CSP={activeCSP} history={layerList[layerList.length - 1]} layer={currentLayer} />
           <LayerHistory newLayer={createNewLayer} history={layerList} current={currentLayer} />
         </div>
       </div>
