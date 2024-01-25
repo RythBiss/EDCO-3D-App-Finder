@@ -10,7 +10,7 @@ function App() {
 
   const [layerList, setLayerList] = useState<Layer[]>([])
   const [currentLayer, setCurrentLayer] = useState<Layer>()
-  const [updateState, toggle] = useState(false);
+  const [updateState, update] = useState(false);
   const [activeCSP, setActiveCSP] = useState(-1);
 
 
@@ -47,33 +47,78 @@ function App() {
     edger: boolean;
     powerType: string;
 
+    //call for any state change to update react
+    requestUpdate = () => {
+      update(prevState => !prevState);
+    }
+
     setMaterialRemoved(value: string){
       this.materialRemoved = value;
 
-      toggle(prevState => !prevState);
+      this.requestUpdate();
     }
 
+    setMaterialThickness = (value: number) => {
+      this.materialThickness = value;
+      
+      this.requestUpdate();
+    }
 
+    setFinishedSurface = (value: string) => {
+      this.finishedSurface = value;
+      
+      this.requestUpdate();
+    }
+
+    setJobSize = (value: number) => {
+      this.jobSize = value;
+      
+      this.requestUpdate();
+    }
+
+    setGreenConcrete = (value: boolean) => {
+      this.greenConcrete = value;
+      
+      this.requestUpdate();
+    }
+
+    setDustControl = (value: boolean) => {
+      this.dustControl = value;
+      
+      this.requestUpdate();
+    }
+
+    setEdger = (value: boolean) => {
+      this.edger = value;
+      
+      this.requestUpdate();
+    }
+
+    setPowerType = (value: string) => {
+      this.powerType = value;
+      
+      this.requestUpdate();
+    }
 
     setSurface(newSurface: string): void{
       this.surface = newSurface;
       this.machine = '';
       this.tooling = '';
 
-      toggle(prevState => !prevState)
+      this.requestUpdate();
     }
     
     setMachine(newMachine: string): void{
       this.machine = newMachine;
       this.tooling = '';
-      toggle(prevState => !prevState)
+      this.requestUpdate();
     }
 
     setTooling(newTooling: string, CSP: number): void{
       this.tooling = newTooling;
       this.CSP = CSP;
       setActiveCSP(CSP);
-      toggle(prevState => !prevState)
+      this.requestUpdate();
     }
   }
 
@@ -89,6 +134,11 @@ function App() {
   useEffect(() => {
     createNewLayer()
   }, [])
+
+  useEffect(() => {
+    console.log('layer: ')
+    console.log(currentLayer)
+  }, [updateState])
 
   return (
     <>
