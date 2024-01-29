@@ -14,6 +14,7 @@ function App() {
   const [activeCSP, setActiveCSP] = useState(-1);
 
 
+  //keep new layer function incase users have multiple types of jobs to do
   class Layer{
     constructor(){
       this.surface = '';
@@ -134,11 +135,6 @@ function App() {
   useEffect(() => {
     createNewLayer()
   }, [])
-
-  useEffect(() => {
-    console.log('layer: ')
-    console.log(currentLayer)
-  }, [updateState])
 
   return (
     <>

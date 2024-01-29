@@ -18,9 +18,9 @@ export default function ListButton(props: any) {
                                     src={props.icon}
                                     alt='machine-icon'
                                     width={128}
-                                    className='machine-icon-frame col-6'
+                                    className='machine-icon-frame col-4'
                                 />
-                                <div className='col-6 text-end list-btn-inner'>{props.lable}</div>
+                                <div className='col-4 text-end list-btn-inner'>{props.lable}</div>
                             </>
                             :
                             <>
