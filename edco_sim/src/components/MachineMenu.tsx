@@ -3,7 +3,7 @@ import ListButton from './ListButton';
 
 export default function EditLayer(props: any) {
 
-const allMachineData: any = {
+const allMachineData = {
   //job size is per hour, remember that when making the lists
   ALR: {
     apps: ['vinyl', 'linoleum', 'ceramic', 'carpet', 'rubber', 'paint', 'ice', 'corrosion', 'oil', 'glue'],
@@ -30,7 +30,7 @@ const allMachineData: any = {
   TS8: {
     apps: ['vinyl', 'linoleum', 'carpet', 'VCT', 'glue'],
     depth: 0,
-    recJobSize: 1,
+    recJobSize: 0,
     onCrete: true,
     //if the machine can achive a CSP 2-3 for new coatings
     surfacePrep: false,
@@ -39,7 +39,7 @@ const allMachineData: any = {
     image: 'https://portal.edcoinc.com/storage/product-slider/8-manual-tile-shark-floor-stripper/TS-8-Machine-Slider.jpg'
   },
   SEC: {
-    apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber'],
+    apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual'],
     depth: 0,
     recJobSize: 0,
     onCrete: true,
@@ -50,7 +50,7 @@ const allMachineData: any = {
     image: 'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-single-disc-floor-grinder/SEC-NG-Machine-Slider.jpg'
   },
   _2GC: {
-    apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber'],
+    apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual'],
     depth: 0,
     recJobSize: 0,
     onCrete: true,
@@ -61,7 +61,7 @@ const allMachineData: any = {
     image: 'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-dual-disc-floor-grinder/2GC-NG-Machine-Slider.jpg'
   },
   _2DHD: {
-    apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber'],
+    apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual'],
     depth: 0,
     recJobSize: 2,
     onCrete: true,
@@ -83,7 +83,7 @@ const allMachineData: any = {
     image: 'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-turbo-lite-grinder/TL-9-Machine-Slider.jpg'
   },
   TMC7: {
-    apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'edges'],
+    apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'edges', 'residual'],
     depth: 0,
     recJobSize: 0,
     onCrete: true,
@@ -152,8 +152,11 @@ const allMachineData: any = {
 }
 
 const [selectedMachine, setSelectedMachine] = useState('');
-const [matchingMachinesL1, setmatchingMachinesL1] = useState<string[]>([]);
 const [selectedLayerState, setSelectedLayerState] = useState<number>();
+const [matchingMachinesL1, setmatchingMachinesL1] = useState<string[]>([]);
+const [matchingMachinesL2, setmatchingMachinesL2] = useState<string[]>([]);
+const [matchingMachinesL3, setmatchingMachinesL3] = useState<string[]>([]);
+const [matchingMachinesL4, setmatchingMachinesL4] = useState<string[]>([]);
 
 const setMachine = (newMachine: string, ) => {
     props.layerObject.setMachine(newMachine);
@@ -168,98 +171,107 @@ const handleMenuState = (newState: number) => {
   }
 }
 
+const compileMachineList = (layerInstance) => {
+    //create new array
+    let validMachineList: string[] = [];
+
+    //sort through machines and concat any that match the application to the validMachineList 
+    Object.keys(allMachineData).forEach((key) => {
+      //checklist for current machine
+      let machineChecklist:any = {
+        //onConcrete: false,
+        materialRemoved: false,
+        materialThickness: false,
+        //finishedSurface: false,
+        jobSize: false,
+        //edger: false,
+        powerType: false
+      }
+  
+      //shorthand for current machine apps
+      const machineApplications = allMachineData[key].apps;
+      //shorthand for length of machine apps list
+      const length: number = machineApplications.length;
+  
+      //compare each app of the current machine to the layer objects property counterpart
+      for (let index = 0; index < length; index++) {
+        const applicationAtIndex = machineApplications[index];
+  
+        if(applicationAtIndex == layerInstance.materialRemoved){
+          //validMachineList = validMachineList.concat(key);
+          machineChecklist.materialRemoved = true;
+          break;
+        }
+      }
+      
+      if(allMachineData[key].depth == layerInstance.materialThickness){
+          machineChecklist.materialThickness = true;
+      }
+
+      
+      if(allMachineData[key].recJobSize <= layerInstance.jobSize){
+        machineChecklist.jobSize = true;
+      }
+    
+  
+      allMachineData[key].power.forEach((item:string) => {
+        if(item == layerInstance.powerType) {
+          machineChecklist.powerType = true;
+        }
+      })
+  
+      let validateMachine:boolean = true;
+  
+      Object.keys(machineChecklist).forEach((item, i) => {
+        if(machineChecklist[item] == false){
+          validateMachine = false;
+        }
+      })
+  
+      if(validateMachine == true){
+        validMachineList = validMachineList.concat(key);
+      }
+    })
+    
+    return validMachineList;
+}
+
 useEffect(() => {
-  //create new array
-  let validMachineList: string[] = [];
 
-  //sort through machines and concat any that match the application to the validMachineList 
-  Object.keys(allMachineData).forEach((key) => {
-    //checklist for current machine
-    let machineChecklist = {
-      //onConcrete: false,
-      materialRemoved: false,
-      materialThickness: false,
-      //finishedSurface: false,
-      jobSize: false,
-      //edger: false,
-      powerType: false
-    }
+  //somehow use this or parts of it to also filter for the applications additional layers
+  setmatchingMachinesL1(compileMachineList(props.layerObject));
+  setmatchingMachinesL2(compileMachineList(props.layerObject.sublayerObjects[0]));
+  setmatchingMachinesL3(compileMachineList(props.layerObject.sublayerObjects[1]));
+  setmatchingMachinesL4(compileMachineList(props.layerObject.sublayerObjects[2]));
 
-    //shorthand for current machine apps
-    const machineApplications = allMachineData[key].apps;
-    //shorthand for length of machine apps list
-    const length: number = machineApplications.length;
-
-    //compare each app of the current machine to the layer objects property counterpart
-    for (let index = 0; index < length; index++) {
-      const applicationAtIndex = machineApplications[index];
-
-      if(applicationAtIndex == props.layerObject.materialRemoved){
-        //validMachineList = validMachineList.concat(key);
-        machineChecklist.materialRemoved = true;
-        break;
-      }
-    }
-    
-    if(allMachineData[key].depth == props.layerObject.materialThickness){
-        machineChecklist.materialThickness = true;
-    }
-
-    // if(allMachineData[key].surfacePrep == props.layerObject.materialThickness){
-    //     machineChecklist.materialThickness = true;
-    // }
-    
-    if(allMachineData[key].recJobSize <= props.layerObject.jobSize){
-      machineChecklist.jobSize = true;
-    }
-    
-    //removed greenConcrete check, thats for tooling
-    
-    //removed dust check, just adds a vacuum to the list
-
-    //removed edges check, just adds an edger if true and grinding the edges is needed
-
-    allMachineData[key].power.forEach((item) => {
-      if(item == props.layerObject.powerType) {
-        machineChecklist.powerType = true;
-      }
-    })
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    let validateMachine:boolean = true;
-
-    Object.keys(machineChecklist).forEach((item, i) => {
-      console.log(machineChecklist)
-      if(machineChecklist[item] == false){
-        validateMachine = false;
-      }
-    })
-
-    if(validateMachine == true){
-      validMachineList = validMachineList.concat(key);
-      setmatchingMachinesL1(validMachineList);
-    }
-
-    //change to go through check list and only add if the machine is all true
-    // if(machineChecklist.materialRemoved == true){
-    //   //set the machine list as a state
-    //   validMachineList = validMachineList.concat(key);
-    //   setmatchingMachinesL1(validMachineList)
-    // }
-  })
 }, [props.layerObject])
+
+useEffect(() => {
+  console.log(matchingMachinesL1)
+  console.log(matchingMachinesL2)
+  console.log(matchingMachinesL3)
+  console.log(matchingMachinesL4)
+}, [matchingMachinesL1])
 
   return (
     <div className='col edit-menu'>
-        <ListButton lable={`First Layer (${matchingMachinesL1.length})`} active={selectedLayerState == 0 ? true : false} onClick={() => {handleMenuState(0)}} />
+        {matchingMachinesL1 &&
+          <ListButton lable={`First Layer (${matchingMachinesL1.length})`} active={selectedLayerState == 0 ? true : false} onClick={() => {handleMenuState(0)}} />
+        }
         {selectedLayerState == 0 &&
           matchingMachinesL1.length > 0 &&
             matchingMachinesL1.map((item, i) => <ListButton key={i} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item)} />)        
         }
 
-        <ListButton lable={'Second Layer'} active={selectedLayerState == 1 ? true : false} onClick={() => {handleMenuState(1)}} />
-        <ListButton lable={'Third Layer'} active={selectedLayerState == 2 ? true : false} onClick={() => {handleMenuState(2)}} />
-        <ListButton lable={'Fourth Layer'} active={selectedLayerState == 3 ? true : false} onClick={() => {handleMenuState(3)}} />
+        {props.layerObject.layerNumber >= 2 &&
+          <ListButton lable={'Second Layer'} active={selectedLayerState == 1 ? true : false} onClick={() => {handleMenuState(1)}} />
+        }
+        {props.layerObject.layerNumber >= 3 &&
+          <ListButton lable={'Third Layer'} active={selectedLayerState == 2 ? true : false} onClick={() => {handleMenuState(2)}} />
+        }
+        {props.layerObject.layerNumber >= 4 &&
+          <ListButton lable={'Fourth Layer'} active={selectedLayerState == 3 ? true : false} onClick={() => {handleMenuState(3)}} />
+        }
     </div>
   )
 }

@@ -3,13 +3,76 @@ import ListButton from './ListButton';
 
 export default function SurfaceMenu(props:any) {
 
-    // const surfacesFirstLayer = ['vinyl', 'linoleum', 'ceramic', 'carpet'];
-    // const surfacesSecondLayer = ['adhesives', 'glues', 'thinsets', 'industrial buildup'];
-    // const surfacesThirdLayer = ['residual adhesive', 'sealers', 'thin mil coatings', 'paint'];
-    // const surfacesFourthLayer = ['leveling', 'Soft Concrete', 'Medium Concrete', 'Hard Concrete'];
+    const applicationDataObjects = {
+        concrete: {
+            name: 'Concrete',
+            layers: 1,
+            sublayers: []
+        },
+        triphazard: {
+            name: 'Trip Hazard',
+            layers: 1,
+            sublayers: []
+        },
+        highspots: {
+            name: 'High Spots',
+            layers: 1,
+            sublayers: []
+        },
+        vinyl: {
+            name: 'Vinyl',
+            layers: 4,
+            sublayers: ['glue', 'residual', 'concrete']
+        },
+        linoleum: {
+            name: 'Linoleum',
+            layers: 4,
+            sublayers: ['glue', 'residual', 'concrete']
+        },
+        ceramic: {
+            name: 'Ceramic',
+            layers: 4,
+            sublayers: ['mastic', 'residual', 'concrete']
+        },
+        carpet: {
+            name: 'Carpet',
+            layers: 4,
+            sublayers: ['glue', 'residual', 'concrete']
+        },
+        mastic: {
+            name: 'Mastic',
+            layers: 3,
+            sublayers: ['residual', 'concrete']
+        },
+        paint: {
+            name: 'Paint',
+            layers: 2,
+            sublayers: ['concrete']
+        },
+        glue: {
+            name: 'Glue',
+            layers: 3,
+            sublayers: ['residual', 'concrete']
+        },
+        residual: {
+            name: 'Residual Glue',
+            layers: 2,
+            sublayers: ['concrete']
+        },
+        sealer: {
+            name: 'Sealer',
+            layers: 2,
+            sublayers: ['concrete']
+        },
+        thinmil: {
+            name: 'Thin Mil Coatings',
+            layers: 2,
+            sublayers: ['concrete']
+        },
+    }
 
     const qOneAnswers = ['Yes', 'No'];
-    const qTwoAnswers = ['Concrete', 'Trip Hazard', 'High Spots', 'Vinyl', 'Linoleum', 'Ceramic', 'Carpet', 'Rubber', 'Mastic', 'Paint', 'Glue'];
+    const [qTwoAnswers, setqTwoAnswers] = useState<string[]>([]);
     const qThreeAnswers = ['1/32"', '1/16"', '1/8"', '1/4"'];
     const qFourAnswers = ['Vinyl', 'Linoleum', 'Ceramic', 'Carpet', 'Rubber', 'Paint', 'None'];
     const qFiveAnswers = ['1,000', '2,000', '5,000+'];
@@ -22,6 +85,16 @@ export default function SurfaceMenu(props:any) {
     const [openedMenu, setOpenedMenu] = useState(-1);
     const [selectedQuestion, setSelectedQuestion] = useState('');
 
+    const populateqTwoAnswers = () => {
+
+        let arr: string[] = []
+
+        Object.keys(applicationDataObjects).map((key) =>{
+            arr.push(applicationDataObjects[key])
+        })
+
+        setqTwoAnswers(arr);
+    }
 
     const handleMenuState = (newState: number) => {
         if(newState == openedMenu){
@@ -36,10 +109,10 @@ export default function SurfaceMenu(props:any) {
         else props.layerObject.onConcrete = false;
     }
 
-    const setMaterialRemoved = (res: string) => {
+    const setMaterialRemoved = (res: string, layer: number, sublayers: string[]) => {
         const material =  res.toLowerCase();
 
-        props.layerObject.setMaterialRemoved(material);
+        props.layerObject.setMaterialRemoved(material, layer, sublayers);
     }
 
     const setMaterialThickness = (res: string) => {
@@ -102,6 +175,11 @@ export default function SurfaceMenu(props:any) {
 
         props.layerObject.setPowerType(power);
     }
+    
+    useEffect(() => {
+        populateqTwoAnswers()
+    }, [])
+    
   return (
     <div className='col edit-menu'>
         {/* <ListButton lable={'Are you on concrete?'} onClick={() => handleMenuState(0)} />
@@ -109,8 +187,8 @@ export default function SurfaceMenu(props:any) {
             <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setOnConcrete(layer)} />
         )} */}
         <ListButton lable={'What is the material being removed?'} onClick={() => handleMenuState(1)} />
-        {openedMenu == 1 && qTwoAnswers.map((layer, i) => 
-            <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setMaterialRemoved(layer)} />
+        {openedMenu == 1 && qTwoAnswers.map((layer:any, i) => 
+            <ListButton key={i} lable={layer.name} indent={1} active={selectedQuestion == layer.name ? true : false} onClick={() => setMaterialRemoved(layer.name, layer.layers, layer.sublayers)} />
         )}
         <ListButton lable={'How thick is the material?'} onClick={() => handleMenuState(2)} />
         {openedMenu == 2 && qThreeAnswers.map((layer, i) => 
@@ -124,11 +202,11 @@ export default function SurfaceMenu(props:any) {
         {openedMenu == 4 && qFiveAnswers.map((layer, i) => 
             <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setJobSize(layer)} />
         )}
-        {/* <ListButton lable={'Is your concrete more than 28 days old?'} onClick={() => handleMenuState(5)} />
+        <ListButton lable={'Is your concrete more than 28 days old?'} onClick={() => handleMenuState(5)} />
         {openedMenu == 5 && qSixAnswers.map((layer, i) => 
             <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setGreenConcrete(layer)} />
         )}
-        <ListButton lable={'Do you already have dust control in the form  of an EDCO vac or water?'} onClick={() => handleMenuState(6)} />
+        {/* <ListButton lable={'Do you already have dust control in the form  of an EDCO vac or water?'} onClick={() => handleMenuState(6)} />
         {openedMenu == 6 && qSevenAnswers.map((layer, i) => 
             <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setDustControl(layer)} />
         )}

@@ -13,14 +13,11 @@ function App() {
   const [updateState, update] = useState(false);
   const [activeCSP, setActiveCSP] = useState(-1);
 
-
   //keep new layer function incase users have multiple types of jobs to do
   class Layer{
     constructor(){
-      this.surface = '';
       this.machine = '';
       this.tooling = '';
-      this.CSP = 0;
 
       this.onConcrete = false;
       this.materialRemoved = '';
@@ -31,12 +28,13 @@ function App() {
       this.dustControl = false;
       this.edger = false;
       this.powerType = '';
+      this.layerNumber = 0;
+      this.sublayers = [];
+      this.sublayerObjects = [];
     }
 
-    surface: string;
     machine: string;
     tooling: string;
-    CSP: number;
 
     onConcrete: boolean;
     materialRemoved: string;
@@ -47,24 +45,42 @@ function App() {
     dustControl: boolean;
     edger: boolean;
     powerType: string;
+    layerNumber: number;
+    sublayers: string[];
+    sublayerObjects: any[];
 
     //call for any state change to update react
     requestUpdate = () => {
       update(prevState => !prevState);
     }
 
-    setMaterialRemoved(value: string){
+    setMaterialRemoved(value: string, layer: number, sublayers: string[]){
       this.materialRemoved = value;
+      this.layerNumber = layer;
+      this.sublayers = sublayers;
+
+      for(let i = 0; i < sublayers.length; i++){
+
+        const newLayer = new Layer;
+        newLayer.materialRemoved = sublayers[i];
+        this.sublayerObjects.push(newLayer);
+      }
 
       this.requestUpdate();
     }
 
+    //ask this for every layer below first layer (vinyl, tile, carpet, etc.). Have the question repeat for each layer.
     setMaterialThickness = (value: number) => {
       this.materialThickness = value;
+
+      this.sublayerObjects.forEach((item) => {
+        item.materialThickness = value;
+      })
       
       this.requestUpdate();
     }
 
+    //if anything other than unfinished, then suggest tools that get CSP 3 or less.
     setFinishedSurface = (value: string) => {
       this.finishedSurface = value;
       
@@ -73,39 +89,46 @@ function App() {
 
     setJobSize = (value: number) => {
       this.jobSize = value;
+
+      this.sublayerObjects.forEach((item) => {
+        item.jobSize = value;
+      })
       
       this.requestUpdate();
     }
 
     setGreenConcrete = (value: boolean) => {
       this.greenConcrete = value;
+
+      this.sublayerObjects.forEach((item) => {
+        item.greenConcrete = value;
+      })
       
       this.requestUpdate();
     }
 
+    //this question can be skipped, add a vac to the list of any machine requires it.
     setDustControl = (value: boolean) => {
       this.dustControl = value;
       
       this.requestUpdate();
     }
 
+    //toggle if TMC7 should be shown.
     setEdger = (value: boolean) => {
       this.edger = value;
       
       this.requestUpdate();
     }
 
+    //only show this question if there is more than 1 option with current selection.
     setPowerType = (value: string) => {
       this.powerType = value;
+
+      this.sublayerObjects.forEach((item) => {
+        item.powerType = value;
+      })
       
-      this.requestUpdate();
-    }
-
-    setSurface(newSurface: string): void{
-      this.surface = newSurface;
-      this.machine = '';
-      this.tooling = '';
-
       this.requestUpdate();
     }
     
@@ -124,17 +147,26 @@ function App() {
   }
 
   const createNewLayer = () => {
+
+    const newLayer = new Layer;
+
     if(currentLayer == undefined){
-      setCurrentLayer(new Layer);
+      setCurrentLayer(newLayer);
     }else{
       setLayerList(layerList?.concat(currentLayer));
-      setCurrentLayer(new Layer);
+      setCurrentLayer(newLayer);
     }
+
+    return newLayer;
   }
 
   useEffect(() => {
     createNewLayer()
   }, [])
+
+  useEffect(() => {
+    console.log(currentLayer)
+  }, [updateState])
 
   return (
     <>

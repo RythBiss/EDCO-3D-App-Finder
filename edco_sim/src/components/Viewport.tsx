@@ -75,17 +75,19 @@ export default function Viewport(props: any) {
     loadSurface(props?.layer?.materialRemoved);
   };
 
-  const loadSurface = (surface) => {
-    loader.load(`Models/${surface}.gltf`, (gltf) => {
-      gltfModelRight.current = gltf.scene;
-      scene.current.add(gltfModelRight.current);
-    });
-
-    loader.load(`Models/${surface}.gltf`, (gltf) => {
-      gltfModelLeft.current = gltf.scene;
-      gltfModelLeft.current.rotation.y = 3.14159;
-      scene.current.add(gltfModelLeft.current);
-    });
+  const loadSurface = (surface: string) => {
+    if(surface !== '' && surface !== undefined){
+      loader.load(`Models/${surface}.gltf`, (gltf) => {
+        gltfModelRight.current = gltf.scene;
+        scene.current.add(gltfModelRight.current);
+      });
+  
+      loader.load(`Models/${surface}.gltf`, (gltf) => {
+        gltfModelLeft.current = gltf.scene;
+        gltfModelLeft.current.rotation.y = 3.14159;
+        scene.current.add(gltfModelLeft.current);
+      });
+    }
   };
 
   updateScene();

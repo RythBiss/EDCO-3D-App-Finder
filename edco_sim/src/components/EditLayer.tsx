@@ -8,7 +8,7 @@ export default function EditLayer(props: any) {
 const [displayMenu, setDisplayMenu] = useState(0);
 
 const menus = [
-    <SurfaceMenu layerObject={props.layerObject} />,
+    <SurfaceMenu layerObject={props.layerObject}/>,
     <MachineMenu layerObject={props.layerObject} />,
     <ToolingMenu layerObject={props.layerObject} />
 ]
@@ -21,7 +21,7 @@ const menus = [
                     <button type="button" className={`w-100 tab-btn ${displayMenu == 0 && 'tab-btn-active'}`} onClick={() => setDisplayMenu(0)}>JOBSITE</button>
                 </div>
                 <div className='col px-0'>
-                    <button type="button" className={`w-100 tab-btn ${displayMenu == 1 && 'tab-btn-active'}`} onClick={() => setDisplayMenu(1)}>MACHINE</button>
+                    <button type="button" className={`w-100 tab-btn ${displayMenu == 1 && 'tab-btn-active'}`} onClick={() => setDisplayMenu(1)}>MACHINES</button>
                 </div>
                 <div className='col px-0'>
                     <button type="button" className={`w-100 tab-btn ${displayMenu == 2 && 'tab-btn-active'}`} onClick={() => setDisplayMenu(2)}>TOOLING</button>
