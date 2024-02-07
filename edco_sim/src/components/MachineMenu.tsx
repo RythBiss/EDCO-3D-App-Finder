@@ -158,8 +158,8 @@ const [matchingMachinesL2, setmatchingMachinesL2] = useState<string[]>([]);
 const [matchingMachinesL3, setmatchingMachinesL3] = useState<string[]>([]);
 const [matchingMachinesL4, setmatchingMachinesL4] = useState<string[]>([]);
 
-const setMachine = (newMachine: string, ) => {
-    props.layerObject.setMachine(newMachine);
+const setMachine = (newMachine: string, layer: number) => {
+    props.layerObject.setMachine(newMachine, layer);
     setSelectedMachine(newMachine);
 }
 
@@ -171,7 +171,7 @@ const handleMenuState = (newState: number) => {
   }
 }
 
-const compileMachineList = (layerInstance) => {
+const compileMachineList = (layerInstance:any) => {
     //create new array
     let validMachineList: string[] = [];
 
@@ -179,7 +179,7 @@ const compileMachineList = (layerInstance) => {
     Object.keys(allMachineData).forEach((key) => {
       //checklist for current machine
       let machineChecklist:any = {
-        //onConcrete: false,
+        //onconcrete: false,
         materialRemoved: false,
         materialThickness: false,
         //finishedSurface: false,
@@ -240,9 +240,21 @@ useEffect(() => {
 
   //somehow use this or parts of it to also filter for the applications additional layers
   setmatchingMachinesL1(compileMachineList(props.layerObject));
-  setmatchingMachinesL2(compileMachineList(props.layerObject.sublayerObjects[0]));
-  setmatchingMachinesL3(compileMachineList(props.layerObject.sublayerObjects[1]));
-  setmatchingMachinesL4(compileMachineList(props.layerObject.sublayerObjects[2]));
+  
+  console.log(props.layerObject.sublayerObjects[1])
+  if(props.layerObject.sublayerObjects[1] !== undefined){
+    setmatchingMachinesL2(compileMachineList(props.layerObject.sublayerObjects[1]));
+  }
+  console.log(props.layerObject.sublayerObjects[2])
+
+  if(props.layerObject.sublayerObjects[2] !== undefined){
+    setmatchingMachinesL3(compileMachineList(props.layerObject.sublayerObjects[2]));
+  }
+  console.log(props.layerObject.sublayerObjects[3])
+
+  if(props.layerObject.sublayerObjects[3] !== undefined){
+    setmatchingMachinesL4(compileMachineList(props.layerObject.sublayerObjects[3]));
+  }
 
 }, [props.layerObject])
 
@@ -260,18 +272,33 @@ useEffect(() => {
         }
         {selectedLayerState == 0 &&
           matchingMachinesL1.length > 0 &&
-            matchingMachinesL1.map((item, i) => <ListButton key={i} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item)} />)        
+            matchingMachinesL1.map((item, i) => <ListButton key={i} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 0)} />)        
         }
 
         {props.layerObject.layerNumber >= 2 &&
-          <ListButton lable={'Second Layer'} active={selectedLayerState == 1 ? true : false} onClick={() => {handleMenuState(1)}} />
+          <ListButton lable={`Second Layer (${matchingMachinesL2.length})`} active={selectedLayerState == 1 ? true : false} onClick={() => {handleMenuState(1)}} />
         }
+        {selectedLayerState == 1 &&
+          matchingMachinesL2.length > 0 &&
+            matchingMachinesL2.map((item, i) => <ListButton key={i} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 1)} />)        
+        }
+
         {props.layerObject.layerNumber >= 3 &&
-          <ListButton lable={'Third Layer'} active={selectedLayerState == 2 ? true : false} onClick={() => {handleMenuState(2)}} />
+          <ListButton lable={`Third Layer (${matchingMachinesL3.length})`} active={selectedLayerState == 2 ? true : false} onClick={() => {handleMenuState(2)}} />
         }
+        {selectedLayerState == 2 &&
+          matchingMachinesL3.length > 0 &&
+            matchingMachinesL3.map((item, i) => <ListButton key={i} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 2)} />)        
+        }
+
         {props.layerObject.layerNumber >= 4 &&
-          <ListButton lable={'Fourth Layer'} active={selectedLayerState == 3 ? true : false} onClick={() => {handleMenuState(3)}} />
+          <ListButton lable={`Fourth Layer (${matchingMachinesL4.length})`} active={selectedLayerState == 3 ? true : false} onClick={() => {handleMenuState(3)}} />
         }
+        {selectedLayerState == 3 &&
+          matchingMachinesL4.length > 0 &&
+            matchingMachinesL4.map((item, i) => <ListButton key={i} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 3)} />)        
+        }
+
     </div>
   )
 }

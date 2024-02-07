@@ -132,9 +132,10 @@ function App() {
       this.requestUpdate();
     }
     
-    setMachine(newMachine: string): void{
+    setMachine(newMachine: string, layer: number): void{
       this.machine = newMachine;
       this.tooling = '';
+      this.sublayerObjects[layer].machine = newMachine;
       this.requestUpdate();
     }
 

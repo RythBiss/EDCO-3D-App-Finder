@@ -7,67 +7,67 @@ export default function SurfaceMenu(props:any) {
         concrete: {
             name: 'Concrete',
             layers: 1,
-            sublayers: []
+            sublayers: ['concrete']
         },
         triphazard: {
             name: 'Trip Hazard',
             layers: 1,
-            sublayers: []
+            sublayers: ['trip hazard']
         },
         highspots: {
             name: 'High Spots',
             layers: 1,
-            sublayers: []
+            sublayers: ['high spots']
         },
         vinyl: {
             name: 'Vinyl',
             layers: 4,
-            sublayers: ['glue', 'residual', 'concrete']
+            sublayers: ['vinyl', 'glue', 'residual', 'concrete']
         },
         linoleum: {
             name: 'Linoleum',
             layers: 4,
-            sublayers: ['glue', 'residual', 'concrete']
+            sublayers: ['linoleum', 'glue', 'residual', 'concrete']
         },
         ceramic: {
             name: 'Ceramic',
             layers: 4,
-            sublayers: ['mastic', 'residual', 'concrete']
+            sublayers: ['ceramic', 'mastic', 'residual', 'concrete']
         },
         carpet: {
             name: 'Carpet',
             layers: 4,
-            sublayers: ['glue', 'residual', 'concrete']
+            sublayers: ['carpet', 'glue', 'residual', 'concrete']
         },
         mastic: {
             name: 'Mastic',
             layers: 3,
-            sublayers: ['residual', 'concrete']
+            sublayers: ['mastic', 'residual', 'concrete']
         },
         paint: {
             name: 'Paint',
             layers: 2,
-            sublayers: ['concrete']
+            sublayers: ['paint', 'concrete']
         },
         glue: {
             name: 'Glue',
             layers: 3,
-            sublayers: ['residual', 'concrete']
+            sublayers: ['glue', 'residual', 'concrete']
         },
         residual: {
             name: 'Residual Glue',
             layers: 2,
-            sublayers: ['concrete']
+            sublayers: ['residual', 'concrete']
         },
         sealer: {
             name: 'Sealer',
             layers: 2,
-            sublayers: ['concrete']
+            sublayers: ['sealer', 'concrete']
         },
         thinmil: {
             name: 'Thin Mil Coatings',
             layers: 2,
-            sublayers: ['concrete']
+            sublayers: ['thin mil coatings', 'concrete']
         },
     }
 
@@ -179,7 +179,7 @@ export default function SurfaceMenu(props:any) {
     useEffect(() => {
         populateqTwoAnswers()
     }, [])
-    
+
   return (
     <div className='col edit-menu'>
         {/* <ListButton lable={'Are you on concrete?'} onClick={() => handleMenuState(0)} />
