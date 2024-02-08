@@ -74,8 +74,8 @@ export default function ToolingMenu(props: any) {
   const [matchingTooling, setMatchingTooling] = useState<string[][]>([]);
   const [openTab, setOpenTab] = useState<number>(-1);
 
-  const setTooling = (newTooling: string, CSP: number) => {
-    props.layerObject.setTooling(newTooling, CSP);
+  const setTooling = (newTooling: string, layer:number, CSP: number) => {
+    props.layerObject.setTooling(newTooling, layer, CSP);
     setSelectedSurface(newTooling);
   }
 
@@ -88,8 +88,6 @@ export default function ToolingMenu(props: any) {
     props.layerObject.sublayerObjects.forEach((item: { machine: any; materialRemoved: any; }, layerIndex: number) => {
       count++
       let concatList: string[] = [];
-      console.log(item.machine)
-      console.log(item.materialRemoved)
 
       //go through each tooling
       Object.keys(toolsByApplicationAndMachine).forEach((key) => {
@@ -100,11 +98,7 @@ export default function ToolingMenu(props: any) {
         const toolFitsMachine = machinesArray.includes(item.machine);
         const toolFitsApplication = appsArray.includes(item.materialRemoved);
 
-        console.log('fits machine: ', toolFitsMachine)
-        console.log('fits app: ', toolFitsApplication)
-
         if(toolFitsApplication && toolFitsMachine){
-          console.log(key, ' match ')
           concatList.push(key)
         }
       })
@@ -145,7 +139,7 @@ export default function ToolingMenu(props: any) {
       {openTab == 0 &&
           matchingTooling.length !== 0 &&
                 matchingTooling[0].map((tool: any, i: any) => 
-                  <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, toolsByApplicationAndMachine[tool].CSP)} />
+                  <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 0, toolsByApplicationAndMachine[tool].CSP)} />
         )}
 
       {/* layer 2 */}
@@ -155,7 +149,7 @@ export default function ToolingMenu(props: any) {
       {openTab == 1 &&
           matchingTooling.length !== 0 &&
               matchingTooling[1].map((tool: any, i: any) => 
-                <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, toolsByApplicationAndMachine[tool].CSP)} />
+                <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 1, toolsByApplicationAndMachine[tool].CSP)} />
         )}
 
       {/* layer 3 */}
@@ -165,7 +159,7 @@ export default function ToolingMenu(props: any) {
       {openTab == 2 &&
           matchingTooling.length !== 0 &&
               matchingTooling[2].map((tool: any, i: any) => 
-                <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, toolsByApplicationAndMachine[tool].CSP)} />
+                <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 2, toolsByApplicationAndMachine[tool].CSP)} />
         )}
       
       {/* layer 4 */}
@@ -175,7 +169,7 @@ export default function ToolingMenu(props: any) {
       {openTab == 3 &&
           matchingTooling.length !== 0 &&
               matchingTooling[3].map((tool: any, i: any) => 
-                <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, toolsByApplicationAndMachine[tool].CSP)} />
+                <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 3, toolsByApplicationAndMachine[tool].CSP)} />
         )}
 
     </div>

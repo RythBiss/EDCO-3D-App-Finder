@@ -139,9 +139,10 @@ function App() {
       this.requestUpdate();
     }
 
-    setTooling(newTooling: string, CSP: number): void{
+    setTooling(newTooling: string, layer: number,CSP: number): void{
       this.tooling = newTooling;
       this.CSP = CSP;
+      this.sublayerObjects[layer].tooling = newTooling;
       setActiveCSP(CSP);
       this.requestUpdate();
     }
