@@ -8,10 +8,10 @@ import Viewport from './components/Viewport'
 
 function App() {
 
-  const [layerList, setLayerList] = useState<Layer[]>([])
-  const [currentLayer, setCurrentLayer] = useState<Layer>()
+  const [layerList, setLayerList] = useState<Layer[]>([]);
+  const [currentLayer, setCurrentLayer] = useState<Layer>();
+  const [renderLayer, setRenderLayer] = useState<number>(0);
   const [updateState, update] = useState(false);
-  const [activeCSP, setActiveCSP] = useState(-1);
 
   //keep new layer function incase users have multiple types of jobs to do
   class Layer{
@@ -58,9 +58,9 @@ function App() {
       this.materialRemoved = value;
       this.layerNumber = layer;
       this.sublayers = sublayers;
+      this.sublayerObjects = [];
 
       for(let i = 0; i < sublayers.length; i++){
-
         const newLayer = new Layer;
         newLayer.materialRemoved = sublayers[i];
         this.sublayerObjects.push(newLayer);
@@ -73,11 +73,11 @@ function App() {
     setMaterialThickness = (value: number) => {
       this.materialThickness = value;
 
-      this.sublayerObjects.forEach((item) => {
-        item.materialThickness = value;
-      })
+      // this.sublayerObjects.forEach((item) => {
+      //   item.materialThickness = value;
+      // })
       
-      this.requestUpdate();
+      //this.requestUpdate();
     }
 
     //if anything other than unfinished, then suggest tools that get CSP 3 or less.
@@ -141,9 +141,7 @@ function App() {
 
     setTooling(newTooling: string, layer: number,CSP: number): void{
       this.tooling = newTooling;
-      this.CSP = CSP;
       this.sublayerObjects[layer].tooling = newTooling;
-      setActiveCSP(CSP);
       this.requestUpdate();
     }
   }
@@ -163,7 +161,7 @@ function App() {
   }
 
   useEffect(() => {
-    createNewLayer()
+    createNewLayer();
   }, [])
 
   useEffect(() => {
@@ -176,8 +174,8 @@ function App() {
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100'>
           <EditLayer layerObject={currentLayer} />
-          <Viewport CSP={activeCSP} history={layerList[layerList.length - 1]} layer={currentLayer} />
-          <LayerHistory newLayer={createNewLayer} history={layerList} current={currentLayer} />
+          <Viewport history={layerList[layerList.length - 1]} layer={currentLayer} renderLayer={renderLayer} />
+          <LayerHistory newLayer={createNewLayer} history={layerList} current={currentLayer} setRenderedLayer={setRenderLayer} />
         </div>
       </div>
     </>

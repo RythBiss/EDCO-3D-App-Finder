@@ -1,6 +1,6 @@
 :root{
-    --active: #D73648;
-    --hover: #e75a6b;
+    --active: #e75a6b;
+    --hover: #e68490;
     --primary: #D73648;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .tab-btn-active{
-    background-color: var(--active);
+    background-color: var(--primary);
     border: none;
     padding: 1rem 0;
     margin: 0;
@@ -50,12 +50,16 @@
     color: white;
 }
 
+.bottom-gap{
+    margin-bottom: 0.4rem;
+}
+
 .list-btn{
     background-color: #D73648;
     border: none;
     color: white;
     padding: 1rem 1.5rem;
-    margin-bottom: 1px;
+    box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
 }
 
 .list-btn-inner{
@@ -72,6 +76,18 @@
 }
 
 .btn-active{
+    background-color: var(--active);
+}
+
+.btn-active-shift-left{
+    margin-left: -16px;
+}
+
+.cluster-btn-active{
+    background-color: black;
+}
+
+.btn-active:hover{
     background-color: var(--active);
 }
 
@@ -105,4 +121,79 @@
 .new-layer{
     color:white;
     padding: 0;
+}
+
+.active-layer-tab{
+    background-color: #e75a6b;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    height: 99.5%;
+    width: 16px;
+    left: -16px;
+    border-radius: 16px 0px 0px 16px;
+    box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
+
+}
+
+.cluster-btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: -0.2rem -0.5rem 0.25rem -0.5rem;
+}
+
+.cluster-btn-container > *{
+    background-color: var(--primary);
+    border: none;
+    color: white;
+    padding: 0.25rem 2rem;
+    margin: 0.2rem;
+    border-radius: 0.5rem;
+    flex-grow: 1;
+    box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
+}
+
+.cluster-btn-container > *:hover{
+    background-color: var(--hover);
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 15rem;
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    background: #474747;
+    height: 0.25rem;
+    border-radius: 0.5rem;
+  }
+  
+  /******** Firefox ********/
+  input[type="range"]::-moz-range-track {
+    background: #474747;
+    height: 0.25rem;
+    border-radius: 0.5rem;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    margin-top: -4px; /* Centers thumb on the track */
+    border-radius: 0.5rem;
+    background-color: #fff;
+    height: 0.75rem;
+    width: 0.75rem;  
+ }
+
+ input[type="range"]::-moz-range-thumb {
+    border: none; /*Removes extra border that FF applies*/
+    border-radius: 0.5rem; /*Removes default border-radius that FF applies*/
+    background-color: #fff;
+    height: 0.75rem;
+    width: 0.75rem;
 }

@@ -1,5 +1,6 @@
 import {useEffect, useState } from 'react'
 import ListButton from './ListButton';
+import { texture } from 'three/examples/jsm/nodes/Nodes.js';
 
 export default function EditLayer(props: any) {
 
@@ -12,7 +13,7 @@ const allMachineData = {
     onCrete: true,
     //if the machine can achive a CSP 2-3 for new coatings
     surfacePrep: false,
-    edges: true,
+    edges: false,
     power: ['air'],
     image: 'https://portal.edcoinc.com/storage/product-slider/alr-steel-chisel-scalers/ALR-5-Machine-Slider.jpg'
   },
@@ -23,7 +24,7 @@ const allMachineData = {
     onCrete: true,
     //if the machine can achive a CSP 2-3 for new coatings
     surfacePrep: false,
-    edges: true,
+    edges: false,
     power: ['air'],
     image: 'https://portal.edcoinc.com/storage/product-slider/big-stick-chisel-scalers/ALR-BS-Straight-Machine-Slider.jpg'
   },
@@ -34,7 +35,7 @@ const allMachineData = {
     onCrete: true,
     //if the machine can achive a CSP 2-3 for new coatings
     surfacePrep: false,
-    edges: true,
+    edges: false,
     power: ['electric'],
     image: 'https://portal.edcoinc.com/storage/product-slider/8-manual-tile-shark-floor-stripper/TS-8-Machine-Slider.jpg'
   },
@@ -184,7 +185,7 @@ const compileMachineList = (layerInstance:any) => {
         materialThickness: false,
         //finishedSurface: false,
         jobSize: false,
-        //edger: false,
+        edger: true,
         powerType: false
       }
   
@@ -198,7 +199,6 @@ const compileMachineList = (layerInstance:any) => {
         const applicationAtIndex = machineApplications[index];
   
         if(applicationAtIndex == layerInstance.materialRemoved){
-          //validMachineList = validMachineList.concat(key);
           machineChecklist.materialRemoved = true;
           break;
         }
@@ -208,21 +208,25 @@ const compileMachineList = (layerInstance:any) => {
           machineChecklist.materialThickness = true;
       }
 
-      
       if(allMachineData[key].recJobSize <= layerInstance.jobSize){
         machineChecklist.jobSize = true;
       }
-    
-  
+
       allMachineData[key].power.forEach((item:string) => {
         if(item == layerInstance.powerType) {
           machineChecklist.powerType = true;
         }
       })
+
+      if(props.layerObject.edger == false){
+        if(allMachineData[key].edges == true){
+          machineChecklist.edger = false;
+        }
+      }
   
       let validateMachine:boolean = true;
   
-      Object.keys(machineChecklist).forEach((item, i) => {
+      Object.keys(machineChecklist).forEach((item) => {
         if(machineChecklist[item] == false){
           validateMachine = false;
         }
@@ -232,38 +236,35 @@ const compileMachineList = (layerInstance:any) => {
         validMachineList = validMachineList.concat(key);
       }
     })
-    
+
     return validMachineList;
 }
+
+  // useEffect(() => {
+  //   console.log(matchingMachinesL1)
+  //   console.log(matchingMachinesL2)
+  //   console.log(matchingMachinesL3)
+  //   console.log(matchingMachinesL4)
+  // }, [matchingMachinesL1])
 
 useEffect(() => {
 
   //somehow use this or parts of it to also filter for the applications additional layers
   setmatchingMachinesL1(compileMachineList(props.layerObject));
   
-  console.log(props.layerObject.sublayerObjects[1])
   if(props.layerObject.sublayerObjects[1] !== undefined){
     setmatchingMachinesL2(compileMachineList(props.layerObject.sublayerObjects[1]));
   }
-  console.log(props.layerObject.sublayerObjects[2])
 
   if(props.layerObject.sublayerObjects[2] !== undefined){
     setmatchingMachinesL3(compileMachineList(props.layerObject.sublayerObjects[2]));
   }
-  console.log(props.layerObject.sublayerObjects[3])
 
   if(props.layerObject.sublayerObjects[3] !== undefined){
     setmatchingMachinesL4(compileMachineList(props.layerObject.sublayerObjects[3]));
   }
 
 }, [props.layerObject])
-
-useEffect(() => {
-  console.log(matchingMachinesL1)
-  console.log(matchingMachinesL2)
-  console.log(matchingMachinesL3)
-  console.log(matchingMachinesL4)
-}, [matchingMachinesL1])
 
   return (
     <div className='col edit-menu'>

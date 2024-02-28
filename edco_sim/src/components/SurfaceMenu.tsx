@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import ListButton from './ListButton';
+import ClusterButton from './ClusterButton';
+import LayerHistory from './LayerHistory';
 
 export default function SurfaceMenu(props:any) {
 
@@ -12,7 +14,7 @@ export default function SurfaceMenu(props:any) {
         triphazard: {
             name: 'Trip Hazard',
             layers: 1,
-            sublayers: ['trip hazard']
+            sublayers: ['trip hazard', 'concrete']
         },
         highspots: {
             name: 'High Spots',
@@ -187,37 +189,57 @@ export default function SurfaceMenu(props:any) {
             <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setOnConcrete(layer)} />
         )} */}
         <ListButton lable={'What is the material being removed?'} onClick={() => handleMenuState(1)} />
-        {openedMenu == 1 && qTwoAnswers.map((layer:any, i) => 
-            <ListButton key={i} lable={layer.name} indent={1} active={selectedQuestion == layer.name ? true : false} onClick={() => setMaterialRemoved(layer.name, layer.layers, layer.sublayers)} />
-        )}
-        <ListButton lable={'How thick is the material?'} onClick={() => handleMenuState(2)} />
+        {openedMenu == 1 &&
+            <div className='cluster-btn-container'>
+                {qTwoAnswers.map((layer:any, i) => 
+                    <ClusterButton key={i} lable={layer.name} layerObject={props.layerObject} onClick={() => setMaterialRemoved(layer.name, layer.layers, layer.sublayers)} />
+                )}
+            </div>
+        }
+        {/* <ListButton lable={'How thick is the material?'} onClick={() => handleMenuState(2)} />
         {openedMenu == 2 && qThreeAnswers.map((layer, i) => 
             <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setMaterialThickness(layer)} />
-        )}
+        )} */}
         {/* <ListButton lable={'What is the desired finished surface?'} onClick={() => handleMenuState(3)} />
         {openedMenu == 3 && qFourAnswers.map((layer, i) => 
             <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setFinishedSurface(layer)} />
         )} */}
         <ListButton lable={'What is the square footage of the site?'} onClick={() => handleMenuState(4)} />
-        {openedMenu == 4 && qFiveAnswers.map((layer, i) => 
-            <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setJobSize(layer)} />
-        )}
+        {openedMenu == 4 &&
+            <div className="cluster-btn-container">
+            {qFiveAnswers.map((layer, i) => 
+                    <ClusterButton key={i} lable={layer} layerObject={props.layerObject} onClick={() => setJobSize(layer)} />
+                )}
+            </div>
+        }
         <ListButton lable={'Is your concrete more than 28 days old?'} onClick={() => handleMenuState(5)} />
-        {openedMenu == 5 && qSixAnswers.map((layer, i) => 
-            <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setGreenConcrete(layer)} />
-        )}
+        {openedMenu == 5 &&
+            <div className="cluster-btn-container">
+                {qSixAnswers.map((layer, i) => 
+                    <ClusterButton key={i} lable={layer} layerObject={props.layerObject} onClick={() => setGreenConcrete(layer)} />
+                )}
+            </div>
+        }
         {/* <ListButton lable={'Do you already have dust control in the form  of an EDCO vac or water?'} onClick={() => handleMenuState(6)} />
         {openedMenu == 6 && qSevenAnswers.map((layer, i) => 
             <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setDustControl(layer)} />
-        )}
-        <ListButton lable={'Do you need to grind or clean against a wall?'} onClick={() => handleMenuState(7)} />
-        {openedMenu == 7 && qEightAnswers.map((layer, i) => 
-            <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setEdger(layer)} />
         )} */}
+        <ListButton lable={'Do you need to grind or clean against a wall?'} onClick={() => handleMenuState(7)} />
+        {openedMenu == 7 &&
+            <div className="cluster-btn-container">
+                {qEightAnswers.map((layer, i) => 
+                    <ClusterButton key={i} lable={layer} layerObject={props.layerObject} onClick={() => setEdger(layer)} />
+                )}
+            </div>
+        }
         <ListButton lable={'What machine power is desired?'} onClick={() => handleMenuState(8)} />
-        {openedMenu == 8 && qNineAnswers.map((layer, i) => 
-            <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setPowerType(layer)} />
-        )}
+        {openedMenu == 8 &&
+            <div className="cluster-btn-container">
+                {qNineAnswers.map((layer, i) => 
+                    <ClusterButton key={i} lable={layer} layerObject={props.layerObject} onClick={() => setPowerType(layer)} />
+                )}
+            </div>
+        }
 
         {/************************************************************OLD*******************************************************************/}
 

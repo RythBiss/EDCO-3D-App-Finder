@@ -7,7 +7,7 @@ export default function ListButton(props: any) {
     }
 
   return (
-        <div className='row'>
+        <div className='row bottom-gap'>
             <div className={`col-${props.indent}`}/>
             <div className='col tab-bar'>
                 <button type="button" className={`btn-wrapper list-btn w-100 container ${props.active == true ? 'btn-active' : ''}`} onClick={handleOnClick}>

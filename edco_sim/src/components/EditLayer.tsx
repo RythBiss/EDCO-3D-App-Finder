@@ -27,7 +27,9 @@ const menus = [
                     <button type="button" className={`w-100 tab-btn ${displayMenu == 2 && 'tab-btn-active'}`} onClick={() => setDisplayMenu(2)}>TOOLING</button>
                 </div>
             </div>
-            {menus[displayMenu]}
+            <div style={{margin: '0'}}>
+                {menus[displayMenu]}
+            </div>
         </div>
     </div>
   )
