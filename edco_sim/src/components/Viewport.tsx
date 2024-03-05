@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 
 export default function Viewport(props: any) {
   const mountRef = useRef(null);
@@ -11,6 +13,7 @@ export default function Viewport(props: any) {
   const gltfModelRight = useRef();
   const gltfModelLeft = useRef();
   const loader = new GLTFLoader();
+  const fontLoader = new FontLoader();
   const controlsRef = useRef();
   const loadedModels = useRef([]);
   
@@ -40,6 +43,42 @@ export default function Viewport(props: any) {
     light.position.set(1, 1, 1).normalize();
 
     camera.current.position.z = 2.05;
+
+    fontLoader.load( 'Fonts/Roboto Medium_Regular.json', function ( font ) {
+
+      const geometry = new TextGeometry( 'After', {
+        font: font,
+        size: 0.1,
+        height: 0.025,
+        curveSegments: 1,
+        bevelEnabled: false,
+        bevelThickness: 1,
+        bevelSize: 1,
+        bevelOffset: 0,
+        bevelSegments: 0
+      } );
+      const geometry2 = new TextGeometry( 'Before', {
+        font: font,
+        size: 0.1,
+        height: 0.025,
+        curveSegments: 1,
+        bevelEnabled: false,
+        bevelThickness: 1,
+        bevelSize: 1,
+        bevelOffset: 0,
+        bevelSegments: 0
+      } );
+
+      const textMesh = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({ color: 0xFFFFFF }))
+      const textMesh2 = new THREE.Mesh(geometry2, new THREE.MeshPhongMaterial({ color: 0xFFFFFF }))
+
+      scene.current.add(textMesh);
+      scene.current.add(textMesh2);
+      textMesh.position.set(0.3,0,-1.05)
+      textMesh2.position.set(-0.7,0,-1.05)
+      textMesh.rotation.x = -3.14159/2
+      textMesh2.rotation.x = -3.14159/2
+    } );
 
     loadSurface('ceramic');
 

@@ -164,9 +164,9 @@ function App() {
     createNewLayer();
   }, [])
 
-  useEffect(() => {
-    console.log(currentLayer)
-  }, [updateState])
+  // useEffect(() => {
+  //   console.log(currentLayer)
+  // }, [updateState])
 
   return (
     <>

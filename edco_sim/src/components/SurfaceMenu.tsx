@@ -77,7 +77,7 @@ export default function SurfaceMenu(props:any) {
     const [qTwoAnswers, setqTwoAnswers] = useState<string[]>([]);
     const qThreeAnswers = ['1/32"', '1/16"', '1/8"', '1/4"'];
     const qFourAnswers = ['Vinyl', 'Linoleum', 'Ceramic', 'Carpet', 'Rubber', 'Paint', 'None'];
-    const qFiveAnswers = ['1,000', '2,000', '5,000+'];
+    const qFiveAnswers = ['1,000+', '2,000+', '5,000+'];
     const qSixAnswers = ['Yes', 'No'];
     const qSevenAnswers = ['Yes', 'No'];
     const qEightAnswers = ['Yes', 'No'];
@@ -145,10 +145,10 @@ export default function SurfaceMenu(props:any) {
     const setJobSize = (res: string) => {
 
         switch(res){
-            case '1,000':
+            case '1,000+':
                 props.layerObject.setJobSize(0);
                 break;
-            case '2,000':
+            case '2,000+':
                 props.layerObject.setJobSize(1);
                 break;
             case '5,000+':

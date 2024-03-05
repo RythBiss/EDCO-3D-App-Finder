@@ -1,6 +1,5 @@
 import {useEffect, useState } from 'react'
 import ListButton from './ListButton';
-import { texture } from 'three/examples/jsm/nodes/Nodes.js';
 
 export default function EditLayer(props: any) {
 
@@ -154,10 +153,16 @@ const allMachineData = {
 
 const [selectedMachine, setSelectedMachine] = useState('');
 const [selectedLayerState, setSelectedLayerState] = useState<number>();
-const [matchingMachinesL1, setmatchingMachinesL1] = useState<string[]>([]);
-const [matchingMachinesL2, setmatchingMachinesL2] = useState<string[]>([]);
-const [matchingMachinesL3, setmatchingMachinesL3] = useState<string[]>([]);
-const [matchingMachinesL4, setmatchingMachinesL4] = useState<string[]>([]);
+
+const [matchingMachinesL1, setmatchingMachinesL1] = useState<any>();
+const [matchingMachinesL2, setmatchingMachinesL2] = useState<any>();
+const [matchingMachinesL3, setmatchingMachinesL3] = useState<any>();
+const [matchingMachinesL4, setmatchingMachinesL4] = useState<any>();
+
+const [subdL1, setSubdL1] = useState<boolean>(false);
+const [subdL2, setSubdL2] = useState<boolean>(false);
+const [subdL3, setSubdL3] = useState<boolean>(false);
+const [subdL4, setSubdL4] = useState<boolean>(false);
 
 const setMachine = (newMachine: string, layer: number) => {
     props.layerObject.setMachine(newMachine, layer);
@@ -172,9 +177,26 @@ const handleMenuState = (newState: number) => {
   }
 }
 
+const substituteMachine = (list) => {
+  
+  let temp = list;
+
+  list?.invalidReasons.forEach((item: string) => {
+    if(item.materialRemoved == true && item.materialThickness == true){
+      console.log(item.name);
+      console.log(list.machines);
+
+      temp.machines.push(item.name);
+    }
+  })
+
+  return temp;
+}
+
 const compileMachineList = (layerInstance:any) => {
     //create new array
     let validMachineList: string[] = [];
+    let invalidResons:any[] = [];
 
     //sort through machines and concat any that match the application to the validMachineList 
     Object.keys(allMachineData).forEach((key) => {
@@ -234,34 +256,67 @@ const compileMachineList = (layerInstance:any) => {
   
       if(validateMachine == true){
         validMachineList = validMachineList.concat(key);
+      }else{
+        machineChecklist.name = key;
+        invalidResons.push(machineChecklist)
       }
     })
 
-    return validMachineList;
-}
+    const returnPackage = {
+      machines: validMachineList,
+      invalidReasons: invalidResons
+    }
 
-  // useEffect(() => {
-  //   console.log(matchingMachinesL1)
-  //   console.log(matchingMachinesL2)
-  //   console.log(matchingMachinesL3)
-  //   console.log(matchingMachinesL4)
-  // }, [matchingMachinesL1])
+    return returnPackage;
+}
 
 useEffect(() => {
 
   //somehow use this or parts of it to also filter for the applications additional layers
-  setmatchingMachinesL1(compileMachineList(props.layerObject));
+  let generatedList = compileMachineList(props.layerObject)
+
+  if(generatedList.machines.length == 0){
+    setmatchingMachinesL1(substituteMachine(generatedList))
+    setSubdL1(true);
+  }else{
+    setmatchingMachinesL1(compileMachineList(props.layerObject));
+    setSubdL1(false);
+  }
   
   if(props.layerObject.sublayerObjects[1] !== undefined){
-    setmatchingMachinesL2(compileMachineList(props.layerObject.sublayerObjects[1]));
+    generatedList = compileMachineList(props.layerObject.sublayerObjects[1])
+
+    if(generatedList.machines.length == 0){
+      setmatchingMachinesL2(substituteMachine(generatedList))
+      setSubdL2(true);
+    }else{
+      setmatchingMachinesL2(compileMachineList(props.layerObject.sublayerObjects[1]));
+      setSubdL2(false);
+    }
   }
 
   if(props.layerObject.sublayerObjects[2] !== undefined){
-    setmatchingMachinesL3(compileMachineList(props.layerObject.sublayerObjects[2]));
+    generatedList = compileMachineList(props.layerObject.sublayerObjects[2])
+
+    if(generatedList.machines.length == 0){
+      setmatchingMachinesL3(substituteMachine(generatedList))
+      setSubdL3(true);
+    }else{
+      setmatchingMachinesL3(compileMachineList(props.layerObject.sublayerObjects[2]));
+      setSubdL3(false);
+    }
   }
 
   if(props.layerObject.sublayerObjects[3] !== undefined){
-    setmatchingMachinesL4(compileMachineList(props.layerObject.sublayerObjects[3]));
+    generatedList = compileMachineList(props.layerObject.sublayerObjects[3])
+
+    if(generatedList.machines.length == 0){
+      setmatchingMachinesL4(substituteMachine(generatedList))
+      setSubdL4(true);
+    }else{
+      setmatchingMachinesL4(compileMachineList(props.layerObject.sublayerObjects[3]));
+      setSubdL4(false);
+    }
   }
 
 }, [props.layerObject])
@@ -269,35 +324,47 @@ useEffect(() => {
   return (
     <div className='col edit-menu'>
         {matchingMachinesL1 &&
-          <ListButton lable={`First Layer (${matchingMachinesL1.length})`} active={selectedLayerState == 0 ? true : false} onClick={() => {handleMenuState(0)}} />
+          <ListButton lable={`First Layer (${matchingMachinesL1.machines.length})`} active={selectedLayerState == 0 ? true : false} onClick={() => {handleMenuState(0)}} />
         }
-        {selectedLayerState == 0 &&
-          matchingMachinesL1.length > 0 &&
-            matchingMachinesL1.map((item, i) => <ListButton key={i} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 0)} />)        
+        {subdL1 && selectedLayerState == 0 &&
+          <ListButton lable='No results with current jobsite filter. Try these substitutes:' indent={1} />
         }
-
-        {props.layerObject.layerNumber >= 2 &&
-          <ListButton lable={`Second Layer (${matchingMachinesL2.length})`} active={selectedLayerState == 1 ? true : false} onClick={() => {handleMenuState(1)}} />
-        }
-        {selectedLayerState == 1 &&
-          matchingMachinesL2.length > 0 &&
-            matchingMachinesL2.map((item, i) => <ListButton key={i} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 1)} />)        
+        {selectedLayerState == 0 && matchingMachinesL1 !== undefined &&
+          matchingMachinesL1.machines.length > 0 &&
+            matchingMachinesL1.machines.map((item, i) => <ListButton key={i} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 0)} />)        
         }
 
-        {props.layerObject.layerNumber >= 3 &&
-          <ListButton lable={`Third Layer (${matchingMachinesL3.length})`} active={selectedLayerState == 2 ? true : false} onClick={() => {handleMenuState(2)}} />
+        {props.layerObject.layerNumber >= 2 && matchingMachinesL2 !== undefined  &&
+          <ListButton lable={`Second Layer (${matchingMachinesL2.machines.length})`} active={selectedLayerState == 1 ? true : false} onClick={() => {handleMenuState(1)}} />
         }
-        {selectedLayerState == 2 &&
-          matchingMachinesL3.length > 0 &&
-            matchingMachinesL3.map((item, i) => <ListButton key={i} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 2)} />)        
+        {subdL2 && selectedLayerState == 1 &&
+          <ListButton lable='No results with current jobsite filter. Try these substitutes:' indent={1} />
+        }
+        {selectedLayerState == 1 && matchingMachinesL2 !== undefined  &&
+          matchingMachinesL2.machines.length > 0 &&
+            matchingMachinesL2.machines.map((item, i) => <ListButton key={i} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 1)} />)        
         }
 
-        {props.layerObject.layerNumber >= 4 &&
-          <ListButton lable={`Fourth Layer (${matchingMachinesL4.length})`} active={selectedLayerState == 3 ? true : false} onClick={() => {handleMenuState(3)}} />
+        {props.layerObject.layerNumber >= 3 && matchingMachinesL3 !== undefined  &&
+          <ListButton lable={`Third Layer (${matchingMachinesL3.machines.length})`} active={selectedLayerState == 2 ? true : false} onClick={() => {handleMenuState(2)}} />
         }
-        {selectedLayerState == 3 &&
-          matchingMachinesL4.length > 0 &&
-            matchingMachinesL4.map((item, i) => <ListButton key={i} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 3)} />)        
+        {subdL3 && selectedLayerState == 2 &&
+          <ListButton lable='No results with current jobsite filter. Try these substitutes:' indent={1} />
+        }
+        {selectedLayerState == 2 && matchingMachinesL3 !== undefined  &&
+          matchingMachinesL3.machines.length > 0 &&
+            matchingMachinesL3.machines.map((item, i) => <ListButton key={i} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 2)} />)        
+        }
+
+        {props.layerObject.layerNumber >= 4 && matchingMachinesL4 !== undefined  &&
+          <ListButton lable={`Fourth Layer (${matchingMachinesL4.machines.length})`} active={selectedLayerState == 3 ? true : false} onClick={() => {handleMenuState(3)}} />
+        }
+        {subdL4 && selectedLayerState == 3 &&
+          <ListButton lable='No results with current jobsite filter. Try these substitutes:' indent={1} />
+        }
+        {selectedLayerState == 3 && matchingMachinesL4 !== undefined  &&
+          matchingMachinesL4.machines.length > 0 &&
+            matchingMachinesL4.machines.map((item, i) => <ListButton key={i} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 3)} />)        
         }
 
     </div>
