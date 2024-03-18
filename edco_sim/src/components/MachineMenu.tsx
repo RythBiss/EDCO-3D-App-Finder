@@ -322,7 +322,7 @@ useEffect(() => {
 }, [props.layerObject])
 
   return (
-    <div className='col edit-menu'>
+    <div className='col edit-menu scroll-on'>
         {matchingMachinesL1 &&
           <ListButton lable={`First Layer (${matchingMachinesL1.machines.length})`} active={selectedLayerState == 0 ? true : false} onClick={() => {handleMenuState(0)}} />
         }

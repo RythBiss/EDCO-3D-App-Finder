@@ -4,6 +4,14 @@
     --primary: #D73648;
 }
 
+html, body{
+    overflow-y: hidden;
+}
+
+.scroll{
+    overflow-y: auto;
+}
+
 .header{
     background-color: #D73648;
 }

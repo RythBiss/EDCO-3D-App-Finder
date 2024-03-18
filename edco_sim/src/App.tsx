@@ -18,6 +18,7 @@ function App() {
     constructor(){
       this.machine = '';
       this.tooling = '';
+      this.CSP = '';
 
       this.onConcrete = false;
       this.materialRemoved = '';
@@ -35,6 +36,7 @@ function App() {
 
     machine: string;
     tooling: string;
+    CSP: string;
 
     onConcrete: boolean;
     materialRemoved: string;
@@ -55,6 +57,8 @@ function App() {
     }
 
     setMaterialRemoved(value: string, layer: number, sublayers: string[]){
+      this.clearSelections(0)
+
       this.materialRemoved = value;
       this.layerNumber = layer;
       this.sublayers = sublayers;
@@ -71,6 +75,8 @@ function App() {
 
     //ask this for every layer below first layer (vinyl, tile, carpet, etc.). Have the question repeat for each layer.
     setMaterialThickness = (value: number) => {
+      this.clearSelections(0)
+
       this.materialThickness = value;
 
       // this.sublayerObjects.forEach((item) => {
@@ -88,6 +94,8 @@ function App() {
     }
 
     setJobSize = (value: number) => {
+      this.clearSelections(0)
+
       this.jobSize = value;
 
       this.sublayerObjects.forEach((item) => {
@@ -98,6 +106,8 @@ function App() {
     }
 
     setGreenConcrete = (value: boolean) => {
+      this.clearSelections(0)
+
       this.greenConcrete = value;
 
       this.sublayerObjects.forEach((item) => {
@@ -116,6 +126,8 @@ function App() {
 
     //toggle if TMC7 should be shown.
     setEdger = (value: boolean) => {
+      this.clearSelections(0)
+
       this.edger = value;
       
       this.requestUpdate();
@@ -123,6 +135,8 @@ function App() {
 
     //only show this question if there is more than 1 option with current selection.
     setPowerType = (value: string) => {
+      this.clearSelections(0)
+
       this.powerType = value;
 
       this.sublayerObjects.forEach((item) => {
@@ -134,15 +148,28 @@ function App() {
     
     setMachine(newMachine: string, layer: number): void{
       this.machine = newMachine;
-      this.tooling = '';
-      this.sublayerObjects[layer].machine = newMachine;
+      //this.setTooling('', layer, 0)
+      this.clearSelections(1);
+      if(this?.sublayerObjects[layer]?.machine !== undefined){
+        this.sublayerObjects[layer].machine = newMachine;
+      }
       this.requestUpdate();
     }
 
     setTooling(newTooling: string, layer: number,CSP: number): void{
       this.tooling = newTooling;
-      this.sublayerObjects[layer].tooling = newTooling;
+      if(this.sublayerObjects[layer] !== undefined){
+        this.sublayerObjects[layer].tooling = newTooling;
+        this.sublayerObjects[layer].CSP = CSP;
+      }
       this.requestUpdate();
+    }
+
+    clearSelections = (range: number) =>{
+      this.sublayerObjects.forEach((obj) => {
+        if(range == 0) obj.setMachine('', 0)
+        if(range == 1 || range == 0) obj.setTooling('', 0, 0)
+      })
     }
   }
 

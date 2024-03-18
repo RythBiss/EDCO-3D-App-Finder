@@ -46,7 +46,7 @@ export default function Viewport(props: any) {
 
     fontLoader.load( 'Fonts/Roboto Medium_Regular.json', function ( font ) {
 
-      const geometry = new TextGeometry( 'After', {
+      const afterGeometry = new TextGeometry( 'After', {
         font: font,
         size: 0.1,
         height: 0.025,
@@ -57,7 +57,7 @@ export default function Viewport(props: any) {
         bevelOffset: 0,
         bevelSegments: 0
       } );
-      const geometry2 = new TextGeometry( 'Before', {
+      const beforeGeometry = new TextGeometry( 'Before', {
         font: font,
         size: 0.1,
         height: 0.025,
@@ -67,17 +67,17 @@ export default function Viewport(props: any) {
         bevelSize: 1,
         bevelOffset: 0,
         bevelSegments: 0
-      } );
+      });
 
-      const textMesh = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({ color: 0xFFFFFF }))
-      const textMesh2 = new THREE.Mesh(geometry2, new THREE.MeshPhongMaterial({ color: 0xFFFFFF }))
+      const afterMesh = new THREE.Mesh(afterGeometry, new THREE.MeshPhongMaterial({ color: 0xFFFFFF }))
+      const beforeMesh = new THREE.Mesh(beforeGeometry, new THREE.MeshPhongMaterial({ color: 0xFFFFFF }))
 
-      scene.current.add(textMesh);
-      scene.current.add(textMesh2);
-      textMesh.position.set(0.3,0,-1.05)
-      textMesh2.position.set(-0.7,0,-1.05)
-      textMesh.rotation.x = -3.14159/2
-      textMesh2.rotation.x = -3.14159/2
+      scene.current.add(afterMesh);
+      scene.current.add(beforeMesh);
+      afterMesh.position.set(0.3,0,-1.05)
+      beforeMesh.position.set(-0.7,0,-1.05)
+      afterMesh.rotation.x = -3.14159/2
+      beforeMesh.rotation.x = -3.14159/2
     } );
 
     loadSurface('ceramic');
@@ -117,14 +117,6 @@ export default function Viewport(props: any) {
 
     loadedModels.current = [];
 
-    //old model clean up, keep for now just in case
-    // if (scene.current.children.includes(gltfModelRight.current)) {
-    //   scene.current.remove(gltfModelRight.current);
-    // }
-    // if (scene.current.children.includes(gltfModelLeft.current)) {
-    //   scene.current.remove(gltfModelLeft.current);
-    // }
-
     loadSurface(props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved);
   };
 
@@ -151,8 +143,18 @@ export default function Viewport(props: any) {
         });
     
         if(props?.layer?.sublayers[props?.renderLayer+1] != undefined){
-          loader.load(`Models/${props?.layer?.sublayers[props?.renderLayer+1]}.gltf`, (gltf) => {
-            loadedModels.current.push(gltf.scene)
+
+          let modifiedSurface = props?.layer?.sublayers[props?.renderLayer+1];
+
+          //logic to determine CSP here, plug new CSP into loader below.
+          if(props.layer.sublayerObjects[props?.renderLayer+1].materialRemoved == 'concrete' && props.layer.sublayerObjects[props?.renderLayer].CSP !== ''){
+            modifiedSurface = `CSP ${props.layer.sublayerObjects[props?.renderLayer].CSP}`;
+          }
+
+          console.log(modifiedSurface);
+
+          loader.load(`Models/${modifiedSurface}.gltf`, (gltf) => {
+            loadedModels.current.push(gltf.scene);
 
             gltfModelRight.current = gltf.scene;
             scene.current.add(gltfModelRight.current);
@@ -160,7 +162,13 @@ export default function Viewport(props: any) {
             setIsLoaded(true);
           });
         }else{
-          loader.load(`Models/${surface}.gltf`, (gltf) => {
+          let modifiedSurface = surface;
+
+          if(surface == 'concrete' && props.layer.sublayerObjects[props?.renderLayer].CSP !== ''){
+            modifiedSurface = `CSP ${props.layer.sublayerObjects[props?.renderLayer].CSP}`;
+          }
+
+          loader.load(`Models/${modifiedSurface}.gltf`, (gltf) => {
             loadedModels.current.push(gltf.scene)
 
             gltfModelRight.current = gltf.scene;

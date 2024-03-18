@@ -9,21 +9,21 @@ export default function ToolingMenu(props: any) {
       name: 'Chisel Scalers',
       machines: ['ALR'],
       image: 'https://edcostore.com/wp-content/uploads/2017/06/C10302_4_SteelChisel-450x450.jpg',
-      CSP: 0
+      CSP: 1
     },
     Scraper: {
       apps: ['vinyl', 'linoleum', 'carpet', 'rubber', 'paint', 'corrosion', 'oil'],
       name: 'Scrapper Blades',
       machines: ['ALR'],
       image: 'https://edcostore.com/wp-content/uploads/2017/06/C10305_ScraperBlades.jpg',
-      CSP: 0
+      CSP: 1
     }, 
     FloorStripperRigid: {
       apps: ['vinyl', 'linoleum', 'carpet', 'VCT'],
       name: '8" Rigid Scrapper Blade',
       machines: ['TS8'],
       image: 'https://edcostore.com/wp-content/uploads/2017/12/28030_TileSharkBlade-450x450.jpg',
-      CSP: 0
+      CSP: 1
     },
     MagnaBlades: {
       apps: ['glue', 'paint', 'mastic'],
@@ -51,7 +51,7 @@ export default function ToolingMenu(props: any) {
       name: 'Carbide Cutter',
       machines: ['CPM8', 'CPL8', 'CPM10'],
       image: 'https://edcostore.com/wp-content/uploads/2017/05/20156_6_PointBlueCutter-450x450.jpg',
-      CSP: 5
+      CSP: 6
     },
     FivePoint: {
       apps: ['concrete', 'trip hazard'],
@@ -65,7 +65,7 @@ export default function ToolingMenu(props: any) {
       name: '9-Point Bit',
       machines: ['CD5'],
       image: 'https://edcostore.com/wp-content/uploads/2017/06/18820_9PointCarbideBit-450x450.jpg',
-      CSP: 8
+      CSP: 9
     },
   }
 
@@ -132,7 +132,7 @@ export default function ToolingMenu(props: any) {
   
 
   return (
-    <div className='col edit-menu'>
+    <div className='col edit-menu scroll-on'>
       
       {/* layer 1 */}
       <ListButton lable={matchingTooling[0] == undefined ? 'First Layer' : `First Layer (${matchingTooling[0].length})`} onClick={() => toolSelect(0)} />

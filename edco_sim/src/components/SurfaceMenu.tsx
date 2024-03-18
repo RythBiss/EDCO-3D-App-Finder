@@ -34,7 +34,7 @@ export default function SurfaceMenu(props:any) {
         ceramic: {
             name: 'Ceramic',
             layers: 4,
-            sublayers: ['ceramic', 'mastic', 'residual', 'concrete']
+            sublayers: ['ceramic', 'glue', 'residual', 'concrete']
         },
         carpet: {
             name: 'Carpet',

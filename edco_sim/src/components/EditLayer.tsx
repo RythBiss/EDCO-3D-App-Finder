@@ -14,7 +14,7 @@ const menus = [
 ]
 
   return (
-    <div className='col-3 h-100 z-0 shadow'>
+    <div className='col-3 h-100 z-0 shadow scroll'>
         <div className='edit-layer'>
             <div className='row'>
                 <div className='col px-0'>
