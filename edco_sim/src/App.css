@@ -10,6 +10,7 @@ html, body{
 
 .scroll{
     overflow-y: auto;
+    background-color: #fff;
 }
 
 .header{
@@ -18,6 +19,10 @@ html, body{
 
 .ui-container{
     height: calc(100% - 64px);
+}
+
+.ui-row{
+    position: relative;
 }
 
 .layer-menus{
@@ -87,10 +92,6 @@ html, body{
     background-color: var(--active);
 }
 
-.btn-active-shift-left{
-    margin-left: -16px;
-}
-
 .cluster-btn-active{
     background-color: black;
 }
@@ -138,7 +139,6 @@ html, body{
     position: absolute;
     height: 99.5%;
     width: 16px;
-    left: -16px;
     border-radius: 16px 0px 0px 16px;
     box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
 
@@ -204,4 +204,26 @@ input[type="range"] {
     background-color: #fff;
     height: 0.75rem;
     width: 0.75rem;
+}
+
+@media only screen and (max-width: 991px){
+    .mobile-togglable{
+        display: none;
+        position: absolute;
+    }
+    .mobile-togglable-i{
+        display: block;
+        position: absolute;
+        right: 0;
+    }
+
+    .mobile-togglable-2{
+        display: none;
+        position: absolute;
+    }
+    .mobile-togglable-i-2{
+        display: block;
+        position: absolute;
+        left: 0;
+    }
 }

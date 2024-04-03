@@ -185,7 +185,7 @@ export default function Viewport(props: any) {
 
   return (
     <>
-      <div className='col-7 viewport' ref={mountRef}></div>
+      <div className='col-12 col-lg-7 viewport' ref={mountRef}></div>
     </>
   );
 }

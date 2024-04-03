@@ -12,6 +12,8 @@ function App() {
   const [currentLayer, setCurrentLayer] = useState<Layer>();
   const [renderLayer, setRenderLayer] = useState<number>(0);
   const [updateState, update] = useState(false);
+  const [mobileLeft, setLeft] = useState<boolean>(false)
+  const [mobileRight, setRight] = useState<boolean>(false)
 
   //keep new layer function incase users have multiple types of jobs to do
   class Layer{
@@ -191,18 +193,26 @@ function App() {
     createNewLayer();
   }, [])
 
-  // useEffect(() => {
-  //   console.log(currentLayer)
-  // }, [updateState])
+  useEffect(() => {
+    if(mobileLeft == true){
+      setRight(false);
+    }
+  }, [mobileLeft])
+
+  useEffect(() => {
+    if(mobileRight == true){
+      setLeft(false);
+    }
+  }, [mobileRight])
 
   return (
     <>
-      <Header />
+      <Header setLeft={setLeft} setRight={setRight} />
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100'>
-          <EditLayer layerObject={currentLayer} />
+          <EditLayer layerObject={currentLayer} mobileLeft={mobileLeft} />
           <Viewport history={layerList[layerList.length - 1]} layer={currentLayer} renderLayer={renderLayer} />
-          <LayerHistory newLayer={createNewLayer} history={layerList} current={currentLayer} setRenderedLayer={setRenderLayer} />
+          <LayerHistory newLayer={createNewLayer} history={layerList} current={currentLayer} setRenderedLayer={setRenderLayer} mobileRight={mobileRight} />
         </div>
       </div>
     </>

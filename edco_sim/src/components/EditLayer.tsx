@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SurfaceMenu from './SurfaceMenu';
 import MachineMenu from './MachineMenu';
 import ToolingMenu from './ToolingMenu';
@@ -13,8 +13,13 @@ const menus = [
     <ToolingMenu layerObject={props.layerObject} />
 ]
 
+
+useEffect(() => {
+    console.log(props.mobileLeft)
+  }, [props.mobileLeft])
+
   return (
-    <div className='col-3 h-100 z-0 shadow scroll'>
+    <div className={`col-lg-3 col-sm-8 shadow scroll h-100 mobile-togglable ${props.mobileLeft == false ? 'mobile-togglable-2' : 'mobile-togglable-i-2'}`} >
         <div className='edit-layer'>
             <div className='row'>
                 <div className='col px-0'>

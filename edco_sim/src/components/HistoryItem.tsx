@@ -36,12 +36,12 @@ export default function HistoryItem(props:any) {
     }
 
   return (
-    <div className='row bottom-gap' style={{position: 'relative'}} onClick={handleOnClick}>
+    <div className='row bottom-gap test' style={{position: 'relative'}} onClick={handleOnClick}>
         {/* {props.active &&
             <div className='active-layer-tab'/>
         } */}
         <div className='col-12 tab-bar'>
-            <div className={`list-btn w-100 container  ${props.active == true && 'btn-active btn-active-shift-left'}`}>
+            <div className={`list-btn w-100 container  ${props.active == true && 'btn-active'}`}>
                 <div className='row justify-content-around align-items-center'>
                     <div className='col'>
                         <ul className='list-btn-bullets'>
