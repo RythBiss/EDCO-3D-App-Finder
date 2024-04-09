@@ -23,7 +23,7 @@ export default function LayerHistory(props: any) {
 
     let printString: string = 'Order: \n'
     const pdf = new jsPDF;
-    props.current.sublayerObjects.forEach((item) =>{
+    props.current.sublayerObjects.forEach((item: any) =>{
       printString += `   \nMachine: ${item.machine} \nTooling: ${item.tooling}`
       console.log(printString)
     })
@@ -42,7 +42,7 @@ export default function LayerHistory(props: any) {
   }, [props.mobileRight])
 
   return (
-      <div className={`col-lg-2 col-sm-8 shadow scroll h-100 ${props.mobileRight == false ? 'mobile-togglable' : 'mobile-togglable-i'}`}>
+      <div className={`col-lg-2 col-sm-8 shadow scroll h-100 ${props.mobileRight == false ? 'hide-menu' : 'show-menu-right'}`}>
         {props.current !== undefined &&
             props.current.sublayerObjects.map((obj: object, key: number) => 
               <HistoryItem key={key} layerObject={obj} layerIndex={key} active={selectedLayer == key} onClick={() => activateLayer(key)} />

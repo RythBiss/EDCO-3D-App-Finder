@@ -207,23 +207,37 @@ input[type="range"] {
 }
 
 @media only screen and (max-width: 991px){
-    .mobile-togglable{
+    .hide-menu{
         display: none;
         position: absolute;
     }
-    .mobile-togglable-i{
+    .show-menu-right{
         display: block;
         position: absolute;
         right: 0;
     }
 
-    .mobile-togglable-2{
-        display: none;
-        position: absolute;
-    }
-    .mobile-togglable-i-2{
+    .show-menu{
         display: block;
         position: absolute;
         left: 0;
+    }
+
+    .mobile-button{
+        background-color: var(--primary);
+        color: #fff;
+        border-width: 0;
+        border-radius: 0.25rem;
+        padding: 2px 8px;
+      }
+
+    .mobile-button:hover{
+    background-color: var(--hover);
+    }
+}
+
+@media only screen and (min-width: 991px){
+    .mobile-button{
+        display: none;
     }
 }

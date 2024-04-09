@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ListButton from './ListButton'
 
 export default function ToolingMenu(props: any) {
@@ -69,19 +69,19 @@ export default function ToolingMenu(props: any) {
     },
   }
 
-  const [selectedMachine, setSelectedMachine] = useState('');
-  const [selectedSurface, setSelectedSurface] = useState('');
+  //const [selectedMachine, setSelectedMachine] = useState('');
+  //const [selectedSurface, setSelectedSurface] = useState('');
   const [matchingTooling, setMatchingTooling] = useState<string[][]>([]);
   const [openTab, setOpenTab] = useState<number>(-1);
 
   const setTooling = (newTooling: string, layer:number, CSP: number) => {
     props.layerObject.setTooling(newTooling, layer, CSP);
-    setSelectedSurface(newTooling);
+    //setSelectedSurface(newTooling);
   }
 
   useEffect(() => {
 
-    let fourLayers = [[],[],[],[]]
+    let fourLayers: any[] = [[],[],[],[]]
     let count = 0;
    
     //for each layer

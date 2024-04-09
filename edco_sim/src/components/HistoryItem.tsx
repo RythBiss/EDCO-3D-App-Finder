@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export default function HistoryItem(props:any) {
     const [thick, setThick] = useState<string>('1/32');

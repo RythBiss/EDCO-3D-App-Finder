@@ -19,7 +19,7 @@ useEffect(() => {
   }, [props.mobileLeft])
 
   return (
-    <div className={`col-lg-3 col-sm-8 shadow scroll h-100 mobile-togglable ${props.mobileLeft == false ? 'mobile-togglable-2' : 'mobile-togglable-i-2'}`} >
+    <div className={`col-lg-3 col-sm-8 shadow scroll h-100 ${props.mobileLeft == false ? 'hide-menu' : 'show-menu'}`} >
         <div className='edit-layer'>
             <div className='row'>
                 <div className='col px-0'>

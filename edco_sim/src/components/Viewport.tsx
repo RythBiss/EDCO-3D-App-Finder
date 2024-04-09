@@ -6,16 +6,16 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 
 export default function Viewport(props: any) {
-  const mountRef = useRef(null);
+  const mountRef = useRef<any>(null);
   const scene = useRef(new THREE.Scene());
   const camera = useRef(new THREE.PerspectiveCamera(75, 1, 0.01, 1000));
   const renderer = useRef(new THREE.WebGLRenderer());
-  const gltfModelRight = useRef();
-  const gltfModelLeft = useRef();
+  const gltfModelRight = useRef<any>();
+  const gltfModelLeft = useRef<any>();
   const loader = new GLTFLoader();
   const fontLoader = new FontLoader();
-  const controlsRef = useRef();
-  const loadedModels = useRef([]);
+  const controlsRef = useRef<any>();
+  const loadedModels = useRef<any>([]);
   
   let isLoaded = true;
   let isFirstLoad = true;
@@ -105,13 +105,13 @@ export default function Viewport(props: any) {
     animate();
 
     return () => {
-      mountRef.current.removeChild(renderer.current.domElement);
-      controlsRef.current.dispose();
+      if(mountRef.current !== null) mountRef.current.removeChild(renderer.current.domElement);
+      if(controlsRef.current !== undefined) controlsRef.current.dispose();
     };
   }, []);
 
   const updateScene = () => {
-    loadedModels.current.forEach((item) => {
+    loadedModels.current.forEach((item: THREE.Object3D) => {
       scene.current.remove(item);
     })
 

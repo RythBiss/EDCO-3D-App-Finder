@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import ListButton from './ListButton';
 import ClusterButton from './ClusterButton';
-import LayerHistory from './LayerHistory';
+//import LayerHistory from './LayerHistory';
 
 export default function SurfaceMenu(props:any) {
 
-    const applicationDataObjects = {
+    const applicationDataObjects: any = {
         concrete: {
             name: 'Concrete',
             layers: 1,
@@ -73,19 +73,19 @@ export default function SurfaceMenu(props:any) {
         },
     }
 
-    const qOneAnswers = ['Yes', 'No'];
+    //const qOneAnswers = ['Yes', 'No'];
     const [qTwoAnswers, setqTwoAnswers] = useState<string[]>([]);
-    const qThreeAnswers = ['1/32"', '1/16"', '1/8"', '1/4"'];
-    const qFourAnswers = ['Vinyl', 'Linoleum', 'Ceramic', 'Carpet', 'Rubber', 'Paint', 'None'];
+    //const qThreeAnswers = ['1/32"', '1/16"', '1/8"', '1/4"'];
+    //const qFourAnswers = ['Vinyl', 'Linoleum', 'Ceramic', 'Carpet', 'Rubber', 'Paint', 'None'];
     const qFiveAnswers = ['1,000+', '2,000+', '5,000+'];
     const qSixAnswers = ['Yes', 'No'];
-    const qSevenAnswers = ['Yes', 'No'];
+    //const qSevenAnswers = ['Yes', 'No'];
     const qEightAnswers = ['Yes', 'No'];
     const qNineAnswers = ['Gas', 'Electric', 'Propane', 'Air'];
 
 
     const [openedMenu, setOpenedMenu] = useState(-1);
-    const [selectedQuestion, setSelectedQuestion] = useState('');
+    //const [selectedQuestion, setSelectedQuestion] = useState('');
 
     const populateqTwoAnswers = () => {
 
@@ -106,10 +106,10 @@ export default function SurfaceMenu(props:any) {
         }
     }
 
-    const setOnConcrete = (res: string) => {
-        if(res == 'Yes') props.layerObject.onConcrete = true;
-        else props.layerObject.onConcrete = false;
-    }
+    // const setOnConcrete = (res: string) => {
+    //     if(res == 'Yes') props.layerObject.onConcrete = true;
+    //     else props.layerObject.onConcrete = false;
+    // }
 
     const setMaterialRemoved = (res: string, layer: number, sublayers: string[]) => {
         const material =  res.toLowerCase();
@@ -117,30 +117,30 @@ export default function SurfaceMenu(props:any) {
         props.layerObject.setMaterialRemoved(material, layer, sublayers);
     }
 
-    const setMaterialThickness = (res: string) => {
+    // const setMaterialThickness = (res: string) => {
         
-        switch(res){
-            case '1/32"':
-                props.layerObject.setMaterialThickness(0);
-                break;
-            case '1/16"':
-                props.layerObject.setMaterialThickness(1);
-                break;
-            case '1/8"':
-                props.layerObject.setMaterialThickness(2);
-                break;
-            case '1/4"':
-                props.layerObject.setMaterialThickness(3);
-                break;
-        }
-    }
+    //     switch(res){
+    //         case '1/32"':
+    //             props.layerObject.setMaterialThickness(0);
+    //             break;
+    //         case '1/16"':
+    //             props.layerObject.setMaterialThickness(1);
+    //             break;
+    //         case '1/8"':
+    //             props.layerObject.setMaterialThickness(2);
+    //             break;
+    //         case '1/4"':
+    //             props.layerObject.setMaterialThickness(3);
+    //             break;
+    //     }
+    // }
 
-    const setFinishedSurface = (res: string) => {
+    // const setFinishedSurface = (res: string) => {
 
-        const finish =  res.toLowerCase();
+    //     const finish =  res.toLowerCase();
 
-        props.layerObject.setFinishedSurface(finish);
-    }
+    //     props.layerObject.setFinishedSurface(finish);
+    // }
     
     const setJobSize = (res: string) => {
 
@@ -162,10 +162,10 @@ export default function SurfaceMenu(props:any) {
         else props.layerObject.setGreenConcrete(false);
     }
         
-    const setDustControl = (res: string) => {
-        if(res == 'Yes') props.layerObject.setDustControl(true);
-        else props.layerObject.setDustControl(false);
-    }
+    // const setDustControl = (res: string) => {
+    //     if(res == 'Yes') props.layerObject.setDustControl(true);
+    //     else props.layerObject.setDustControl(false);
+    // }
             
     const setEdger = (res: string) => {
         if(res == 'Yes') props.layerObject.setEdger(true);

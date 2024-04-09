@@ -191,6 +191,7 @@ function App() {
 
   useEffect(() => {
     createNewLayer();
+    console.log(updateState)
   }, [])
 
   useEffect(() => {
