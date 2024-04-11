@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -16,6 +16,7 @@ export default function Viewport(props: any) {
   const fontLoader = new FontLoader();
   const controlsRef = useRef<any>();
   const loadedModels = useRef<any>([]);
+  const [updateView, setUpdateView] = useState<boolean>(false);
   
   let isLoaded = true;
   let isFirstLoad = true;
@@ -111,13 +112,21 @@ export default function Viewport(props: any) {
   }, []);
 
   const updateScene = () => {
-    loadedModels.current.forEach((item: THREE.Object3D) => {
-      scene.current.remove(item);
-    })
+    console.log('update: ' + props.updateTrigger)
+    console.log('update var: ' + updateView)
+    if(updateView !== props.updateTrigger){
+      console.log('UPDATIN!!!!!!!!!!!!!!!!!!')
 
-    loadedModels.current = [];
+      loadedModels.current.forEach((item: THREE.Object3D) => {
+        scene.current.remove(item);
+      })
+  
+      loadedModels.current = [];
+  
+      loadSurface(props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved);
 
-    loadSurface(props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved);
+      setUpdateView(props.updateTrigger);
+    }
   };
 
   const setIsLoaded = (status: boolean) => {

@@ -212,7 +212,7 @@ function App() {
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100'>
           <EditLayer layerObject={currentLayer} mobileLeft={mobileLeft} />
-          <Viewport history={layerList[layerList.length - 1]} layer={currentLayer} renderLayer={renderLayer} />
+          <Viewport history={layerList[layerList.length - 1]} layer={currentLayer} renderLayer={renderLayer} updateTrigger={updateState} />
           <LayerHistory newLayer={createNewLayer} history={layerList} current={currentLayer} setRenderedLayer={setRenderLayer} mobileRight={mobileRight} />
         </div>
       </div>
