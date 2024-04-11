@@ -92,7 +92,7 @@ function App() {
     setFinishedSurface = (value: string) => {
       this.finishedSurface = value;
       
-      this.requestUpdate();
+      //this.requestUpdate();
     }
 
     setJobSize = (value: number) => {
@@ -104,7 +104,7 @@ function App() {
         item.jobSize = value;
       })
       
-      this.requestUpdate();
+      //this.requestUpdate();
     }
 
     setGreenConcrete = (value: boolean) => {
@@ -116,14 +116,14 @@ function App() {
         item.greenConcrete = value;
       })
       
-      this.requestUpdate();
+      //this.requestUpdate();
     }
 
     //this question can be skipped, add a vac to the list of any machine requires it.
     setDustControl = (value: boolean) => {
       this.dustControl = value;
       
-      this.requestUpdate();
+      //this.requestUpdate();
     }
 
     //toggle if TMC7 should be shown.
@@ -132,7 +132,7 @@ function App() {
 
       this.edger = value;
       
-      this.requestUpdate();
+      //this.requestUpdate();
     }
 
     //only show this question if there is more than 1 option with current selection.
@@ -145,7 +145,7 @@ function App() {
         item.powerType = value;
       })
       
-      this.requestUpdate();
+      //this.requestUpdate();
     }
     
     setMachine(newMachine: string, layer: number): void{
@@ -155,7 +155,7 @@ function App() {
       if(this?.sublayerObjects[layer]?.machine !== undefined){
         this.sublayerObjects[layer].machine = newMachine;
       }
-      this.requestUpdate();
+      //this.requestUpdate();
     }
 
     setTooling(newTooling: string, layer: number,CSP: number): void{
@@ -164,7 +164,7 @@ function App() {
         this.sublayerObjects[layer].tooling = newTooling;
         this.sublayerObjects[layer].CSP = CSP;
       }
-      this.requestUpdate();
+      //this.requestUpdate();
     }
 
     clearSelections = (range: number) =>{
