@@ -32,7 +32,7 @@ useEffect(() => {
                     <button type="button" className={`w-100 tab-btn ${displayMenu == 2 && 'tab-btn-active'}`} onClick={() => setDisplayMenu(2)}>TOOLING</button>
                 </div>
             </div>
-            <div style={{margin: '0'}}>
+            <div style={{margin: '0', paddingBottom: '64px'}}>
                 {menus[displayMenu]}
             </div>
         </div>

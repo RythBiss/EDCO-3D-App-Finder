@@ -115,8 +115,6 @@ export default function Viewport(props: any) {
     console.log('update: ' + props.updateTrigger)
     console.log('update var: ' + updateView)
     if(updateView !== props.updateTrigger){
-      console.log('UPDATIN!!!!!!!!!!!!!!!!!!')
-
       loadedModels.current.forEach((item: THREE.Object3D) => {
         scene.current.remove(item);
       })
