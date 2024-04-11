@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 
 export default function ListButton(props: any) { 
 
@@ -5,11 +6,17 @@ export default function ListButton(props: any) {
         props.onClick();
     }
 
+    const [infoPop, setPop] = useState<boolean>(false);
+
+    useEffect(() => {
+        console.log(infoPop)
+    }, [infoPop])
+
   return (
         <div className='row bottom-gap'>
             <div className={`col-${props.indent}`}/>
             <div className='col tab-bar'>
-                <button type="button" className={`btn-wrapper list-btn w-100 container ${props.active == true ? 'btn-active' : ''}`} onClick={handleOnClick}>
+                <button type="button" className={`btn-wrapper- list-btn w-100 container ${props.active == true ? 'btn-active' : ''}`} onClick={handleOnClick}>
                     <div className={`row ${props.icon ? 'justify-content-around' : ''}`}>
                         {props.icon ?
                             <>
@@ -19,7 +26,20 @@ export default function ListButton(props: any) {
                                     width={128}
                                     className='machine-icon-frame col-4'
                                 />
-                                <div className='col-4 text-end list-btn-inner'>{props.lable}</div>
+                                <div className="col" ></div>
+                                <div className="col-4 vert-space-between">
+                                    <div>
+                                        <div className='col-12 text-end list-btn-inner'>{props.lable}</div>
+                                    </div>
+                                    <div>
+                                        {props.showMenu &&
+                                            <button className="col-4 product-info" onMouseOver={() => setPop(true)} onMouseLeave={() => setPop(false)}>?</button>
+                                        }
+                                        {infoPop == true &&
+                                            <p className={'info-pop'} style={{transform: `translate(-190%, -50%)`}}>block of text</p>
+                                        }
+                                    </div>
+                                </div>
                             </>
                             :
                             <>

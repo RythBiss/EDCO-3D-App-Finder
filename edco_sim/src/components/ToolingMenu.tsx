@@ -139,7 +139,7 @@ export default function ToolingMenu(props: any) {
       {openTab == 0 &&
           matchingTooling.length !== 0 &&
                 matchingTooling[0].map((tool: any, i: any) => 
-                  <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 0, toolsByApplicationAndMachine[tool].CSP)} />
+                  <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} showMenu={true} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 0, toolsByApplicationAndMachine[tool].CSP)} />
         )}
 
       {/* layer 2 */}
