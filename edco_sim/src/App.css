@@ -36,12 +36,13 @@ html, body{
 .viewport{
     background-color:azure;
     padding: 0;
+    position: relative;
 }
 
 .tab-bar{
     padding: 0;
     margin: 0;
-    /* position: relative; */
+    position: relative;
 }
 
 .tab-btn{
@@ -193,12 +194,14 @@ html, body{
 .info-pop{
     position: absolute;
     top: 50%;
-    left: 50%;
-    
+    left: 1rem;
+    /* transform: translate(-50%, -50%); */
     color: #fff;
     background-color: var(--primary);
-    padding: 2rem;
+    padding: 0.5rem;
     border-radius: 0.25rem;
+    max-width: 20rem;
+    z-index: 2;
 }
 
 input[type="range"] {
@@ -256,6 +259,7 @@ input[type="range"] {
         display: block;
         position: absolute;
         left: 0;
+        z-index: 1;
     }
 
     .mobile-button{

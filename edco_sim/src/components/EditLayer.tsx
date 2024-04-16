@@ -8,9 +8,9 @@ export default function EditLayer(props: any) {
 const [displayMenu, setDisplayMenu] = useState(0);
 
 const menus = [
-    <SurfaceMenu layerObject={props.layerObject}/>,
-    <MachineMenu layerObject={props.layerObject} />,
-    <ToolingMenu layerObject={props.layerObject} />
+    <SurfaceMenu popupOn={props.setPopup} layerObject={props.layerObject}/>,
+    <MachineMenu popupOn={props.setPopup} layerObject={props.layerObject} />,
+    <ToolingMenu popupOn={props.setPopup} layerObject={props.layerObject} />
 ]
 
 

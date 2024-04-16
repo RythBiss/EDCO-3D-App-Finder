@@ -10,6 +10,7 @@ export default function ListButton(props: any) {
 
     useEffect(() => {
         console.log(infoPop)
+        if(props.popupOn) props.popupOn(infoPop)
     }, [infoPop])
 
   return (
@@ -34,9 +35,6 @@ export default function ListButton(props: any) {
                                     <div>
                                         {props.showMenu &&
                                             <button className="col-4 product-info" onMouseOver={() => setPop(true)} onMouseLeave={() => setPop(false)}>?</button>
-                                        }
-                                        {infoPop == true &&
-                                            <p className={'info-pop'} style={{transform: `translate(-190%, -50%)`}}>block of text</p>
                                         }
                                     </div>
                                 </div>

@@ -190,9 +190,17 @@ export default function Viewport(props: any) {
 
   updateScene();
 
+  useEffect(() => {
+    console.log('viewport' + props.popup)
+  }, [props.popup])
+
   return (
     <>
-      <div className='col-12 col-lg-7 viewport' ref={mountRef}></div>
+      <div className='col-12 col-lg-7 viewport' ref={mountRef}>
+        {props.popup == true &&
+          <p className={'info-pop'} >block o' text with lot o' text block o' text with lot o' text block o' text with lot o' text block o' text with lot o' text block o' text with lot o' text </p>
+        }
+      </div>
     </>
   );
 }

@@ -331,7 +331,7 @@ useEffect(() => {
         }
         {selectedLayerState == 0 && matchingMachinesL1 !== undefined &&
           matchingMachinesL1.machines.length > 0 &&
-            matchingMachinesL1.machines.map((item: string, i: number) => <ListButton key={i} showMenu={true} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 0)} />)        
+            matchingMachinesL1.machines.map((item: string, i: number) => <ListButton key={i} popupOn={props.popupOn} showMenu={true} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 0)} />)        
         }
 
         {props.layerObject.layerNumber >= 2 && matchingMachinesL2 !== undefined  &&
@@ -342,7 +342,7 @@ useEffect(() => {
         }
         {selectedLayerState == 1 && matchingMachinesL2 !== undefined  &&
           matchingMachinesL2.machines.length > 0 &&
-            matchingMachinesL2.machines.map((item: string, i: number) => <ListButton key={i} showMenu={true}  indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 1)} />)        
+            matchingMachinesL2.machines.map((item: string, i: number) => <ListButton key={i} popupOn={props.popupOn} showMenu={true}  indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 1)} />)        
         }
 
         {props.layerObject.layerNumber >= 3 && matchingMachinesL3 !== undefined  &&
@@ -353,7 +353,7 @@ useEffect(() => {
         }
         {selectedLayerState == 2 && matchingMachinesL3 !== undefined  &&
           matchingMachinesL3.machines.length > 0 &&
-            matchingMachinesL3.machines.map((item: string, i: number) => <ListButton key={i} showMenu={true}  indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 2)} />)        
+            matchingMachinesL3.machines.map((item: string, i: number) => <ListButton key={i} popupOn={props.popupOn} showMenu={true}  indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 2)} />)        
         }
 
         {props.layerObject.layerNumber >= 4 && matchingMachinesL4 !== undefined  &&
@@ -364,7 +364,7 @@ useEffect(() => {
         }
         {selectedLayerState == 3 && matchingMachinesL4 !== undefined  &&
           matchingMachinesL4.machines.length > 0 &&
-            matchingMachinesL4.machines.map((item: string, i: number) => <ListButton key={i} showMenu={true}  indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 3)} />)        
+            matchingMachinesL4.machines.map((item: string, i: number) => <ListButton key={i} popupOn={props.popupOn} showMenu={true}  indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 3)} />)        
         }
 
     </div>

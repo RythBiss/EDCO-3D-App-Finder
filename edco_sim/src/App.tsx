@@ -12,8 +12,9 @@ function App() {
   const [currentLayer, setCurrentLayer] = useState<Layer>();
   const [renderLayer, setRenderLayer] = useState<number>(0);
   const [updateState, update] = useState(false);
-  const [mobileLeft, setLeft] = useState<boolean>(false)
-  const [mobileRight, setRight] = useState<boolean>(false)
+  const [mobileLeft, setLeft] = useState<boolean>(false);
+  const [mobileRight, setRight] = useState<boolean>(false);
+  const [popupOn, setPopupOn] = useState<boolean>(false);
 
   //keep new layer function incase users have multiple types of jobs to do
   class Layer{
@@ -206,13 +207,19 @@ function App() {
     }
   }, [mobileRight])
 
+  useEffect(() => {
+    console.log('app: ' + popupOn)
+  })
+
+
+
   return (
     <>
       <Header setLeft={setLeft} setRight={setRight} />
       <div className='container-fluid ui-container'>
-        <div className='row ui-row h-100'>
-          <EditLayer layerObject={currentLayer} mobileLeft={mobileLeft} />
-          <Viewport history={layerList[layerList.length - 1]} layer={currentLayer} renderLayer={renderLayer} updateTrigger={updateState} />
+        <div className='row ui-row h-100' style={{position: 'relative'}}>
+          <EditLayer setPopup={setPopupOn} layerObject={currentLayer} mobileLeft={mobileLeft} />
+          <Viewport popup={popupOn} history={layerList[layerList.length - 1]} layer={currentLayer} renderLayer={renderLayer} updateTrigger={updateState} />
           <LayerHistory newLayer={createNewLayer} history={layerList} current={currentLayer} setRenderedLayer={setRenderLayer} mobileRight={mobileRight} />
         </div>
       </div>
