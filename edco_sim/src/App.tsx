@@ -15,6 +15,7 @@ function App() {
   const [mobileLeft, setLeft] = useState<boolean>(false);
   const [mobileRight, setRight] = useState<boolean>(false);
   const [popupOn, setPopupOn] = useState<boolean>(false);
+  const [popupInfo, setPopupInfo] = useState<string>('blank');
 
   //keep new layer function incase users have multiple types of jobs to do
   class Layer{
@@ -165,7 +166,7 @@ function App() {
         this.sublayerObjects[layer].tooling = newTooling;
         this.sublayerObjects[layer].CSP = CSP;
       }
-      //this.requestUpdate();
+      this.requestUpdate();
     }
 
     clearSelections = (range: number) =>{
@@ -208,8 +209,13 @@ function App() {
   }, [mobileRight])
 
   useEffect(() => {
-    console.log('app: ' + popupOn)
-  })
+    console.log(popupInfo)
+  }, [popupInfo])
+
+  useEffect(() => {
+    console.log(renderLayer)
+    update(prevState => !prevState);
+  }, [renderLayer])
 
 
 
@@ -218,8 +224,8 @@ function App() {
       <Header setLeft={setLeft} setRight={setRight} />
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100' style={{position: 'relative'}}>
-          <EditLayer setPopup={setPopupOn} layerObject={currentLayer} mobileLeft={mobileLeft} />
-          <Viewport popup={popupOn} history={layerList[layerList.length - 1]} layer={currentLayer} renderLayer={renderLayer} updateTrigger={updateState} />
+          <EditLayer setPopup={setPopupOn} layerObject={currentLayer} mobileLeft={mobileLeft} setPopupInfo={setPopupInfo} />
+          <Viewport popup={popupOn} popupInfo={popupInfo} history={layerList[layerList.length - 1]} layer={currentLayer} renderLayer={renderLayer} updateTrigger={updateState} />
           <LayerHistory newLayer={createNewLayer} history={layerList} current={currentLayer} setRenderedLayer={setRenderLayer} mobileRight={mobileRight} />
         </div>
       </div>

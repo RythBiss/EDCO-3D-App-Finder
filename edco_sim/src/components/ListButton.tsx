@@ -6,10 +6,14 @@ export default function ListButton(props: any) {
         props.onClick();
     }
 
+    const handlePop = () => {
+        props.mouseAction()
+        setPop(true);
+    }
+
     const [infoPop, setPop] = useState<boolean>(false);
 
     useEffect(() => {
-        console.log(infoPop)
         if(props.popupOn) props.popupOn(infoPop)
     }, [infoPop])
 
@@ -32,11 +36,9 @@ export default function ListButton(props: any) {
                                     <div>
                                         <div className='col-12 text-end list-btn-inner'>{props.lable}</div>
                                     </div>
-                                    <div>
-                                        {props.showMenu &&
-                                            <button className="col-4 product-info" onMouseOver={() => setPop(true)} onMouseLeave={() => setPop(false)}>?</button>
-                                        }
-                                    </div>
+                                    {props.showMenu &&
+                                        <div className="col-4 product-info" onMouseOver={handlePop} onMouseLeave={() => setPop(false)}>?</div>
+                                    }
                                 </div>
                             </>
                             :

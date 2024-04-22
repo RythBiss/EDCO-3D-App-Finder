@@ -31,16 +31,32 @@ export default function Viewport(props: any) {
     }
 
     renderer.current.shadowMap.enabled = true;
+    renderer.current.shadowMap.type = THREE.PCFSoftShadowMap;
 
     //build environment
     const light = new THREE.DirectionalLight(0xffffff, 2);
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
     const ambLight = new THREE.AmbientLight(0xffffff, 1);
+    const floor = new THREE.PlaneGeometry(10, 10);
+    const floorMesh = new THREE.Mesh(floor, new THREE.MeshPhongMaterial({ color: 0xe8e8e8, /*side: THREE.DoubleSide*/ }))
+
+    light.castShadow = true;
+
+    light.shadow.mapSize.width = 4096; // default
+    light.shadow.mapSize.height = 4096; // default
+    light.shadow.camera.near = 0.5; // default
+    light.shadow.camera.far = 500; // default
 
     scene.current.add(light);
     scene.current.add(directionalLight);
     scene.current.add(ambLight);
     scene.current.background = new THREE.Color("rgb(20%, 20%, 20%)");
+
+    scene.current.add(floorMesh)
+    floorMesh.rotation.x = -3.14159/2;
+    floorMesh.position.y = -0.025;
+    floorMesh.receiveShadow = true;
+
     light.position.set(1, 1, 1).normalize();
 
     camera.current.position.z = 2.05;
@@ -73,12 +89,16 @@ export default function Viewport(props: any) {
       const afterMesh = new THREE.Mesh(afterGeometry, new THREE.MeshPhongMaterial({ color: 0xFFFFFF }))
       const beforeMesh = new THREE.Mesh(beforeGeometry, new THREE.MeshPhongMaterial({ color: 0xFFFFFF }))
 
-      scene.current.add(afterMesh);
-      scene.current.add(beforeMesh);
       afterMesh.position.set(0.3,0,-1.05)
       beforeMesh.position.set(-0.7,0,-1.05)
       afterMesh.rotation.x = -3.14159/2
       beforeMesh.rotation.x = -3.14159/2
+      afterMesh.castShadow = true;
+      beforeMesh.castShadow = true;
+
+      scene.current.add(afterMesh);
+      scene.current.add(beforeMesh);
+
     } );
 
     loadSurface('ceramic');
@@ -112,8 +132,6 @@ export default function Viewport(props: any) {
   }, []);
 
   const updateScene = () => {
-    console.log('update: ' + props.updateTrigger)
-    console.log('update var: ' + updateView)
     if(updateView !== props.updateTrigger){
       loadedModels.current.forEach((item: THREE.Object3D) => {
         scene.current.remove(item);
@@ -143,6 +161,13 @@ export default function Viewport(props: any) {
 
           gltfModelLeft.current = gltf.scene;
           gltfModelLeft.current.rotation.y = 3.14159;
+
+          gltfModelLeft.current.traverse( function( node: any ) {
+
+            if ( node.isMesh ) { node.castShadow = true; }
+    
+          } );
+
           scene.current.add(gltfModelLeft.current);
 
           setIsLoaded(true);
@@ -164,6 +189,13 @@ export default function Viewport(props: any) {
             loadedModels.current.push(gltf.scene);
 
             gltfModelRight.current = gltf.scene;
+
+            gltfModelRight.current.traverse( function( node: any ) {
+
+              if ( node.isMesh ) { node.castShadow = true; }
+      
+            } );
+            
             scene.current.add(gltfModelRight.current);
 
             setIsLoaded(true);
@@ -179,6 +211,13 @@ export default function Viewport(props: any) {
             loadedModels.current.push(gltf.scene)
 
             gltfModelRight.current = gltf.scene;
+
+            gltfModelRight.current.traverse( function( node: any ) {
+
+              if ( node.isMesh ) { node.castShadow = true; }
+      
+            } );
+
             scene.current.add(gltfModelRight.current);
 
             setIsLoaded(true);
@@ -190,15 +229,11 @@ export default function Viewport(props: any) {
 
   updateScene();
 
-  useEffect(() => {
-    console.log('viewport' + props.popup)
-  }, [props.popup])
-
   return (
     <>
       <div className='col-12 col-lg-7 viewport' ref={mountRef}>
         {props.popup == true &&
-          <p className={'info-pop'} >block o' text with lot o' text block o' text with lot o' text block o' text with lot o' text block o' text with lot o' text block o' text with lot o' text </p>
+          <p className={'info-pop'} >{props.popupInfo}</p>
         }
       </div>
     </>

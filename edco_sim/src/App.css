@@ -10,6 +10,7 @@ html, body{
 
 .scroll{
     overflow-y: auto;
+    overflow-x: hidden;
     background-color: #fff;
 }
 
@@ -184,11 +185,14 @@ html, body{
     border-radius: 1rem;
     pointer-events: all;
     width: 2rem;
-    aspect-ratio: 1 / 1;
+    height: 2rem;
+    text-align: center;
+    line-height: 2rem;
+    /* aspect-ratio: 1 / 1; */
 }
 
 .product-info:hover{
-    background-color: var(--hover);
+    background-color: var(--active);
 }
 
 .info-pop{
