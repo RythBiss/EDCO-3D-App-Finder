@@ -16,6 +16,7 @@ function App() {
   const [mobileRight, setRight] = useState<boolean>(false);
   const [popupOn, setPopupOn] = useState<boolean>(false);
   const [popupInfo, setPopupInfo] = useState<string>('blank');
+  const [popupYPos, setPopupYPos] = useState<number>(0);
 
   //keep new layer function incase users have multiple types of jobs to do
   class Layer{
@@ -98,7 +99,7 @@ function App() {
     }
 
     setJobSize = (value: number) => {
-      this.clearSelections(0)
+      this.clearSelections(0);
 
       this.jobSize = value;
 
@@ -160,19 +161,19 @@ function App() {
       //this.requestUpdate();
     }
 
-    setTooling(newTooling: string, layer: number,CSP: number): void{
+    setTooling(newTooling: string, layer: number,CSP: number, doUpdate: boolean = true): void{
       this.tooling = newTooling;
       if(this.sublayerObjects[layer] !== undefined){
         this.sublayerObjects[layer].tooling = newTooling;
         this.sublayerObjects[layer].CSP = CSP;
       }
-      this.requestUpdate();
+      if(doUpdate == true) this.requestUpdate();
     }
 
     clearSelections = (range: number) =>{
       this.sublayerObjects.forEach((obj) => {
         if(range == 0) obj.setMachine('', 0)
-        if(range == 1 || range == 0) obj.setTooling('', 0, 0)
+        if(range == 1 || range == 0) obj.setTooling('', 0, 0, false);
       })
     }
   }
@@ -209,13 +210,13 @@ function App() {
   }, [mobileRight])
 
   useEffect(() => {
-    console.log(popupInfo)
-  }, [popupInfo])
-
-  useEffect(() => {
     console.log(renderLayer)
     update(prevState => !prevState);
   }, [renderLayer])
+
+  useEffect(() => {
+    console.log(popupYPos)
+  }, [popupYPos])
 
 
 
@@ -224,8 +225,8 @@ function App() {
       <Header setLeft={setLeft} setRight={setRight} />
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100' style={{position: 'relative'}}>
-          <EditLayer setPopup={setPopupOn} layerObject={currentLayer} mobileLeft={mobileLeft} setPopupInfo={setPopupInfo} />
-          <Viewport popup={popupOn} popupInfo={popupInfo} history={layerList[layerList.length - 1]} layer={currentLayer} renderLayer={renderLayer} updateTrigger={updateState} />
+          <EditLayer setPopup={setPopupOn} layerObject={currentLayer} mobileLeft={mobileLeft} setPopupInfo={setPopupInfo} setPopupYPos={setPopupYPos} />
+          <Viewport popup={popupOn} popupInfo={popupInfo} popupYPos={popupYPos} history={layerList[layerList.length - 1]} layer={currentLayer} renderLayer={renderLayer} updateTrigger={updateState} />
           <LayerHistory newLayer={createNewLayer} history={layerList} current={currentLayer} setRenderedLayer={setRenderLayer} mobileRight={mobileRight} />
         </div>
       </div>

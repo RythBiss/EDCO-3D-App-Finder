@@ -68,6 +68,7 @@ html, body{
 
 .bottom-gap{
     margin-bottom: 0.4rem;
+    position: relative;
 }
 
 .list-btn{
@@ -93,10 +94,6 @@ html, body{
 
 .btn-active{
     background-color: var(--active);
-}
-
-.cluster-btn-active{
-    background-color: black;
 }
 
 .btn-active:hover{
@@ -197,16 +194,24 @@ html, body{
 
 .info-pop{
     position: absolute;
-    top: 50%;
     left: 1rem;
-    /* transform: translate(-50%, -50%); */
     color: #fff;
     background-color: var(--primary);
     padding: 0.5rem;
     border-radius: 0.25rem;
     max-width: 20rem;
     z-index: 2;
+    box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.1);
 }
+
+.menus-container{
+    margin: 0;
+    padding-bottom: 64px;
+}
+
+.mobile-button{
+    display: none;
+  }
 
 input[type="range"] {
     -webkit-appearance: none;
@@ -267,6 +272,7 @@ input[type="range"] {
     }
 
     .mobile-button{
+        display: block;
         background-color: var(--primary);
         color: #fff;
         border-width: 0;
@@ -275,12 +281,42 @@ input[type="range"] {
       }
 
     .mobile-button:hover{
-    background-color: var(--hover);
+        background-color: var(--hover);
+    }
+
+    .info-pop{
+        position: absolute;
+        right: 0rem;
+        left: calc((100/12)*8%);
+        margin: 0 0.5rem;
     }
 }
 
-@media only screen and (min-width: 991px){
+@media only screen and (max-width: 576px){
+   
+    .info-pop{
+        position: absolute;
+        left: 50%; /* Adjusted to center horizontally */
+        transform: translate(-50%, -50%); /* Center the element both vertically and horizontally */
+        color: #fff;
+        background-color: var(--primary);
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        max-width: 20rem;
+        z-index: 2;
+        box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.1);
+        margin: 0 0.5rem; /* Add margin if necessary */
+    }
+
     .mobile-button{
-        display: none;
+        background-color: var(--primary);
+        color: #fff;
+        border-width: 0;
+        border-radius: 0.25rem;
+        padding: 2px 8px;
+      }
+
+    .mobile-button:hover{
+        background-color: var(--hover);
     }
 }

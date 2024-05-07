@@ -4,7 +4,7 @@ import ClusterButton from './ClusterButton';
 //import LayerHistory from './LayerHistory';
 
 export default function SurfaceMenu(props:any) {
-
+    //temporary application data table until backend is developed.
     const applicationDataObjects: any = {
         concrete: {
             name: 'Concrete',
@@ -88,7 +88,6 @@ export default function SurfaceMenu(props:any) {
     //const [selectedQuestion, setSelectedQuestion] = useState('');
 
     const populateqTwoAnswers = () => {
-
         let arr: string[] = []
 
         Object.keys(applicationDataObjects).map((key) =>{
@@ -188,6 +187,8 @@ export default function SurfaceMenu(props:any) {
         {openedMenu == 0 && qOneAnswers.map((layer, i) => 
             <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setOnConcrete(layer)} />
         )} */}
+
+        {/* what application are you trying to solve? */}
         <ListButton lable={'What is the material being removed?'} onClick={() => handleMenuState(1)} />
         {openedMenu == 1 &&
             <div className='cluster-btn-container'>
@@ -204,6 +205,8 @@ export default function SurfaceMenu(props:any) {
         {openedMenu == 3 && qFourAnswers.map((layer, i) => 
             <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setFinishedSurface(layer)} />
         )} */}
+
+        {/* how big is the site? */}
         <ListButton lable={'What is the square footage of the site?'} onClick={() => handleMenuState(4)} />
         {openedMenu == 4 &&
             <div className="cluster-btn-container">
@@ -212,6 +215,8 @@ export default function SurfaceMenu(props:any) {
                 )}
             </div>
         }
+
+        {/* is your concrete new? */}
         <ListButton lable={'Is your concrete more than 28 days old?'} onClick={() => handleMenuState(5)} />
         {openedMenu == 5 &&
             <div className="cluster-btn-container">
@@ -224,6 +229,8 @@ export default function SurfaceMenu(props:any) {
         {openedMenu == 6 && qSevenAnswers.map((layer, i) => 
             <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setDustControl(layer)} />
         )} */}
+
+        {/* are you going to need an edger? */}
         <ListButton lable={'Do you need to grind or clean against a wall?'} onClick={() => handleMenuState(7)} />
         {openedMenu == 7 &&
             <div className="cluster-btn-container">
@@ -232,6 +239,8 @@ export default function SurfaceMenu(props:any) {
                 )}
             </div>
         }
+
+        {/* what power option is desired? */}
         <ListButton lable={'What machine power is desired?'} onClick={() => handleMenuState(8)} />
         {openedMenu == 8 &&
             <div className="cluster-btn-container">
@@ -240,21 +249,6 @@ export default function SurfaceMenu(props:any) {
                 )}
             </div>
         }
-
-        {/************************************************************OLD*******************************************************************/}
-
-        {/* <ListButton lable={'Second Layer Surfaces'} onClick={() => handleMenuState(2)} />
-        {openedMenu == 2 && surfacesSecondLayer.map((layer, i) => 
-            <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setSurface(layer)} />
-        )}
-        <ListButton lable={'Third Layer Surfaces'} onClick={() => handleMenuState(3)} />
-        {openedMenu == 3 && surfacesThirdLayer.map((layer, i) => 
-            <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setSurface(layer)} />
-        )}
-        <ListButton lable={'Fourth Layer Surfaces'} onClick={() => handleMenuState(4)} />
-        {openedMenu == 4 && surfacesFourthLayer.map((layer, i) => 
-            <ListButton key={i} lable={layer} indent={1} active={selectedQuestion == layer ? true : false} onClick={() => setSurface(layer)} />
-        )} */}
     </div>
   )
 }

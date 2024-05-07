@@ -4,6 +4,7 @@ export default function HistoryItem(props:any) {
     const [thick, setThick] = useState<string>('1/32');
     const [value, setValue] = useState<number>(0);
 
+    //assigns layer thickness given slider event result.
     const handleSetThick = (value: string) => {
 
         props.layerObject.setMaterialThickness(value)
@@ -31,15 +32,13 @@ export default function HistoryItem(props:any) {
         }
     }
 
+    //execute function given by props
     const handleOnClick = () => {
         props.onClick();
     }
 
   return (
-    <div className='row bottom-gap test' style={{position: 'relative'}} onClick={handleOnClick}>
-        {/* {props.active &&
-            <div className='active-layer-tab'/>
-        } */}
+    <div className='row bottom-gap' onClick={handleOnClick}>
         <div className='col-12 tab-bar'>
             <div className={`list-btn w-100 container  ${props.active == true && 'btn-active'}`}>
                 <div className='row justify-content-around align-items-center'>

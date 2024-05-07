@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import ListButton from './ListButton'
 
 export default function ToolingMenu(props: any) {
-
+  //temporary tooling data table until backend is developed.
   const toolsByApplicationAndMachine: any = {
     Scaler: {
       apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue'],
@@ -93,61 +93,50 @@ export default function ToolingMenu(props: any) {
     //setSelectedSurface(newTooling);
   }
 
+  //
   useEffect(() => {
-
+    //2D array to store tooling options
     let fourLayers: any[] = [[],[],[],[]]
     let count = 0;
    
     //for each layer
     props.layerObject.sublayerObjects.forEach((item: { machine: any; materialRemoved: any; }, layerIndex: number) => {
-      count++
+      count++;
       let concatList: string[] = [];
 
       //go through each tooling
       Object.keys(toolsByApplicationAndMachine).forEach((key) => {
-
         const machinesArray = toolsByApplicationAndMachine[key].machines;
         const appsArray = toolsByApplicationAndMachine[key].apps;
-
         const toolFitsMachine = machinesArray.includes(item.machine);
         const toolFitsApplication = appsArray.includes(item.materialRemoved);
 
+        //add tools that fit application
         if(toolFitsApplication && toolFitsMachine){
           concatList.push(key)
         }
       })
-      console.log(concatList)
-      fourLayers[layerIndex] = concatList;
 
-      // setMatchingTooling(concatList);
+      //add tools to 2D array
+      fourLayers[layerIndex] = concatList;
     });
-    console.log(count)
-    console.log(fourLayers)
+
     setMatchingTooling(fourLayers)
   }, [])
 
+  //opens accordion of currently selected layer.
   const toolSelect = (num: number) => {
-    console.log(matchingTooling[num].length, ` options in list ${num+1}`)
     if(openTab == num){
       setOpenTab(-1)
     }else{
       setOpenTab(num)
     }
-  } 
-
-  useEffect(() => {
-    console.log(matchingTooling.length)
-    console.log(matchingTooling)
-
-    if(matchingTooling.length !== 0){
-      matchingTooling.forEach
-    }
-  }, [matchingTooling])
+  }
   
-
   return (
     <div className='col edit-menu scroll-on'>
-      
+      {/* lists of tooling organized by layer */}
+
       {/* layer 1 */}
       <ListButton lable={matchingTooling[0] == undefined ? 'First Layer' : `First Layer (${matchingTooling[0].length})`} onClick={() => toolSelect(0)} />
       {openTab == 0 &&
@@ -185,7 +174,6 @@ export default function ToolingMenu(props: any) {
           matchingTooling[3].map((tool: any, i: any) => 
             <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} popupOn={props.popupOn} showMenu={true} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 3, toolsByApplicationAndMachine[tool].CSP)} mouseAction={() => handlePopup(tool)} />
         )}
-
     </div>
   )
 }

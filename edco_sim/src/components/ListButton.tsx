@@ -1,17 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function ListButton(props: any) { 
 
+    const [infoPop, setPop] = useState<boolean>(false);
+
+    const helpBtnRef = useRef<HTMLInputElement>(null)
+
+    //execute function given by props
     const handleOnClick = () => {
         props.onClick();
     }
 
+    //handles information popup states
     const handlePop = () => {
         props.mouseAction()
         setPop(true);
+        if(helpBtnRef.current !== null){
+            props.setPopupYPos(helpBtnRef.current.getBoundingClientRect().y)
+        }
     }
-
-    const [infoPop, setPop] = useState<boolean>(false);
 
     useEffect(() => {
         if(props.popupOn) props.popupOn(infoPop)
@@ -37,7 +44,7 @@ export default function ListButton(props: any) {
                                         <div className='col-12 text-end list-btn-inner'>{props.lable}</div>
                                     </div>
                                     {props.showMenu &&
-                                        <div className="col-4 product-info" onMouseOver={handlePop} onMouseLeave={() => setPop(false)}>?</div>
+                                        <div ref={helpBtnRef} className="col-4 product-info" onMouseOver={handlePop} onMouseLeave={() => setPop(false)}>?</div>
                                     }
                                 </div>
                             </>
