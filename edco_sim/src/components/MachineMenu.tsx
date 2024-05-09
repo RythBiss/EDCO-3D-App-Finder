@@ -7,7 +7,7 @@ export default function EditLayer(props: any) {
     //job size is per hour, remember that when making the lists
     ALR: {
       apps: ['vinyl', 'linoleum', 'ceramic', 'carpet', 'rubber', 'paint', 'ice', 'corrosion', 'oil', 'glue'],
-      depth: 0,
+      depth: -1,
       recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
@@ -19,7 +19,7 @@ export default function EditLayer(props: any) {
     },
     ALRBS: {
       apps: ['vinyl', 'linoleum', 'ceramic', 'carpet', 'rubber', 'paint', 'ice', 'corrosion', 'oil', 'glue'],
-      depth: 0,
+      depth: -1,
       recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
@@ -31,7 +31,7 @@ export default function EditLayer(props: any) {
     },
     TS8: {
       apps: ['vinyl', 'linoleum', 'carpet', 'VCT', 'glue'],
-      depth: 0,
+      depth: -1,
       recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
@@ -250,6 +250,8 @@ export default function EditLayer(props: any) {
         
         if(allMachineData[key].depth == layerInstance.materialThickness){
             machineChecklist.materialThickness = true;
+        }else if(allMachineData[key].depth == -1){
+          machineChecklist.materialThickness = true;
         }
 
         if(allMachineData[key].recJobSize <= layerInstance.jobSize){

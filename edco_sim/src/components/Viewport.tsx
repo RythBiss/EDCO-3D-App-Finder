@@ -9,6 +9,7 @@ export default function Viewport(props: any) {
 
   const [updateView, setUpdateView] = useState<boolean>(false);
   const [popupHeight, setPopupHeight] = useState<number>(0);
+  const [lastPassed, setLastPassed] = useState<any>();
 
   const mountRef = useRef<any>(null);
   const controlsRef = useRef<any>();
@@ -28,16 +29,21 @@ export default function Viewport(props: any) {
 
   //called when a visual component in the 3D scene has changed.
   const updateScene = () => {
-    if(updateView !== props.updateTrigger){
-      loadedModels.current.forEach((item: THREE.Object3D) => {
-        scene.current.remove(item);
-      })
-  
-      loadedModels.current = [];
-  
-      loadSurface(props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved);
+    console.log(`last: ${lastPassed}`)
+    console.log(`props: ${props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved}`)
+    if(lastPassed == undefined || lastPassed !== props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved){ 
+      if(updateView !== props.updateTrigger){
+        loadedModels.current.forEach((item: THREE.Object3D) => {
+          scene.current.remove(item);
+        })
+    
+        loadedModels.current = [];
+    
+        loadSurface(props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved);
+        setLastPassed(props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved)
 
-      setUpdateView(props.updateTrigger);
+        setUpdateView(props.updateTrigger);
+      }
     }
   };
 
@@ -78,8 +84,6 @@ export default function Viewport(props: any) {
           if(props.layer.sublayerObjects[props?.renderLayer+1].materialRemoved == 'concrete' && props.layer.sublayerObjects[props?.renderLayer].CSP !== ''){
             modifiedSurface = `CSP ${props.layer.sublayerObjects[props?.renderLayer].CSP}`;
           }
-
-          console.log(modifiedSurface);
 
           loader.load(`Models/${modifiedSurface}.gltf`, (gltf) => {
             loadedModels.current.push(gltf.scene);

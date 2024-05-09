@@ -84,11 +84,14 @@ function App() {
 
       this.materialThickness = value;
 
+
+      console.log("thickness update")
+
       // this.sublayerObjects.forEach((item) => {
       //   item.materialThickness = value;
       // })
       
-      //this.requestUpdate();
+      this.requestUpdate();
     }
 
     //if anything other than unfinished, then suggest tools that get CSP 3 or less.
@@ -158,7 +161,7 @@ function App() {
       if(this?.sublayerObjects[layer]?.machine !== undefined){
         this.sublayerObjects[layer].machine = newMachine;
       }
-      //this.requestUpdate();
+      this.requestUpdate();
     }
 
     setTooling(newTooling: string, layer: number,CSP: number, doUpdate: boolean = true): void{
@@ -210,13 +213,8 @@ function App() {
   }, [mobileRight])
 
   useEffect(() => {
-    console.log(renderLayer)
     update(prevState => !prevState);
   }, [renderLayer])
-
-  useEffect(() => {
-    console.log(popupYPos)
-  }, [popupYPos])
 
 
 
