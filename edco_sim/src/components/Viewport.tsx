@@ -29,8 +29,7 @@ export default function Viewport(props: any) {
 
   //called when a visual component in the 3D scene has changed.
   const updateScene = () => {
-    console.log(`last: ${lastPassed}`)
-    console.log(`props: ${props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved}`)
+
     if(lastPassed == undefined || lastPassed !== props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved){ 
       if(updateView !== props.updateTrigger){
         loadedModels.current.forEach((item: THREE.Object3D) => {

@@ -142,7 +142,7 @@ export default function ToolingMenu(props: any) {
       {openTab == 0 &&
         matchingTooling.length !== 0 &&
           matchingTooling[0].map((tool: any, i: any) => 
-            <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} popupOn={props.popupOn} showMenu={true} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 0, toolsByApplicationAndMachine[tool].CSP)} mouseAction={() => handlePopup(tool)} />
+            <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} popupOn={props.popupOn} showMenu={true} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 0, toolsByApplicationAndMachine[tool].CSP)} mouseAction={() => handlePopup(tool)} setPopupYPos={props.setPopupYPos} />
         )}
 
       {/* layer 2 */}
@@ -152,7 +152,7 @@ export default function ToolingMenu(props: any) {
       {openTab == 1 &&
         matchingTooling.length !== 0 &&
           matchingTooling[1].map((tool: any, i: any) => 
-            <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} popupOn={props.popupOn} showMenu={true} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 1, toolsByApplicationAndMachine[tool].CSP)} mouseAction={() => handlePopup(tool)} />
+            <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} popupOn={props.popupOn} showMenu={true} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 1, toolsByApplicationAndMachine[tool].CSP)} mouseAction={() => handlePopup(tool)} setPopupYPos={props.setPopupYPos} />
         )}
 
       {/* layer 3 */}
@@ -162,7 +162,7 @@ export default function ToolingMenu(props: any) {
       {openTab == 2 &&
         matchingTooling.length !== 0 &&
           matchingTooling[2].map((tool: any, i: any) => 
-            <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} popupOn={props.popupOn} showMenu={true} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 2, toolsByApplicationAndMachine[tool].CSP)} mouseAction={() => handlePopup(tool)} />
+            <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} popupOn={props.popupOn} showMenu={true} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 2, toolsByApplicationAndMachine[tool].CSP)} mouseAction={() => handlePopup(tool)} setPopupYPos={props.setPopupYPos} />
         )}
       
       {/* layer 4 */}
@@ -172,7 +172,7 @@ export default function ToolingMenu(props: any) {
       {openTab == 3 &&
         matchingTooling.length !== 0 &&
           matchingTooling[3].map((tool: any, i: any) => 
-            <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} popupOn={props.popupOn} showMenu={true} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 3, toolsByApplicationAndMachine[tool].CSP)} mouseAction={() => handlePopup(tool)} />
+            <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} popupOn={props.popupOn} showMenu={true} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 3, toolsByApplicationAndMachine[tool].CSP)} mouseAction={() => handlePopup(tool)} setPopupYPos={props.setPopupYPos} />
         )}
     </div>
   )

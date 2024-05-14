@@ -199,8 +199,6 @@ export default function EditLayer(props: any) {
 
     list?.invalidReasons.forEach((item: any) => {
       if(item.materialRemoved == true && item.materialThickness == true){
-        console.log(item.name);
-        console.log(list.machines);
 
         temp.machines.push(item.name);
       }
@@ -297,6 +295,8 @@ export default function EditLayer(props: any) {
   //populate layer lists
   useEffect(() => {
 
+    console.log('change machines')
+
     let generatedList = compileMachineList(props.layerObject)
 
     //below are 4 blocks, each populate its respective layer with machines based on provided information, and substitutes machines when none match the inputs.
@@ -353,7 +353,7 @@ export default function EditLayer(props: any) {
       }
     }
 
-  }, [props.layerObject])
+  }, [props.layerObject, props.update])
 
   return (
     <div className='col edit-menu scroll-on'>
@@ -382,7 +382,7 @@ export default function EditLayer(props: any) {
         {/* list of buttons for machines that passed population filters */}
         {selectedLayerState == 1 && matchingMachinesL2 !== undefined  &&
           matchingMachinesL2.machines.length > 0 &&
-            matchingMachinesL2.machines.map((item: string, i: number) => <ListButton key={i} popupOn={props.popupOn} showMenu={true}  indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 1)} mouseAction={() => handlePopup(item)} />)        
+            matchingMachinesL2.machines.map((item: string, i: number) => <ListButton key={i} popupOn={props.popupOn} showMenu={true}  indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 1)} mouseAction={() => handlePopup(item)} setPopupYPos={props.setPopupYPos} />)        
         }
 
       {/* layer 3 accordion open/close button, if there is a layer 2 */}
@@ -396,7 +396,7 @@ export default function EditLayer(props: any) {
         {/* list of buttons for machines that passed population filters */}
         {selectedLayerState == 2 && matchingMachinesL3 !== undefined  &&
           matchingMachinesL3.machines.length > 0 &&
-            matchingMachinesL3.machines.map((item: string, i: number) => <ListButton key={i} popupOn={props.popupOn} showMenu={true}  indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 2)} mouseAction={() => handlePopup(item)} />)        
+            matchingMachinesL3.machines.map((item: string, i: number) => <ListButton key={i} popupOn={props.popupOn} showMenu={true}  indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 2)} mouseAction={() => handlePopup(item)} setPopupYPos={props.setPopupYPos} />)        
         }
 
       {/* layer 4 accordion open/close button, if there is a layer 2 */}
@@ -410,7 +410,7 @@ export default function EditLayer(props: any) {
         {/* list of buttons for machines that passed population filters */}
         {selectedLayerState == 3 && matchingMachinesL4 !== undefined  &&
           matchingMachinesL4.machines.length > 0 &&
-            matchingMachinesL4.machines.map((item: string, i: number) => <ListButton key={i} popupOn={props.popupOn} showMenu={true}  indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 3)} mouseAction={() => handlePopup(item)} />)        
+            matchingMachinesL4.machines.map((item: string, i: number) => <ListButton key={i} popupOn={props.popupOn} showMenu={true}  indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 3)} mouseAction={() => handlePopup(item)} setPopupYPos={props.setPopupYPos} />)        
         }
     </div>
   )

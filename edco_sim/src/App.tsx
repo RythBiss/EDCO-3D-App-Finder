@@ -84,6 +84,7 @@ function App() {
 
       this.materialThickness = value;
 
+      //-------------------- You were trying to make the thickness slider trigger a UI update but not a viewport update --------------------------------------------
 
       console.log("thickness update")
 
@@ -223,7 +224,7 @@ function App() {
       <Header setLeft={setLeft} setRight={setRight} />
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100' style={{position: 'relative'}}>
-          <EditLayer setPopup={setPopupOn} layerObject={currentLayer} mobileLeft={mobileLeft} setPopupInfo={setPopupInfo} setPopupYPos={setPopupYPos} />
+          <EditLayer setPopup={setPopupOn} layerObject={currentLayer} mobileLeft={mobileLeft} setPopupInfo={setPopupInfo} setPopupYPos={setPopupYPos} update={updateState} />
           <Viewport popup={popupOn} popupInfo={popupInfo} popupYPos={popupYPos} history={layerList[layerList.length - 1]} layer={currentLayer} renderLayer={renderLayer} updateTrigger={updateState} />
           <LayerHistory newLayer={createNewLayer} history={layerList} current={currentLayer} setRenderedLayer={setRenderLayer} mobileRight={mobileRight} />
         </div>
