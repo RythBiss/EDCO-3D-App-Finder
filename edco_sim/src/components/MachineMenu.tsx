@@ -98,7 +98,7 @@ export default function EditLayer(props: any) {
       surfacePrep: true,
       edges: true,
       power: ['electric'],
-      image: 'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Gas-Machine-Slider.jpg',
+      image: 'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-7-turbo-edge-grinder/TMC-7-Electric-Machine-Slider.jpg',
       info: 'This unique edging machine grinds concrete all the way to walls, poles, and stationary objects.  It resurfaces small, hard-to-reach areas eliminating hand grinding.  Turbo Grinders remove thick coverings, level uneven areas, and solve other industrial application problems. '
     },
     TG10: {

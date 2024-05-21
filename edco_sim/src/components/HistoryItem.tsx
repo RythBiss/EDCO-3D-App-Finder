@@ -4,6 +4,7 @@ export default function HistoryItem(props:any) {
     const [thick, setThick] = useState<string>('1/32');
     const [value, setValue] = useState<number>(0);
     const [allowThick, setAllowThick] = useState<boolean>(false);
+    const [optionList, setOptionList] = useState(['']);
 
     //assigns layer thickness given slider event result.
     const handleSetThick = (value: string) => {
@@ -65,15 +66,22 @@ export default function HistoryItem(props:any) {
         props.onClick();
     }
 
+    const handleChange = (change) => {
+        const result = props.getAltLayers(change);
+        setOptionList(result);
+        if(change !== props.layerObject.materialRemoved){
+            props.layerObject.modMaterialRemoved(change)
+        }
+    }
+
     useEffect(() => {
-        console.log(props.layerObject.materialRemoved)
         if(props.layerObject.materialRemoved == 'concrete'){
-            console.log('use thickness')
             setAllowThick(true);
         }else{
-            console.log('do not use thickness')
             setAllowThick(false);
         }
+
+        handleChange(props.layerObject.materialRemoved)
     })
 
   return (
@@ -83,7 +91,17 @@ export default function HistoryItem(props:any) {
                 <div className='row justify-content-around align-items-center'>
                     <div className='col'>
                         <ul className='list-btn-bullets'>
-                            <li>MATERIAL: {props?.layerObject?.materialRemoved}</li>
+                            <li>MATERIAL:  
+                                <label htmlFor="changeLayer" style={{display: 'none'}}>change layer</label>
+
+                                <select name="changeLayer" id="changeLayer" className='drop-select' onChange={(e) => {handleChange(e.target.value)}}>
+                                    {optionList.length > 0 &&
+                                        optionList.map((name, i) => 
+                                            <option key={i} value={name}>{name}</option>
+                                        )
+                                    }
+                                </select>
+                            </li>
                             <li>MACHINE: {props?.layerObject?.machine}</li>
                             <li>TOOLING: {props?.layerObject?.tooling}</li>
                             {allowThick == true &&

@@ -213,6 +213,21 @@ html, body{
     display: none;
   }
 
+.drop-select{
+    border: none;
+    background-color: transparent;
+    color: white;
+    margin: 0 0 0 2px;
+}
+
+.drop-option{
+    color: white;
+    background-color: #D73648;
+    border: none;
+    border-radius: 0;
+    font
+}
+
 input[type="range"] {
     -webkit-appearance: none;
     appearance: none;

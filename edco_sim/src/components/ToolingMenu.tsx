@@ -12,11 +12,27 @@ export default function ToolingMenu(props: any) {
       CSP: 1,
       info: 'Scaler info block'
     },
+    ScalerBS: {
+      apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue'],
+      name: 'Chisel Scalers',
+      machines: ['ALRBS'],
+      image: 'https://edcostore.com/wp-content/uploads/2017/06/27033_BigStick_3_SingleBevel.jpg',
+      CSP: 1,
+      info: 'Scaler info block'
+    },
     Scraper: {
       apps: ['vinyl', 'linoleum', 'carpet', 'rubber', 'paint', 'corrosion', 'oil'],
       name: 'Scrapper Blades',
       machines: ['ALR'],
       image: 'https://edcostore.com/wp-content/uploads/2017/06/C10305_ScraperBlades.jpg',
+      CSP: 1,
+      info: 'Scraper Blade info block'
+    }, 
+    ScraperBS: {
+      apps: ['vinyl', 'linoleum', 'carpet', 'rubber', 'paint', 'corrosion', 'oil'],
+      name: 'Scrapper Blades',
+      machines: ['ALRBS'],
+      image: 'https://edcostore.com/wp-content/uploads/2018/04/27035_ScraperBlade-1.jpg',
       CSP: 1,
       info: 'Scraper Blade info block'
     }, 

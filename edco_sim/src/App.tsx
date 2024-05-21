@@ -78,6 +78,13 @@ function App() {
       this.requestUpdate();
     }
 
+    modMaterialRemoved(layer: string){
+      console.log('changing layer from ' + this.materialRemoved + ' to ' + layer)
+      this.materialRemoved = layer;
+
+      this.requestUpdate();
+    }
+
     //ask this for every layer below first layer (vinyl, tile, carpet, etc.). Have the question repeat for each layer.
     setMaterialThickness = (value: number) => {
       this.clearSelections(0)

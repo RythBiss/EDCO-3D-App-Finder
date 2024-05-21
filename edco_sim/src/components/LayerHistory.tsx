@@ -9,6 +9,13 @@ export default function LayerHistory(props: any) {
   const [selectedLayer, setSelectedLayer] = useState<number>(0);
   const selectedTab = useRef(selectedLayer);
 
+  const altLayers = [
+    ['vinyl', 'linoleum', 'ceramic', 'carpet'],
+    ['glue', 'mastic', 'thinset'],
+    ['thin mil coatings', 'sealers', 'residual', 'paint'],
+    ['concrete', 'high spots']
+  ]
+
   const activateLayer = (layerIndex: number) =>{
 
     if(layerIndex == selectedTab.current){
@@ -33,6 +40,14 @@ export default function LayerHistory(props: any) {
     pdf.save('rental ticket.pdf');
   }
 
+  const getAltLayers = (change: string) => {
+    for(let i = 0; i < 4; i++){
+      if(altLayers[i].includes(change)){
+        return altLayers[i];
+      }
+    }
+  }
+
   useEffect(() => {
     props.setRenderedLayer(selectedLayer);
   }, [selectedLayer])
@@ -45,7 +60,7 @@ export default function LayerHistory(props: any) {
       <div className={`col-lg-2 col-sm-8 shadow scroll h-100 ${props.mobileRight == false ? 'hide-menu' : 'show-menu-right'}`}>
         {props.current !== undefined &&
             props.current.sublayerObjects.map((obj: object, key: number) => 
-              <HistoryItem key={key} layerObject={obj} layerIndex={key} active={selectedLayer == key} onClick={() => activateLayer(key)} />
+              <HistoryItem key={key} layerObject={obj} layerIndex={key} active={selectedLayer == key} onClick={() => activateLayer(key)} getAltLayers={getAltLayers} />
         )}
 
         <ListButton onClick={printPDF} lable='Print PDF' />
