@@ -88,19 +88,25 @@ export default function HistoryItem(props:any) {
     <div className='row bottom-gap' onClick={handleOnClick}>
         <div className='col-12 tab-bar'>
             <div className={`list-btn w-100 container  ${props.active == true && 'btn-active'}`}>
-                <div className='row justify-content-around align-items-center'>
+                <div className='row justify-content-around align-items-top'>
                     <div className='col'>
                         <ul className='list-btn-bullets'>
                             <li>MATERIAL:  
-                                <label htmlFor="changeLayer" style={{display: 'none'}}>change layer</label>
+                                {props.active ?
+                                    <>
+                                        <label htmlFor="changeLayer" style={{display: 'none'}}>change layer</label>
 
-                                <select name="changeLayer" id="changeLayer" className='drop-select' onChange={(e) => {handleChange(e.target.value)}}>
-                                    {optionList.length > 0 &&
-                                        optionList.map((name, i) => 
-                                            <option key={i} value={name}>{name}</option>
-                                        )
-                                    }
-                                </select>
+                                        <select name="changeLayer" id="changeLayer" className='drop-select' onChange={(e) => {handleChange(e.target.value)}}>
+                                            {optionList.length > 0 &&
+                                                optionList.map((name, i) => 
+                                                    <option key={i} value={name}>{name}</option>
+                                                )
+                                            }
+                                        </select>   
+                                    </>
+                                    : 
+                                    <>{` ${props?.layerObject?.materialRemoved}`}</>
+                                }
                             </li>
                             <li>MACHINE: {props?.layerObject?.machine}</li>
                             <li>TOOLING: {props?.layerObject?.tooling}</li>
