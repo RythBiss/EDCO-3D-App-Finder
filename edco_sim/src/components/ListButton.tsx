@@ -51,6 +51,11 @@ export default function ListButton(props: any) {
                             :
                             <>
                                 <div className='col text-start list-btn-inner'>{props.lable}</div>
+                                {props.selected ? 
+                                    <div className="col-1" style={{color: 'white'}}>☑</div>
+                                    :
+                                    <div className="col-1" style={{color: 'white'}}>☐</div>    
+                                }
                             </>
                             }
                     </div>

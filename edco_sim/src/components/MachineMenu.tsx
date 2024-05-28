@@ -295,8 +295,6 @@ export default function EditLayer(props: any) {
   //populate layer lists
   useEffect(() => {
 
-    console.log('change machines')
-
     let generatedList = compileMachineList(props.layerObject)
 
     //below are 4 blocks, each populate its respective layer with machines based on provided information, and substitutes machines when none match the inputs.

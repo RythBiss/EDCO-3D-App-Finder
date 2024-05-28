@@ -189,7 +189,7 @@ export default function SurfaceMenu(props:any) {
         )} */}
 
         {/* what application are you trying to solve? */}
-        <ListButton lable={'What is the material being removed?'} onClick={() => handleMenuState(1)} />
+        <ListButton lable={'What is the material being removed?'} onClick={() => handleMenuState(1)} selected={props?.layerObject?.materialRemoved !== ''} />
         {openedMenu == 1 &&
             <div className='cluster-btn-container'>
                 {qTwoAnswers.map((layer:any, i) => 
@@ -207,7 +207,7 @@ export default function SurfaceMenu(props:any) {
         )} */}
 
         {/* how big is the site? */}
-        <ListButton lable={'What is the square footage of the site?'} onClick={() => handleMenuState(4)} />
+        <ListButton lable={'What is the square footage of the site?'} onClick={() => handleMenuState(4)} selected={props?.layerObject?.jobSize !== null} />
         {openedMenu == 4 &&
             <div className="cluster-btn-container">
             {qFiveAnswers.map((layer, i) => 
@@ -217,7 +217,7 @@ export default function SurfaceMenu(props:any) {
         }
 
         {/* is your concrete new? */}
-        <ListButton lable={'Is your concrete more than 28 days old?'} onClick={() => handleMenuState(5)} />
+        <ListButton lable={'Is your concrete more than 28 days old?'} onClick={() => handleMenuState(5)} selected={props?.layerObject?.greenConcrete !== null} />
         {openedMenu == 5 &&
             <div className="cluster-btn-container">
                 {qSixAnswers.map((layer, i) => 
@@ -231,7 +231,7 @@ export default function SurfaceMenu(props:any) {
         )} */}
 
         {/* are you going to need an edger? */}
-        <ListButton lable={'Do you need to grind or clean against a wall?'} onClick={() => handleMenuState(7)} />
+        <ListButton lable={'Do you need to grind or clean against a wall?'} onClick={() => handleMenuState(7)} selected={props?.layerObject?.edger !== null} />
         {openedMenu == 7 &&
             <div className="cluster-btn-container">
                 {qEightAnswers.map((layer, i) => 
@@ -241,7 +241,7 @@ export default function SurfaceMenu(props:any) {
         }
 
         {/* what power option is desired? */}
-        <ListButton lable={'What machine power is desired?'} onClick={() => handleMenuState(8)} />
+        <ListButton lable={'What machine power is desired?'} onClick={() => handleMenuState(8)} selected={props?.layerObject?.powerType !== ''} />
         {openedMenu == 8 &&
             <div className="cluster-btn-container">
                 {qNineAnswers.map((layer, i) => 

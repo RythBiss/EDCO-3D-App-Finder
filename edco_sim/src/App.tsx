@@ -29,10 +29,10 @@ function App() {
       this.materialRemoved = '';
       this.materialThickness = 0;
       this.finishedSurface = '';
-      this.jobSize = 0;
-      this.greenConcrete = false;
+      this.jobSize = null;
+      this.greenConcrete = null;
       this.dustControl = false;
-      this.edger = false;
+      this.edger = null;
       this.powerType = '';
       this.layerNumber = 0;
       this.sublayers = [];
@@ -47,10 +47,10 @@ function App() {
     materialRemoved: string;
     materialThickness: number;
     finishedSurface: string;
-    jobSize: number;
-    greenConcrete: boolean;
+    jobSize: number | null;
+    greenConcrete: boolean | null;
     dustControl: boolean;
-    edger: boolean;
+    edger: boolean | null;
     powerType: string;
     layerNumber: number;
     sublayers: string[];
@@ -106,7 +106,7 @@ function App() {
     setFinishedSurface = (value: string) => {
       this.finishedSurface = value;
       
-      //this.requestUpdate();
+      this.requestUpdate();
     }
 
     setJobSize = (value: number) => {
@@ -118,7 +118,7 @@ function App() {
         item.jobSize = value;
       })
       
-      //this.requestUpdate();
+      this.requestUpdate();
     }
 
     setGreenConcrete = (value: boolean) => {
@@ -130,14 +130,14 @@ function App() {
         item.greenConcrete = value;
       })
       
-      //this.requestUpdate();
+      this.requestUpdate();
     }
 
     //this question can be skipped, add a vac to the list of any machine requires it.
     setDustControl = (value: boolean) => {
       this.dustControl = value;
       
-      //this.requestUpdate();
+      this.requestUpdate();
     }
 
     //toggle if TMC7 should be shown.
@@ -146,7 +146,7 @@ function App() {
 
       this.edger = value;
       
-      //this.requestUpdate();
+      this.requestUpdate();
     }
 
     //only show this question if there is more than 1 option with current selection.
@@ -159,7 +159,7 @@ function App() {
         item.powerType = value;
       })
       
-      //this.requestUpdate();
+      this.requestUpdate();
     }
     
     setMachine(newMachine: string, layer: number): void{
