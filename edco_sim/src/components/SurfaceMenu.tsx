@@ -83,6 +83,12 @@ export default function SurfaceMenu(props:any) {
     const qEightAnswers = ['Yes', 'No'];
     const qNineAnswers = ['Gas', 'Electric', 'Propane', 'Air'];
 
+    const [matSelected, setMatSelected] = useState<boolean>(false);
+    const [sizeSelected, setSizeSelected] = useState<boolean>(false);
+    const [greenSelected, setGreenSelected] = useState<boolean>(false);
+    const [edgeSelected, setEdgeSelected] = useState<boolean>(false);
+    const [powerSelected, setPowerSelected] = useState<boolean>(false);
+
 
     const [openedMenu, setOpenedMenu] = useState(-1);
     //const [selectedQuestion, setSelectedQuestion] = useState('');
@@ -176,6 +182,22 @@ export default function SurfaceMenu(props:any) {
 
         props.layerObject.setPowerType(power);
     }
+
+    useEffect(() => {
+        if(props.layerObject){
+            setMatSelected(props?.layerObject?.materialRemoved !== '');
+            setSizeSelected(props?.layerObject?.jobSize !== null);
+            setGreenSelected(props?.layerObject?.greenConcrete !== null);
+            setEdgeSelected(props?.layerObject?.edger !== null);
+            setPowerSelected(props?.layerObject?.powerType !== '');
+        }
+    })
+
+    useEffect(() =>{
+        if(matSelected == true && sizeSelected == true && greenSelected == true && edgeSelected == true && powerSelected == true){
+            props.setAllowProgress(1)
+        }
+    }, [matSelected, sizeSelected, greenSelected, edgeSelected, powerSelected])
     
     useEffect(() => {
         populateqTwoAnswers()
@@ -189,7 +211,7 @@ export default function SurfaceMenu(props:any) {
         )} */}
 
         {/* what application are you trying to solve? */}
-        <ListButton lable={'What is the material being removed?'} onClick={() => handleMenuState(1)} selected={props?.layerObject?.materialRemoved !== ''} />
+        <ListButton lable={'What is the material being removed?'} onClick={() => handleMenuState(1)} selected={matSelected} />
         {openedMenu == 1 &&
             <div className='cluster-btn-container'>
                 {qTwoAnswers.map((layer:any, i) => 
@@ -207,7 +229,7 @@ export default function SurfaceMenu(props:any) {
         )} */}
 
         {/* how big is the site? */}
-        <ListButton lable={'What is the square footage of the site?'} onClick={() => handleMenuState(4)} selected={props?.layerObject?.jobSize !== null} />
+        <ListButton lable={'What is the square footage of the site?'} onClick={() => handleMenuState(4)} selected={sizeSelected} />
         {openedMenu == 4 &&
             <div className="cluster-btn-container">
             {qFiveAnswers.map((layer, i) => 
@@ -217,7 +239,7 @@ export default function SurfaceMenu(props:any) {
         }
 
         {/* is your concrete new? */}
-        <ListButton lable={'Is your concrete more than 28 days old?'} onClick={() => handleMenuState(5)} selected={props?.layerObject?.greenConcrete !== null} />
+        <ListButton lable={'Is your concrete more than 28 days old?'} onClick={() => handleMenuState(5)} selected={greenSelected} />
         {openedMenu == 5 &&
             <div className="cluster-btn-container">
                 {qSixAnswers.map((layer, i) => 
@@ -231,7 +253,7 @@ export default function SurfaceMenu(props:any) {
         )} */}
 
         {/* are you going to need an edger? */}
-        <ListButton lable={'Do you need to grind or clean against a wall?'} onClick={() => handleMenuState(7)} selected={props?.layerObject?.edger !== null} />
+        <ListButton lable={'Do you need to grind or clean against a wall?'} onClick={() => handleMenuState(7)} selected={edgeSelected} />
         {openedMenu == 7 &&
             <div className="cluster-btn-container">
                 {qEightAnswers.map((layer, i) => 
@@ -241,7 +263,7 @@ export default function SurfaceMenu(props:any) {
         }
 
         {/* what power option is desired? */}
-        <ListButton lable={'What machine power is desired?'} onClick={() => handleMenuState(8)} selected={props?.layerObject?.powerType !== ''} />
+        <ListButton lable={'What machine power is desired?'} onClick={() => handleMenuState(8)} selected={powerSelected} />
         {openedMenu == 8 &&
             <div className="cluster-btn-container">
                 {qNineAnswers.map((layer, i) => 

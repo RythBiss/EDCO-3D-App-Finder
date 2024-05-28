@@ -154,7 +154,7 @@ export default function ToolingMenu(props: any) {
       {/* lists of tooling organized by layer */}
 
       {/* layer 1 */}
-      <ListButton lable={matchingTooling[0] == undefined ? 'First Layer' : `First Layer (${matchingTooling[0].length})`} onClick={() => toolSelect(0)} />
+      <ListButton lable={matchingTooling[0] == undefined ? 'First Layer' : `First Layer (${matchingTooling[0].length})`} onClick={() => toolSelect(0)} selected={props.layerObject.sublayerObjects[0].tooling !== ''} />
       {openTab == 0 &&
         matchingTooling.length !== 0 &&
           matchingTooling[0].map((tool: any, i: any) => 
@@ -163,7 +163,7 @@ export default function ToolingMenu(props: any) {
 
       {/* layer 2 */}
       {props.layerObject.sublayerObjects.length > 1 &&
-        <ListButton lable={matchingTooling[1] == undefined ? 'Second Layer' : `Second Layer (${matchingTooling[1].length})`} onClick={() => toolSelect(1)} />
+        <ListButton lable={matchingTooling[1] == undefined ? 'Second Layer' : `Second Layer (${matchingTooling[1].length})`} onClick={() => toolSelect(1)} selected={props.layerObject.sublayerObjects[1].tooling !== ''} />
       }
       {openTab == 1 &&
         matchingTooling.length !== 0 &&
@@ -173,7 +173,7 @@ export default function ToolingMenu(props: any) {
 
       {/* layer 3 */}
       {props.layerObject.sublayerObjects.length > 2 &&
-        <ListButton lable={matchingTooling[2] == undefined ? 'Third Layer' : `Third Layer (${matchingTooling[2].length})`} onClick={() => toolSelect(2)} />
+        <ListButton lable={matchingTooling[2] == undefined ? 'Third Layer' : `Third Layer (${matchingTooling[2].length})`} onClick={() => toolSelect(2)} selected={props.layerObject.sublayerObjects[2].tooling !== ''} />
       }
       {openTab == 2 &&
         matchingTooling.length !== 0 &&
@@ -183,7 +183,7 @@ export default function ToolingMenu(props: any) {
       
       {/* layer 4 */}
       {props.layerObject.sublayerObjects.length > 3 &&
-        <ListButton lable={matchingTooling[0] == undefined ? 'Fourth Layer' : `Fourth Layer (${matchingTooling[3].length})`} onClick={() => toolSelect(3)} />
+        <ListButton lable={matchingTooling[0] == undefined ? 'Fourth Layer' : `Fourth Layer (${matchingTooling[3].length})`} onClick={() => toolSelect(3)} selected={props.layerObject.sublayerObjects[3].tooling !== ''} />
       }
       {openTab == 3 &&
         matchingTooling.length !== 0 &&

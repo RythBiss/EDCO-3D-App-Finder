@@ -30,7 +30,7 @@ export default function EditLayer(props: any) {
       info: 'Big Stick chisel scalers solve industrial removal applications including scraping and chipping away concrete and thick coatings. Blast through ceramic tile and other floor coverings with the Big Stick’s increased air power.'
     },
     TS8: {
-      apps: ['vinyl', 'linoleum', 'carpet', 'VCT', 'glue'],
+      apps: ['vinyl', 'linoleum', 'carpet', 'VCT'],
       depth: -1,
       recJobSize: 0,
       onCrete: true,
@@ -353,11 +353,26 @@ export default function EditLayer(props: any) {
 
   }, [props.layerObject, props.update])
 
+
+  useEffect(()=>{
+    let machinesSelected: boolean = true;
+
+    props.layerObject.sublayerObjects.forEach((obj: any) => {
+      if(obj.machine == ''){
+        machinesSelected = false;
+      }
+    })
+
+    if(machinesSelected){
+      props.setAllowProgress(2);
+    }
+  })
+
   return (
     <div className='col edit-menu scroll-on'>
       {/* layer 1 accordion open/close button */}
         {matchingMachinesL1 &&
-          <ListButton lable={`First Layer (${matchingMachinesL1.machines.length})`} active={selectedLayerState == 0 ? true : false} onClick={() => {handleMenuState(0)}} />
+          <ListButton lable={`First Layer (${matchingMachinesL1.machines.length})`} active={selectedLayerState == 0 ? true : false} onClick={() => {handleMenuState(0)}} selected={props.layerObject.sublayerObjects[0].machine !== ''} />
         }
         {/* substitutes added indicator */}
         {subdL1 && selectedLayerState == 0 &&
@@ -371,7 +386,7 @@ export default function EditLayer(props: any) {
 
       {/* layer 2 accordion open/close button, if there is a layer 2 */}
         {props.layerObject.layerNumber >= 2 && matchingMachinesL2 !== undefined  &&
-          <ListButton lable={`Second Layer (${matchingMachinesL2.machines.length})`} active={selectedLayerState == 1 ? true : false} onClick={() => {handleMenuState(1)}} />
+          <ListButton lable={`Second Layer (${matchingMachinesL2.machines.length})`} active={selectedLayerState == 1 ? true : false} onClick={() => {handleMenuState(1)}} selected={props.layerObject.sublayerObjects[1].machine !== ''}  />
         }
         {/* substitutes added indicator */}
         {subdL2 && selectedLayerState == 1 &&
@@ -385,7 +400,7 @@ export default function EditLayer(props: any) {
 
       {/* layer 3 accordion open/close button, if there is a layer 2 */}
         {props.layerObject.layerNumber >= 3 && matchingMachinesL3 !== undefined  &&
-          <ListButton lable={`Third Layer (${matchingMachinesL3.machines.length})`} active={selectedLayerState == 2 ? true : false} onClick={() => {handleMenuState(2)}} />
+          <ListButton lable={`Third Layer (${matchingMachinesL3.machines.length})`} active={selectedLayerState == 2 ? true : false} onClick={() => {handleMenuState(2)}} selected={props.layerObject.sublayerObjects[2].machine !== ''}  />
         }
         {/* substitutes added indicator */}
         {subdL3 && selectedLayerState == 2 &&
@@ -399,7 +414,7 @@ export default function EditLayer(props: any) {
 
       {/* layer 4 accordion open/close button, if there is a layer 2 */}
         {props.layerObject.layerNumber >= 4 && matchingMachinesL4 !== undefined  &&
-          <ListButton lable={`Fourth Layer (${matchingMachinesL4.machines.length})`} active={selectedLayerState == 3 ? true : false} onClick={() => {handleMenuState(3)}} />
+          <ListButton lable={`Fourth Layer (${matchingMachinesL4.machines.length})`} active={selectedLayerState == 3 ? true : false} onClick={() => {handleMenuState(3)}} selected={props.layerObject.sublayerObjects[3].machine !== ''}  />
         }
         {/* substitutes added indicator */}
         {subdL4 && selectedLayerState == 3 &&
