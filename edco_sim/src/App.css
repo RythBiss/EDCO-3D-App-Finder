@@ -79,6 +79,16 @@ html, body{
     box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
 }
 
+.list-btn-icon{
+    background-color: white;
+    border: none;
+    border-radius: 16px 0 0 16px;
+    color: white;
+    padding: 0;
+    box-shadow: 3px 3px 3px 3px rgb(0 0 0 / 20%);
+    overflow: hidden;
+}
+
 .list-btn-inner{
     color: white;
     font-size: 1.25rem;
@@ -88,8 +98,21 @@ html, body{
     background-color: var(--hover);
 }
 
+.icon-cushion{
+    background-color: white;
+    width: 1rem;
+}
+
 .btn-wrapper > *{
     pointer-events: none;
+}
+
+.btn-icon-spaces{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0 1.5rem;
 }
 
 .btn-active{
@@ -100,11 +123,14 @@ html, body{
     background-color: var(--active);
 }
 
+.vert-space-between{
+    background-color: var(--primary);
+}
+
 .machine-icon-frame{
     aspect-ratio: 1/1;
     object-fit: cover;
     padding: 0;
-    border-radius: 2px;
 }
 
 .list-btn-title{
@@ -141,7 +167,6 @@ html, body{
     width: 16px;
     border-radius: 16px 0px 0px 16px;
     box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
-
 }
 
 .cluster-btn-container{
@@ -167,29 +192,19 @@ html, body{
     background-color: var(--hover);
 }
 
-.vert-space-between{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: flex-end;
-    padding: 0;
-}
-
 .product-info{
-    background-color: var(--primary);
-    color: #fff;
+    background-color: white;
+    color: black;
     border-width: 0;
-    border-radius: 1rem;
+    border-radius: 2rem;
     pointer-events: all;
-    width: 2rem;
-    height: 2rem;
-    text-align: center;
-    line-height: 2rem;
+    width: 4rem;
+    height: 4rem;
+    text-align: start;
+    line-height: 2.5rem;
+    margin: -2rem -3rem;
+    padding: 0 0 0 1rem;
     /* aspect-ratio: 1 / 1; */
-}
-
-.product-info:hover{
-    background-color: var(--active);
 }
 
 .info-pop{
@@ -225,7 +240,6 @@ html, body{
     background-color: #D73648;
     border: none;
     border-radius: 0;
-    font
 }
 
 input[type="range"] {
