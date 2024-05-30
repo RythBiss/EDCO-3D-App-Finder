@@ -12,8 +12,8 @@ export default function LayerHistory(props: any) {
   const altLayers = [
     ['vinyl', 'linoleum', 'ceramic', 'carpet'],
     ['glue', 'mastic', 'thinset'],
-    ['thin mil coatings', 'sealers', 'residual', 'paint'],
-    ['concrete', 'high spots']
+    ['thin mil coatings', 'sealer', 'residual', 'paint'],
+    ['concrete', 'high spots', 'trip hazard']
   ]
 
   const activateLayer = (layerIndex: number) =>{
