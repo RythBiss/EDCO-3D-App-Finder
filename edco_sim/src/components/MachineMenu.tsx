@@ -42,7 +42,7 @@ export default function EditLayer(props: any) {
       info: 'Electric floor strippers remove vinyl, linoleum, carpet, rubber, and other softer coverings from concrete floors. The “Tile Shark” floor stripper is 110 volt and can be used for removal of vinyl, linoleum, carpet, rubber, and other soft floor coverings.'
     },
     SEC: {
-      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual'],
+      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots'],
       depth: 0,
       recJobSize: 0,
       onCrete: true,
@@ -54,7 +54,7 @@ export default function EditLayer(props: any) {
       info: 'Floor Grinders solve first layer applications like smoothing concrete, preparing floors for new coverings and removing thinner coatings, soft materials and ice.  This single-disc model grinds approximately 250sqft per hour.'
     },
     _2GC: {
-      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual'],
+      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots'],
       depth: 0,
       recJobSize: 0,
       onCrete: true,
@@ -66,7 +66,7 @@ export default function EditLayer(props: any) {
       info: 'Floor Grinders solve first layer applications like smoothing concrete, preparing floors for new coverings and removing thinner coatings, soft materials and ice. This dual-disc model grinds approximately 500sqft per hour.'
     },
     _2DHD: {
-      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual'],
+      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots'],
       depth: 0,
       recJobSize: 2,
       onCrete: true,
@@ -78,7 +78,7 @@ export default function EditLayer(props: any) {
       info: 'Floor Grinders solve first-layer applications.  This Heavy-Duty Grinder is also designed to level concrete and deeper removal of industrial-strength coverings.  This dual-disc model grinds approximately 800 – 1,000 sq. ft. per hour.'
     },
     TL9: {
-      apps: ['leveling', 'rubber', 'epoxy', 'concrete'],
+      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'high spots'],
       depth: 0,
       recJobSize: 0,
       onCrete: true,
@@ -90,7 +90,7 @@ export default function EditLayer(props: any) {
       info: 'The “Turbo-Lite” is high-production and portable.  It aggressively grinds concrete surfaces like a turbo grinder while having portable attributes. It weighs less than 100lbs, has a folding handlebar with built-in handgrip for travel. The TL9 is great for removal and resurfacing in hard-to-reach areas.'
     },
     TMC7: {
-      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'edges', 'residual'],
+      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'edges', 'residual', 'high spots'],
       depth: 0,
       recJobSize: 0,
       onCrete: true,
@@ -102,7 +102,7 @@ export default function EditLayer(props: any) {
       info: 'This unique edging machine grinds concrete all the way to walls, poles, and stationary objects.  It resurfaces small, hard-to-reach areas eliminating hand grinding.  Turbo Grinders remove thick coverings, level uneven areas, and solve other industrial application problems. '
     },
     TG10: {
-      apps: ['leveling', 'rubber', 'epoxy', 'concrete'],
+      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'high spots'],
       depth: 1,
       recJobSize: 0,
       onCrete: true,
@@ -115,7 +115,7 @@ export default function EditLayer(props: any) {
     },
     //make trip hazard surface`
     CPL8: {
-      apps: ['leveling', 'rubber', 'concrete', 'trip hazard'],
+      apps: ['leveling', 'rubber', 'concrete', 'trip hazard', 'high spots'],
       depth: 1,
       recJobSize: 0,
       onCrete: true,
@@ -127,7 +127,7 @@ export default function EditLayer(props: any) {
       info: 'The “Sacri-Lite” Planer is for profiling and texturing the first layer of concrete and asphalt surfaces.  While it removes thin coatings, it does not solve the larger removal applications like other Crete-Planers.  Available in 110 Volt electric.'
     },
     CPM8: {
-      apps: ['leveling', 'concrete', 'trip hazard', 'rubber'],
+      apps: ['leveling', 'concrete', 'trip hazard', 'rubber', 'high spots'],
       depth: 2,
       recJobSize: 0,
       onCrete: true,
@@ -139,7 +139,7 @@ export default function EditLayer(props: any) {
       info: 'Crete-Planers level, remove, texture and groove concrete and asphalt surfaces. The 8” Planer solves common removal applications and is the best product to quickly level sidewalk trip hazards. Its available is gasoline, electric and propane.'
     },
     CPM10: {
-      apps: ['leveling', 'concrete', 'trip hazard', 'rubber'],
+      apps: ['leveling', 'concrete', 'trip hazard', 'rubber', 'high spots'],
       depth: 2,
       recJobSize: 1,
       onCrete: true,
@@ -151,7 +151,7 @@ export default function EditLayer(props: any) {
       info: 'Crete-Planers level, remove, texture and groove concrete and asphalt surfaces. The 10” Planer is designed for aggressive removal applications like surface leveling and heavy coating removal.'
     },
     CD5: {
-      apps: ['leveling', 'concrete', 'trip hazard'],
+      apps: ['leveling', 'concrete', 'trip hazard', 'high spots'],
       depth: 3,
       recJobSize: 0,
       onCrete: true,

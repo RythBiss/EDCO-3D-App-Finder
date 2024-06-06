@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import DropDown from './DropDown';
 
 export default function HistoryItem(props:any) {
     const [thick, setThick] = useState<string>('1/32');
@@ -66,7 +67,7 @@ export default function HistoryItem(props:any) {
         props.onClick();
     }
 
-    const handleChange = (change) => {
+    const handleChange = (change: string) => {
         const result = props.getAltLayers(change);
         setOptionList(result);
         if(change !== props.layerObject.materialRemoved){
@@ -96,13 +97,15 @@ export default function HistoryItem(props:any) {
                                     <>
                                         <label htmlFor="changeLayer" style={{display: 'none'}}>change layer</label>
 
-                                        <select name="changeLayer" id="changeLayer" className='drop-select' onChange={(e) => {handleChange(e.target.value)}}>
+                                        {/* <select name="changeLayer" id="changeLayer" className='drop-select' value={props?.layerObject?.materialRemoved} onChange={(e) => {handleChange(e.target.value)}}>
                                             {optionList.length > 0 &&
                                                 optionList.map((name, i) => 
                                                     <option key={i} value={name}>{name}</option>
                                                 )
                                             }
-                                        </select>   
+                                        </select>    */}
+
+                                        <DropDown optionsStringArray={optionList} onChange={handleChange} currentValue={props?.layerObject?.materialRemoved} />
                                     </>
                                     : 
                                     <>{` ${props?.layerObject?.materialRemoved}`}</>

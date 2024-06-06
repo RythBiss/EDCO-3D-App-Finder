@@ -349,3 +349,50 @@ input[type="range"] {
         background-color: var(--hover);
     }
 }
+
+
+
+
+
+
+
+/* copied from online
+https://codesandbox.io/s/custom-dropdown-react-7oytw?file=/src/styles.css */
+
+.dropdown {
+    background-color: var(--active);
+  }
+  .dropdown,
+  .dropdown * {
+    z-index: 10;
+  }
+  .dropdown .dropdown-btn {
+    cursor: pointer;
+    background-color: var(--active);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: white;
+    user-select: none;
+  }
+  .dropdown-content {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.07);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .dropdown-content .item {
+    padding: 10px;
+    cursor: pointer;
+    background: white;
+    color: black;
+  }
+  .dropdown-content .item:hover {
+    background: lightgrey;
+  }

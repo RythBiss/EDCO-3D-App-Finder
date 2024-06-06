@@ -23,7 +23,7 @@ function App() {
     constructor(){
       this.machine = '';
       this.tooling = '';
-      this.CSP = '';
+      this.CSP = '1';
 
       this.onConcrete = false;
       this.materialRemoved = '';
@@ -90,10 +90,6 @@ function App() {
       this.clearSelections(0)
 
       this.materialThickness = value;
-
-      //-------------------- You were trying to make the thickness slider trigger a UI update but not a viewport update --------------------------------------------
-
-      console.log("thickness update")
 
       // this.sublayerObjects.forEach((item) => {
       //   item.materialThickness = value;
@@ -223,6 +219,10 @@ function App() {
   useEffect(() => {
     update(prevState => !prevState);
   }, [renderLayer])
+
+  // useEffect(()=>{
+  //   console.log(currentLayer)
+  // })
 
 
 

@@ -13,13 +13,13 @@ export default function SurfaceMenu(props:any) {
         },
         triphazard: {
             name: 'Trip Hazard',
-            layers: 1,
+            layers: 2,
             sublayers: ['trip hazard', 'concrete']
         },
         highspots: {
             name: 'High Spots',
-            layers: 1,
-            sublayers: ['high spots']
+            layers: 2,
+            sublayers: ['high spots', 'concrete']
         },
         vinyl: {
             name: 'Vinyl',
@@ -66,11 +66,11 @@ export default function SurfaceMenu(props:any) {
             layers: 2,
             sublayers: ['sealer', 'concrete']
         },
-        thinmil: {
-            name: 'Thin Mil Coatings',
-            layers: 2,
-            sublayers: ['thin mil coatings', 'concrete']
-        },
+        // thinmil: {
+        //     name: 'Thin Mil Coatings',
+        //     layers: 2,
+        //     sublayers: ['thin mil coatings', 'concrete']
+        // },
     }
 
     //const qOneAnswers = ['Yes', 'No'];

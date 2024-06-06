@@ -53,7 +53,7 @@ export default function ToolingMenu(props: any) {
       info: 'Magna Blades info block'
     },
     DymaDots: {
-      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual'],
+      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots'],
       name: 'Dyma-Dots',
       machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
       image: 'https://edcostore.com/wp-content/uploads/2017/04/QC2B-MC-0030_DoubleDotGray-450x450.jpg',
@@ -61,7 +61,7 @@ export default function ToolingMenu(props: any) {
       info: 'Dots info block'
     },
     PCDbacking: {
-      apps: ['industrial buildup', 'glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual'],
+      apps: ['industrial buildup', 'glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots'],
       name: 'PCD w/Backing Segment',
       machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
       image: 'https://edcostore.com/wp-content/uploads/2017/04/QC-PCD1-LB_DymaPCD_Blue-450x450.jpg',
@@ -69,7 +69,7 @@ export default function ToolingMenu(props: any) {
       info: 'PCD Backing info block'
     },
     CarbideCutter: {
-      apps: ['leveling', 'rubber', 'concrete', 'trip hazard'],
+      apps: ['leveling', 'rubber', 'concrete', 'trip hazard', 'high spots'],
       name: 'Carbide Cutter',
       machines: ['CPM8', 'CPL8', 'CPM10'],
       image: 'https://edcostore.com/wp-content/uploads/2017/05/20156_6_PointBlueCutter-450x450.jpg',
@@ -77,7 +77,7 @@ export default function ToolingMenu(props: any) {
       info: 'Carbide info block'
     },
     FivePoint: {
-      apps: ['concrete', 'trip hazard'],
+      apps: ['concrete', 'trip hazard', 'high spots'],
       name: '5-Point Bit',
       machines: ['CD5'],
       image: 'https://edcostore.com/wp-content/uploads/2017/06/18810_5PointCarbideBit-450x450.jpg',
@@ -85,7 +85,7 @@ export default function ToolingMenu(props: any) {
       info: '5 point info block'
     },
     NinePoint: {
-      apps: ['concrete', 'trip hazard'],
+      apps: ['concrete', 'trip hazard', 'high spots'],
       name: '9-Point Bit',
       machines: ['CD5'],
       image: 'https://edcostore.com/wp-content/uploads/2017/06/18820_9PointCarbideBit-450x450.jpg',
