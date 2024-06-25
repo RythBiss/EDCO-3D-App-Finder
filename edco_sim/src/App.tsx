@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import EditLayer from './components/EditLayer'
 import Header from './components/Header'
-import LayerHistory from './components/LayerHistory'
+import RentalOrder from './components/RentalOrder'
 import Viewport from './components/Viewport'
 
 
@@ -11,12 +11,20 @@ function App() {
   const [layerList, setLayerList] = useState<Layer[]>([]);
   const [currentLayer, setCurrentLayer] = useState<Layer>();
   const [renderLayer, setRenderLayer] = useState<number>(0);
-  const [updateState, update] = useState(false);
+  const [updateState, update] = useState(0);
   const [mobileLeft, setLeft] = useState<boolean>(false);
   const [mobileRight, setRight] = useState<boolean>(false);
   const [popupOn, setPopupOn] = useState<boolean>(false);
   const [popupInfo, setPopupInfo] = useState<string>('blank');
   const [popupYPos, setPopupYPos] = useState<number>(0);
+
+  //locks clicking on tabs when previous selections have not been made.
+const [allowProgress, setAllowProgress] = useState<number>(0);
+
+useEffect(() => {
+    console.log("progress at " + allowProgress)
+}, [allowProgress])
+
 
   //keep new layer function incase users have multiple types of jobs to do
   class Layer{
@@ -58,7 +66,8 @@ function App() {
 
     //call for any state change to update react
     requestUpdate = () => {
-      update(prevState => !prevState);
+      //this weird set state is to make sure it always updates this state to a new value, a simple !prevState made it not update in some cases.
+      update(prevState => prevState + 1 >= 3 ? 0 : prevState +1);
     }
 
     setMaterialRemoved(value: string, layer: number, sublayers: string[]){
@@ -79,7 +88,6 @@ function App() {
     }
 
     modMaterialRemoved(layer: string){
-      console.log('changing layer from ' + this.materialRemoved + ' to ' + layer)
       this.materialRemoved = layer;
 
       this.requestUpdate();
@@ -179,8 +187,14 @@ function App() {
 
     clearSelections = (range: number) =>{
       this.sublayerObjects.forEach((obj) => {
-        if(range == 0) obj.setMachine('', 0)
-        if(range == 1 || range == 0) obj.setTooling('', 0, 0, false);
+        if(range == 0) {
+          obj.setMachine('', 0)
+          setAllowProgress(range)
+        }
+        if(range == 1 || range == 0) {
+          obj.setTooling('', 0, 0, false);
+          setAllowProgress(range)
+        }
       })
     }
   }
@@ -201,7 +215,6 @@ function App() {
 
   useEffect(() => {
     createNewLayer();
-    console.log(updateState)
   }, [])
 
   useEffect(() => {
@@ -217,13 +230,8 @@ function App() {
   }, [mobileRight])
 
   useEffect(() => {
-    update(prevState => !prevState);
+    update(prevState => prevState + 1 >= 3 ? 0 : prevState +1);
   }, [renderLayer])
-
-  // useEffect(()=>{
-  //   console.log(currentLayer)
-  // })
-
 
 
   return (
@@ -231,9 +239,9 @@ function App() {
       <Header setLeft={setLeft} setRight={setRight} />
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100' style={{position: 'relative'}}>
-          <EditLayer setPopup={setPopupOn} layerObject={currentLayer} mobileLeft={mobileLeft} setPopupInfo={setPopupInfo} setPopupYPos={setPopupYPos} update={updateState} />
+          <EditLayer setPopup={setPopupOn} layerObject={currentLayer} mobileLeft={mobileLeft} setPopupInfo={setPopupInfo} setPopupYPos={setPopupYPos} update={updateState} allowProgress={allowProgress} setAllowProgress={setAllowProgress} />
           <Viewport popup={popupOn} popupInfo={popupInfo} popupYPos={popupYPos} history={layerList[layerList.length - 1]} layer={currentLayer} renderLayer={renderLayer} updateTrigger={updateState} />
-          <LayerHistory newLayer={createNewLayer} history={layerList} current={currentLayer} setRenderedLayer={setRenderLayer} mobileRight={mobileRight} />
+          <RentalOrder newLayer={createNewLayer} history={layerList} current={currentLayer} setRenderedLayer={setRenderLayer} mobileRight={mobileRight} />
         </div>
       </div>
     </>

@@ -14,7 +14,9 @@ export default function EditLayer(props: any) {
       surfacePrep: false,
       edges: false,
       power: ['air'],
-      image: 'https://portal.edcoinc.com/storage/product-slider/alr-steel-chisel-scalers/ALR-5-Machine-Slider.jpg',
+      image: [
+              'https://portal.edcoinc.com/storage/product-slider/alr-steel-chisel-scalers/ALR-5-Machine-Slider.jpg'
+              ],
       info: 'Chisel Scalers have multiple accessories to remove many hard and soft coverings from walls, ceilings, roofs, floors, stationary objects, and outdoor spaces.'
     },
     ALRBS: {
@@ -26,7 +28,9 @@ export default function EditLayer(props: any) {
       surfacePrep: false,
       edges: false,
       power: ['air'],
-      image: 'https://portal.edcoinc.com/storage/product-slider/big-stick-chisel-scalers/ALR-BS-Straight-Machine-Slider.jpg',
+      image: [
+              'https://portal.edcoinc.com/storage/product-slider/big-stick-chisel-scalers/ALR-BS-Straight-Machine-Slider.jpg'
+              ],
       info: 'Big Stick chisel scalers solve industrial removal applications including scraping and chipping away concrete and thick coatings. Blast through ceramic tile and other floor coverings with the Big Stick’s increased air power.'
     },
     TS8: {
@@ -38,11 +42,13 @@ export default function EditLayer(props: any) {
       surfacePrep: false,
       edges: false,
       power: ['electric'],
-      image: 'https://portal.edcoinc.com/storage/product-slider/8-manual-tile-shark-floor-stripper/TS-8-Machine-Slider.jpg',
+      image: [
+              'https://portal.edcoinc.com/storage/product-slider/8-manual-tile-shark-floor-stripper/TS-8-Machine-Slider.jpg'
+              ],
       info: 'Electric floor strippers remove vinyl, linoleum, carpet, rubber, and other softer coverings from concrete floors. The “Tile Shark” floor stripper is 110 volt and can be used for removal of vinyl, linoleum, carpet, rubber, and other soft floor coverings.'
     },
     SEC: {
-      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots'],
+      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots', 'sealer'],
       depth: 0,
       recJobSize: 0,
       onCrete: true,
@@ -50,23 +56,28 @@ export default function EditLayer(props: any) {
       surfacePrep: true,
       edges: false,
       power: ['electric'],
-      image: 'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-single-disc-floor-grinder/SEC-NG-Machine-Slider.jpg',
+      image: [
+              'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-single-disc-floor-grinder/SEC-NG-Machine-Slider.jpg'
+              ],
       info: 'Floor Grinders solve first layer applications like smoothing concrete, preparing floors for new coverings and removing thinner coatings, soft materials and ice.  This single-disc model grinds approximately 250sqft per hour.'
     },
     _2GC: {
-      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots'],
+      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots', 'sealer'],
       depth: 0,
       recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: true,
       edges: false,
-      power: ['gas', 'electric', 'propane'],
-      image: 'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-dual-disc-floor-grinder/2GC-NG-Machine-Slider.jpg',
+      power: ['gas', 'electric'],
+      image: [
+              'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-dual-disc-floor-grinder/2GC-NG-Machine-Slider.jpg',
+              'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-dual-disc-floor-grinder/2EC-NG-Machine-Slider.jpg'
+              ],
       info: 'Floor Grinders solve first layer applications like smoothing concrete, preparing floors for new coverings and removing thinner coatings, soft materials and ice. This dual-disc model grinds approximately 500sqft per hour.'
     },
     _2DHD: {
-      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots'],
+      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots', 'sealer'],
       depth: 0,
       recJobSize: 2,
       onCrete: true,
@@ -74,11 +85,14 @@ export default function EditLayer(props: any) {
       surfacePrep: true,
       edges: false,
       power: ['electric', 'propane'],
-      image: 'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-heavy-duty-floor-grinder-polisher/2D-HD-Propane-Machine-Slider.jpg',
+      image: [
+              'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-heavy-duty-floor-grinder-polisher/2D-HD-Electric-Machine-Slider.jpg',
+              'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-heavy-duty-floor-grinder-polisher/2D-HD-Propane-Machine-Slider.jpg'
+              ],
       info: 'Floor Grinders solve first-layer applications.  This Heavy-Duty Grinder is also designed to level concrete and deeper removal of industrial-strength coverings.  This dual-disc model grinds approximately 800 – 1,000 sq. ft. per hour.'
     },
     TL9: {
-      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'high spots'],
+      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'high spots', 'sealer'],
       depth: 0,
       recJobSize: 0,
       onCrete: true,
@@ -86,11 +100,13 @@ export default function EditLayer(props: any) {
       surfacePrep: true,
       edges: false,
       power: ['electric'],
-      image: 'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-turbo-lite-grinder/TL-9-Machine-Slider.jpg',
+      image: [
+              'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-turbo-lite-grinder/TL-9-Machine-Slider.jpg'
+              ],
       info: 'The “Turbo-Lite” is high-production and portable.  It aggressively grinds concrete surfaces like a turbo grinder while having portable attributes. It weighs less than 100lbs, has a folding handlebar with built-in handgrip for travel. The TL9 is great for removal and resurfacing in hard-to-reach areas.'
     },
     TMC7: {
-      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'edges', 'residual', 'high spots'],
+      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'edges', 'residual', 'high spots', 'sealer'],
       depth: 0,
       recJobSize: 0,
       onCrete: true,
@@ -98,11 +114,13 @@ export default function EditLayer(props: any) {
       surfacePrep: true,
       edges: true,
       power: ['electric'],
-      image: 'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-7-turbo-edge-grinder/TMC-7-Electric-Machine-Slider.jpg',
+      image: [
+              'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-7-turbo-edge-grinder/TMC-7-Electric-Machine-Slider.jpg'
+              ],
       info: 'This unique edging machine grinds concrete all the way to walls, poles, and stationary objects.  It resurfaces small, hard-to-reach areas eliminating hand grinding.  Turbo Grinders remove thick coverings, level uneven areas, and solve other industrial application problems. '
     },
     TG10: {
-      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'high spots'],
+      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'high spots', 'sealer'],
       depth: 1,
       recJobSize: 0,
       onCrete: true,
@@ -110,7 +128,11 @@ export default function EditLayer(props: any) {
       surfacePrep: true,
       edges: false,
       power: ['gas', 'electric', 'propane'],
-      image: 'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Gas-Machine-Slider.jpg',
+      image: [
+              'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Gas-Machine-Slider.jpg',
+              'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Electric-Machine.jpg',
+              'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Propane-Machine-Slider.jpg'
+              ],
       info: 'Turbo Grinders remove thick coverings, level uneven areas, and solve other industrial application problems.  This 10” Turbo Grinder is EDCO’s “beast.” Its heavy-duty, aggressive and should be used for thick and hard coating removal, leveling tasks and applications that other EDCO Magna-Trap Grinders cannot perform.'
     },
     //make trip hazard surface`
@@ -123,7 +145,10 @@ export default function EditLayer(props: any) {
       surfacePrep: false,
       edges: false,
       power: ['gas', 'electric'],
-      image: 'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-scari-lite-crete-planer-r/CPL-8-Electric-Machine-Slider.jpg',
+      image: [
+              'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-scari-lite-crete-planer-r/CPL-8-Gas-Machine-Slider.jpg',
+              'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-scari-lite-crete-planer-r/CPL-8-Electric-Machine-Slider.jpg'
+              ],
       info: 'The “Sacri-Lite” Planer is for profiling and texturing the first layer of concrete and asphalt surfaces.  While it removes thin coatings, it does not solve the larger removal applications like other Crete-Planers.  Available in 110 Volt electric.'
     },
     CPM8: {
@@ -135,7 +160,11 @@ export default function EditLayer(props: any) {
       surfacePrep: false,
       edges: false,
       power: ['gas', 'electric', 'propane'],
-      image: 'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8-Gas-Machine-Slider.jpg',
+      image: [
+              'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8-Gas-Machine-Slider.jpg',
+              'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8-Electric-Machine-Slider.jpg',
+              'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8%20Propane%20Machine%20Slider.jpg'
+              ], 
       info: 'Crete-Planers level, remove, texture and groove concrete and asphalt surfaces. The 8” Planer solves common removal applications and is the best product to quickly level sidewalk trip hazards. Its available is gasoline, electric and propane.'
     },
     CPM10: {
@@ -147,7 +176,10 @@ export default function EditLayer(props: any) {
       surfacePrep: false,
       edges: false,
       power: ['gas', 'electric'],
-      image: 'https://portal.edcoinc.com/storage/product-slider/10-walk-behind-crete-planer-r/CPM-10-Gas-Machine-Slider.jpg',
+      image: [
+              'https://portal.edcoinc.com/storage/product-slider/10-walk-behind-crete-planer-r/CPM-10-Gas-Machine-Slider.jpg',
+              'https://portal.edcoinc.com/storage/product-slider/10-walk-behind-crete-planer-r/CPM-10-Electric-Machine-Slider.jpg'
+              ],
       info: 'Crete-Planers level, remove, texture and groove concrete and asphalt surfaces. The 10” Planer is designed for aggressive removal applications like surface leveling and heavy coating removal.'
     },
     CD5: {
@@ -158,8 +190,10 @@ export default function EditLayer(props: any) {
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: false,
       edges: false,
-      power: ['air'],
-      image: 'https://portal.edcoinc.com/storage/product-slider/5-head-crete-crusher-r/CD-5-Machine-Slider.jpg',
+      power: [
+              'air'
+              ],
+      image: ['https://portal.edcoinc.com/storage/product-slider/5-head-crete-crusher-r/CD-5-Machine-Slider.jpg'],
       info: 'Crete-Crushers aggressively solve concrete removal applications by hammering pointed bits into surfaces.  These deep layer tasks include recapping floors and removing spalling or laitance concrete. The 5 Bit CD5 removes 250sqft of per hour.'
     }
   }
@@ -292,6 +326,16 @@ export default function EditLayer(props: any) {
       return returnPackage;
   }
 
+  //
+  const getPowerTypeImageIndex = (machine: string) => {
+
+    let index = allMachineData[machine].power.indexOf(props.layerObject.powerType)
+
+    if(index == -1) index = 0
+
+    return index
+  }
+
   //populate layer lists
   useEffect(() => {
 
@@ -354,6 +398,7 @@ export default function EditLayer(props: any) {
   }, [props.layerObject, props.update])
 
 
+  //checks if a machine has been selected for each layer, and allows the user to access the next tab if so.
   useEffect(()=>{
     let machinesSelected: boolean = true;
 
@@ -364,6 +409,7 @@ export default function EditLayer(props: any) {
     })
 
     if(machinesSelected){
+      console.log('setting progress in machines')
       props.setAllowProgress(2);
     }
   })
@@ -372,7 +418,12 @@ export default function EditLayer(props: any) {
     <div className='col edit-menu scroll-on'>
       {/* layer 1 accordion open/close button */}
         {matchingMachinesL1 &&
-          <ListButton lable={`First Layer (${matchingMachinesL1.machines.length})`} active={selectedLayerState == 0 ? true : false} onClick={() => {handleMenuState(0)}} selected={props.layerObject.sublayerObjects[0].machine !== ''} />
+          <ListButton
+            lable={`First Layer (${matchingMachinesL1.machines.length})`}
+            active={selectedLayerState == 0 ? true : false}
+            onClick={() => {handleMenuState(0)}}
+            selected={props.layerObject.sublayerObjects[0].machine !== ''}
+            />
         }
         {/* substitutes added indicator */}
         {subdL1 && selectedLayerState == 0 &&
@@ -381,12 +432,30 @@ export default function EditLayer(props: any) {
         {/* list of buttons for machines that passed population filters */}
         {selectedLayerState == 0 && matchingMachinesL1 !== undefined &&
           matchingMachinesL1.machines.length > 0 &&
-            matchingMachinesL1.machines.map((item: string, i: number) => <ListButton key={i} popupOn={props.popupOn} showMenu={true} indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 0)} mouseAction={() => handlePopup(item)} setPopupYPos={props.setPopupYPos} />)        
+            matchingMachinesL1.machines.map((item: string, i: number) =>
+              <ListButton
+                key={i}
+                popupOn={props.popupOn}
+                showMenu={true}
+                indent={1}
+                lable={item}
+                icon={allMachineData[item].image[getPowerTypeImageIndex(item)]}
+                active={selectedMachine == item ? true : false}
+                onClick={() => setMachine(item, 0)}
+                mouseAction={() => handlePopup(item)}
+                setIsInfoPopupOnupYPos={props.setPopupYPos}
+                />
+              )        
         }
 
       {/* layer 2 accordion open/close button, if there is a layer 2 */}
         {props.layerObject.layerNumber >= 2 && matchingMachinesL2 !== undefined  &&
-          <ListButton lable={`Second Layer (${matchingMachinesL2.machines.length})`} active={selectedLayerState == 1 ? true : false} onClick={() => {handleMenuState(1)}} selected={props.layerObject.sublayerObjects[1].machine !== ''}  />
+          <ListButton
+            lable={`Second Layer (${matchingMachinesL2.machines.length})`}
+            active={selectedLayerState == 1 ? true : false}
+            onClick={() => {handleMenuState(1)}}
+            selected={props.layerObject.sublayerObjects[1].machine !== ''}
+            />
         }
         {/* substitutes added indicator */}
         {subdL2 && selectedLayerState == 1 &&
@@ -395,12 +464,30 @@ export default function EditLayer(props: any) {
         {/* list of buttons for machines that passed population filters */}
         {selectedLayerState == 1 && matchingMachinesL2 !== undefined  &&
           matchingMachinesL2.machines.length > 0 &&
-            matchingMachinesL2.machines.map((item: string, i: number) => <ListButton key={i} popupOn={props.popupOn} showMenu={true}  indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 1)} mouseAction={() => handlePopup(item)} setPopupYPos={props.setPopupYPos} />)        
+            matchingMachinesL2.machines.map((item: string, i: number) =>
+              <ListButton
+                key={i}
+                popupOn={props.popupOn}
+                showMenu={true}
+                indent={1}
+                lable={item}
+                icon={allMachineData[item].image[getPowerTypeImageIndex(item)]}
+                active={selectedMachine == item ? true : false}
+                onClick={() => setMachine(item, 1)}
+                mouseAction={() => handlePopup(item)}
+                setIsInfoPopupOnupYPos={props.setPopupYPos}
+                />
+              )        
         }
 
       {/* layer 3 accordion open/close button, if there is a layer 2 */}
         {props.layerObject.layerNumber >= 3 && matchingMachinesL3 !== undefined  &&
-          <ListButton lable={`Third Layer (${matchingMachinesL3.machines.length})`} active={selectedLayerState == 2 ? true : false} onClick={() => {handleMenuState(2)}} selected={props.layerObject.sublayerObjects[2].machine !== ''}  />
+          <ListButton
+            lable={`Third Layer (${matchingMachinesL3.machines.length})`}
+            active={selectedLayerState == 2 ? true : false}
+            onClick={() => {handleMenuState(2)}}
+            selected={props.layerObject.sublayerObjects[2].machine !== ''}
+            />
         }
         {/* substitutes added indicator */}
         {subdL3 && selectedLayerState == 2 &&
@@ -409,12 +496,30 @@ export default function EditLayer(props: any) {
         {/* list of buttons for machines that passed population filters */}
         {selectedLayerState == 2 && matchingMachinesL3 !== undefined  &&
           matchingMachinesL3.machines.length > 0 &&
-            matchingMachinesL3.machines.map((item: string, i: number) => <ListButton key={i} popupOn={props.popupOn} showMenu={true}  indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 2)} mouseAction={() => handlePopup(item)} setPopupYPos={props.setPopupYPos} />)        
+            matchingMachinesL3.machines.map((item: string, i: number) =>
+              <ListButton
+                key={i}
+                popupOn={props.popupOn}
+                showMenu={true}
+                indent={1}
+                lable={item}
+                icon={allMachineData[item].image[getPowerTypeImageIndex(item)]}
+                active={selectedMachine == item ? true : false}
+                onClick={() => setMachine(item, 2)}
+                mouseAction={() => handlePopup(item)}
+                setIsInfoPopupOnupYPos={props.setPopupYPos}
+                />
+              )        
         }
 
       {/* layer 4 accordion open/close button, if there is a layer 2 */}
         {props.layerObject.layerNumber >= 4 && matchingMachinesL4 !== undefined  &&
-          <ListButton lable={`Fourth Layer (${matchingMachinesL4.machines.length})`} active={selectedLayerState == 3 ? true : false} onClick={() => {handleMenuState(3)}} selected={props.layerObject.sublayerObjects[3].machine !== ''}  />
+          <ListButton
+            lable={`Fourth Layer (${matchingMachinesL4.machines.length})`}
+            active={selectedLayerState == 3 ? true : false}
+            onClick={() => {handleMenuState(3)}}
+            selected={props.layerObject.sublayerObjects[3].machine !== ''}
+            />
         }
         {/* substitutes added indicator */}
         {subdL4 && selectedLayerState == 3 &&
@@ -423,7 +528,20 @@ export default function EditLayer(props: any) {
         {/* list of buttons for machines that passed population filters */}
         {selectedLayerState == 3 && matchingMachinesL4 !== undefined  &&
           matchingMachinesL4.machines.length > 0 &&
-            matchingMachinesL4.machines.map((item: string, i: number) => <ListButton key={i} popupOn={props.popupOn} showMenu={true}  indent={1} lable={item} icon={allMachineData[item].image} active={selectedMachine == item ? true : false} onClick={() => setMachine(item, 3)} mouseAction={() => handlePopup(item)} setPopupYPos={props.setPopupYPos} />)        
+            matchingMachinesL4.machines.map((item: string, i: number) =>
+              <ListButton
+                key={i}
+                popupOn={props.popupOn}
+                showMenu={true} 
+                indent={1}
+                lable={item}
+                icon={allMachineData[item].image[getPowerTypeImageIndex(item)]}
+                active={selectedMachine == item ? true : false}
+                onClick={() => setMachine(item, 3)}
+                mouseAction={() => handlePopup(item)}
+                setIsInfoPopupOnupYPos={props.setPopupYPos}
+                />
+              )        
         }
     </div>
   )

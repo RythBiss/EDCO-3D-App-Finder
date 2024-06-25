@@ -8,7 +8,7 @@ export default function ClusterButton(props: any) {
 
   return (
 
-        <button type="button" className={`btn-wrapper`} onClick={handleOnClick}>
+        <button type="button" className={`btn-wrapper ${props.active && 'cluster-btn-active'}`} onClick={handleOnClick}>
             <div className='col list-btn-inner'>{props.lable}</div>
         </button>
     )

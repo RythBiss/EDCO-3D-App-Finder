@@ -7,9 +7,10 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 
 export default function Viewport(props: any) {
 
+  //updateView is used to synchronize updates with the react dom and the three js scene. Called after any scene altering changes are made in the layer object.
   const [updateView, setUpdateView] = useState<boolean>(false);
-  const [popupHeight, setPopupHeight] = useState<number>(0);
-  const [lastPassed, setLastPassed] = useState<any>();
+  const [popupHeightValue, setpopupHeightValueValue] = useState<number>(0);
+  const [lastRenderedSurface, setLastRenderedSurface] = useState<any>();
 
   const mountRef = useRef<any>(null);
   const controlsRef = useRef<any>();
@@ -17,37 +18,69 @@ export default function Viewport(props: any) {
   const scene = useRef(new THREE.Scene());
   const camera = useRef(new THREE.PerspectiveCamera(75, 1, 0.01, 1000));
   const renderer = useRef(new THREE.WebGLRenderer());
-  const gltfModelRight = useRef<any>();
-  const gltfModelLeft = useRef<any>();
+  const gltfModel = useRef<any>();
   const popupRef = useRef<any>(null);
 
   const loader = new GLTFLoader();
   const fontLoader = new FontLoader();
+
+  const subLayerAbove = props?.layer?.sublayerObjects[props?.renderLayer-1]
+  const subLayerCurrent = props?.layer?.sublayerObjects[props?.renderLayer]
+  const subLayerBelow = props?.layer?.sublayerObjects[props?.renderLayer+1]
   
   let isLoaded = true;
   let isFirstLoad = true;
 
+
+  const addSlabToScene = (surface: string, isRenderedLayer: boolean) => {
+    loader.load(`Models/${surface}.gltf`, (gltf) => {
+      loadedModels.current.push(gltf.scene)
+
+      gltfModel.current = gltf.scene;
+      if(isRenderedLayer) gltfModel.current.rotation.y = 3.14159;
+      gltfModel.current.traverse( function( node: any ) {
+        if(node.isMesh){
+          node.castShadow = true;
+          node.receiveShadow  = true;
+        }
+      });
+
+      scene.current.add(gltfModel.current);
+
+      isFirstLoad = false;
+    });
+  }
+
   //called when a visual component in the 3D scene has changed.
   const updateScene = () => {
 
-    //initializes prePass, which is used to set lastPassed, which is used to see if the check if the layers already match as intended before rerendering.
-    let prepPassed = props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved;
+    //initializes prePass, which is used to set lastRenderedSurface, which is used to see if the check if the layers already match as intended before rerendering.
+    let prepPassed = subLayerCurrent?.materialRemoved;
 
 
     //if layer is concrete, changes surface CSP to match the tooling.
-    if( props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved == 'concrete' ||
-        props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved == 'trip hazard' ||
-        props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved == 'high spots'
-    ){
-      prepPassed = `CSP ${props?.layer?.sublayerObjects[props?.renderLayer].CSP}`
-    }else if( props?.layer?.sublayerObjects[props?.renderLayer+1]?.materialRemoved == 'concrete' ||
-              props?.layer?.sublayerObjects[props?.renderLayer+1]?.materialRemoved == 'trip hazard' ||
-              props?.layer?.sublayerObjects[props?.renderLayer+1]?.materialRemoved == 'high spots'){
-      prepPassed = `CSP ${props?.layer?.sublayerObjects[props?.renderLayer+1]?.materialRemoved}`
-    }
+    if( 
+        subLayerCurrent?.materialRemoved == 'concrete' ||
+        subLayerCurrent?.materialRemoved == 'trip hazard' ||
+        subLayerCurrent?.materialRemoved == 'high spots'
+      ){
+        
+      prepPassed = `CSP ${subLayerCurrent.CSP}`
 
-    //if lastPassed is not the same as the new render request, begin rerender.
-    if(lastPassed == undefined || lastPassed !== props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved){ 
+      }
+
+    else if(
+        subLayerBelow?.materialRemoved == 'concrete' ||
+        subLayerBelow?.materialRemoved == 'trip hazard' ||
+        subLayerBelow?.materialRemoved == 'high spots'
+      ){
+
+      prepPassed = `CSP ${subLayerBelow?.materialRemoved}`
+    
+      }
+
+    //if lastRenderedSurface is not the same as the new render request, begin rerender.
+    if(lastRenderedSurface == undefined || lastRenderedSurface !== subLayerCurrent?.materialRemoved){ 
       if(updateView !== props.updateTrigger){
         loadedModels.current.forEach((item: THREE.Object3D) => {
           scene.current.remove(item);
@@ -55,8 +88,8 @@ export default function Viewport(props: any) {
     
         loadedModels.current = [];
     
-        loadSurface(props?.layer?.sublayerObjects[props?.renderLayer]?.materialRemoved);
-        setLastPassed(prepPassed);
+        loadSurface(subLayerCurrent?.materialRemoved);
+        setLastRenderedSurface(prepPassed);
         setUpdateView(props.updateTrigger);
       }
     }
@@ -73,88 +106,55 @@ export default function Viewport(props: any) {
       setIsLoaded(false);
 
       if(surface !== '' && surface !== undefined){
-
-
         //another concrete CSP check, similar to updateScene() above.
+
+
         let modifiedSurface = surface;
 
-        if((surface == 'concrete' || surface == 'trip hazards' || surface == 'highspots') && props.layer.sublayerObjects[props?.renderLayer-1].CSP !== ''){
-          modifiedSurface = `CSP ${props.layer.sublayerObjects[props?.renderLayer-1].CSP}`;
-        }
+        if((surface == 'concrete') && subLayerAbove?.CSP !== ''){
 
-          loader.load(`Models/${modifiedSurface}.gltf`, (gltf) => {
-            loadedModels.current.push(gltf.scene)
-  
-            gltfModelLeft.current = gltf.scene;
-            gltfModelLeft.current.rotation.y = 3.14159;
-            gltfModelLeft.current.traverse( function( node: any ) {
-              if(node.isMesh){
-                node.castShadow = true;
-                node.receiveShadow  = true;
+              if(subLayerAbove?.CSP !== undefined){
+                modifiedSurface = `CSP ${subLayerAbove?.CSP}`;
+              }else{
+                modifiedSurface = `CSP 1`;
+                
               }
-            });
-  
-            scene.current.add(gltfModelLeft.current);
-  
-            setIsLoaded(true);
-            isFirstLoad = false;
-          });
+            }
+          console.log("mod surface " + modifiedSurface)
+
+        addSlabToScene(modifiedSurface, true);
 
         //check if there is another layer below the current one, and if so, render it on the other side. Otherwise, render current layer for both sides.
         if(props?.layer?.sublayers[props?.renderLayer+1] != undefined){
 
-          let modifiedSurface = props?.layer?.sublayers[props?.renderLayer+1];
+          let modifiedSurface = subLayerBelow.materialRemoved;
 
           //another concrete CSP check, similar to updateScene() above.
-          if( props?.layer?.sublayerObjects[props?.renderLayer+1]?.materialRemoved == 'concrete' ||
-              props?.layer?.sublayerObjects[props?.renderLayer+1]?.materialRemoved == 'trip hazards' ||
-              props?.layer?.sublayerObjects[props?.renderLayer+1]?.materialRemoved == 'high spots'
-           ){
-            modifiedSurface = `CSP ${props?.layer?.sublayerObjects[props?.renderLayer]?.CSP}`;
-          }
-
-          loader.load(`Models/${modifiedSurface}.gltf`, (gltf) => {
-            loadedModels.current.push(gltf.scene);
-
-            gltfModelRight.current = gltf.scene;
-
-            gltfModelRight.current.traverse( function( node: any ) {
-
-              if(node.isMesh){
-                node.castShadow = true;
-                node.receiveShadow  = true;
-              }
-            });
-            
-            scene.current.add(gltfModelRight.current);
-
-            setIsLoaded(true);
-          });
+          // if( modifiedSurface == 'concrete' ||
+          //     modifiedSurface == 'trip hazard' ||
+          //     modifiedSurface == 'high spots' &&
+          //     subLayerCurrent?.CSP !== ''
+          //  ){
+          //   modifiedSurface = `CSP ${subLayerCurrent?.CSP}`;
+          // }
+          //this one isnt reading concrete slab variants right
+          
+          addSlabToScene(modifiedSurface, false)
         }else{
           let modifiedSurface = surface;
 
-          if((surface == 'concrete' || surface == 'trip hazards' || surface == 'high spots') && props.layer.sublayerObjects[props?.renderLayer].CSP !== ''){
-            modifiedSurface = `CSP ${props.layer.sublayerObjects[props?.renderLayer].CSP}`;
+          if((surface == 'concrete' ||
+              surface == 'trip hazard' ||
+              surface == 'high spots') &&
+              props.layer.sublayerObjects[props?.renderLayer].CSP !== ''){
+                modifiedSurface = `CSP ${props.layer.sublayerObjects[props?.renderLayer].CSP}`;
           }
 
-          loader.load(`Models/${modifiedSurface}.gltf`, (gltf) => {
-            loadedModels.current.push(gltf.scene)
-
-            gltfModelRight.current = gltf.scene;
-
-            gltfModelRight.current.traverse( function( node: any ) {
-              if(node.isMesh){
-                node.castShadow = true;
-                node.receiveShadow  = true;
-              }
-            });
-
-            scene.current.add(gltfModelRight.current);
-
-            setIsLoaded(true);
-          });
+          addSlabToScene(modifiedSurface, false)
         }
       }
+
+      setIsLoaded(true);
     }
   };
 
@@ -177,6 +177,7 @@ export default function Viewport(props: any) {
     controlsRef.current = new OrbitControls(camera.current, renderer.current.domElement);
 
     //build environment
+    const ambColor = 0xe8e8e8
     const light = new THREE.DirectionalLight(0xffffff, 0.5);
     const light2 = new THREE.DirectionalLight(0xffffff, 0.5);
     const light3 = new THREE.DirectionalLight(0xffffff, 0.5);
@@ -184,7 +185,7 @@ export default function Viewport(props: any) {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
     const ambLight = new THREE.AmbientLight(0xffffff, 1);
     const floor = new THREE.PlaneGeometry(50, 50);
-    const floorMesh = new THREE.Mesh(floor, new THREE.MeshPhongMaterial({ color: 0xe8e8e8, /*side: THREE.DoubleSide*/ }))
+    const floorMesh = new THREE.Mesh(floor, new THREE.MeshPhongMaterial({ color: ambColor, /*side: THREE.DoubleSide*/ }))
 
     //camera settings
     camera.current.position.z = 1.5;
@@ -231,7 +232,7 @@ export default function Viewport(props: any) {
     scene.current.add(light4);
     scene.current.add(directionalLight);
     scene.current.add(ambLight);
-    scene.current.background = new THREE.Color("rgb(20%, 20%, 20%)");
+    scene.current.background = new THREE.Color(ambColor);
     scene.current.add(floorMesh)
 
     //floor settings
@@ -306,8 +307,7 @@ export default function Viewport(props: any) {
 
   useEffect(() =>{
     if(popupRef.current){
-      console.log(props.popupYPos-popupRef.current.getBoundingClientRect().height/2)
-      setPopupHeight((props.popupYPos)-(popupRef.current.getBoundingClientRect().height/2)-64)
+      setpopupHeightValueValue((props.popupYPos)-(popupRef.current.getBoundingClientRect().height/2)-64)
     }
   })
 
@@ -315,7 +315,7 @@ export default function Viewport(props: any) {
     <>
       <div className='col-12 col-lg-7 viewport' ref={mountRef}>
         {props.popup == true &&
-          <p ref={popupRef} className={'info-pop'} style={{ top: `calc(${popupHeight / 16}rem + 1rem)`}} >
+          <p ref={popupRef} className={'info-pop'} style={{ top: `calc(${popupHeightValue / 16}rem + 1rem)`}} >
             {props.popupInfo}
           </p>
         }

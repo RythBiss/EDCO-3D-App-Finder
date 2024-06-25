@@ -103,6 +103,10 @@ html, body{
     width: 1rem;
 }
 
+.list-btn-icon:hover .icon-btn-red-space{
+    background-color: var(--hover);
+}
+
 .btn-wrapper > *{
     pointer-events: none;
 }
@@ -123,7 +127,7 @@ html, body{
     background-color: var(--active);
 }
 
-.vert-space-between{
+.icon-btn-red-space{
     background-color: var(--primary);
 }
 
@@ -186,6 +190,10 @@ html, body{
     border-radius: 0.5rem;
     flex-grow: 1;
     box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
+}
+
+.cluster-btn-active{
+    background-color: var(--active);
 }
 
 .cluster-btn-container > *:hover{

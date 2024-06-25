@@ -2,27 +2,30 @@ import { useEffect, useRef, useState } from "react";
 
 export default function ListButton(props: any) { 
 
-    const [infoPop, setPop] = useState<boolean>(false);
-
-    const helpBtnRef = useRef<HTMLInputElement>(null)
+    const [isInfoPopupOn, setIsInfoPopupOn] = useState<boolean>(false);
+    const infoPopupRef = useRef<HTMLInputElement>(null)
 
     //execute function given by props
     const handleOnClick = () => {
         props.onClick();
     }
 
-    //handles information popup states
+    //handles information popup states and positions popup next to hover button.
     const handlePop = () => {
-        props.mouseAction()
-        setPop(true);
-        if(helpBtnRef.current !== null){
-            props.setPopupYPos(helpBtnRef.current.getBoundingClientRect().y)
+        props.mouseAction();
+        setIsInfoPopupOn(true);
+
+        if(infoPopupRef.current !== null){
+            const popupPositionY = infoPopupRef.current.getBoundingClientRect().y;
+            
+            props.setIsInfoPopupOnupYPos(popupPositionY)
         }
     }
 
+    //sets popup state up the prop chain.
     useEffect(() => {
-        if(props.popupOn) props.popupOn(infoPop)
-    }, [infoPop])
+        if(props.popupOn) props.popupOn(isInfoPopupOn)
+    }, [isInfoPopupOn])
 
   return (
         <div className='row bottom-gap'>
@@ -39,13 +42,13 @@ export default function ListButton(props: any) {
                                     width={128}
                                     className='machine-icon-frame col-4'
                                 />
-                                <div className={`col btn-icon-spaces ${props.active == true ? 'btn-active' : 'vert-space-between'}`} ></div>
-                                <div className={`col-4 btn-icon-spaces ${props.active == true ? 'btn-active' : 'vert-space-between'}`}>
+                                <div className={`col btn-icon-spaces ${props.active == true ? 'btn-active' : 'icon-btn-red-space'}`} ></div>
+                                <div className={`col-4 btn-icon-spaces ${props.active == true ? 'btn-active' : 'icon-btn-red-space'}`}>
                                     <div>
                                         <div className='col-12 text-end list-btn-inner'>{props.lable}</div>
                                     </div>
                                     {props.showMenu &&
-                                        <div ref={helpBtnRef} className="col-4 product-info" onMouseOver={handlePop} onMouseLeave={() => setPop(false)}>?</div>
+                                        <div ref={infoPopupRef} className="col-4 product-info" onMouseOver={handlePop} onMouseLeave={() => setIsInfoPopupOn(false)}>?</div>
                                     }
                                 </div>
                             </>

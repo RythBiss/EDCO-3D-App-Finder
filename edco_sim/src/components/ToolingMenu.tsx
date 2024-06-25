@@ -53,7 +53,7 @@ export default function ToolingMenu(props: any) {
       info: 'Magna Blades info block'
     },
     DymaDots: {
-      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots'],
+      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots', 'sealer'],
       name: 'Dyma-Dots',
       machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
       image: 'https://edcostore.com/wp-content/uploads/2017/04/QC2B-MC-0030_DoubleDotGray-450x450.jpg',
@@ -61,7 +61,7 @@ export default function ToolingMenu(props: any) {
       info: 'Dots info block'
     },
     PCDbacking: {
-      apps: ['industrial buildup', 'glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots'],
+      apps: ['industrial buildup', 'glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots', 'sealer'],
       name: 'PCD w/Backing Segment',
       machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
       image: 'https://edcostore.com/wp-content/uploads/2017/04/QC-PCD1-LB_DymaPCD_Blue-450x450.jpg',
@@ -94,13 +94,10 @@ export default function ToolingMenu(props: any) {
     },
   }
 
-  //const [selectedMachine, setSelectedMachine] = useState('');
-  //const [selectedSurface, setSelectedSurface] = useState('');
   const [matchingTooling, setMatchingTooling] = useState<string[][]>([]);
   const [openTab, setOpenTab] = useState<number>(-1);
 
   const handlePopup = (item: any) =>{
-    console.log(toolsByApplicationAndMachine[item].info)
     props.setPopupInfo(toolsByApplicationAndMachine[item].info)
   }
 
@@ -158,7 +155,18 @@ export default function ToolingMenu(props: any) {
       {openTab == 0 &&
         matchingTooling.length !== 0 &&
           matchingTooling[0].map((tool: any, i: any) => 
-            <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} popupOn={props.popupOn} showMenu={true} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 0, toolsByApplicationAndMachine[tool].CSP)} mouseAction={() => handlePopup(tool)} setPopupYPos={props.setPopupYPos} />
+            <ListButton
+              key={i}
+              lable={toolsByApplicationAndMachine[tool].name}
+              indent={1}
+              popupOn={props.popupOn}
+              showMenu={true} 
+              icon={toolsByApplicationAndMachine[tool].image}
+              onClick={() =>
+                setTooling(toolsByApplicationAndMachine[tool].name, 0, toolsByApplicationAndMachine[tool].CSP)}
+              mouseAction={() => handlePopup(tool)}
+              setIsInfoPopupOnupYPos={props.setPopupYPos}
+              />
         )}
 
       {/* layer 2 */}
@@ -168,7 +176,17 @@ export default function ToolingMenu(props: any) {
       {openTab == 1 &&
         matchingTooling.length !== 0 &&
           matchingTooling[1].map((tool: any, i: any) => 
-            <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} popupOn={props.popupOn} showMenu={true} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 1, toolsByApplicationAndMachine[tool].CSP)} mouseAction={() => handlePopup(tool)} setPopupYPos={props.setPopupYPos} />
+            <ListButton
+              key={i}
+              lable={toolsByApplicationAndMachine[tool].name}
+              indent={1} popupOn={props.popupOn} 
+              showMenu={true}
+              icon={toolsByApplicationAndMachine[tool].image}
+              onClick={() =>
+                setTooling(toolsByApplicationAndMachine[tool].name, 1, toolsByApplicationAndMachine[tool].CSP)}
+              mouseAction={() => handlePopup(tool)}
+              setIsInfoPopupOnupYPos={props.setPopupYPos}
+              />
         )}
 
       {/* layer 3 */}
@@ -178,7 +196,17 @@ export default function ToolingMenu(props: any) {
       {openTab == 2 &&
         matchingTooling.length !== 0 &&
           matchingTooling[2].map((tool: any, i: any) => 
-            <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} popupOn={props.popupOn} showMenu={true} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 2, toolsByApplicationAndMachine[tool].CSP)} mouseAction={() => handlePopup(tool)} setPopupYPos={props.setPopupYPos} />
+            <ListButton
+              key={i}
+              lable={toolsByApplicationAndMachine[tool].name}
+              indent={1} popupOn={props.popupOn}
+              showMenu={true}
+              icon={toolsByApplicationAndMachine[tool].image}
+              onClick={() =>
+                setTooling(toolsByApplicationAndMachine[tool].name, 2, toolsByApplicationAndMachine[tool].CSP)}
+              mouseAction={() => handlePopup(tool)}
+              setIsInfoPopupOnupYPos={props.setPopupYPos}
+              />
         )}
       
       {/* layer 4 */}
@@ -188,7 +216,18 @@ export default function ToolingMenu(props: any) {
       {openTab == 3 &&
         matchingTooling.length !== 0 &&
           matchingTooling[3].map((tool: any, i: any) => 
-            <ListButton key={i} lable={toolsByApplicationAndMachine[tool].name} indent={1} popupOn={props.popupOn} showMenu={true} icon={toolsByApplicationAndMachine[tool].image} onClick={() => setTooling(toolsByApplicationAndMachine[tool].name, 3, toolsByApplicationAndMachine[tool].CSP)} mouseAction={() => handlePopup(tool)} setPopupYPos={props.setPopupYPos} />
+            <ListButton
+              key={i}
+              lable={toolsByApplicationAndMachine[tool].name}
+              indent={1}
+              popupOn={props.popupOn}
+              showMenu={true}
+              icon={toolsByApplicationAndMachine[tool].image} 
+              onClick={() =>
+                setTooling(toolsByApplicationAndMachine[tool].name, 3, toolsByApplicationAndMachine[tool].CSP)}
+              mouseAction={() => handlePopup(tool)}
+              setIsInfoPopupOnupYPos={props.setPopupYPos}
+              />
         )}
     </div>
   )

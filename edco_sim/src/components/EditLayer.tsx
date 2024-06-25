@@ -5,13 +5,13 @@ import ToolingMenu from './ToolingMenu';
 
 export default function EditLayer(props: any) {
 
+//state is used as the index to select a menu in the menu array.
 const [displayMenu, setDisplayMenu] = useState<number>(0);
-const [allowProgress, setAllowProgress] = useState<number>(0);
 
 //array stores menus that will be rendered based on which tab is selected.
 const menus = [
-    <SurfaceMenu popupOn={props.setPopup} layerObject={props.layerObject} setPopupInfo={props.setPopupInfo} setPopupYPos={props.setPopupYPos} update={props.update} setAllowProgress={setAllowProgress} />,
-    <MachineMenu popupOn={props.setPopup} layerObject={props.layerObject} setPopupInfo={props.setPopupInfo} setPopupYPos={props.setPopupYPos} update={props.update} setAllowProgress={setAllowProgress} />,
+    <SurfaceMenu popupOn={props.setPopup} layerObject={props.layerObject} setPopupInfo={props.setPopupInfo} setPopupYPos={props.setPopupYPos} update={props.update} setAllowProgress={props.setAllowProgress} allowProgress={props.allowProgress} />,
+    <MachineMenu popupOn={props.setPopup} layerObject={props.layerObject} setPopupInfo={props.setPopupInfo} setPopupYPos={props.setPopupYPos} update={props.update} setAllowProgress={props.setAllowProgress} />,
     <ToolingMenu popupOn={props.setPopup} layerObject={props.layerObject} setPopupInfo={props.setPopupInfo} setPopupYPos={props.setPopupYPos} update={props.update} />
 ]
 
@@ -24,10 +24,10 @@ const menus = [
                     <button type="button" className={`w-100 tab-btn ${displayMenu == 0 && 'tab-btn-active'}`} onClick={() => setDisplayMenu(0)}>JOBSITE</button>
                 </div>
                 <div className='col px-0'>
-                    <button type="button" className={`w-100 tab-btn ${displayMenu == 1 && 'tab-btn-active'}`} onClick={() => {if(allowProgress > 0){setDisplayMenu(1)}}} >MACHINES</button>
+                    <button type="button" className={`w-100 tab-btn ${displayMenu == 1 && 'tab-btn-active'}`} onClick={() => {if(props.allowProgress > 0){setDisplayMenu(1)}}} >MACHINES</button>
                 </div>
                 <div className='col px-0'>
-                    <button type="button" className={`w-100 tab-btn ${displayMenu == 2 && 'tab-btn-active'}`} onClick={() => {if(allowProgress > 1){setDisplayMenu(2)}}}>TOOLING</button>
+                    <button type="button" className={`w-100 tab-btn ${displayMenu == 2 && 'tab-btn-active'}`} onClick={() => {if(props.allowProgress > 1){setDisplayMenu(2)}}}>TOOLING</button>
                 </div>
             </div>
             {/* displays selected menu */}
