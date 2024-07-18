@@ -53,7 +53,10 @@ export default function RentalItem(props:any) {
 
     //enables the thickness slider only for concrete layers.
     useEffect(() => {
-        if(props.layerObject.materialRemoved == 'concrete'){
+        if( props.layerObject.materialRemoved == 'concrete' ||
+            props.layerObject.materialRemoved == 'trip hazard' ||
+            props.layerObject.materialRemoved == 'high spots'
+        ){
             setAllowThick(true);
         }else{
             setAllowThick(false);

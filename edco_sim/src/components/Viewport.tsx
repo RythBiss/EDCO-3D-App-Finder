@@ -130,14 +130,17 @@ export default function Viewport(props: any) {
           let modifiedSurface = subLayerBelow.materialRemoved;
 
           //another concrete CSP check, similar to updateScene() above.
-          // if( modifiedSurface == 'concrete' ||
-          //     modifiedSurface == 'trip hazard' ||
-          //     modifiedSurface == 'high spots' &&
-          //     subLayerCurrent?.CSP !== ''
-          //  ){
-          //   modifiedSurface = `CSP ${subLayerCurrent?.CSP}`;
-          // }
-          //this one isnt reading concrete slab variants right
+          if( modifiedSurface == 'concrete' ||
+              modifiedSurface == 'trip hazard' ||
+              modifiedSurface == 'high spots' &&
+              subLayerCurrent?.CSP !== ''
+           ){
+            modifiedSurface = `CSP ${subLayerCurrent?.CSP}`;
+          }
+          //the problem you had last time:
+          //when not all items are selected (machines and tools),
+          //it makes this code display CSP 1. Either give a disclaimer
+          //about appearances not being accurate without all selections or find workaround
           
           addSlabToScene(modifiedSurface, false)
         }else{
@@ -178,6 +181,7 @@ export default function Viewport(props: any) {
 
     //build environment
     const ambColor = 0xe8e8e8
+    const backgroundAmbColor = 0xd7d7d7
     const light = new THREE.DirectionalLight(0xffffff, 0.5);
     const light2 = new THREE.DirectionalLight(0xffffff, 0.5);
     const light3 = new THREE.DirectionalLight(0xffffff, 0.5);
@@ -232,7 +236,7 @@ export default function Viewport(props: any) {
     scene.current.add(light4);
     scene.current.add(directionalLight);
     scene.current.add(ambLight);
-    scene.current.background = new THREE.Color(ambColor);
+    scene.current.background = new THREE.Color(backgroundAmbColor);
     scene.current.add(floorMesh)
 
     //floor settings
