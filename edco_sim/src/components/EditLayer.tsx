@@ -24,10 +24,10 @@ const menus = [
                     <button type="button" className={`w-100 tab-btn ${displayMenu == 0 && 'tab-btn-active'}`} onClick={() => setDisplayMenu(0)}>JOBSITE</button>
                 </div>
                 <div className='col px-0'>
-                    <button type="button" className={`w-100 tab-btn ${displayMenu == 1 && 'tab-btn-active'}`} onClick={() => {if(props.allowProgress > 0){setDisplayMenu(1)}}} >MACHINES</button>
+                    <button type="button" className={`w-100 tab-btn ${displayMenu == 1 && 'tab-btn-active'} ${props.allowProgress < 1 && 'tab-btn-inactive'}`} onClick={() => {if(props.allowProgress > 0){setDisplayMenu(1)}}} >MACHINES</button>
                 </div>
                 <div className='col px-0'>
-                    <button type="button" className={`w-100 tab-btn ${displayMenu == 2 && 'tab-btn-active'}`} onClick={() => {if(props.allowProgress > 1){setDisplayMenu(2)}}}>TOOLING</button>
+                    <button type="button" className={`w-100 tab-btn ${displayMenu == 2 && 'tab-btn-active'} ${props.allowProgress < 2 && 'tab-btn-inactive-light'}`} onClick={() => {if(props.allowProgress > 1){setDisplayMenu(2)}}}>TOOLING</button>
                 </div>
             </div>
             {/* displays selected menu */}

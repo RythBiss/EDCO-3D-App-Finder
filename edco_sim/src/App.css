@@ -53,6 +53,22 @@ html, body{
     margin: 0;
 }
 
+.tab-btn-inactive{
+    background-color: rgb(128, 128, 128);
+    border: none;
+    padding: 1rem 0;
+    margin: 0;
+    color: white;
+}
+
+.tab-btn-inactive-light{
+    background-color: rgb(145, 145, 145);
+    border: none;
+    padding: 1rem 0;
+    margin: 0;
+    color: white;
+}
+
 .tab-btn-active{
     background-color: var(--primary);
     border: none;
@@ -64,6 +80,14 @@ html, body{
 .tab-btn:hover{
     background-color:var(--hover);
     color: white;
+}
+
+.tab-btn-inactive-light:hover{
+    background-color: rgb(145, 145, 145);
+}
+
+.tab-btn-inactive:hover{
+    background-color: rgb(128, 128, 128);
 }
 
 .bottom-gap{
@@ -115,12 +139,13 @@ html, body{
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    align-items: flex-end;
     padding: 0 1.5rem;
 }
 
 .btn-active{
     background-color: var(--active);
+    text-align: left;
+    align-items:flex-start
 }
 
 .btn-active:hover{
@@ -129,6 +154,15 @@ html, body{
 
 .icon-btn-red-space{
     background-color: var(--primary);
+    text-align: left;
+    align-items:flex-start;
+}
+ul{
+    /* how the fuck to we center this? */
+    padding: 0 0 0 0;
+}
+li{
+    color: white;
 }
 
 .machine-icon-frame{
@@ -200,19 +234,16 @@ html, body{
     background-color: var(--hover);
 }
 
+.product-tag{
+    display: flex;
+    flex-direction: column;
+}
+
 .product-info{
-    background-color: white;
-    color: black;
-    border-width: 0;
-    border-radius: 2rem;
+    color: white;
     pointer-events: all;
-    width: 4rem;
-    height: 4rem;
-    text-align: start;
-    line-height: 2.5rem;
-    margin: -2rem -3rem;
-    padding: 0 0 0 1rem;
-    /* aspect-ratio: 1 / 1; */
+    width: 100%;
+    text-align: end;
 }
 
 .info-pop{
@@ -225,6 +256,15 @@ html, body{
     max-width: 20rem;
     z-index: 2;
     box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.1);
+}
+
+.product-name{
+    padding-top: 0.25rem;
+    line-height: 1.25rem;
+}
+.product-number{
+    font-size: 0.9rem;
+    line-height: 0.8rem;
 }
 
 .menus-container{

@@ -10,39 +10,42 @@ export default function ToolingMenu(props: any) {
       machines: ['ALR'],
       image: 'https://edcostore.com/wp-content/uploads/2017/06/C10302_4_SteelChisel-450x450.jpg',
       CSP: 1,
-      info: 'Used for hard floor coverings: pergo flooring, pre-cut wood flooring, hard material build up, etc.'
+      info: 'Ceramic,Ice,Glue',
+      number: ['C10302']
     },
-    ScalerBS: {
-      apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue'],
-      name: 'Chisel Scalers',
-      machines: ['ALRBS'],
-      image: 'https://edcostore.com/wp-content/uploads/2017/06/27033_BigStick_3_SingleBevel.jpg',
-      CSP: 1,
-      info: 'Used for hard floor coverings: pergo flooring, pre-cut wood flooring, hard material build up, etc.' 
-    },
+    // ScalerBS: {
+    //   apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue'],
+    //   name: 'Chisel Scalers',
+    //   machines: ['ALRBS'],
+    //   image: 'https://edcostore.com/wp-content/uploads/2017/06/27033_BigStick_3_SingleBevel.jpg',
+    //   CSP: 1,
+    //   info: 'Used for hard floor coverings: pergo flooring, pre-cut wood flooring, hard material build up, etc.' 
+    // },
     Scraper: {
       apps: ['vinyl', 'linoleum', 'carpet', 'rubber', 'paint', 'corrosion', 'oil'],
       name: 'Scrapper Blades',
       machines: ['ALR'],
       image: 'https://edcostore.com/wp-content/uploads/2017/06/C10305_ScraperBlades.jpg',
       CSP: 1,
-      info: 'Used for soft flooring flooring removal: VCT, vinyl, linoleum, carpet, thin set, mortar, material build up, flaking paint, and brittle adhesives.'
+      info: 'Vinyl,Carpet,Glue',
+      number: ['C10305']
     }, 
-    ScraperBS: {
-      apps: ['vinyl', 'linoleum', 'carpet', 'rubber', 'paint', 'corrosion', 'oil'],
-      name: 'Scrapper Blades',
-      machines: ['ALRBS'],
-      image: 'https://edcostore.com/wp-content/uploads/2018/04/27035_ScraperBlade-1.jpg',
-      CSP: 1,
-      info: 'Used for soft flooring flooring removal: VCT, vinyl, linoleum, carpet, thin set, mortar, material build up, flaking paint, and brittle adhesives.'
-    }, 
+    // ScraperBS: {
+    //   apps: ['vinyl', 'linoleum', 'carpet', 'rubber', 'paint', 'corrosion', 'oil'],
+    //   name: 'Scrapper Blades',
+    //   machines: ['ALRBS'],
+    //   image: 'https://edcostore.com/wp-content/uploads/2018/04/27035_ScraperBlade-1.jpg',
+    //   CSP: 1,
+    //   info: 'Used for soft flooring flooring removal: VCT, vinyl, linoleum, carpet, thin set, mortar, material build up, flaking paint, and brittle adhesives.'
+    // }, 
     FloorStripperRigid: {
       apps: ['vinyl', 'linoleum', 'carpet', 'VCT'],
       name: '8" Rigid Scrapper Blade',
       machines: ['TS8'],
       image: 'https://edcostore.com/wp-content/uploads/2017/12/28030_TileSharkBlade-450x450.jpg',
       CSP: 1,
-      info: 'General Purpose soft floor covering removal. VCT, Vinyl, Linoleum, Carpet. For Concrete use with the bevel edge up. For Wood use with the bevel edge down.'
+      info: 'Vinyl,Carpet,VCT',
+      number: ['28040']
     },
     MagnaBlades: {
       apps: ['glue', 'paint', 'mastic'],
@@ -50,7 +53,8 @@ export default function ToolingMenu(props: any) {
       machines: ['SEC', 'TG10', '_2DHD', '_2GC'],
       image: 'https://edcostore.com/wp-content/uploads/2017/04/12501LC_MagnaBlade-450x450.jpg',
       CSP: 1,
-      info: 'Magna-Blades are 8 sided carbide tipped blocks designed to clean floors without grinding into the concrete. Specifically designed to remove thicker/soft coatings from concrete without grinding the surface. Magna-Blades have a replaceable, multi-sided tungsten carbide edge that can be rotated for maximum use.'
+      info: 'Glue,Paint,Mastic',
+      number: ['12501LC']
     },
     DymaDots: {
       apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots', 'sealer'],
@@ -58,7 +62,8 @@ export default function ToolingMenu(props: any) {
       machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
       image: 'https://edcostore.com/wp-content/uploads/2017/04/QC2B-MC-0030_DoubleDotGray-450x450.jpg',
       CSP: 1,
-      info: 'General purpose tool used for a wide range of prepping and remove applications. Leaves clean smooth surfaces with small amount of scratches and no gouging. Used for removing sealers, thin mil residential epoxies, brittle thinsets, and more.'
+      info: 'General Grinding,Epoxy,Residual Glue',
+      number: ['QC2B-MC-0030']
     },
     PCDbacking: {
       apps: ['industrial buildup', 'glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots', 'sealer'],
@@ -66,7 +71,8 @@ export default function ToolingMenu(props: any) {
       machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
       image: 'https://edcostore.com/wp-content/uploads/2017/04/QC-PCD1-LB_DymaPCD_Blue-450x450.jpg',
       CSP: 3,
-      info: 'Backing segment prevents PCD from digging/gouging concrete. Leaves a medium texture & medium scratch marks on the surface. Digging through industrial strength coverings, water-proofing membrane, thick epoxies and much more.'
+      info: 'Aggressive Grinding,Industrial Buildup,Epoxy',
+      number: ['QC-PCD1-LB']
     },
     CarbideCutter: {
       apps: ['leveling', 'rubber', 'concrete', 'trip hazard', 'high spots'],
@@ -74,7 +80,8 @@ export default function ToolingMenu(props: any) {
       machines: ['CPM8', 'CPL8', 'CPM10'],
       image: 'https://edcostore.com/wp-content/uploads/2017/05/20156_6_PointBlueCutter-450x450.jpg',
       CSP: 6,
-      info: '6-Point tungsten blue carbide cutter used for aggressive removal of concrete surfaces. Leaves a rough texture on the surface. Used for trip hazard repair, creating non slip surfaces, and leveling surfaces.'
+      info: 'Concrete Removal,Trip Hazard Removal,High Spots',
+      number: ['20156']
     },
     FivePoint: {
       apps: ['concrete', 'trip hazard', 'high spots'],
@@ -82,7 +89,8 @@ export default function ToolingMenu(props: any) {
       machines: ['CD5'],
       image: 'https://edcostore.com/wp-content/uploads/2017/06/18810_5PointCarbideBit-450x450.jpg',
       CSP: 9,
-      info: '5-Point tungsten carbide bits are for the most aggressive concrete removal cases. These are often used for heavy concrete removal and making wheelchair ramps.'
+      info: 'Heavy Concrete Removal,Trip Hazard removal,High Spots',
+      number: ['18810']
     },
     NinePoint: {
       apps: ['concrete', 'trip hazard', 'high spots'],
@@ -90,7 +98,8 @@ export default function ToolingMenu(props: any) {
       machines: ['CD5'],
       image: 'https://edcostore.com/wp-content/uploads/2017/06/18820_9PointCarbideBit-450x450.jpg',
       CSP: 9,
-      info: '9-Point tungsten carbide bits are for the most aggressive concrete removal cases. These are often used for heavy concrete removal and making wheelchair ramps.'
+      info: 'Heavy Concrete Removal,Trip Hazard removal,High Spots',
+      number: ['18820']
     },
   }
 
@@ -166,6 +175,8 @@ export default function ToolingMenu(props: any) {
                 setTooling(toolsByApplicationAndMachine[tool].name, 0, toolsByApplicationAndMachine[tool].CSP)}
               mouseAction={() => handlePopup(tool)}
               setIsInfoPopupOnupYPos={props.setPopupYPos}
+              popupInfo={toolsByApplicationAndMachine[tool].info}
+              partNumber={toolsByApplicationAndMachine[tool].number[0]}
               />
         )}
 
@@ -186,6 +197,8 @@ export default function ToolingMenu(props: any) {
                 setTooling(toolsByApplicationAndMachine[tool].name, 1, toolsByApplicationAndMachine[tool].CSP)}
               mouseAction={() => handlePopup(tool)}
               setIsInfoPopupOnupYPos={props.setPopupYPos}
+              popupInfo={toolsByApplicationAndMachine[tool].info}
+              partNumber={toolsByApplicationAndMachine[tool].number[0]}
               />
         )}
 
@@ -206,6 +219,8 @@ export default function ToolingMenu(props: any) {
                 setTooling(toolsByApplicationAndMachine[tool].name, 2, toolsByApplicationAndMachine[tool].CSP)}
               mouseAction={() => handlePopup(tool)}
               setIsInfoPopupOnupYPos={props.setPopupYPos}
+              popupInfo={toolsByApplicationAndMachine[tool].info}
+              partNumber={toolsByApplicationAndMachine[tool].number[0]}
               />
         )}
       
@@ -227,6 +242,8 @@ export default function ToolingMenu(props: any) {
                 setTooling(toolsByApplicationAndMachine[tool].name, 3, toolsByApplicationAndMachine[tool].CSP)}
               mouseAction={() => handlePopup(tool)}
               setIsInfoPopupOnupYPos={props.setPopupYPos}
+              popupInfo={toolsByApplicationAndMachine[tool].info}
+              partNumber={toolsByApplicationAndMachine[tool].number[0]}
               />
         )}
     </div>

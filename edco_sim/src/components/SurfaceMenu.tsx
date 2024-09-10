@@ -72,7 +72,7 @@ export default function SurfaceMenu(props:any) {
     const jobSizeAnswers = ['1,000+', '2,000+', '5,000+'];
     const greenConcreteAnswers = ['No', 'Yes'];
     const edgeGrindingAnswers = ['No', 'Yes'];
-    const powerOptionAnswers = ['Gas', 'Electric', 'Propane', 'Air'];
+    const powerOptionAnswers = ['Gas', 'Electric', 'Electric 3 Phase', 'Propane', 'Air'];
 
     const [matSelected, setMatSelected] = useState<boolean>(false);
     const [sizeSelected, setSizeSelected] = useState<boolean>(false);

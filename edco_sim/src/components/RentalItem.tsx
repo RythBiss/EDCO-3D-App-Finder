@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import DropDown from './DropDown';
+import { motion } from "framer-motion"
 
 export default function RentalItem(props:any) {
     const [thick, setThick] = useState<string>('1/32');
     const [value, setValue] = useState<number>(0);
     const [allowThick, setAllowThick] = useState<boolean>(false);
     const [optionList, setOptionList] = useState(['']);
+    const [machine, setMachine] = useState<string>('');
+    const [tool, setTool] = useState<string>('');
 
     //assigns layer thickness, takes slider event result.
     const handleSetThick = (value: string) => {
@@ -63,6 +66,8 @@ export default function RentalItem(props:any) {
         }
 
         handleChange(props.layerObject.materialRemoved)
+        setMachine(props.layerObject.machine)
+        setTool(props.layerObject.tooling)
     })
 
   return (
@@ -72,8 +77,14 @@ export default function RentalItem(props:any) {
                 <div className='row justify-content-around align-items-top'>
                     <div className='col'>
                         <ul className='list-btn-bullets'>
-                            <li>MATERIAL:  
-
+                            <motion.li
+                                initial={{ backgroundColor: '#ffffffCC' }}
+                                animate={{ backgroundColor: '#ffffff00' }}
+                                transition={{
+                                    type: "linear",
+                                    duration: 1.25
+                                }}
+                            >MATERIAL:  
                                 {props.active ?
                                     <>
                                         <DropDown
@@ -88,12 +99,37 @@ export default function RentalItem(props:any) {
                                     </>
                                 }
 
-                            </li>
-                            <li>MACHINE: {props?.layerObject?.machine}</li>
-                            <li>TOOLING: {props?.layerObject?.tooling}</li>
+                            </motion.li>
+                            <motion.li
+                                  key={machine + props.layerIndex} // makes sure this key is unique, otherwise the other rental items would have the same "machine" key.
+                                  initial={{ backgroundColor: '#ffffffCC' }}
+                                  animate={{ backgroundColor: '#ffffff00' }}
+                                  transition={{
+                                    type: "linear",
+                                    duration: 1.25
+                                  }}
+
+                            >MACHINE: {props?.layerObject?.machine}</motion.li>
+                            <motion.li
+                                key={tool} //this one did not have the same problem as machine.
+                                initial={{ backgroundColor: '#ffffffCC' }}
+                                animate={{ backgroundColor: '#ffffff00' }}
+                                transition={{
+                                    type: "linear",
+                                    duration: 1.25
+                                }}
+                            >TOOLING: {props?.layerObject?.tooling}</motion.li>
 
                             {allowThick == true &&
-                                <li>THICKNESS: {thick}</li>
+                                <motion.li
+                                key={thick} //this one did not have the same problem as machine.
+                                initial={{ backgroundColor: '#ffffffCC' }}
+                                animate={{ backgroundColor: '#ffffff00' }}
+                                transition={{
+                                    type: "linear",
+                                    duration: 1.25
+                                }}
+                                >THICKNESS: {thick}</motion.li>
                             }
 
                         </ul>

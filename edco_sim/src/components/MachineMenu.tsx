@@ -17,7 +17,8 @@ export default function EditLayer(props: any) {
       image: [
               'https://portal.edcoinc.com/storage/product-slider/alr-steel-chisel-scalers/ALR-5-Machine-Slider.jpg'
               ],
-      info: 'Chisel Scalers have multiple accessories to remove many hard and soft coverings from walls, ceilings, roofs, floors, stationary objects, and outdoor spaces.'
+      info: 'Light Weight,Compact,Versatile',
+      number: ['C10301'] //add diferent sizes as different machines.
     },
     ALRBS: {
       apps: ['vinyl', 'linoleum', 'ceramic', 'carpet', 'rubber', 'paint', 'ice', 'corrosion', 'oil', 'glue'],
@@ -31,7 +32,8 @@ export default function EditLayer(props: any) {
       image: [
               'https://portal.edcoinc.com/storage/product-slider/big-stick-chisel-scalers/ALR-BS-Straight-Machine-Slider.jpg'
               ],
-      info: 'Big Stick chisel scalers solve industrial removal applications including scraping and chipping away concrete and thick coatings. Blast through ceramic tile and other floor coverings with the Big Stick’s increased air power.'
+      info: 'Light Weight,Heavy Duty,Versatile',
+      number: ['27100'] //add ERGO model as seperate machine
     },
     TS8: {
       apps: ['vinyl', 'linoleum', 'carpet', 'VCT'],
@@ -45,7 +47,8 @@ export default function EditLayer(props: any) {
       image: [
               'https://portal.edcoinc.com/storage/product-slider/8-manual-tile-shark-floor-stripper/TS-8-Machine-Slider.jpg'
               ],
-      info: 'Electric floor strippers remove vinyl, linoleum, carpet, rubber, and other softer coverings from concrete floors. The “Tile Shark” floor stripper is 110 volt and can be used for removal of vinyl, linoleum, carpet, rubber, and other soft floor coverings.'
+      info: 'Light Weight,Heavy Duty,High Production Rate',
+      number: ['94400']
     },
     SEC: {
       apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots', 'sealer'],
@@ -59,7 +62,8 @@ export default function EditLayer(props: any) {
       image: [
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-single-disc-floor-grinder/SEC-NG-Machine-Slider.jpg'
               ],
-      info: 'Floor Grinders solve first layer applications like smoothing concrete, preparing floors for new coverings and removing thinner coatings, soft materials and ice.  This single-disc model grinds approximately 250sqft per hour.'
+      info: 'Small Scale,Residential,Versatile',
+      number: ['59800']
     },
     _2GC: {
       apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots', 'sealer'],
@@ -69,12 +73,14 @@ export default function EditLayer(props: any) {
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: true,
       edges: false,
-      power: ['gas', 'electric'],
+      power: ['gas', 'electric', 'electric 3 phase'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-dual-disc-floor-grinder/2GC-NG-Machine-Slider.jpg',
+              'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-dual-disc-floor-grinder/2EC-NG-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-dual-disc-floor-grinder/2EC-NG-Machine-Slider.jpg'
               ],
-      info: 'Floor Grinders solve first layer applications like smoothing concrete, preparing floors for new coverings and removing thinner coatings, soft materials and ice. This dual-disc model grinds approximately 500sqft per hour.'
+      info: 'Mid Scale,Commercial,Versatile',
+      number: ['59300', '59200', '59600']
     },
     _2DHD: {
       apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots', 'sealer'],
@@ -87,9 +93,11 @@ export default function EditLayer(props: any) {
       power: ['electric', 'propane'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-heavy-duty-floor-grinder-polisher/2D-HD-Electric-Machine-Slider.jpg',
+              'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-heavy-duty-floor-grinder-polisher/2D-HD-Electric-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-heavy-duty-floor-grinder-polisher/2D-HD-Propane-Machine-Slider.jpg'
               ],
-      info: 'Floor Grinders solve first-layer applications.  This Heavy-Duty Grinder is also designed to level concrete and deeper removal of industrial-strength coverings.  This dual-disc model grinds approximately 800 – 1,000 sq. ft. per hour.'
+      info: 'Large Scale,Industrial,Versatile',
+      number: ['58100', '58200']
     },
     TL9: {
       apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'high spots', 'sealer'],
@@ -103,7 +111,8 @@ export default function EditLayer(props: any) {
       image: [
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-turbo-lite-grinder/TL-9-Machine-Slider.jpg'
               ],
-      info: 'The “Turbo-Lite” is high-production and portable.  It aggressively grinds concrete surfaces like a turbo grinder while having portable attributes. It weighs less than 100lbs, has a folding handlebar with built-in handgrip for travel. The TL9 is great for removal and resurfacing in hard-to-reach areas.'
+      info: 'Light Weight,Compact,Versatile',
+      number: ['58900']
     },
     TMC7: {
       apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'edges', 'residual', 'high spots', 'sealer'],
@@ -117,7 +126,8 @@ export default function EditLayer(props: any) {
       image: [
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-7-turbo-edge-grinder/TMC-7-Electric-Machine-Slider.jpg'
               ],
-      info: 'This unique edging machine grinds concrete all the way to walls, poles, and stationary objects.  It resurfaces small, hard-to-reach areas eliminating hand grinding.  Turbo Grinders remove thick coverings, level uneven areas, and solve other industrial application problems. '
+      info: 'Light Weight,Compact,Edges',
+      number: ['57200']
     },
     TG10: {
       apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'high spots', 'sealer'],
@@ -127,13 +137,15 @@ export default function EditLayer(props: any) {
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: true,
       edges: false,
-      power: ['gas', 'electric', 'propane'],
+      power: ['gas', 'electric', 'electric 3 phase', 'propane'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Gas-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Electric-Machine.jpg',
+              'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Electric-Machine.jpg',
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Propane-Machine-Slider.jpg'
               ],
-      info: 'Turbo Grinders remove thick coverings, level uneven areas, and solve other industrial application problems.  This 10” Turbo Grinder is EDCO’s “beast.” Its heavy-duty, aggressive and should be used for thick and hard coating removal, leveling tasks and applications that other EDCO Magna-Trap Grinders cannot perform.'
+      info: 'Aggressive,Residential,Versatile',
+      number: ['56600', '56900', '56800', '56700']
     },
     //make trip hazard surface`
     CPL8: {
@@ -149,7 +161,8 @@ export default function EditLayer(props: any) {
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-scari-lite-crete-planer-r/CPL-8-Gas-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-scari-lite-crete-planer-r/CPL-8-Electric-Machine-Slider.jpg'
               ],
-      info: 'The “Sacri-Lite” Planer is for profiling and texturing the first layer of concrete and asphalt surfaces.  While it removes thin coatings, it does not solve the larger removal applications like other Crete-Planers.  Available in 110 Volt electric.'
+      info: 'Small Scale, Residential, Removal',
+      number: ['69500', '69300']
     },
     CPM8: {
       apps: ['leveling', 'concrete', 'trip hazard', 'rubber', 'high spots'],
@@ -165,7 +178,8 @@ export default function EditLayer(props: any) {
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8-Electric-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8%20Propane%20Machine%20Slider.jpg'
               ], 
-      info: 'Crete-Planers level, remove, texture and groove concrete and asphalt surfaces. The 8” Planer solves common removal applications and is the best product to quickly level sidewalk trip hazards. Its available is gasoline, electric and propane.'
+      info: 'Mid Scale, Commercial, Removal',
+      number: ['79300', '79500', '72600']
     },
     CPM10: {
       apps: ['leveling', 'concrete', 'trip hazard', 'rubber', 'high spots'],
@@ -180,7 +194,8 @@ export default function EditLayer(props: any) {
               'https://portal.edcoinc.com/storage/product-slider/10-walk-behind-crete-planer-r/CPM-10-Gas-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/10-walk-behind-crete-planer-r/CPM-10-Electric-Machine-Slider.jpg'
               ],
-      info: 'Crete-Planers level, remove, texture and groove concrete and asphalt surfaces. The 10” Planer is designed for aggressive removal applications like surface leveling and heavy coating removal.'
+      info: 'Large Scale, Industrial, Removal',
+      number: ['69100', '69200']
     },
     CD5: {
       apps: ['leveling', 'concrete', 'trip hazard', 'high spots'],
@@ -190,11 +205,10 @@ export default function EditLayer(props: any) {
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: false,
       edges: false,
-      power: [
-              'air'
-              ],
+      power: ['air'],
       image: ['https://portal.edcoinc.com/storage/product-slider/5-head-crete-crusher-r/CD-5-Machine-Slider.jpg'],
-      info: 'Crete-Crushers aggressively solve concrete removal applications by hammering pointed bits into surfaces.  These deep layer tasks include recapping floors and removing spalling or laitance concrete. The 5 Bit CD5 removes 250sqft of per hour.'
+      info: 'Aggressive, Rough, Removal',
+      number: ['63100']
     }
   }
 
@@ -414,6 +428,17 @@ export default function EditLayer(props: any) {
     }
   })
 
+  useEffect(() => {
+    console.log("machine list test")
+    
+    props.layerObject.sublayerObjects.forEach((item: any, index: number) =>{
+      console.log("i = " + index)
+      if(props.layerObject.sublayerObjects[index]!== undefined){
+        console.log(props.layerObject.sublayerObjects[index].machine)
+      }
+    })
+  }, [selectedMachine])
+
   return (
     <div className='col edit-menu scroll-on'>
       {/* layer 1 accordion open/close button */}
@@ -440,10 +465,12 @@ export default function EditLayer(props: any) {
                 indent={1}
                 lable={item}
                 icon={allMachineData[item].image[getPowerTypeImageIndex(item)]}
-                active={selectedMachine == item ? true : false}
+                active={props.layerObject.sublayerObjects[0].machine == item ? true : false}
                 onClick={() => setMachine(item, 0)}
                 mouseAction={() => handlePopup(item)}
                 setIsInfoPopupOnupYPos={props.setPopupYPos}
+                popupInfo={allMachineData[item].info}
+                partNumber={allMachineData[item].number[getPowerTypeImageIndex(item)]}
                 />
               )        
         }
@@ -472,10 +499,13 @@ export default function EditLayer(props: any) {
                 indent={1}
                 lable={item}
                 icon={allMachineData[item].image[getPowerTypeImageIndex(item)]}
-                active={selectedMachine == item ? true : false}
+                active={props.layerObject.sublayerObjects[1].machine == item ? true : false}
                 onClick={() => setMachine(item, 1)}
                 mouseAction={() => handlePopup(item)}
                 setIsInfoPopupOnupYPos={props.setPopupYPos}
+                popupInfo={allMachineData[item].info}
+                partNumber={allMachineData[item].number[getPowerTypeImageIndex(item)]}
+                
                 />
               )        
         }
@@ -504,10 +534,12 @@ export default function EditLayer(props: any) {
                 indent={1}
                 lable={item}
                 icon={allMachineData[item].image[getPowerTypeImageIndex(item)]}
-                active={selectedMachine == item ? true : false}
+                active={props.layerObject.sublayerObjects[2].machine == item ? true : false}
                 onClick={() => setMachine(item, 2)}
                 mouseAction={() => handlePopup(item)}
                 setIsInfoPopupOnupYPos={props.setPopupYPos}
+                popupInfo={allMachineData[item].info}
+                partNumber={allMachineData[item].number[getPowerTypeImageIndex(item)]}
                 />
               )        
         }
@@ -536,10 +568,12 @@ export default function EditLayer(props: any) {
                 indent={1}
                 lable={item}
                 icon={allMachineData[item].image[getPowerTypeImageIndex(item)]}
-                active={selectedMachine == item ? true : false}
+                active={props.layerObject.sublayerObjects[3].machine == item ? true : false}
                 onClick={() => setMachine(item, 3)}
                 mouseAction={() => handlePopup(item)}
                 setIsInfoPopupOnupYPos={props.setPopupYPos}
+                popupInfo={allMachineData[item].info}
+                partNumber={allMachineData[item].number[getPowerTypeImageIndex(item)]}
                 />
               )        
         }
