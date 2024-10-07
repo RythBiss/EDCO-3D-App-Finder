@@ -99,9 +99,9 @@ useEffect(() => {
 
       this.materialThickness = value;
 
-      // this.sublayerObjects.forEach((item) => {
-      //   item.materialThickness = value;
-      // })
+      this.sublayerObjects.forEach((item) => {
+        item.materialThickness = value;
+      })
       
       this.requestUpdate();
     }

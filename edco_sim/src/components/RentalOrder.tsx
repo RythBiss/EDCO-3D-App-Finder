@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import RentalItem from './RentalItem'
-import jsPDF from 'jspdf';
 import "jspdf/dist/polyfills.es.js";
 import ListButton from './ListButton';
 
@@ -14,8 +13,8 @@ export default function RentalOrder(props: any) {
   //2D array that contains alternitive layer choices for each layer. This makes sure only valid layer types are assigned to each layer.
   const altLayers = [
     ['vinyl', 'linoleum', 'ceramic', 'carpet'],
-    ['glue', 'mastic', 'thinset'],
-    ['sealer', 'residual', 'paint'],
+    ['glue/adhesive', 'mastic', 'thinset'],
+    ['sealer', 'residual glue/adhesive', 'paint'],
     ['concrete', 'high spots', 'trip hazard']
   ]
 
@@ -26,20 +25,6 @@ export default function RentalOrder(props: any) {
     }else{
       setSelectedLayer(layerIndex)
     }
-  }
-
-  //generates a PDF rental ticket with selected machines and tools.
-  const printPDF = () => {
-    
-    const pdf = new jsPDF;
-    let printString: string = 'Order: \n'
-    
-    props.current.sublayerObjects.forEach((item: any) =>{
-      printString += `   \nMachine: ${item.machine} \nTooling: ${item.tooling}`
-    })
-
-    pdf.text(printString, 10, 10);
-    pdf.save('rental ticket.pdf');
   }
 
   //when a layer type is passed, finds other layer types that could also be assigned to that layer.
@@ -58,7 +43,7 @@ export default function RentalOrder(props: any) {
 
 
   return (
-      <div className={`col-lg-2 col-sm-8 shadow scroll h-100 ${props.mobileRight == false ? 'hide-menu' : 'show-menu-right'}`}>
+      <div className={`col-lg-2 col-sm-8 shadow scroll h-100 ${props.mobileRight == false ? 'hide-menu' : 'show-menu-right'}`} style={{overflowY: "scroll"}}>
         {props.current !== undefined &&
             props.current.sublayerObjects.map((obj: object, key: number) => 
               <RentalItem
@@ -70,8 +55,6 @@ export default function RentalOrder(props: any) {
                 getAltLayers={getAltLayers}
                 />
         )}
-
-        <ListButton onClick={printPDF} lable='Print PDF' />
       </div>
   )
 }

@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import ListButton from './ListButton'
+import NextButton from './NextButton';
+
 
 export default function ToolingMenu(props: any) {
   //temporary tooling data table until backend is developed.
   const toolsByApplicationAndMachine: any = {
     Scaler: {
-      apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue'],
+      apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue/adhesive'],
       name: 'Chisel Scalers',
       machines: ['ALR'],
       image: 'https://edcostore.com/wp-content/uploads/2017/06/C10302_4_SteelChisel-450x450.jpg',
@@ -14,7 +16,7 @@ export default function ToolingMenu(props: any) {
       number: ['C10302']
     },
     // ScalerBS: {
-    //   apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue'],
+    //   apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue/adhesive'],
     //   name: 'Chisel Scalers',
     //   machines: ['ALRBS'],
     //   image: 'https://edcostore.com/wp-content/uploads/2017/06/27033_BigStick_3_SingleBevel.jpg',
@@ -48,7 +50,7 @@ export default function ToolingMenu(props: any) {
       number: ['28040']
     },
     MagnaBlades: {
-      apps: ['glue', 'paint', 'mastic'],
+      apps: ['glue/adhesive', 'paint', 'mastic'],
       name: 'Magna-Blades',
       machines: ['SEC', 'TG10', '_2DHD', '_2GC'],
       image: 'https://edcostore.com/wp-content/uploads/2017/04/12501LC_MagnaBlade-450x450.jpg',
@@ -57,7 +59,7 @@ export default function ToolingMenu(props: any) {
       number: ['12501LC']
     },
     DymaDots: {
-      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots', 'sealer'],
+      apps: ['paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
       name: 'Dyma-Dots',
       machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
       image: 'https://edcostore.com/wp-content/uploads/2017/04/QC2B-MC-0030_DoubleDotGray-450x450.jpg',
@@ -66,7 +68,7 @@ export default function ToolingMenu(props: any) {
       number: ['QC2B-MC-0030']
     },
     PCDbacking: {
-      apps: ['industrial buildup', 'glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots', 'sealer'],
+      apps: ['industrial buildup', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
       name: 'PCD w/Backing Segment',
       machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
       image: 'https://edcostore.com/wp-content/uploads/2017/04/QC-PCD1-LB_DymaPCD_Blue-450x450.jpg',
@@ -115,6 +117,26 @@ export default function ToolingMenu(props: any) {
     //setSelectedSurface(newTooling);
   }
 
+    //checks if tooling has been selected for each layer, and allows the user to access recommendations if so.
+    useEffect(()=>{
+      let machinesSelected: boolean = true;
+  
+      props.layerObject.sublayerObjects.forEach((obj: any) => {
+        if(obj.tooling == ''){
+          machinesSelected = false;
+        }
+      })
+  
+      if(machinesSelected){
+        console.log('setting progress in tooling')
+        props.setAllowProgress(3);
+      }
+    })
+
+    useEffect(() => {
+      console.log("progress " + props.allowProgress)
+    }, [])
+
   //
   useEffect(() => {
     //2D array to store tooling options
@@ -160,7 +182,7 @@ export default function ToolingMenu(props: any) {
       {/* lists of tooling organized by layer */}
 
       {/* layer 1 */}
-      <ListButton lable={matchingTooling[0] == undefined ? 'First Layer' : `First Layer (${matchingTooling[0].length})`} onClick={() => toolSelect(0)} selected={props.layerObject.sublayerObjects[0].tooling !== ''} />
+      <ListButton lable={'First Layer'} onClick={() => toolSelect(0)} selected={props.layerObject.sublayerObjects[0].tooling !== ''} />
       {openTab == 0 &&
         matchingTooling.length !== 0 &&
           matchingTooling[0].map((tool: any, i: any) => 
@@ -182,7 +204,7 @@ export default function ToolingMenu(props: any) {
 
       {/* layer 2 */}
       {props.layerObject.sublayerObjects.length > 1 &&
-        <ListButton lable={matchingTooling[1] == undefined ? 'Second Layer' : `Second Layer (${matchingTooling[1].length})`} onClick={() => toolSelect(1)} selected={props.layerObject.sublayerObjects[1].tooling !== ''} />
+        <ListButton lable={'Second Layer'} onClick={() => toolSelect(1)} selected={props.layerObject.sublayerObjects[1].tooling !== ''} />
       }
       {openTab == 1 &&
         matchingTooling.length !== 0 &&
@@ -204,7 +226,7 @@ export default function ToolingMenu(props: any) {
 
       {/* layer 3 */}
       {props.layerObject.sublayerObjects.length > 2 &&
-        <ListButton lable={matchingTooling[2] == undefined ? 'Third Layer' : `Third Layer (${matchingTooling[2].length})`} onClick={() => toolSelect(2)} selected={props.layerObject.sublayerObjects[2].tooling !== ''} />
+        <ListButton lable={'Third Layer'} onClick={() => toolSelect(2)} selected={props.layerObject.sublayerObjects[2].tooling !== ''} />
       }
       {openTab == 2 &&
         matchingTooling.length !== 0 &&
@@ -226,7 +248,7 @@ export default function ToolingMenu(props: any) {
       
       {/* layer 4 */}
       {props.layerObject.sublayerObjects.length > 3 &&
-        <ListButton lable={matchingTooling[0] == undefined ? 'Fourth Layer' : `Fourth Layer (${matchingTooling[3].length})`} onClick={() => toolSelect(3)} selected={props.layerObject.sublayerObjects[3].tooling !== ''} />
+        <ListButton lable={'Fourth Layer'} onClick={() => toolSelect(3)} selected={props.layerObject.sublayerObjects[3].tooling !== ''} />
       }
       {openTab == 3 &&
         matchingTooling.length !== 0 &&
@@ -246,6 +268,10 @@ export default function ToolingMenu(props: any) {
               partNumber={toolsByApplicationAndMachine[tool].number[0]}
               />
         )}
+
+          {props.allowProgress == 3 &&
+            <NextButton lable={'View Recommendation'} onClick={() => props.printPDF()} />
+          }
     </div>
   )
 }

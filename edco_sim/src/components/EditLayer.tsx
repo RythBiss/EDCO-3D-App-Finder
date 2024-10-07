@@ -2,17 +2,33 @@ import { useState } from 'react'
 import SurfaceMenu from './SurfaceMenu';
 import MachineMenu from './MachineMenu';
 import ToolingMenu from './ToolingMenu';
+import jsPDF from 'jspdf';
+
 
 export default function EditLayer(props: any) {
+
+//generates a PDF rental ticket with selected machines and tools.
+  const printPDF = () => {
+    
+    const pdf = new jsPDF;
+    let printString: string = 'Order: \n'
+    
+    props.layerObject.sublayerObjects.forEach((item: any) =>{
+      printString += `   \nMachine: ${item.machine} \nTooling: ${item.tooling}`
+    })
+
+    pdf.text(printString, 10, 10);
+    pdf.output('dataurlnewwindow', {filename: 'EDCO App Finder Recommendation'});
+  }
 
 //state is used as the index to select a menu in the menu array.
 const [displayMenu, setDisplayMenu] = useState<number>(0);
 
 //array stores menus that will be rendered based on which tab is selected.
 const menus = [
-    <SurfaceMenu popupOn={props.setPopup} layerObject={props.layerObject} setPopupInfo={props.setPopupInfo} setPopupYPos={props.setPopupYPos} update={props.update} setAllowProgress={props.setAllowProgress} allowProgress={props.allowProgress} />,
-    <MachineMenu popupOn={props.setPopup} layerObject={props.layerObject} setPopupInfo={props.setPopupInfo} setPopupYPos={props.setPopupYPos} update={props.update} setAllowProgress={props.setAllowProgress} />,
-    <ToolingMenu popupOn={props.setPopup} layerObject={props.layerObject} setPopupInfo={props.setPopupInfo} setPopupYPos={props.setPopupYPos} update={props.update} />
+    <SurfaceMenu popupOn={props.setPopup} layerObject={props.layerObject} setPopupInfo={props.setPopupInfo} setPopupYPos={props.setPopupYPos} update={props.update} setAllowProgress={props.setAllowProgress} allowProgress={props.allowProgress} nextFunction={() => setDisplayMenu(1)}/>,
+    <MachineMenu popupOn={props.setPopup} layerObject={props.layerObject} setPopupInfo={props.setPopupInfo} setPopupYPos={props.setPopupYPos} update={props.update} setAllowProgress={props.setAllowProgress} allowProgress={props.allowProgress} nextFunction={() => setDisplayMenu(2)}/>,
+    <ToolingMenu popupOn={props.setPopup} layerObject={props.layerObject} setPopupInfo={props.setPopupInfo} setPopupYPos={props.setPopupYPos} update={props.update} setAllowProgress={props.setAllowProgress} allowProgress={props.allowProgress} printPDF={printPDF} />
 ]
 
   return (

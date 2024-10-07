@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import DropDown from './DropDown';
+//import DropDown from './DropDown';
 import { motion } from "framer-motion"
 
 export default function RentalItem(props:any) {
@@ -44,28 +44,28 @@ export default function RentalItem(props:any) {
     }
 
     //get changes made (type of layer, example: vinyl to linoleum) from dropdown component and update.
-    const handleChange = (change: string) => {
-        const result = props.getAltLayers(change);
+    // const handleChange = (change: string) => {
+    //     const result = props.getAltLayers(change);
 
-        setOptionList(result);
+    //     setOptionList(result);
 
-        if(change !== props.layerObject.materialRemoved){
-            props.layerObject.modMaterialRemoved(change)
-        }
-    }
+    //     if(change !== props.layerObject.materialRemoved){
+    //         props.layerObject.modMaterialRemoved(change)
+    //     }
+    // }
 
     //enables the thickness slider only for concrete layers.
     useEffect(() => {
-        if( props.layerObject.materialRemoved == 'concrete' ||
-            props.layerObject.materialRemoved == 'trip hazard' ||
-            props.layerObject.materialRemoved == 'high spots'
-        ){
-            setAllowThick(true);
-        }else{
-            setAllowThick(false);
-        }
+        // if( props.layerObject.materialRemoved == 'concrete' ||
+        //     props.layerObject.materialRemoved == 'trip hazard' ||
+        //     props.layerObject.materialRemoved == 'high spots'
+        // ){
+        //     setAllowThick(true);
+        // }else{
+        //     setAllowThick(false);
+        // }
 
-        handleChange(props.layerObject.materialRemoved)
+        //handleChange(props.layerObject.materialRemoved)
         setMachine(props.layerObject.machine)
         setTool(props.layerObject.tooling)
     })
@@ -84,20 +84,7 @@ export default function RentalItem(props:any) {
                                     type: "linear",
                                     duration: 1.25
                                 }}
-                            >MATERIAL:  
-                                {props.active ?
-                                    <>
-                                        <DropDown
-                                            optionsStringArray={optionList}
-                                            onChange={handleChange}
-                                            currentValue={props?.layerObject?.materialRemoved}
-                                            />
-                                    </>
-                                    : 
-                                    <>
-                                        {` ${props?.layerObject?.materialRemoved}`}
-                                    </>
-                                }
+                            >MATERIAL: {props?.layerObject?.materialRemoved}
 
                             </motion.li>
                             <motion.li
@@ -143,12 +130,12 @@ export default function RentalItem(props:any) {
                         {props.layerIndex == 'Active' && 'Active Layer'}
 
                     </div>
-                    {(props.active && allowThick == true) &&
+                    {/* {(props.active && allowThick == true) &&
                         <>
                             <label htmlFor="customRange1" className="form-label list-btn-title" style={{marginBottom: '0', marginTop: '0.5rem'}}>LAYER THICKNESS</label>
                             <input id="slider" className='thick-slider' type="range" min="0" max="3" step='1' value={value} onChange={(e) => {handleSetThick(e.target.value)}} />
                         </>
-                    }
+                    } */}
                 </div>
             </div>
         </div>

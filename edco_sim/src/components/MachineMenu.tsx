@@ -1,44 +1,46 @@
 import {useEffect, useState } from 'react'
 import ListButton from './ListButton';
+import NextButton from './NextButton';
+
 
 export default function EditLayer(props: any) {
   //temporary machine data table until backend is developed.
   const allMachineData: any = {
     //job size is per hour, remember that when making the lists
     ALR: {
-      apps: ['vinyl', 'linoleum', 'ceramic', 'carpet', 'rubber', 'paint', 'ice', 'corrosion', 'oil', 'glue'],
+      apps: ['vinyl', 'linoleum', 'ceramic', 'carpet', 'rubber', 'paint', 'ice', 'corrosion', 'oil', 'glue/adhesive'],
       depth: -1,
-      recJobSize: 0,
+      //recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: false,
       edges: false,
-      power: ['air'],
+      power: ['pneumatic'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/alr-steel-chisel-scalers/ALR-5-Machine-Slider.jpg'
               ],
-      info: 'Light Weight,Compact,Versatile',
+      info: '200 SQFT. Per hour, 6-8CFM at 90 PSI',
       number: ['C10301'] //add diferent sizes as different machines.
     },
     ALRBS: {
-      apps: ['vinyl', 'linoleum', 'ceramic', 'carpet', 'rubber', 'paint', 'ice', 'corrosion', 'oil', 'glue'],
+      apps: ['vinyl', 'linoleum', 'ceramic', 'carpet', 'rubber', 'paint', 'ice', 'corrosion', 'oil', 'glue/adhesive'],
       depth: -1,
-      recJobSize: 0,
+      //recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: false,
       edges: false,
-      power: ['air'],
+      power: ['pneumatic'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/big-stick-chisel-scalers/ALR-BS-Straight-Machine-Slider.jpg'
               ],
-      info: 'Light Weight,Heavy Duty,Versatile',
+      info: '300 SQFT. Per hour, 12-15CFM at 90 PSI',
       number: ['27100'] //add ERGO model as seperate machine
     },
     TS8: {
       apps: ['vinyl', 'linoleum', 'carpet', 'VCT'],
       depth: -1,
-      recJobSize: 0,
+      //recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: false,
@@ -47,13 +49,13 @@ export default function EditLayer(props: any) {
       image: [
               'https://portal.edcoinc.com/storage/product-slider/8-manual-tile-shark-floor-stripper/TS-8-Machine-Slider.jpg'
               ],
-      info: 'Light Weight,Heavy Duty,High Production Rate',
+      info: '200 SQFT. Per Hour, 3/4HP 115V/15A',
       number: ['94400']
     },
     SEC: {
-      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots', 'sealer'],
+      apps: ['glue/adhesive', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
       depth: 0,
-      recJobSize: 0,
+      //recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: true,
@@ -62,13 +64,13 @@ export default function EditLayer(props: any) {
       image: [
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-single-disc-floor-grinder/SEC-NG-Machine-Slider.jpg'
               ],
-      info: 'Small Scale,Residential,Versatile',
+      info: '250 SQFT. Per Hour,1.5HP 115V/15A, 1/32" depth per pass, Vac 200 recommended',
       number: ['59800']
     },
     _2GC: {
-      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots', 'sealer'],
+      apps: ['glue/adhesive', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
       depth: 0,
-      recJobSize: 0,
+      //recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: true,
@@ -79,13 +81,13 @@ export default function EditLayer(props: any) {
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-dual-disc-floor-grinder/2EC-NG-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-dual-disc-floor-grinder/2EC-NG-Machine-Slider.jpg'
               ],
-      info: 'Mid Scale,Commercial,Versatile',
+      info: '500 SQFT. Per Hour, [varies], 1/32" depth per pass, Vac 200 recommended', //make this an array like part number and image
       number: ['59300', '59200', '59600']
     },
     _2DHD: {
-      apps: ['glue', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual', 'high spots', 'sealer'],
+      apps: ['glue/adhesive', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
       depth: 0,
-      recJobSize: 2,
+      //recJobSize: 2,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: true,
@@ -96,13 +98,13 @@ export default function EditLayer(props: any) {
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-heavy-duty-floor-grinder-polisher/2D-HD-Electric-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-heavy-duty-floor-grinder-polisher/2D-HD-Propane-Machine-Slider.jpg'
               ],
-      info: 'Large Scale,Industrial,Versatile',
+      info: '1000 SQFT. Per Hour, [varies], 1/32" depth per pass, Vac 200 recommended',
       number: ['58100', '58200']
     },
     TL9: {
       apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'high spots', 'sealer'],
       depth: 0,
-      recJobSize: 0,
+      //recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: true,
@@ -111,13 +113,13 @@ export default function EditLayer(props: any) {
       image: [
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-turbo-lite-grinder/TL-9-Machine-Slider.jpg'
               ],
-      info: 'Light Weight,Compact,Versatile',
+      info: '400 SQFT. Per Hour, 1.5HP 115V/15A, 1/32" depth per pass, Vac 200 recommended',
       number: ['58900']
     },
     TMC7: {
-      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'edges', 'residual', 'high spots', 'sealer'],
+      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'edges', 'residual glue/adhesive', 'high spots', 'sealer'],
       depth: 0,
-      recJobSize: 0,
+      //recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: true,
@@ -126,13 +128,13 @@ export default function EditLayer(props: any) {
       image: [
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-7-turbo-edge-grinder/TMC-7-Electric-Machine-Slider.jpg'
               ],
-      info: 'Light Weight,Compact,Edges',
+      info: '800 Lineal ft. Per Hour, 2HP 115V/20A, 1/32" depth per pass, Vac 200 recommended',
       number: ['57200']
     },
     TG10: {
       apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'high spots', 'sealer'],
       depth: 1,
-      recJobSize: 0,
+      //recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: true,
@@ -144,14 +146,14 @@ export default function EditLayer(props: any) {
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Electric-Machine.jpg',
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Propane-Machine-Slider.jpg'
               ],
-      info: 'Aggressive,Residential,Versatile',
+      info: '500 SQFT. Per Hour, [varies], 1/16" depth per pass, Vac 290 recommended',
       number: ['56600', '56900', '56800', '56700']
     },
     //make trip hazard surface`
     CPL8: {
       apps: ['leveling', 'rubber', 'concrete', 'trip hazard', 'high spots'],
       depth: 1,
-      recJobSize: 0,
+      //recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: false,
@@ -161,13 +163,13 @@ export default function EditLayer(props: any) {
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-scari-lite-crete-planer-r/CPL-8-Gas-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-scari-lite-crete-planer-r/CPL-8-Electric-Machine-Slider.jpg'
               ],
-      info: 'Small Scale, Residential, Removal',
+      info: '250 SQFT. Per Hour, [varies], 1/32" depth per pass, Vac 200 recommended',
       number: ['69500', '69300']
     },
     CPM8: {
       apps: ['leveling', 'concrete', 'trip hazard', 'rubber', 'high spots'],
       depth: 2,
-      recJobSize: 0,
+      //recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: false,
@@ -178,13 +180,13 @@ export default function EditLayer(props: any) {
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8-Electric-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8%20Propane%20Machine%20Slider.jpg'
               ], 
-      info: 'Mid Scale, Commercial, Removal',
+      info: '500 SQFT. Per Hour, [varies], 1/8" depth per pass, Vac 200 recommended',
       number: ['79300', '79500', '72600']
     },
     CPM10: {
       apps: ['leveling', 'concrete', 'trip hazard', 'rubber', 'high spots'],
       depth: 2,
-      recJobSize: 1,
+      //recJobSize: 1,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: false,
@@ -194,20 +196,20 @@ export default function EditLayer(props: any) {
               'https://portal.edcoinc.com/storage/product-slider/10-walk-behind-crete-planer-r/CPM-10-Gas-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/10-walk-behind-crete-planer-r/CPM-10-Electric-Machine-Slider.jpg'
               ],
-      info: 'Large Scale, Industrial, Removal',
+      info: '700 SQFT. Per Hour, [varies], 1/8" depth per pass, Vac 290 recommended',
       number: ['69100', '69200']
     },
     CD5: {
       apps: ['leveling', 'concrete', 'trip hazard', 'high spots'],
       depth: 3,
-      recJobSize: 0,
+      //recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: false,
       edges: false,
-      power: ['air'],
+      power: ['pneumatic'],
       image: ['https://portal.edcoinc.com/storage/product-slider/5-head-crete-crusher-r/CD-5-Machine-Slider.jpg'],
-      info: 'Aggressive, Rough, Removal',
+      info: '250 SQFT. Per Hour, 160CFM at 100PSI, 1/4" depth per pass, Vac 200 recommended',
       number: ['63100']
     }
   }
@@ -261,7 +263,7 @@ export default function EditLayer(props: any) {
   }
 
   //called to compile list given a layer object
-  const compileMachineList = (layerInstance:any) => {
+  const compileMachineList = (layerInstance: any) => {
       //create new array
       let validMachineList: string[] = [];
       let invalidResons:any[] = [];
@@ -274,7 +276,7 @@ export default function EditLayer(props: any) {
           materialRemoved: false,
           materialThickness: false,
           //finishedSurface: false,
-          jobSize: false,
+          //jobSize: false,
           edger: true,
           powerType: false
         }
@@ -295,7 +297,7 @@ export default function EditLayer(props: any) {
         }
         
         if(allMachineData[key].depth == layerInstance.materialThickness){
-            machineChecklist.materialThickness = true;
+          machineChecklist.materialThickness = true;
         }else if(allMachineData[key].depth == -1){
           machineChecklist.materialThickness = true;
         }
@@ -316,6 +318,9 @@ export default function EditLayer(props: any) {
           }
         }
     
+
+
+
         let validateMachine:boolean = true;
     
         Object.keys(machineChecklist).forEach((item) => {
@@ -360,6 +365,8 @@ export default function EditLayer(props: any) {
     //layer 1
     if(props.layerObject.sublayerObjects[0] !== undefined){
       generatedList = compileMachineList(props.layerObject.sublayerObjects[0])
+
+      console.log(generatedList)
 
       if(generatedList.machines.length == 0){
         setmatchingMachinesL1(substituteMachine(generatedList))
@@ -444,7 +451,7 @@ export default function EditLayer(props: any) {
       {/* layer 1 accordion open/close button */}
         {matchingMachinesL1 &&
           <ListButton
-            lable={`First Layer (${matchingMachinesL1.machines.length})`}
+            lable={`First Layer`}
             active={selectedLayerState == 0 ? true : false}
             onClick={() => {handleMenuState(0)}}
             selected={props.layerObject.sublayerObjects[0].machine !== ''}
@@ -478,7 +485,7 @@ export default function EditLayer(props: any) {
       {/* layer 2 accordion open/close button, if there is a layer 2 */}
         {props.layerObject.layerNumber >= 2 && matchingMachinesL2 !== undefined  &&
           <ListButton
-            lable={`Second Layer (${matchingMachinesL2.machines.length})`}
+            lable={`Second Layer`}
             active={selectedLayerState == 1 ? true : false}
             onClick={() => {handleMenuState(1)}}
             selected={props.layerObject.sublayerObjects[1].machine !== ''}
@@ -513,7 +520,7 @@ export default function EditLayer(props: any) {
       {/* layer 3 accordion open/close button, if there is a layer 2 */}
         {props.layerObject.layerNumber >= 3 && matchingMachinesL3 !== undefined  &&
           <ListButton
-            lable={`Third Layer (${matchingMachinesL3.machines.length})`}
+            lable={`Third Layer`}
             active={selectedLayerState == 2 ? true : false}
             onClick={() => {handleMenuState(2)}}
             selected={props.layerObject.sublayerObjects[2].machine !== ''}
@@ -547,7 +554,7 @@ export default function EditLayer(props: any) {
       {/* layer 4 accordion open/close button, if there is a layer 2 */}
         {props.layerObject.layerNumber >= 4 && matchingMachinesL4 !== undefined  &&
           <ListButton
-            lable={`Fourth Layer (${matchingMachinesL4.machines.length})`}
+            lable={`Fourth Layer`}
             active={selectedLayerState == 3 ? true : false}
             onClick={() => {handleMenuState(3)}}
             selected={props.layerObject.sublayerObjects[3].machine !== ''}
@@ -577,6 +584,10 @@ export default function EditLayer(props: any) {
                 />
               )        
         }
+
+        {props.allowProgress == 2 &&
+            <NextButton lable={'Next: Tooling'} onClick={() => props.nextFunction()} />
+          }
     </div>
   )
 }

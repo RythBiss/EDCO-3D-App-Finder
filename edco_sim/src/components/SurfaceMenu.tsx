@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import ListButton from './ListButton';
+import NextButton from './NextButton';
 import ClusterButton from './ClusterButton';
 //import RentalOrder from './RentalOrder';
 
@@ -24,47 +25,62 @@ export default function SurfaceMenu(props:any) {
         vinyl: {
             name: 'Vinyl',
             layers: 4,
-            sublayers: ['vinyl', 'glue', 'residual', 'concrete']
+            sublayers: ['vinyl', 'glue/adhesive', 'residual glue/adhesive', 'concrete']
         },
         linoleum: {
             name: 'Linoleum',
             layers: 4,
-            sublayers: ['linoleum', 'glue', 'residual', 'concrete']
+            sublayers: ['linoleum', 'glue/adhesive', 'residual glue/adhesive', 'concrete']
         },
         ceramic: {
             name: 'Ceramic',
             layers: 4,
-            sublayers: ['ceramic', 'glue', 'residual', 'concrete']
+            sublayers: ['ceramic', 'glue/adhesive', 'residual glue/adhesive', 'concrete']
+        },
+        thinset: {
+            name: 'Thinset',
+            layers: 3,
+            sublayers: ['thinset', 'residual glue/adhesive', 'concrete']
         },
         carpet: {
             name: 'Carpet',
             layers: 4,
-            sublayers: ['carpet', 'glue', 'residual', 'concrete']
+            sublayers: ['carpet', 'glue/adhesive', 'residual glue/adhesive', 'concrete']
         },
         mastic: {
             name: 'Mastic',
             layers: 3,
-            sublayers: ['mastic', 'residual', 'concrete']
+            sublayers: ['mastic', 'residual glue/adhesive', 'concrete']
         },
         paint: {
             name: 'Paint',
             layers: 2,
             sublayers: ['paint', 'concrete']
         },
-        glue: {
-            name: 'Glue',
-            layers: 3,
-            sublayers: ['glue', 'residual', 'concrete']
-        },
-        residual: {
-            name: 'Residual Glue',
-            layers: 2,
-            sublayers: ['residual', 'concrete']
-        },
         sealer: {
             name: 'Sealer',
             layers: 2,
             sublayers: ['sealer', 'concrete']
+        },
+        epoxy: {
+            name: 'Epoxy Coating',
+            layers: 2,
+            sublayers: ['epoxy', 'concrete']
+        },
+        glue: {
+            name: 'Glue/Adhesive',
+            layers: 3,
+            sublayers: ['glue/adhesive', 'residual glue/adhesive', 'concrete']
+        },
+        residual: {
+            name: 'Residual Glue/Adhesive',
+            layers: 2,
+            sublayers: ['residual glue/adhesive', 'concrete']
+        },
+        industrial: {
+            name: 'Industrial Buildup',
+            layers: 1,
+            sublayers: ['industrial']
         },
     }
 
@@ -72,22 +88,25 @@ export default function SurfaceMenu(props:any) {
     const jobSizeAnswers = ['1,000+', '2,000+', '5,000+'];
     const greenConcreteAnswers = ['No', 'Yes'];
     const edgeGrindingAnswers = ['No', 'Yes'];
-    const powerOptionAnswers = ['Gas', 'Electric', 'Electric 3 Phase', 'Propane', 'Air'];
+    const powerOptionAnswers = ['Gas', 'Electric', 'Electric 3 Phase', 'Propane', 'pneumatic'];
 
     const [matSelected, setMatSelected] = useState<boolean>(false);
+    const [thickSelected, setThickSelected] = useState<boolean>(false);
     const [sizeSelected, setSizeSelected] = useState<boolean>(false);
     const [greenSelected, setGreenSelected] = useState<boolean>(false);
     const [edgeSelected, setEdgeSelected] = useState<boolean>(false);
     const [powerSelected, setPowerSelected] = useState<boolean>(false);
 
     const [activeMaterial, setActiveMaterial] = useState<string>();
+    const [activeThickness, setActiveThickness] = useState<string>();
     const [activeSize, setActiveSize] = useState<string>();
     const [activeGreenConcrete, setActiveGreenConcrete] = useState<string>();
     const [activeEdgingNeeded, setActiveEdgingNeeded] = useState<string>();
     const [activePower, setActivePower] = useState<string>();
 
+    const [openedMenu, setOpenedMenu] = useState<number>(-1);
 
-    const [openedMenu, setOpenedMenu] = useState(-1);
+    const thicknessRemovedConditional = ['1/32', '1/16', '1/8', '1/4', '+1/4'];
 
     const populateMaterialRemovedAnswers = () => {
         let arr: string[] = []
@@ -113,6 +132,34 @@ export default function SurfaceMenu(props:any) {
         props.layerObject.setMaterialRemoved(material, layer, sublayers);
 
         setActiveMaterial(res)
+    }
+
+    const setThicknessHandler = (fraction: string) => {
+
+        setActiveThickness(fraction);
+
+
+        switch(fraction){
+            case '1/32':
+                props.layerObject.setMaterialThickness(0);
+                break;
+            case '1/16':
+                props.layerObject.setMaterialThickness(1);
+                break;
+            case '1/8':
+                props.layerObject.setMaterialThickness(2);
+                break;
+            case '1/4':
+                props.layerObject.setMaterialThickness(3);
+                break;
+            case '+1/4':
+                props.layerObject.setMaterialThickness(3);
+                break;
+            default:
+                props.layerObject.setMaterialThickness(0);
+        }
+
+        setThickSelected(true);
     }
     
     const setJobSize = (res: string) => {
@@ -154,6 +201,18 @@ export default function SurfaceMenu(props:any) {
         setActivePower(res)
     }
 
+    const isThicknessRelevant = () => {
+        if(props.layerObject){
+            return  props.layerObject.materialRemoved == 'concrete' ||
+                    props.layerObject.materialRemoved == 'trip hazard' ||
+                    props.layerObject.materialRemoved == 'high spots' ||
+                    props.layerObject.materialRemoved == 'epoxy coating' ||
+                    props.layerObject.materialRemoved == 'paint'
+        }
+
+        return false;
+    }
+
     useEffect(() => {
         if(props.layerObject){
             setMatSelected(props?.layerObject?.materialRemoved !== '');
@@ -161,7 +220,7 @@ export default function SurfaceMenu(props:any) {
             setGreenSelected(props?.layerObject?.greenConcrete !== null);
             setEdgeSelected(props?.layerObject?.edger !== null);
             setPowerSelected(props?.layerObject?.powerType !== '');
-        } 
+        }
     })
 
     useEffect(() =>{
@@ -170,10 +229,11 @@ export default function SurfaceMenu(props:any) {
             greenSelected == true &&
             edgeSelected == true &&
             powerSelected == true &&
+            ((isThicknessRelevant() == true && thickSelected == true) || isThicknessRelevant() == false) &&
             props.allowProgress == 0){
                 props.setAllowProgress(1)
         }
-    }, [matSelected, sizeSelected, greenSelected, edgeSelected, powerSelected])
+    }, [matSelected, sizeSelected, greenSelected, edgeSelected, powerSelected, thickSelected])
 
     useEffect(() => {
         console.log('progress reading from surfaces')
@@ -194,7 +254,7 @@ export default function SurfaceMenu(props:any) {
   return (
     <div className='col edit-menu'>
         {/* what application are you trying to solve? */}
-        <ListButton lable={'What is the material being removed?'} onClick={() => handleMenuState(1)} selected={matSelected} />
+        <ListButton lable={'Choose an application'} onClick={() => handleMenuState(1)} selected={matSelected} />
         {openedMenu == 1 &&
             <div className='cluster-btn-container'>
                 {materialRemovedAnswers.map((layer:any, i) => 
@@ -202,6 +262,21 @@ export default function SurfaceMenu(props:any) {
                         lable={layer.name} layerObject={props.layerObject} onClick={() => setMaterialRemoved(layer.name, layer.layers, layer.sublayers)} />
                 )}
             </div>
+        }
+
+        {/* How thick is the material? (only for concrete, highspots, epoxy coating, and paint). */}
+        {isThicknessRelevant() &&
+            <>
+                <ListButton lable={'How thick is the material?'} onClick={() => handleMenuState(2)} selected={thickSelected} />
+                {openedMenu == 2 &&
+                    <div className='cluster-btn-container'>
+                        {thicknessRemovedConditional.map((layer:any, i) => 
+                            <ClusterButton key={i} active={activeThickness == thicknessRemovedConditional[i]}
+                                lable={thicknessRemovedConditional[i]} layerObject={props.layerObject} onClick={() => setThicknessHandler(thicknessRemovedConditional[i])} />
+                        )}
+                    </div>
+                }
+            </>
         }
 
         {/* how big is the site? */}
@@ -246,6 +321,10 @@ export default function SurfaceMenu(props:any) {
                     lable={layer} layerObject={props.layerObject} onClick={() => setPowerType(layer)} />
                 )}
             </div>
+        }
+
+        {props.allowProgress == 1 &&
+            <NextButton lable={'Next: Machines'} onClick={() => props.nextFunction()} />
         }
     </div>
   )
