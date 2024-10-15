@@ -21,10 +21,6 @@ function App() {
   //locks clicking on tabs when previous selections have not been made.
 const [allowProgress, setAllowProgress] = useState<number>(0);
 
-useEffect(() => {
-    console.log("progress at " + allowProgress)
-}, [allowProgress])
-
 
   //keep new layer function incase users have multiple types of jobs to do
   class Layer{
@@ -45,6 +41,8 @@ useEffect(() => {
       this.layerNumber = 0;
       this.sublayers = [];
       this.sublayerObjects = [];
+      this.containsElectric = false;
+      this.containsDiamonds = false;
     }
 
     machine: string;
@@ -63,6 +61,8 @@ useEffect(() => {
     layerNumber: number;
     sublayers: string[];
     sublayerObjects: any[];
+    containsElectric: boolean;
+    containsDiamonds: boolean;
 
     //call for any state change to update react
     requestUpdate = () => {
@@ -178,11 +178,26 @@ useEffect(() => {
 
     setTooling(newTooling: string, layer: number,CSP: number, doUpdate: boolean = true): void{
       this.tooling = newTooling;
+
       if(this.sublayerObjects[layer] !== undefined){
         this.sublayerObjects[layer].tooling = newTooling;
         this.sublayerObjects[layer].CSP = CSP;
       }
       if(doUpdate == true) this.requestUpdate();
+    }
+
+    setContainsElectric(isElectric: boolean): void{
+
+      this.containsElectric = isElectric;
+
+      this.requestUpdate();
+    }
+
+    setContainsDiamonds(hasDiamonds: boolean): void{
+
+      this.containsDiamonds = hasDiamonds;
+
+      this.requestUpdate();
     }
 
     clearSelections = (range: number) =>{
@@ -196,6 +211,46 @@ useEffect(() => {
           setAllowProgress(range)
         }
       })
+    }
+
+
+
+    getMaterialForPDF = () => {
+      return `Removing ${this.materialRemoved}.`;
+    }
+
+    getJobSizeForPDF = () => {
+
+      switch(this.jobSize){
+        case 0: return `Less than 500 sqft.`;
+        case 1: return `Over 500 sqft.`;
+        case 2: return `Over 1,000 sqft.`;
+        case 3: return `Over 2,000 sqft.`;
+        case 4: return `Over 5,000 sqft.`;
+      }
+    }
+
+    getGreenForPDF = () => {
+
+      if(this.greenConcrete == true){
+        return "Yes"
+      } else {
+        return "No"
+      }
+    }
+
+    geteEdgerforPDF = () => {
+
+      if(this.edger == true){
+        return "Yes"
+      } else {
+        return "No"
+      }
+    }
+
+    getePowerforPDF = () => {
+
+      return this.powerType;
     }
   }
 

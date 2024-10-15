@@ -1,109 +1,12 @@
 import { useEffect, useState } from 'react'
 import ListButton from './ListButton'
 import NextButton from './NextButton';
+import { toolsByApplicationAndMachine, toolingHasDiamonds } from '../functions';
+
 
 
 export default function ToolingMenu(props: any) {
   //temporary tooling data table until backend is developed.
-  const toolsByApplicationAndMachine: any = {
-    Scaler: {
-      apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue/adhesive'],
-      name: 'Chisel Scalers',
-      machines: ['ALR'],
-      image: 'https://edcostore.com/wp-content/uploads/2017/06/C10302_4_SteelChisel-450x450.jpg',
-      CSP: 1,
-      info: 'Ceramic,Ice,Glue',
-      number: ['C10302']
-    },
-    // ScalerBS: {
-    //   apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue/adhesive'],
-    //   name: 'Chisel Scalers',
-    //   machines: ['ALRBS'],
-    //   image: 'https://edcostore.com/wp-content/uploads/2017/06/27033_BigStick_3_SingleBevel.jpg',
-    //   CSP: 1,
-    //   info: 'Used for hard floor coverings: pergo flooring, pre-cut wood flooring, hard material build up, etc.' 
-    // },
-    Scraper: {
-      apps: ['vinyl', 'linoleum', 'carpet', 'rubber', 'paint', 'corrosion', 'oil'],
-      name: 'Scrapper Blades',
-      machines: ['ALR'],
-      image: 'https://edcostore.com/wp-content/uploads/2017/06/C10305_ScraperBlades.jpg',
-      CSP: 1,
-      info: 'Vinyl,Carpet,Glue',
-      number: ['C10305']
-    }, 
-    // ScraperBS: {
-    //   apps: ['vinyl', 'linoleum', 'carpet', 'rubber', 'paint', 'corrosion', 'oil'],
-    //   name: 'Scrapper Blades',
-    //   machines: ['ALRBS'],
-    //   image: 'https://edcostore.com/wp-content/uploads/2018/04/27035_ScraperBlade-1.jpg',
-    //   CSP: 1,
-    //   info: 'Used for soft flooring flooring removal: VCT, vinyl, linoleum, carpet, thin set, mortar, material build up, flaking paint, and brittle adhesives.'
-    // }, 
-    FloorStripperRigid: {
-      apps: ['vinyl', 'linoleum', 'carpet', 'VCT'],
-      name: '8" Rigid Scrapper Blade',
-      machines: ['TS8'],
-      image: 'https://edcostore.com/wp-content/uploads/2017/12/28030_TileSharkBlade-450x450.jpg',
-      CSP: 1,
-      info: 'Vinyl,Carpet,VCT',
-      number: ['28040']
-    },
-    MagnaBlades: {
-      apps: ['glue/adhesive', 'paint', 'mastic'],
-      name: 'Magna-Blades',
-      machines: ['SEC', 'TG10', '_2DHD', '_2GC'],
-      image: 'https://edcostore.com/wp-content/uploads/2017/04/12501LC_MagnaBlade-450x450.jpg',
-      CSP: 1,
-      info: 'Glue,Paint,Mastic',
-      number: ['12501LC']
-    },
-    DymaDots: {
-      apps: ['paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
-      name: 'Dyma-Dots',
-      machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
-      image: 'https://edcostore.com/wp-content/uploads/2017/04/QC2B-MC-0030_DoubleDotGray-450x450.jpg',
-      CSP: 1,
-      info: 'General Grinding,Epoxy,Residual Glue',
-      number: ['QC2B-MC-0030']
-    },
-    PCDbacking: {
-      apps: ['industrial buildup', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
-      name: 'PCD w/Backing Segment',
-      machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
-      image: 'https://edcostore.com/wp-content/uploads/2017/04/QC-PCD1-LB_DymaPCD_Blue-450x450.jpg',
-      CSP: 3,
-      info: 'Aggressive Grinding,Industrial Buildup,Epoxy',
-      number: ['QC-PCD1-LB']
-    },
-    CarbideCutter: {
-      apps: ['leveling', 'rubber', 'concrete', 'trip hazard', 'high spots'],
-      name: 'Carbide Cutter',
-      machines: ['CPM8', 'CPL8', 'CPM10'],
-      image: 'https://edcostore.com/wp-content/uploads/2017/05/20156_6_PointBlueCutter-450x450.jpg',
-      CSP: 6,
-      info: 'Concrete Removal,Trip Hazard Removal,High Spots',
-      number: ['20156']
-    },
-    FivePoint: {
-      apps: ['concrete', 'trip hazard', 'high spots'],
-      name: '5-Point Bit',
-      machines: ['CD5'],
-      image: 'https://edcostore.com/wp-content/uploads/2017/06/18810_5PointCarbideBit-450x450.jpg',
-      CSP: 9,
-      info: 'Heavy Concrete Removal,Trip Hazard removal,High Spots',
-      number: ['18810']
-    },
-    NinePoint: {
-      apps: ['concrete', 'trip hazard', 'high spots'],
-      name: '9-Point Bit',
-      machines: ['CD5'],
-      image: 'https://edcostore.com/wp-content/uploads/2017/06/18820_9PointCarbideBit-450x450.jpg',
-      CSP: 9,
-      info: 'Heavy Concrete Removal,Trip Hazard removal,High Spots',
-      number: ['18820']
-    },
-  }
 
   const [matchingTooling, setMatchingTooling] = useState<string[][]>([]);
   const [openTab, setOpenTab] = useState<number>(-1);
@@ -114,6 +17,10 @@ export default function ToolingMenu(props: any) {
 
   const setTooling = (newTooling: string, layer:number, CSP: number) => {
     props.layerObject.setTooling(newTooling, layer, CSP);
+    
+    if(toolingHasDiamonds(newTooling) == true){
+      props.layerObject.setContainsDiamonds(true)
+    }
     //setSelectedSurface(newTooling);
   }
 
@@ -128,16 +35,11 @@ export default function ToolingMenu(props: any) {
       })
   
       if(machinesSelected){
-        console.log('setting progress in tooling')
         props.setAllowProgress(3);
       }
     })
 
-    useEffect(() => {
-      console.log("progress " + props.allowProgress)
-    }, [])
 
-  //
   useEffect(() => {
     //2D array to store tooling options
     let fourLayers: any[] = [[],[],[],[]]

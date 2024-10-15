@@ -2,90 +2,13 @@ import { useState, useEffect } from 'react'
 import ListButton from './ListButton';
 import NextButton from './NextButton';
 import ClusterButton from './ClusterButton';
-//import RentalOrder from './RentalOrder';
+import { populateMaterialRemovedAnswers } from '../functions';
+
 
 export default function SurfaceMenu(props:any) {
-    //temporary application data table until backend is developed.
-    const applicationDataObjects: any = {
-        concrete: {
-            name: 'Concrete',
-            layers: 1,
-            sublayers: ['concrete']
-        },
-        triphazard: {
-            name: 'Trip Hazard',
-            layers: 2,
-            sublayers: ['trip hazard', 'concrete']
-        },
-        highspots: {
-            name: 'High Spots',
-            layers: 2,
-            sublayers: ['high spots', 'concrete']
-        },
-        vinyl: {
-            name: 'Vinyl',
-            layers: 4,
-            sublayers: ['vinyl', 'glue/adhesive', 'residual glue/adhesive', 'concrete']
-        },
-        linoleum: {
-            name: 'Linoleum',
-            layers: 4,
-            sublayers: ['linoleum', 'glue/adhesive', 'residual glue/adhesive', 'concrete']
-        },
-        ceramic: {
-            name: 'Ceramic',
-            layers: 4,
-            sublayers: ['ceramic', 'glue/adhesive', 'residual glue/adhesive', 'concrete']
-        },
-        thinset: {
-            name: 'Thinset',
-            layers: 3,
-            sublayers: ['thinset', 'residual glue/adhesive', 'concrete']
-        },
-        carpet: {
-            name: 'Carpet',
-            layers: 4,
-            sublayers: ['carpet', 'glue/adhesive', 'residual glue/adhesive', 'concrete']
-        },
-        mastic: {
-            name: 'Mastic',
-            layers: 3,
-            sublayers: ['mastic', 'residual glue/adhesive', 'concrete']
-        },
-        paint: {
-            name: 'Paint',
-            layers: 2,
-            sublayers: ['paint', 'concrete']
-        },
-        sealer: {
-            name: 'Sealer',
-            layers: 2,
-            sublayers: ['sealer', 'concrete']
-        },
-        epoxy: {
-            name: 'Epoxy Coating',
-            layers: 2,
-            sublayers: ['epoxy', 'concrete']
-        },
-        glue: {
-            name: 'Glue/Adhesive',
-            layers: 3,
-            sublayers: ['glue/adhesive', 'residual glue/adhesive', 'concrete']
-        },
-        residual: {
-            name: 'Residual Glue/Adhesive',
-            layers: 2,
-            sublayers: ['residual glue/adhesive', 'concrete']
-        },
-        industrial: {
-            name: 'Industrial Buildup',
-            layers: 1,
-            sublayers: ['industrial']
-        },
-    }
 
     const [materialRemovedAnswers, setmaterialRemovedAnswers] = useState<string[]>([]);
-    const jobSizeAnswers = ['1,000+', '2,000+', '5,000+'];
+    const jobSizeAnswers = ['500-', '500+', '1,000+', '2,000+', '5,000+'];
     const greenConcreteAnswers = ['No', 'Yes'];
     const edgeGrindingAnswers = ['No', 'Yes'];
     const powerOptionAnswers = ['Gas', 'Electric', 'Electric 3 Phase', 'Propane', 'pneumatic'];
@@ -108,15 +31,7 @@ export default function SurfaceMenu(props:any) {
 
     const thicknessRemovedConditional = ['1/32', '1/16', '1/8', '1/4', '+1/4'];
 
-    const populateMaterialRemovedAnswers = () => {
-        let arr: string[] = []
 
-        Object.keys(applicationDataObjects).map((key) =>{
-            arr.push(applicationDataObjects[key])
-        })
-
-        setmaterialRemovedAnswers(arr);
-    }
 
     const handleMenuState = (newState: number) => {
         if(newState == openedMenu){
@@ -165,14 +80,20 @@ export default function SurfaceMenu(props:any) {
     const setJobSize = (res: string) => {
 
         switch(res){
-            case '1,000+':
+            case '500-':
                 props.layerObject.setJobSize(0);
                 break;
-            case '2,000+':
+            case '500+':
                 props.layerObject.setJobSize(1);
                 break;
-            case '5,000+':
+            case '1,000+':
                 props.layerObject.setJobSize(2);
+                break;
+            case '2,000+':
+                props.layerObject.setJobSize(3);
+                break;
+            case '5,000+':
+                props.layerObject.setJobSize(4);
                 break;
         }
 
@@ -236,7 +157,6 @@ export default function SurfaceMenu(props:any) {
     }, [matSelected, sizeSelected, greenSelected, edgeSelected, powerSelected, thickSelected])
 
     useEffect(() => {
-        console.log('progress reading from surfaces')
         if(props.allowProgress == 0){
             setMatSelected(false)
             setSizeSelected(false)
@@ -247,8 +167,8 @@ export default function SurfaceMenu(props:any) {
     }, [props.allowProgress])
     
     useEffect(() => {
-        populateMaterialRemovedAnswers()
-        console.log('loading surfaces menu')
+        setmaterialRemovedAnswers(populateMaterialRemovedAnswers()
+    );
     }, [])
 
   return (

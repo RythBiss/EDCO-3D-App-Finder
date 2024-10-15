@@ -4,6 +4,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { getModelNameBySurfacename } from '../functions';
+
 
 export default function Viewport(props: any) {
 
@@ -33,7 +35,8 @@ export default function Viewport(props: any) {
 
 
   const addSlabToScene = (surface: string, isRenderedLayer: boolean) => {
-    loader.load(`Models/${surface}.gltf`, (gltf) => {
+
+    loader.load(`Models/${getModelNameBySurfacename(surface)}.gltf`, (gltf) => {
       loadedModels.current.push(gltf.scene)
 
       gltfModel.current = gltf.scene;
@@ -120,7 +123,6 @@ export default function Viewport(props: any) {
                 
               }
             }
-          console.log("mod surface " + modifiedSurface)
 
         addSlabToScene(modifiedSurface, true);
 
