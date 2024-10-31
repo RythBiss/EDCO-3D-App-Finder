@@ -91,6 +91,7 @@ export default function ToolingMenu(props: any) {
             <ListButton
               key={i}
               lable={toolsByApplicationAndMachine[tool].name}
+              displayName={toolsByApplicationAndMachine[tool].name}
               indent={1}
               popupOn={props.popupOn}
               showMenu={true} 
@@ -101,6 +102,7 @@ export default function ToolingMenu(props: any) {
               setIsInfoPopupOnupYPos={props.setPopupYPos}
               popupInfo={toolsByApplicationAndMachine[tool].info}
               partNumber={toolsByApplicationAndMachine[tool].number[0]}
+              layerObject={props.layerObject}
               />
         )}
 
@@ -114,6 +116,7 @@ export default function ToolingMenu(props: any) {
             <ListButton
               key={i}
               lable={toolsByApplicationAndMachine[tool].name}
+              displayName={toolsByApplicationAndMachine[tool].name}
               indent={1} popupOn={props.popupOn} 
               showMenu={true}
               icon={toolsByApplicationAndMachine[tool].image}
@@ -123,6 +126,7 @@ export default function ToolingMenu(props: any) {
               setIsInfoPopupOnupYPos={props.setPopupYPos}
               popupInfo={toolsByApplicationAndMachine[tool].info}
               partNumber={toolsByApplicationAndMachine[tool].number[0]}
+              layerObject={props.layerObject}
               />
         )}
 
@@ -136,6 +140,7 @@ export default function ToolingMenu(props: any) {
             <ListButton
               key={i}
               lable={toolsByApplicationAndMachine[tool].name}
+              displayName={toolsByApplicationAndMachine[tool].name}
               indent={1} popupOn={props.popupOn}
               showMenu={true}
               icon={toolsByApplicationAndMachine[tool].image}
@@ -145,6 +150,7 @@ export default function ToolingMenu(props: any) {
               setIsInfoPopupOnupYPos={props.setPopupYPos}
               popupInfo={toolsByApplicationAndMachine[tool].info}
               partNumber={toolsByApplicationAndMachine[tool].number[0]}
+              layerObject={props.layerObject}
               />
         )}
       
@@ -158,6 +164,7 @@ export default function ToolingMenu(props: any) {
             <ListButton
               key={i}
               lable={toolsByApplicationAndMachine[tool].name}
+              displayName={toolsByApplicationAndMachine[tool].name}
               indent={1}
               popupOn={props.popupOn}
               showMenu={true}
@@ -168,6 +175,7 @@ export default function ToolingMenu(props: any) {
               setIsInfoPopupOnupYPos={props.setPopupYPos}
               popupInfo={toolsByApplicationAndMachine[tool].info}
               partNumber={toolsByApplicationAndMachine[tool].number[0]}
+              layerObject={props.layerObject}
               />
         )}
 

@@ -252,6 +252,7 @@ export default function EditLayer(props: any) {
                 showMenu={true}
                 indent={1}
                 lable={item}
+                displayName={allMachineData[item].displayName[getPowerTypeImageIndex(item)]}
                 icon={allMachineData[item].image[getPowerTypeImageIndex(item)]}
                 active={props.layerObject.sublayerObjects[0].machine == item ? true : false}
                 onClick={() => setMachine(item, 0, allMachineData[item].number[getPowerTypeImageIndex(item)])}
@@ -259,6 +260,7 @@ export default function EditLayer(props: any) {
                 setIsInfoPopupOnupYPos={props.setPopupYPos}
                 popupInfo={allMachineData[item].info}
                 partNumber={allMachineData[item].number[getPowerTypeImageIndex(item)]}
+                layerObject={props.layerObject}
                 />
               )        
         }
@@ -286,6 +288,7 @@ export default function EditLayer(props: any) {
                 showMenu={true}
                 indent={1}
                 lable={item}
+                displayName={allMachineData[item].displayName[getPowerTypeImageIndex(item)]}
                 icon={allMachineData[item].image[getPowerTypeImageIndex(item)]}
                 active={props.layerObject.sublayerObjects[1].machine == item ? true : false}
                 onClick={() => setMachine(item, 1, allMachineData[item].number[getPowerTypeImageIndex(item)])}
@@ -293,7 +296,7 @@ export default function EditLayer(props: any) {
                 setIsInfoPopupOnupYPos={props.setPopupYPos}
                 popupInfo={allMachineData[item].info}
                 partNumber={allMachineData[item].number[getPowerTypeImageIndex(item)]}
-                
+                layerObject={props.layerObject}
                 />
               )        
         }
@@ -321,6 +324,7 @@ export default function EditLayer(props: any) {
                 showMenu={true}
                 indent={1}
                 lable={item}
+                displayName={allMachineData[item].displayName[getPowerTypeImageIndex(item)]}
                 icon={allMachineData[item].image[getPowerTypeImageIndex(item)]}
                 active={props.layerObject.sublayerObjects[2].machine == item ? true : false}
                 onClick={() => setMachine(item, 2, allMachineData[item].number[getPowerTypeImageIndex(item)])}
@@ -328,6 +332,7 @@ export default function EditLayer(props: any) {
                 setIsInfoPopupOnupYPos={props.setPopupYPos}
                 popupInfo={allMachineData[item].info}
                 partNumber={allMachineData[item].number[getPowerTypeImageIndex(item)]}
+                layerObject={props.layerObject}
                 />
               )        
         }
@@ -355,6 +360,7 @@ export default function EditLayer(props: any) {
                 showMenu={true} 
                 indent={1}
                 lable={item}
+                displayName={allMachineData[item].displayName[getPowerTypeImageIndex(item)]}
                 icon={allMachineData[item].image[getPowerTypeImageIndex(item)]}
                 active={props.layerObject.sublayerObjects[3].machine == item ? true : false}
                 onClick={() => setMachine(item, 3, allMachineData[item].number[getPowerTypeImageIndex(item)])}
@@ -362,6 +368,7 @@ export default function EditLayer(props: any) {
                 setIsInfoPopupOnupYPos={props.setPopupYPos}
                 popupInfo={allMachineData[item].info}
                 partNumber={allMachineData[item].number[getPowerTypeImageIndex(item)]}
+                layerObject={props.layerObject}
                 />
               )        
         }

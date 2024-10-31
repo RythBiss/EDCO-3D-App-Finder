@@ -12,8 +12,9 @@ export const allMachineData: any = {
       image: [
               'https://portal.edcoinc.com/storage/product-slider/alr-steel-chisel-scalers/ALR-5-Machine-Slider.jpg'
               ],
-      info: '200 SQFT. Per hour, 6-8CFM at 90 PSI',
-      number: ['C10301'] //add diferent sizes as different machines.
+      info: ['200 SQFT. Per hour, 6-8CFM at 90 PSI'],
+      number: ['C10301'], //add diferent sizes as different machines.
+      displayName: ['ALR']
     },
     ALRBS: {
       apps: ['vinyl', 'linoleum', 'ceramic', 'carpet', 'rubber', 'paint', 'ice', 'corrosion', 'oil', 'glue/adhesive'],
@@ -27,8 +28,9 @@ export const allMachineData: any = {
       image: [
               'https://portal.edcoinc.com/storage/product-slider/big-stick-chisel-scalers/ALR-BS-Straight-Machine-Slider.jpg'
               ],
-      info: '300 SQFT. Per hour, 12-15CFM at 90 PSI',
-      number: ['27100'] //add ERGO model as seperate machine
+      info: ['300 SQFT. Per hour, 12-15CFM at 90 PSI'],
+      number: ['27100'], //add ERGO model as seperate machine
+      displayName: ['ALR-BS']
     },
     TS8: {
       apps: ['vinyl', 'linoleum', 'carpet', 'VCT'],
@@ -38,61 +40,65 @@ export const allMachineData: any = {
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: false,
       edges: false,
-      power: ['electric'],
+      power: ['electric residential'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/8-manual-tile-shark-floor-stripper/TS-8-Machine-Slider.jpg'
               ],
-      info: '200 SQFT. Per Hour, 3/4HP 115V/15A',
-      number: ['94400']
+      info: ['200 SQFT. Per Hour, 3/4HP 115V/15A'],
+      number: ['94400'],
+      displayName: ['TS-8']
     },
     SEC: {
-      apps: ['glue/adhesive', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
+      apps: ['glue/adhesive', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer','thinset'],
       depth: 0,
       //recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: true,
       edges: false,
-      power: ['electric'],
+      power: ['electric residential'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-single-disc-floor-grinder/SEC-NG-Machine-Slider.jpg'
               ],
-      info: '250 SQFT. Per Hour,1.5HP 115V/15A, 1/32" depth per pass, Vac 200 recommended',
-      number: ['59800']
+      info: ['250 SQFT. Per Hour,1.5HP 115V/15A, 1/32" depth per pass, Vac 200 recommended'],
+      number: ['59800'],
+      displayName: ['SEC-NG']
     },
     _2GC: {
-      apps: ['glue/adhesive', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
+      apps: ['glue/adhesive', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer','thinset'],
       depth: 0,
       //recJobSize: 0,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: true,
       edges: false,
-      power: ['gas', 'electric', 'electric 3 phase'],
+      power: ['gas', 'electric commercial', 'electric industrial'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-dual-disc-floor-grinder/2GC-NG-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-dual-disc-floor-grinder/2EC-NG-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-dual-disc-floor-grinder/2EC-NG-Machine-Slider.jpg'
               ],
-      info: '500 SQFT. Per Hour, [varies], 1/32" depth per pass, Vac 200 recommended', //make this an array like part number and image
-      number: ['59300', '59200', '59600']
+      info: ['500 SQFT. Per Hour, Honda GXV390, 1/32" depth per pass, Vac 200 recommended','500 SQFT. Per Hour, 1.5 HP 115V/20A, 1/32" depth per pass, Vac 200 recommended','500 SQFT. Per Hour, 3HP 230V/15A, 1/32" depth per pass, Vac 200 recommended'], // ========================================== VARIES
+      number: ['59300', '59200', '59600'],
+      displayName: ['2GC-NG','2EC-NG','2EC-NG']
     },
     _2DHD: {
-      apps: ['glue/adhesive', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
+      apps: ['glue/adhesive', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer','thinset'],
       depth: 0,
       //recJobSize: 2,
       onCrete: true,
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: true,
       edges: false,
-      power: ['electric', 'propane'],
+      power: ['electric industrial', 'propane'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-heavy-duty-floor-grinder-polisher/2D-HD-Electric-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-heavy-duty-floor-grinder-polisher/2D-HD-Electric-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-heavy-duty-floor-grinder-polisher/2D-HD-Propane-Machine-Slider.jpg'
               ],
-      info: '1000 SQFT. Per Hour, [varies], 1/32" depth per pass, Vac 200 recommended',
-      number: ['58100', '58200']
+      info: ['1000 SQFT. Per Hour, 5HP 230V/30A, 1/32" depth per pass, Vac 200 recommended','1000 SQFT. Per Hour, LEHR LX600V, 1/32" depth per pass, Vac 200 recommended'], // ========================================== VARIES
+      number: ['58100', '58200'],
+      displayName: ['2D-HDE','2D-HDP']
     },
     TL9: {
       apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'high spots', 'sealer'],
@@ -102,28 +108,30 @@ export const allMachineData: any = {
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: true,
       edges: false,
-      power: ['electric'],
+      power: ['electric residential'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-turbo-lite-grinder/TL-9-Machine-Slider.jpg'
               ],
-      info: '400 SQFT. Per Hour, 1.5HP 115V/15A, 1/32" depth per pass, Vac 200 recommended',
-      number: ['58900']
+      info: ['400 SQFT. Per Hour, 1.5HP 115V/15A, 1/32" depth per pass, Vac 200 recommended'],
+      number: ['58900'],
+      displayName: ['TL-9']
     },
-    TMC7: {
-      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'edges', 'residual glue/adhesive', 'high spots', 'sealer'],
-      depth: 0,
-      //recJobSize: 0,
-      onCrete: true,
-      //if the machine can achive a CSP 2-3 for new coatings
-      surfacePrep: true,
-      edges: true,
-      power: ['electric'],
-      image: [
-              'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-7-turbo-edge-grinder/TMC-7-Electric-Machine-Slider.jpg'
-              ],
-      info: '800 Lineal ft. Per Hour, 2HP 115V/20A, 1/32" depth per pass, Vac 200 recommended',
-      number: ['57200']
-    },
+    // TMC7: {
+    //   apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'edges', 'residual glue/adhesive', 'high spots', 'sealer'],
+    //   depth: 0,
+    //   //recJobSize: 0,
+    //   onCrete: true,
+    //   //if the machine can achive a CSP 2-3 for new coatings
+    //   surfacePrep: true,
+    //   edges: true,
+    //   power: ['electric commercial'],
+    //   image: [
+    //           'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-7-turbo-edge-grinder/TMC-7-Electric-Machine-Slider.jpg'
+    //           ],
+    //   info: ['800 Lineal ft. Per Hour, 2HP 115V/20A, 1/32" depth per pass, Vac 200 recommended'],
+    //   number: ['57200'],
+    //   displayName: ['TMC-7E']
+    // },
     TG10: {
       apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'high spots', 'sealer'],
       depth: 1,
@@ -132,17 +140,17 @@ export const allMachineData: any = {
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: true,
       edges: false,
-      power: ['gas', 'electric', 'electric 3 phase', 'propane'],
+      power: ['gas', 'electric industrial', 'propane'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Gas-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Electric-Machine.jpg',
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Electric-Machine.jpg',
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-10-turbo-grinder/TG-10-Propane-Machine-Slider.jpg'
               ],
-      info: '500 SQFT. Per Hour, [varies], 1/16" depth per pass, Vac 290 recommended',
-      number: ['56600', '56900', '56800', '56700']
+      info: ['500 SQFT. Per Hour, Honda GXV390, 1/16" depth per pass, Vac 290 recommended','500 SQFT. Per Hour, 5HP 230V/30A, 1/16" depth per pass, Vac 290 recommended','500 SQFT. Per Hour, Aztec 390cc 12V Starter, 1/16" depth per pass, Vac 290 recommended'], // ========================================== VARIES
+      number: ['56600', '56900', '56800', '56700'],
+      displayName: ['TG-10G','TG-10E', 'TG-10E3', 'TG-10P']
     },
-    //make trip hazard surface`
     CPL8: {
       apps: ['leveling', 'rubber', 'concrete', 'trip hazard', 'high spots'],
       depth: 1,
@@ -151,13 +159,14 @@ export const allMachineData: any = {
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: false,
       edges: false,
-      power: ['gas', 'electric'],
+      power: ['gas', 'electric commercial'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-scari-lite-crete-planer-r/CPL-8-Gas-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-scari-lite-crete-planer-r/CPL-8-Electric-Machine-Slider.jpg'
               ],
-      info: '250 SQFT. Per Hour, [varies], 1/32" depth per pass, Vac 200 recommended',
-      number: ['69500', '69300']
+      info: ['250 SQFT. Per Hour, Honda GX160, 1/32" depth per pass, Vac 200 recommended','250 SQFT. Per Hour, 1.5HP 115V/20A, 1/32" depth per pass, Vac 200 recommended'], // ========================================== VARIES
+      number: ['69500', '69300'],
+      displayName: ['CPL-8G','CPL-8E']
     },
     CPM8: {
       apps: ['leveling', 'concrete', 'trip hazard', 'rubber', 'high spots'],
@@ -167,14 +176,15 @@ export const allMachineData: any = {
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: false,
       edges: false,
-      power: ['gas', 'electric', 'propane'],
+      power: ['gas', 'electric industrial', 'propane'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8-Gas-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8-Electric-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8%20Propane%20Machine%20Slider.jpg'
               ], 
-      info: '500 SQFT. Per Hour, [varies], 1/8" depth per pass, Vac 200 recommended',
-      number: ['79300', '79500', '72600']
+      info: ['500 SQFT. Per Hour, Honda GX270, 1/8" depth per pass, Vac 200 recommended','500 SQFT. Per Hour, 5HP 230V/30A, 1/8" depth per pass, Vac 200 recommended','500 SQFT. Per Hour, PPS 305cc, 1/8" depth per pass, Vac 200 recommended'], // ========================================== VARIES
+      number: ['79300', '79500', '72600'],
+      displayName: ['CPM-8G','CPM-8E','CPM-8P']
     },
     CPM10: {
       apps: ['leveling', 'concrete', 'trip hazard', 'rubber', 'high spots'],
@@ -184,13 +194,14 @@ export const allMachineData: any = {
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: false,
       edges: false,
-      power: ['gas', 'electric'],
+      power: ['gas', 'electric industrial'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/10-walk-behind-crete-planer-r/CPM-10-Gas-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/10-walk-behind-crete-planer-r/CPM-10-Electric-Machine-Slider.jpg'
               ],
-      info: '700 SQFT. Per Hour, [varies], 1/8" depth per pass, Vac 290 recommended',
-      number: ['69100', '69200']
+      info: ['700 SQFT. Per Hour, Honda GX390, 1/8" depth per pass, Vac 290 recommended','700 SQFT. Per Hour, 7.5HP 230V/30A, 1/8" depth per pass, Vac 290 recommended'], // ========================================== VARIES
+      number: ['69100', '69200'],
+      displayName: ['CPM-10G','CPM-10E']
     },
     CD5: {
       apps: ['leveling', 'concrete', 'trip hazard', 'high spots'],
@@ -202,10 +213,11 @@ export const allMachineData: any = {
       edges: false,
       power: ['pneumatic'],
       image: ['https://portal.edcoinc.com/storage/product-slider/5-head-crete-crusher-r/CD-5-Machine-Slider.jpg'],
-      info: '250 SQFT. Per Hour, 160CFM at 100PSI, 1/4" depth per pass, Vac 200 recommended',
-      number: ['63100']
+      info: ['250 SQFT. Per Hour, 160CFM at 100PSI, 1/4" depth per pass, Vac 200 recommended'],
+      number: ['63100'],
+      displayName: ['CD-5']
     }
-  }
+}
 
 //temporary tooling data table until backend is developed.
 export const toolsByApplicationAndMachine: any = {
@@ -215,7 +227,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['ALR'],
     image: 'https://edcostore.com/wp-content/uploads/2017/06/C10302_4_SteelChisel-450x450.jpg',
     CSP: 1,
-    info: 'Ceramic,Ice,Glue',
+    info: 'STRIP',
     number: ['C10302'],
     hasDiamonds: false
   },
@@ -225,7 +237,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['ALR'],
     image: 'https://edcostore.com/wp-content/uploads/2017/06/C10303_2_SteelChisel.jpg',
     CSP: 1,
-    info: 'Ceramic,Ice,Glue',
+    info: 'STRIP',
     number: ['C10303'],
     hasDiamonds: false
   },
@@ -235,7 +247,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['ALR'],
     image: 'https://edcostore.com/wp-content/uploads/2017/06/C10324_SteelChisel.jpg',
     CSP: 1,
-    info: 'Ceramic,Ice,Glue',
+    info: 'STRIP',
     number: ['C10324'],
     hasDiamonds: false
   },
@@ -245,7 +257,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['ALR'],
     image: 'https://edcostore.com/wp-content/uploads/2017/06/C10327_MPT_ChippingPoint.jpg',
     CSP: 1,
-    info: 'Ceramic,Ice,Glue',
+    info: 'STRIP',
     number: ['C10327'],
     hasDiamonds: false
   },
@@ -255,7 +267,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['ALRBS'],
     image: 'https://edcostore.com/wp-content/uploads/2017/06/27031_BigStick_2_SingleBevel.jpg',
     CSP: 1,
-    info: 'Used for hard floor coverings: pergo flooring, pre-cut wood flooring, hard material build up, etc.',
+    info: 'STRIP',
     number: ['27031'],
     hasDiamonds: false //finish adding all core tooling
   },
@@ -265,7 +277,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['ALR'],
     image: 'https://edcostore.com/wp-content/uploads/2017/06/C10305_ScraperBlades.jpg',
     CSP: 1,
-    info: 'Vinyl,Carpet,Glue',
+    info: 'STRIP',
     number: ['C10305'],
     hasDiamonds: false
   }, 
@@ -275,7 +287,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['ALRBS'],
     image: 'https://edcostore.com/wp-content/uploads/2017/06/27033_BigStick_3_SingleBevel.jpg',
     CSP: 1,
-    info: 'Used for hard floor coverings: pergo flooring, pre-cut wood flooring, hard material build up, etc.',
+    info: 'STRIP',
     number: ['27031'],
     hasDiamonds: false //finish adding all core tooling
   },
@@ -285,7 +297,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['ALRBS'],
     image: 'https://edcostore.com/wp-content/uploads/2018/04/27035_ScraperBlade-1.jpg',
     CSP: 1,
-    info: 'Used for soft flooring flooring removal: VCT, vinyl, linoleum, carpet, thin set, mortar, material build up, flaking paint, and brittle adhesives.',
+    info: 'STRIP',
     number: ['27035'],
     hasDiamonds: false
   }, 
@@ -295,7 +307,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['ALRBS'],
     image: 'https://edcostore.com/wp-content/uploads/2018/09/27037.jpg',
     CSP: 1,
-    info: 'Used for soft flooring flooring removal: VCT, vinyl, linoleum, carpet, thin set, mortar, material build up, flaking paint, and brittle adhesives.',
+    info: 'STRIP',
     number: ['27037'],
     hasDiamonds: false
   }, 
@@ -305,7 +317,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['TS8'],
     image: 'https://edcostore.com/wp-content/uploads/2017/12/28030_TileSharkBlade-450x450.jpg',
     CSP: 1,
-    info: 'Vinyl,Carpet,VCT',
+    info: 'STRIP',
     number: ['28040'],
     hasDiamonds: false
   },
@@ -315,7 +327,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['TS8'],
     image: 'https://edcostore.com/wp-content/uploads/2017/12/28030_TileSharkBlade-450x450.jpg',
     CSP: 1,
-    info: 'Vinyl,Carpet,VCT',
+    info: 'STRIP',
     number: ['28050'],
     hasDiamonds: false
   },
@@ -325,7 +337,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['SEC', 'TG10'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/12501LC_MagnaBlade-450x450.jpg',
     CSP: 1,
-    info: 'Glue,Paint,Mastic',
+    info: 'STRIP,Material That Can Be Cut With a Utility Knife',
     number: ['12501LC'],
     hasDiamonds: false
   },
@@ -335,17 +347,17 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['_2DHD', '_2GC'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/12501LC_MagnaBlade-450x450.jpg',
     CSP: 1,
-    info: 'Glue,Paint,Mastic',
+    info: 'STRIP,Material That Can Be Cut With a Utility Knife',
     number: ['12501LC & 12501RC'],
     hasDiamonds: false
   },
   DymaDots: {
-    apps: ['paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
+    apps: ['paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer', 'thinset'],
     name: 'Dyma-Dots',
     machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/QC2B-MC-0030_DoubleDotGray-450x450.jpg',
     CSP: 1,
-    info: 'General Grinding,Epoxy,Residual Glue',
+    info: 'GRIND,Material That Cannot Be Cut With a Utility Knife',
     number: [
               //soft
               'QC2B-SC-0030',
@@ -363,12 +375,12 @@ export const toolsByApplicationAndMachine: any = {
     hasDiamonds: true
   },
   DymaSegs: {
-    apps: ['paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
-    name: 'Dyma-Dots',
+    apps: ['paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer', 'thinset'],
+    name: 'Dyma-Segs',
     machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/DYMA-Segs-MC.jpg',
     CSP: 2,
-    info: 'General Grinding,Epoxy,Residual Glue',
+    info: 'GRIND',
     number: [
               //soft
               'QC2S-SC-0018',
@@ -380,22 +392,22 @@ export const toolsByApplicationAndMachine: any = {
     hasDiamonds: true
   },
   PCDbacking: {
-    apps: ['industrial buildup', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
+    apps: ['industrial', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'high spots', 'sealer'],
     name: 'PCD w/Backing Segment',
     machines: ['SEC', 'TG10', 'TL9', 'TMC7'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/QC-PCD1-LB_DymaPCD_Blue-450x450.jpg',
     CSP: 3,
-    info: 'Aggressive Grinding,Industrial Buildup,Epoxy',
+    info: 'REMOVE,Material That Cannot Be Cut With a Utility Knife',
     number: ['QC-PCD1-LB'],
     hasDiamonds: true
   },
   PCDbackingDual: {
-    apps: ['industrial buildup', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
+    apps: ['industrial', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
     name: 'PCD w/Backing Segment Dual Disc',
     machines: ['_2DHD', '_2GC'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/QC-PCD1-LB_DymaPCD_Blue-450x450.jpg',
     CSP: 3,
-    info: 'Aggressive Grinding,Industrial Buildup,Epoxy',
+    info: 'REMOVE,Material That Cannot Be Cut With a Utility Knife',
     number: ['QC-PCD1-LB & QC-PCD1-B'],
     hasDiamonds: true
   },
@@ -405,7 +417,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['CPM8', 'CPL8', 'CPM10'],
     image: 'https://edcostore.com/wp-content/uploads/2017/05/20156_6_PointBlueCutter-450x450.jpg',
     CSP: 6,
-    info: 'Concrete Removal,Trip Hazard Removal,High Spots',
+    info: 'REMOVE',
     number: ['20156'],
     hasDiamonds: false
   },
@@ -415,7 +427,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['CPM8', 'CPL8', 'CPM10'],
     image: 'https://edcostore.com/wp-content/uploads/2017/06/20236_18_PointedSteelCutter.jpg',
     CSP: 6,
-    info: 'Concrete Removal,Trip Hazard Removal,High Spots',
+    info: 'REMOVE,Carbide Drum',
     number: ['12206'],
     hasDiamonds: false
   },
@@ -425,7 +437,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['CD5'],
     image: 'https://edcostore.com/wp-content/uploads/2017/06/18810_5PointCarbideBit-450x450.jpg',
     CSP: 9,
-    info: 'Heavy Concrete Removal,Trip Hazard removal,High Spots',
+    info: 'REMOVE',
     number: ['18810'],
     hasDiamonds: false
   },
@@ -435,7 +447,7 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['CD5'],
     image: 'https://edcostore.com/wp-content/uploads/2017/06/18820_9PointCarbideBit-450x450.jpg',
     CSP: 9,
-    info: 'Heavy Concrete Removal,Trip Hazard removal,High Spots',
+    info: 'REMOVE',
     number: ['18820'],
     hasDiamonds: false
   },
@@ -475,7 +487,7 @@ export const applicationDataObjects: any = {
   ceramic: {
       name: 'Ceramic',
       layers: 4,
-      sublayers: ['ceramic', 'glue/adhesive', 'residual glue/adhesive', 'concrete'],
+      sublayers: ['ceramic', 'thinset', 'residual glue/adhesive', 'concrete'],
       modelName: 'ceramic'
   },
   thinset: {
@@ -528,8 +540,8 @@ export const applicationDataObjects: any = {
   },
   industrial: {
       name: 'Industrial Buildup',
-      layers: 1,
-      sublayers: ['industrial'],
+      layers: 2,
+      sublayers: ['residual glue/adhesive', 'concrete'],
       modelName: 'residual'
   }
 }
@@ -537,11 +549,16 @@ export const applicationDataObjects: any = {
 // returns index based on power type
 export const getPowerTypeImageIndexGlobal = (machine: string, layer: any) => {
 
+  try{
     let index = allMachineData[machine].power.indexOf(layer.powerType)
 
     if(index == -1) index = 0
 
     return index
+  }catch(e){
+    return 0
+  }
+
 }
 
 // returns index of part number
@@ -573,7 +590,7 @@ export const isMachineElectricGlobal = (number: string) => {
 
       for(var i = 0; i < length; i++){
         if(allMachineData[element].number[i] == number){
-          if(allMachineData[element].power[i] == 'electric'){
+          if(allMachineData[element].power[i] == 'electric residential' || allMachineData[element].power[i] == 'electric commercial' || allMachineData[element].power[i] == 'electric industrial'){
             isElectric = true;
           }
         }
@@ -588,7 +605,6 @@ export const toolingHasDiamonds = (tooling: string) => {
   let toolingObjectID: string;
 
   Object.keys(toolsByApplicationAndMachine).forEach((element: any) => {
-    console.log(toolsByApplicationAndMachine[element].name == tooling)
     if(toolsByApplicationAndMachine[element].name == tooling){
       toolingObjectID = element;
     }
@@ -602,14 +618,10 @@ export const getModelNameBySurfacename = (surfaceName: string) => {
   
   let modelName = undefined;
 
-  console.log(`starting search for ${surfaceName}`)
   
   for (const [key, value] of Object.entries(applicationDataObjects)) {
 
     if(surfaceName == value.name.toLowerCase()){
-
-      console.log(`using model name ${value.modelName} for surface ${surfaceName}`);
-      console.log('=======================');
 
       modelName = value.modelName;
 
@@ -633,4 +645,17 @@ export const populateMaterialRemovedAnswers = () => {
   })
 
   return arr;
+}
+
+export const isNameMachine = (name:string) => {
+  try{
+    if(allMachineData[name] == undefined){
+      return false;
+    }
+  else{
+    return true;
+  }
+  }catch(e){
+    return false;
+  }
 }

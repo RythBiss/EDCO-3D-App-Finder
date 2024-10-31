@@ -31,7 +31,7 @@ export default function DropDown(props) {
   return (
     <>
       <label htmlFor="changeLayer" style={{display: 'none'}}>change layer</label>
-      <div className="dropdown" id="changeLayer">
+      <div className={`dropdown ${props.active && 'dropdown-active'}`} id="changeLayer">
         <div onClick={(e) => {setIsActive(!isActive)}} className="dropdown-btn" >
           {selected}
           <span>

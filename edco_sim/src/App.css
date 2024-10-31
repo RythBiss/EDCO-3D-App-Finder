@@ -408,6 +408,9 @@ input[type="range"] {
 https://codesandbox.io/s/custom-dropdown-react-7oytw?file=/src/styles.css */
 
 .dropdown {
+    background-color: var(--primary);
+  }
+.dropdown-active {
     background-color: var(--active);
   }
   .dropdown,
@@ -416,13 +419,25 @@ https://codesandbox.io/s/custom-dropdown-react-7oytw?file=/src/styles.css */
   }
   .dropdown .dropdown-btn {
     cursor: pointer;
+    background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px;
+    border: none;
+    /* border-radius: 5px; */
+    color: white;
+    user-select: none;
+  }
+  .dropdown-active .dropdown-btn {
+    cursor: pointer;
     background-color: var(--active);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    padding: 3px;
+    border: none;
+    /* border-radius: 5px; */
     color: white;
     user-select: none;
   }
@@ -443,4 +458,10 @@ https://codesandbox.io/s/custom-dropdown-react-7oytw?file=/src/styles.css */
   }
   .dropdown-content .item:hover {
     background: lightgrey;
+  }
+  .dropdown-active:hover .dropdown-btn{
+    background-color: var(--hover);
+  }
+  .dropdown:hover .dropdown-btn{
+    background-color: var(--hover);
   }

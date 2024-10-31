@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { getPowerTypeImageIndexGlobal, isNameMachine, allMachineData } from '../functions';
 
 export default function ListButton(props: any) { 
 
@@ -44,12 +45,17 @@ export default function ListButton(props: any) {
                                 />
                                 <div className={`col-4 btn-icon-spaces ${props.active == true ? 'btn-active' : 'icon-btn-red-space'}`} style={{overflow: 'visible', zIndex: 0, paddingRight: 0}}>
                                     <ul style={{overflow: 'visible'}}>
-                                        {props.popupInfo.split(",").map((item: string) => <li style={{overflow: 'visible'}}>{item}</li>)}
+                                        {isNameMachine(props.lable) == true &&
+                                            props.popupInfo[getPowerTypeImageIndexGlobal(props.lable, props.layerObject)].split(",").map((item: string) => <li style={{overflow: 'visible'}}>{item}</li>)
+                                        }
+                                        {isNameMachine(props.lable) == false &&
+                                            props.popupInfo.split(",").map((item: string) => <li style={{overflow: 'visible'}}>{item}</li>)
+                                        }
                                     </ul>
                                 </div>
                                 <div className={`col-4 row btn-icon-spaces ${props.active == true ? 'btn-active' : 'icon-btn-red-space'}`} style={{paddingLeft: 0, paddingRight: 0}}>
                                     <div>
-                                        <div className='col-12 list-btn-inner history-item-num product-name'>{props.lable}</div>
+                                        <div className='col-12 list-btn-inner history-item-num product-name'>{props.displayName}</div>
                                         <div className='col-12 list-btn-inner history-item-num product-number'>#{props.partNumber}</div>
                                     </div>
                                         {props.showMenu &&
