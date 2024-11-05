@@ -343,7 +343,7 @@ export const toolsByApplicationAndMachine: any = {
   },
   MagnaBladesDual: {
     apps: ['glue/adhesive', 'paint', 'mastic'],
-    name: 'Magna-Blades Dual Disc',
+    name: 'Magna-Blades (L & R)',
     machines: ['_2DHD', '_2GC'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/12501LC_MagnaBlade-450x450.jpg',
     CSP: 1,
@@ -403,7 +403,7 @@ export const toolsByApplicationAndMachine: any = {
   },
   PCDbackingDual: {
     apps: ['industrial', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
-    name: 'PCD w/Backing Segment Dual Disc',
+    name: 'PCD w/Backing Segment (L & R)',
     machines: ['_2DHD', '_2GC'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/QC-PCD1-LB_DymaPCD_Blue-450x450.jpg',
     CSP: 3,

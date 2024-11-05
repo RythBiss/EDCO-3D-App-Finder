@@ -33,7 +33,7 @@ export default function EditLayer(props: any) {
     // Table Header
     doc.text("Machine", 10, 50);
     doc.text("Part Number", 60, 50);
-    doc.text("Tooling", 110, 50);
+    doc.text("Tooling", 95, 50);
     doc.text("Part Number", 160, 50);
 
 
@@ -65,7 +65,7 @@ export default function EditLayer(props: any) {
 
       }
 
-      doc.text(item.tooling, 110, getLine());
+      doc.text(item.tooling, 95, getLine());
       doc.text(`${getToolingPartNumberGlobal(item.tooling)}`, 160, getLine()); // move machine and tooling tables/algorithms to a seperate functions file so they can be called globally.
       getLineIncrement();
     })
