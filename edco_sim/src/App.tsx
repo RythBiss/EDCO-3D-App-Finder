@@ -282,6 +282,10 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
   }, [])
 
   useEffect(() => {
+    console.log("edger " + currentLayer?.edger);
+  })
+
+  useEffect(() => {
     if(mobileLeft == true){
       setRight(false);
     }

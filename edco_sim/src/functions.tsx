@@ -440,14 +440,14 @@ export const applicationDataObjects: any = {
   },
   triphazard: {
       name: 'Trip Hazard',
-      layers: 2,
-      sublayers: ['trip hazard', 'concrete'],
+      layers: 1,
+      sublayers: ['trip hazard'],
       modelName: 'trip hazard'
   },
   highspots: {
       name: 'High Spots',
-      layers: 2,
-      sublayers: ['high spots', 'concrete'],
+      layers: 1,
+      sublayers: ['high spots'],
       modelName: 'high spots'
   },
   vinyl: {

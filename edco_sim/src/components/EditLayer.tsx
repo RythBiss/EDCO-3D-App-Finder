@@ -81,13 +81,13 @@ export default function EditLayer(props: any) {
     })
 
     
-    if(edger){
+    if(edger == true){
       doc.text('TMC-7E (Vert. Walls)', 10, getLine());
       doc.text(`57200`, 60, getLineIncrement());
       machineArray.push('TMC-7E');
     }
 
-    if(use290){
+    if(use290 == true){
       doc.text('VAC 290 (Dust Control)', 10, getLine());
       doc.text(`ED33280K`, 60, getLineIncrement());
       machineArray.push('VAC 290');

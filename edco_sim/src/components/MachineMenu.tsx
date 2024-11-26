@@ -95,7 +95,10 @@ export default function EditLayer(props: any) {
           machineChecklist.materialThickness = true;
         }else if(allMachineData[key].depth == -1){
           machineChecklist.materialThickness = true;
+        }else if(layerInstance.materialRemoved == "trip hazard" && key !== "CD5"){ // trup hazards are a "special case" since they are always used for this app, regardless of depth, size, etc.
+          machineChecklist.materialThickness = true;
         }
+        
 
         if(allMachineData[key].recJobSize <= layerInstance.jobSize){
           machineChecklist.jobSize = true;
@@ -112,7 +115,6 @@ export default function EditLayer(props: any) {
             machineChecklist.edger = false;
           }
         }
-    
 
 
 

@@ -153,10 +153,17 @@ export default function SurfaceMenu(props:any) {
     const isThicknessRelevant = () => {
         if(props.layerObject){
             return  props.layerObject.materialRemoved == 'concrete' ||
-                    props.layerObject.materialRemoved == 'trip hazard' ||
+                    //props.layerObject.materialRemoved == 'trip hazard' ||
                     props.layerObject.materialRemoved == 'high spots' ||
-                    props.layerObject.materialRemoved == 'epoxy coating' //||
-                    //props.layerObject.materialRemoved == 'paint'
+                    props.layerObject.materialRemoved == 'epoxy coating'
+        }
+
+        return false;
+    }
+
+    const isTextureRelevant = () => {
+        if(props.layerObject){
+            return  props.layerObject.materialRemoved !== 'trip hazard';
         }
 
         return false;
@@ -353,16 +360,21 @@ export default function SurfaceMenu(props:any) {
             </div>
         }
 
-        {/* what power option is desired? */}
-        <ListButton lable={'What type of surface texture is desired?'} onClick={() => handleMenuState(9)} selected={finishSelected} />
-        {openedMenu == 9 &&
-            <div className="cluster-btn-container">
-                {finishOptionAnswers.map((layer, i) => 
-                    <ClusterButton key={i} active={activeFinish == layer}
-                    lable={layer} layerObject={props.layerObject} onClick={() => setFinishType(layer)} />
-                )}
-            </div>
+        {/* what finish is desired? */}
+        {isTextureRelevant() &&
+            <>
+                <ListButton lable={'What type of surface texture is desired?'} onClick={() => handleMenuState(9)} selected={finishSelected} />
+                {openedMenu == 9 &&
+                    <div className="cluster-btn-container">
+                        {finishOptionAnswers.map((layer, i) => 
+                            <ClusterButton key={i} active={activeFinish == layer}
+                            lable={layer} layerObject={props.layerObject} onClick={() => setFinishType(layer)} />
+                        )}
+                    </div>
+                }
+            </>
         }
+
 
         {props.allowProgress == 1 &&
             <NextButton lable={'Next: Machines'} onClick={() => props.nextFunction()} />
