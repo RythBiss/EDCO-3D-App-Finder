@@ -56,9 +56,25 @@ export default function ToolingMenu(props: any) {
         const appsArray = toolsByApplicationAndMachine[key].apps;
         const toolFitsMachine = machinesArray.includes(item.machine);
         const toolFitsApplication = appsArray.includes(item.materialRemoved);
+        const adhesiveSpecialCase = (key == "MagnaBlades" || key == "DymaDots" || key == "DymaSegs");
+
+        let removeToolDueToSpecialCase = false;
+
+        if(
+          (item.materialRemoved == "glue/adhesive" ||
+          item.materialRemoved == "thinset" ||
+          item.materialRemoved == "mastic")
+          &&
+          adhesiveSpecialCase
+        ){
+          if((props.layerObject.puttyKnifeCuts == true && (key == "DymaDots" || key == "DymaSegs")) || (props.layerObject.puttyKnifeCuts == false && key == "MagnaBlades")){
+            console.log("(first if) removing " + key + " from this layer")
+            removeToolDueToSpecialCase = true;
+          }
+        }
 
         //add tools that fit application
-        if(toolFitsApplication && toolFitsMachine){
+        if(toolFitsApplication && toolFitsMachine && removeToolDueToSpecialCase == false){
           concatList.push(key)
         }
       })

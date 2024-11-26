@@ -93,7 +93,6 @@ export const allMachineData: any = {
       power: ['electric industrial', 'propane'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-heavy-duty-floor-grinder-polisher/2D-HD-Electric-Machine-Slider.jpg',
-              'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-heavy-duty-floor-grinder-polisher/2D-HD-Electric-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/magna-trap-r-heavy-duty-floor-grinder-polisher/2D-HD-Propane-Machine-Slider.jpg'
               ],
       info: ['1000 SQFT. Per Hour, 5HP 230V/30A, 1/32" depth per pass, Vac 200 recommended','1000 SQFT. Per Hour, LEHR LX600V, 1/32" depth per pass, Vac 200 recommended'], // ========================================== VARIES
@@ -101,7 +100,7 @@ export const allMachineData: any = {
       displayName: ['2D-HDE','2D-HDP']
     },
     TL9: {
-      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'high spots', 'sealer'],
+      apps: ['leveling', 'rubber', 'concrete', 'high spots', 'sealer'],
       depth: 0,
       //recJobSize: 0,
       onCrete: true,
@@ -213,13 +212,12 @@ export const allMachineData: any = {
       edges: false,
       power: ['pneumatic'],
       image: ['https://portal.edcoinc.com/storage/product-slider/5-head-crete-crusher-r/CD-5-Machine-Slider.jpg'],
-      info: ['250 SQFT. Per Hour, 160CFM at 100PSI, 1/4" depth per pass, Vac 200 recommended'],
+      info: ['250 SQFT. Per Hour, 160CFM at 100PSI, 1/4" depth per pass, Vac 200 recommended, Only for use on slabs that are 6" thick or greater.'],
       number: ['63100'],
       displayName: ['CD-5']
     }
 }
 
-//temporary tooling data table until backend is developed.
 export const toolsByApplicationAndMachine: any = {
   Scaler4: {
     apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue/adhesive'],
@@ -352,43 +350,23 @@ export const toolsByApplicationAndMachine: any = {
     hasDiamonds: false
   },
   DymaDots: {
-    apps: ['paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer', 'thinset'],
+    apps: ['paint', 'leveling', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'glue/adhesive', 'high spots', 'sealer', 'thinset'],
     name: 'Dyma-Dots',
     machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/QC2B-MC-0030_DoubleDotGray-450x450.jpg',
     CSP: 1,
     info: 'GRIND,Material That Cannot Be Cut With a Utility Knife',
-    number: [
-              //soft
-              'QC2B-SC-0030',
-              'QC2B-SC-0070',
-              'QC2B-SC-0120',
-              //medium
-              'QC2B-MC-0030',
-              'QC2B-MC-0070',
-              'QC2B-MC-0120',
-              //hard
-              'QC2B-HC-0030',
-              'QC2B-HC-0070',
-              'QC2B-HC-0120'
-            ],
+    number: ["Inquire for details."],
     hasDiamonds: true
   },
   DymaSegs: {
-    apps: ['paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer', 'thinset'],
+    apps: ['paint', 'leveling', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'glue/adhesive', 'high spots', 'sealer', 'thinset'],
     name: 'Dyma-Segs',
     machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/DYMA-Segs-MC.jpg',
     CSP: 2,
     info: 'GRIND',
-    number: [
-              //soft
-              'QC2S-SC-0018',
-              //medium
-              'QC2S-MC-0018',
-              //hard
-              'QC2S-HC-0018',
-            ],
+    number: ["Inquire for details."],
     hasDiamonds: true
   },
   PCDbacking: {
@@ -398,7 +376,7 @@ export const toolsByApplicationAndMachine: any = {
     image: 'https://edcostore.com/wp-content/uploads/2017/04/QC-PCD1-LB_DymaPCD_Blue-450x450.jpg',
     CSP: 3,
     info: 'REMOVE,Material That Cannot Be Cut With a Utility Knife',
-    number: ['QC-PCD1-LB'],
+    number: ["Inquire for details."],
     hasDiamonds: true
   },
   PCDbackingDual: {
@@ -408,7 +386,7 @@ export const toolsByApplicationAndMachine: any = {
     image: 'https://edcostore.com/wp-content/uploads/2017/04/QC-PCD1-LB_DymaPCD_Blue-450x450.jpg',
     CSP: 3,
     info: 'REMOVE,Material That Cannot Be Cut With a Utility Knife',
-    number: ['QC-PCD1-LB & QC-PCD1-B'],
+    number: ["Inquire for details."],
     hasDiamonds: true
   },
   CarbideCutter: {
@@ -421,16 +399,16 @@ export const toolsByApplicationAndMachine: any = {
     number: ['20156'],
     hasDiamonds: false
   },
-  SteelCutters: {
-    apps: ['rubber', 'concrete'],
-    name: 'Carbide Cutter',
-    machines: ['CPM8', 'CPL8', 'CPM10'],
-    image: 'https://edcostore.com/wp-content/uploads/2017/06/20236_18_PointedSteelCutter.jpg',
-    CSP: 6,
-    info: 'REMOVE,Carbide Drum',
-    number: ['12206'],
-    hasDiamonds: false
-  },
+  // SteelCutters: {
+  //   apps: ['rubber', 'concrete'],
+  //   name: 'Carbide Cutter',
+  //   machines: ['CPM8', 'CPL8', 'CPM10'],
+  //   image: 'https://edcostore.com/wp-content/uploads/2017/06/20236_18_PointedSteelCutter.jpg',
+  //   CSP: 6,
+  //   info: 'REMOVE,Carbide Drum',
+  //   number: ['12206'],
+  //   hasDiamonds: false
+  // },
   FivePoint: {
     apps: ['concrete', 'trip hazard', 'high spots'],
     name: '5-Point Bit',
@@ -558,7 +536,6 @@ export const getPowerTypeImageIndexGlobal = (machine: string, layer: any) => {
   }catch(e){
     return 0
   }
-
 }
 
 // returns index of part number

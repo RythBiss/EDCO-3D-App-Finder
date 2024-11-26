@@ -43,6 +43,7 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
       this.sublayerObjects = [];
       this.containsElectric = false;
       this.containsDiamonds = false;
+      this.puttyKnifeCuts = null;
     }
 
     machine: string;
@@ -63,6 +64,7 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
     sublayerObjects: any[];
     containsElectric: boolean;
     containsDiamonds: boolean;
+    puttyKnifeCuts: boolean | null;
 
     //call for any state change to update react
     requestUpdate = () => {
@@ -196,6 +198,13 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
     setContainsDiamonds(hasDiamonds: boolean): void{
 
       this.containsDiamonds = hasDiamonds;
+
+      this.requestUpdate();
+    }
+
+    setPuttyKnifeCuts(canCut: boolean): void{
+
+      this.puttyKnifeCuts = canCut;
 
       this.requestUpdate();
     }

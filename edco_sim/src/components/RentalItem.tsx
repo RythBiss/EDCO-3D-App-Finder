@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 //import DropDown from './DropDown';
 import { motion } from "framer-motion"
+import { allMachineData, getPowerTypeImageIndexGlobal } from '../functions';
+
 
 export default function RentalItem(props:any) {
     const [thick, setThick] = useState<string>('1/32');
@@ -68,6 +70,7 @@ export default function RentalItem(props:any) {
         //handleChange(props.layerObject.materialRemoved)
         setMachine(props.layerObject.machine)
         setTool(props.layerObject.tooling)
+
     })
 
   return (
@@ -96,7 +99,7 @@ export default function RentalItem(props:any) {
                                     duration: 1.25
                                   }}
 
-                            >MACHINE: {props?.layerObject?.machine}</motion.li>
+                            >MACHINE: {props?.layerObject?.machine == "" ? "" : allMachineData[props?.layerObject?.machine].displayName[getPowerTypeImageIndexGlobal(props?.layerObject?.machine, props?.layerObject)]}</motion.li>
                             <motion.li
                                 key={tool} //this one did not have the same problem as machine.
                                 initial={{ backgroundColor: '#ffffffCC' }}

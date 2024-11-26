@@ -12,6 +12,7 @@ export default function SurfaceMenu(props:any) {
     const jobSizeAnswers = ['500-', '500+', '1,000+', '2,000+', '5,000+'];
     const greenConcreteAnswers = ['No', 'Yes'];
     const edgeGrindingAnswers = ['No', 'Yes'];
+    const puttyKnifeAnswers = ['No', 'Yes'];
     const powerOptionAnswers = ['Gas', ['Electric Residential', 'Electric Commercial', 'Electric Industrial'], 'Propane', 'pneumatic'];
     const finishOptionAnswers = ['Smooth', 'Textured'];
 
@@ -20,6 +21,7 @@ export default function SurfaceMenu(props:any) {
     const [sizeSelected, setSizeSelected] = useState<boolean>(false);
     const [greenSelected, setGreenSelected] = useState<boolean>(false);
     const [edgeSelected, setEdgeSelected] = useState<boolean>(false);
+    const [puttyKnifeSelected, setActivePuttyKnifeSelected] = useState<boolean>(false);
     const [powerSelected, setPowerSelected] = useState<boolean>(false);
     const [finishSelected, setFinishSelected] = useState<boolean>(false);
 
@@ -28,12 +30,13 @@ export default function SurfaceMenu(props:any) {
     const [activeSize, setActiveSize] = useState<string>();
     const [activeGreenConcrete, setActiveGreenConcrete] = useState<string>();
     const [activeEdgingNeeded, setActiveEdgingNeeded] = useState<string>();
+    const [activePuttyKnife, setActivePuttyKnife] = useState<string>();
     const [activePower, setActivePower] = useState<string>();
     const [activeFinish, setActiveFinish] = useState<string>();
 
     const [openedMenu, setOpenedMenu] = useState<number>(-1);
 
-    const thicknessRemovedConditional = ['1/32', '1/16', '1/8', '1/4', '+1/4'];
+    const thicknessRemovedConditional = ['1/32"', '1/16"', '1/8"', '1/4"', '+1/4""'];
 
 
 
@@ -59,19 +62,19 @@ export default function SurfaceMenu(props:any) {
 
 
         switch(fraction){
-            case '1/32':
+            case '1/32"':
                 props.layerObject.setMaterialThickness(0);
                 break;
-            case '1/16':
+            case '1/16"':
                 props.layerObject.setMaterialThickness(1);
                 break;
-            case '1/8':
+            case '1/8"':
                 props.layerObject.setMaterialThickness(2);
                 break;
-            case '1/4':
+            case '1/4"':
                 props.layerObject.setMaterialThickness(3);
                 break;
-            case '+1/4':
+            case '+1/4""':
                 props.layerObject.setMaterialThickness(3);
                 break;
             default:
@@ -119,8 +122,6 @@ export default function SurfaceMenu(props:any) {
     }
                 
     const setPowerType = (res: string) => {
-        console.log(res)
-        console.log(activePower)
 
         const power =  res.toLowerCase();
 
@@ -138,6 +139,15 @@ export default function SurfaceMenu(props:any) {
         props.layerObject.setFinishedSurface(finish);
 
         setActiveFinish(res);
+    }
+
+    const setPuttyKnife = (res: string) => {
+        if(res == 'Yes')
+            props.layerObject.setPuttyKnifeCuts(true);
+        else
+            props.layerObject.setPuttyKnifeCuts(false);
+
+        setActivePuttyKnife(res);
     }
 
     const isThicknessRelevant = () => {
@@ -161,6 +171,28 @@ export default function SurfaceMenu(props:any) {
         return false;
     }
 
+    const isPuttyKnifeRelevant = () => {
+
+        let hasAdhesive: boolean = false;
+
+        const length = props?.layerObject?.sublayers?.length;
+    
+        for(let i = 0; i < length; i++){
+            const material = props?.layerObject?.sublayers[i];
+            if(
+                material == "glue/adhesive" ||
+                material == "thinset" ||
+                material == "mastic"
+            ){
+                hasAdhesive = true;
+                break;
+            }
+        }
+
+        return hasAdhesive;
+
+    }
+
     useEffect(() => {
         if(props.layerObject){
             setMatSelected(props?.layerObject?.materialRemoved !== '');
@@ -169,7 +201,9 @@ export default function SurfaceMenu(props:any) {
             setEdgeSelected(props?.layerObject?.edger !== null);
             setPowerSelected(props?.layerObject?.powerType !== '');
             setFinishSelected(props?.layerObject?.finishedSurface !== '');
+            setActivePuttyKnifeSelected(props?.layerObject?.puttyKnifeCuts !== null);
         }
+
     })
 
     useEffect(() =>{
@@ -180,13 +214,15 @@ export default function SurfaceMenu(props:any) {
                 edgeSelected == true &&
                 powerSelected == true &&
                 finishSelected == true &&
+                ((isPuttyKnifeRelevant() == true && puttyKnifeSelected == true) || isPuttyKnifeRelevant() == false) &&
                 ((isThicknessRelevant() == true && thickSelected == true) || isThicknessRelevant() == false) && props.allowProgress == 0){
                     props.setAllowProgress(1)
             } else if(  props.layerObject.materialRemoved == 'trip hazard' && matSelected == true && powerSelected == true){
                 props.setAllowProgress(1)
             }
+            
         }
-    }, [matSelected, sizeSelected, greenSelected, edgeSelected, powerSelected, finishSelected, thickSelected])
+    }, [matSelected, sizeSelected, greenSelected, edgeSelected, powerSelected, finishSelected, thickSelected, puttyKnifeSelected])
 
     useEffect(() => {
         if(props.allowProgress == 0){
@@ -196,6 +232,7 @@ export default function SurfaceMenu(props:any) {
             setEdgeSelected(false);
             setPowerSelected(false);
             setFinishSelected(false);
+            setActivePuttyKnifeSelected(false);
         }
     }, [props.allowProgress])
     
@@ -272,6 +309,21 @@ export default function SurfaceMenu(props:any) {
                         {edgeGrindingAnswers.map((layer, i) => 
                             <ClusterButton key={i} active={activeEdgingNeeded == layer}
                             lable={layer} layerObject={props.layerObject} onClick={() => setEdger(layer)} />
+                        )}
+                    </div>
+                }
+            </>
+        }
+
+        {/* will you need to test your material with a putty knife? */}
+        {isPuttyKnifeRelevant() &&
+            <>        
+                <ListButton lable={'Can you cut the adhesive with a utility knife?'} onClick={() => handleMenuState(10)} selected={puttyKnifeSelected} />
+                {openedMenu == 10 &&
+                    <div className="cluster-btn-container">
+                        {puttyKnifeAnswers.map((layer, i) => 
+                            <ClusterButton key={i} active={activePuttyKnife == layer}
+                            lable={layer} layerObject={props.layerObject} onClick={() => setPuttyKnife(layer)} />
                         )}
                     </div>
                 }
