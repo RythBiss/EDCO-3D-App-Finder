@@ -4,7 +4,6 @@ import NextButton from './NextButton';
 import { toolsByApplicationAndMachine, toolingHasDiamonds } from '../functions';
 
 
-
 export default function ToolingMenu(props: any) {
   //temporary tooling data table until backend is developed.
 
@@ -24,20 +23,30 @@ export default function ToolingMenu(props: any) {
     //setSelectedSurface(newTooling);
   }
 
-    //checks if tooling has been selected for each layer, and allows the user to access recommendations if so.
-    useEffect(()=>{
-      let machinesSelected: boolean = true;
-  
-      props.layerObject.sublayerObjects.forEach((obj: any) => {
-        if(obj.tooling == ''){
-          machinesSelected = false;
-        }
-      })
-  
-      if(machinesSelected){
-        props.setAllowProgress(3);
+    //opens accordion of currently selected layer.
+    const toolSelect = (num: number) => {
+      if(openTab == num){
+        setOpenTab(-1)
+      }else{
+        setOpenTab(num)
+      }
+    }
+
+  //checks if tooling has been selected for each layer, and allows the user to access recommendations if so.
+  useEffect(()=>{
+    let machinesSelected: boolean = true;
+
+    props.layerObject.sublayerObjects.forEach((obj: any) => {
+      if(obj.tooling == ''){
+        machinesSelected = false;
       }
     })
+
+    if(machinesSelected){
+      props.setAllowProgress(3);
+    }
+
+  })
 
 
   useEffect(() => {
@@ -56,7 +65,9 @@ export default function ToolingMenu(props: any) {
         const appsArray = toolsByApplicationAndMachine[key].apps;
         const toolFitsMachine = machinesArray.includes(item.machine);
         const toolFitsApplication = appsArray.includes(item.materialRemoved);
-        const adhesiveSpecialCase = (key == "MagnaBlades" || key == "DymaDots" || key == "DymaSegs");
+        const hardGlueTool = (key == "DymaDots" || key == "DymaDots70" || key == "DymaDots120" || key == "DymaSegs");
+        const softGlueTool = (key == "MagnaBlades" || key == "MagnaBladesDual");
+        const adhesiveSpecialCase = hardGlueTool || softGlueTool;
 
         let removeToolDueToSpecialCase = false;
 
@@ -67,8 +78,7 @@ export default function ToolingMenu(props: any) {
           &&
           adhesiveSpecialCase
         ){
-          if((props.layerObject.puttyKnifeCuts == true && (key == "DymaDots" || key == "DymaSegs")) || (props.layerObject.puttyKnifeCuts == false && key == "MagnaBlades")){
-            console.log("(first if) removing " + key + " from this layer")
+          if((props.layerObject.puttyKnifeCuts == true && hardGlueTool) || (props.layerObject.puttyKnifeCuts == false && softGlueTool)){
             removeToolDueToSpecialCase = true;
           }
         }
@@ -77,7 +87,7 @@ export default function ToolingMenu(props: any) {
         if(toolFitsApplication && toolFitsMachine && removeToolDueToSpecialCase == false){
           concatList.push(key)
         }
-      })
+      });
 
       //add tools to 2D array
       fourLayers[layerIndex] = concatList;
@@ -86,15 +96,12 @@ export default function ToolingMenu(props: any) {
     setMatchingTooling(fourLayers)
   }, [])
 
-  //opens accordion of currently selected layer.
-  const toolSelect = (num: number) => {
-    if(openTab == num){
-      setOpenTab(-1)
-    }else{
-      setOpenTab(num)
-    }
-  }
-  
+
+  useEffect(() => {
+    console.log(props.layerObject.sublayerObjects[props.layerObject.getSubLayerLength()-1].machine);
+    console.log(props.layerObject.getFinishLayersGenerated());
+  }, [])
+
   return (
     <div className='col edit-menu scroll-on'>
       {/* lists of tooling organized by layer */}
@@ -187,6 +194,31 @@ export default function ToolingMenu(props: any) {
               icon={toolsByApplicationAndMachine[tool].image} 
               onClick={() =>
                 setTooling(toolsByApplicationAndMachine[tool].name, 3, toolsByApplicationAndMachine[tool].CSP)}
+              mouseAction={() => handlePopup(tool)}
+              setIsInfoPopupOnupYPos={props.setPopupYPos}
+              popupInfo={toolsByApplicationAndMachine[tool].info}
+              partNumber={toolsByApplicationAndMachine[tool].number[0]}
+              layerObject={props.layerObject}
+              />
+        )}
+      
+      {/* layer 5 */}
+      {props.layerObject.sublayerObjects.length > 4 &&
+        <ListButton lable={'Fourth Layer'} onClick={() => toolSelect(4)} selected={props.layerObject.sublayerObjects[4].tooling !== ''} />
+      }
+      {openTab == 4 &&
+        matchingTooling.length !== 0 &&
+          matchingTooling[4].map((tool: any, i: any) => 
+            <ListButton
+              key={i}
+              lable={toolsByApplicationAndMachine[tool].name}
+              displayName={toolsByApplicationAndMachine[tool].name}
+              indent={1}
+              popupOn={props.popupOn}
+              showMenu={true}
+              icon={toolsByApplicationAndMachine[tool].image} 
+              onClick={() =>
+                setTooling(toolsByApplicationAndMachine[tool].name, 4, toolsByApplicationAndMachine[tool].CSP)}
               mouseAction={() => handlePopup(tool)}
               setIsInfoPopupOnupYPos={props.setPopupYPos}
               popupInfo={toolsByApplicationAndMachine[tool].info}

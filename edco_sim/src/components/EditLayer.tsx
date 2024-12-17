@@ -55,6 +55,10 @@ export default function EditLayer(props: any) {
       return posBase + (posIncrement*posMultiplier++);
     }
 
+    const isAppOnConcrete = () => {
+      return props.layerObject.getSurfaceType() == "concrete";
+    }
+
     props.layerObject.sublayerObjects.forEach((item: any) =>{ //i think this statement is causing spaces because its skipping layers that have the same machine?
       const currentName = allMachineData[item.machine].displayName[getPowerTypeImageIndexGlobal(item.machine, props.layerObject)];
 
@@ -71,7 +75,7 @@ export default function EditLayer(props: any) {
     })
 
     let use290 = false;
-    let edger = props.layerObject.geteEdgerforPDF();
+    let edger = props.layerObject.getEdgerforPDF();
     
 
     machineArray.forEach((i)=>{
@@ -87,23 +91,25 @@ export default function EditLayer(props: any) {
       machineArray.push('TMC-7E');
     }
 
-    if(use290 == true){
-      doc.text('VAC 290 (Dust Control)', 10, getLine());
-      doc.text(`ED33280K`, 60, getLineIncrement());
-      machineArray.push('VAC 290');
-    }else{
-      doc.text('VAC 200 (Dust Control)', 10, getLine());
-      doc.text(`ED33125HCONK`, 60, getLineIncrement());
-      machineArray.push('VAC 200');
+    if(isAppOnConcrete()){
+      if(use290 == true){
+        doc.text('VAC 290 (Dust Control)', 10, getLine());
+        doc.text(`ED33280K`, 60, getLineIncrement());
+        machineArray.push('VAC 290');
+      }else{
+        doc.text('VAC 200 (Dust Control)', 10, getLine());
+        doc.text(`ED33125HCONK`, 60, getLineIncrement());
+        machineArray.push('VAC 200');
+      }
+  
+      doc.text('Liner Bags (optional)', 10, getLine());
+      doc.text(`ED16766901`, 60, getLineIncrement());
+      machineArray.push('Liner Bags');
+  
+      doc.text('2" Floor Wand (optional)', 10, getLine());
+      doc.text(`ED5004K`, 60, getLineIncrement());
+      machineArray.push('2" Floor Wand');
     }
-
-    doc.text('Liner Bags (optional)', 10, getLine());
-    doc.text(`ED16766901`, 60, getLineIncrement());
-    machineArray.push('Liner Bags');
-
-    doc.text('2" Floor Wand (optional)', 10, getLine());
-    doc.text(`ED5004K`, 60, getLineIncrement());
-    machineArray.push('2" Floor Wand');
 
     getLineIncrement();
     getLineIncrement();
@@ -111,15 +117,15 @@ export default function EditLayer(props: any) {
 
     doc.text(`What is your application: ${props.layerObject.getMaterialForPDF()}`, 10, getLineIncrement());
 
-    doc.text(`What is the square footage of your job: ${props.layerObject.getJobSizeForPDF()}`, 10, getLineIncrement());
+    doc.text(`What is the square footage of your job: ${isAppOnConcrete() ? props.layerObject.getJobSizeForPDF() : "N/A"}`, 10, getLineIncrement());
 
-    doc.text(`Is your concrete older than 28 days: ${props.layerObject.geteEdgerforPDF()}.`, 10, getLineIncrement());
+    doc.text(`Is your concrete older than 28 days: ${isAppOnConcrete() ? props.layerObject.getGreenForPDF() : "N/A"}.`, 10, getLineIncrement());
 
-    doc.text(`Do you need to grind or clean against a wall: ${props.layerObject.geteEdgerforPDF()}.`, 10, getLineIncrement());
+    doc.text(`Do you need to grind or clean against a wall: ${isAppOnConcrete() ? props.layerObject.getEdgerforPDF() : "N/A"}.`, 10, getLineIncrement());
 
 
 
-    let power = props.layerObject.getePowerforPDF();
+    let power = props.layerObject.getPowerforPDF();
 
     doc.text(`What machine power is desired: ${power.charAt(0).toUpperCase() + power.slice(1)}.`, 10, getLineIncrement());
     

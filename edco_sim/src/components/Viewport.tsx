@@ -36,7 +36,7 @@ export default function Viewport(props: any) {
 
   const addSlabToScene = (surface: string, isRenderedLayer: boolean) => {
 
-    loader.load(`Models/${getModelNameBySurfacename(surface)}.gltf`, (gltf) => {
+    loader.load(`Models/${getModelNameBySurfacename(surface, props?.layer)}.gltf`, (gltf) => {
       loadedModels.current.push(gltf.scene)
 
       gltfModel.current = gltf.scene;
@@ -146,7 +146,11 @@ export default function Viewport(props: any) {
           
           addSlabToScene(modifiedSurface, false)
         }else{
-          let modifiedSurface = surface;
+          let modifiedSurface = 'concrete';
+
+          if(props?.layer?.getSubLayerLength() == undefined){
+            modifiedSurface = 'ceramic';
+          }
 
           if((surface == 'concrete' ||
               surface == 'trip hazard' ||

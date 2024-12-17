@@ -43,25 +43,38 @@ export default function ListButton(props: any) {
                                     width={128}
                                     className='machine-icon-frame col-4'
                                 />
-                                <div className={`col-4 btn-icon-spaces ${props.active == true ? 'btn-active' : 'icon-btn-red-space'}`} style={{overflow: 'visible', zIndex: 0, paddingRight: 0}}>
-                                    <ul style={{overflow: 'visible'}}>
-                                        {isNameMachine(props.lable) == true &&
-                                            props.popupInfo[getPowerTypeImageIndexGlobal(props.lable, props.layerObject)].split(",").map((item: string) => <li style={{overflow: 'visible'}}>{item}</li>)
-                                        }
-                                        {isNameMachine(props.lable) == false &&
-                                            props.popupInfo.split(",").map((item: string) => <li style={{overflow: 'visible'}}>{item}</li>)
-                                        }
-                                    </ul>
+                                <div style={{display: "flex"}} className="col">
+                                    <div className={`col row btn-icon-spaces ${props.active == true ? 'btn-active' : 'icon-btn-red-space'}`} style={{paddingLeft: 0, paddingRight: 0}}>
+                                        <div>
+                                            <div className='col-12 list-btn-inner history-item-num product-name' style={{textAlign: "left"}}>{props.displayName}</div>
+
+                                            {isNameMachine(props.lable) == true &&
+                                                props.popupInfo[getPowerTypeImageIndexGlobal(props.lable, props.layerObject)].split(",").map((item: string) => <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left"}}>- {item}</div>)
+                                            }
+                                            {isNameMachine(props.lable) == false &&
+                                                props.popupInfo.split(",").map((item: string) => <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left"}} >- {item}</div>)
+                                            }
+
+                                            <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left"}}>- Part Number: {props.partNumber}</div>
+                                            {/* <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left"}}>#{props.partNumber}</div> */}
+                                        </div>
+                                        {/* <div className={`col btn-icon-spaces ${props.active == true ? 'btn-active' : 'icon-btn-red-space'}`} style={{overflow: 'visible', zIndex: 0, paddingRight: 0, paddingLeft: "0.5rem"}}>
+                                            <ul style={{overflow: 'visible', listStyle: "none"}} >
+                                                {isNameMachine(props.lable) == true &&
+                                                    props.popupInfo[getPowerTypeImageIndexGlobal(props.lable, props.layerObject)].split(",").map((item: string) => <li style={{overflow: 'visible'}}>{item}</li>)
+                                                }
+                                                {isNameMachine(props.lable) == false &&
+                                                    props.popupInfo.split(",").map((item: string) => <li style={{overflow: 'visible', height: "1rem", textAlign: "right"}} >{item}</li>)
+                                                }
+                                            </ul>
+                                        </div> */}
+                                            {/* {props.showMenu &&
+                                                <div ref={infoPopupRef} className="col-1 product-info" onMouseOver={handlePop} onMouseLeave={() => setIsInfoPopupOn(false)}>?</div>
+                                            } */}
+                                    </div>
+
+                   
                                 </div>
-                                <div className={`col-4 row btn-icon-spaces ${props.active == true ? 'btn-active' : 'icon-btn-red-space'}`} style={{paddingLeft: 0, paddingRight: 0}}>
-                                    <div>
-                                        <div className='col-12 list-btn-inner history-item-num product-name'>{props.displayName}</div>
-                                        <div className='col-12 list-btn-inner history-item-num product-number'>#{props.partNumber}</div>
-                                    </div>
-                                        {props.showMenu &&
-                                            <div ref={infoPopupRef} className="col-1 product-info" onMouseOver={handlePop} onMouseLeave={() => setIsInfoPopupOn(false)}>?</div>
-                                        }
-                                    </div>
                             </>
                             :
                             <>

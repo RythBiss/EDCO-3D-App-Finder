@@ -218,6 +218,22 @@ export const allMachineData: any = {
     }
 }
 
+
+
+
+
+/*=====================================================================================================================================
+
+
+
+Try just adding all the tools (each grit) and clarifying that they are different finishes. See if that fixes the finish layer issue.
+
+
+
+=====================================================================================================================================*/
+
+
+
 export const toolsByApplicationAndMachine: any = {
   Scaler4: {
     apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue/adhesive'],
@@ -330,42 +346,32 @@ export const toolsByApplicationAndMachine: any = {
     hasDiamonds: false
   },
   MagnaBlades: {
-    apps: ['glue/adhesive', 'paint', 'mastic'],
+    apps: ['glue/adhesive', 'paint', 'mastic', 'thinset'],
     name: 'Magna-Blades',
     machines: ['SEC', 'TG10'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/12501LC_MagnaBlade-450x450.jpg',
     CSP: 1,
-    info: 'STRIP,Material That Can Be Cut With a Utility Knife',
+    info: 'STRIP', //    info: 'STRIP,Material That Can Be Cut With a Utility Knife',
     number: ['12501LC'],
     hasDiamonds: false
   },
   MagnaBladesDual: {
-    apps: ['glue/adhesive', 'paint', 'mastic'],
-    name: 'Magna-Blades (L & R)',
+    apps: ['glue/adhesive', 'paint', 'mastic', 'thinset'],
+    name: 'Magna-Blades (Left & Right)',
     machines: ['_2DHD', '_2GC'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/12501LC_MagnaBlade-450x450.jpg',
     CSP: 1,
-    info: 'STRIP,Material That Can Be Cut With a Utility Knife',
+    info: 'STRIP', //    info: 'STRIP,Material That Can Be Cut With a Utility Knife',
     number: ['12501LC & 12501RC'],
     hasDiamonds: false
   },
-  DymaDots: {
-    apps: ['paint', 'leveling', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'glue/adhesive', 'high spots', 'sealer', 'thinset'],
-    name: 'Dyma-Dots',
-    machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
-    image: 'https://edcostore.com/wp-content/uploads/2017/04/QC2B-MC-0030_DoubleDotGray-450x450.jpg',
-    CSP: 1,
-    info: 'GRIND,Material That Cannot Be Cut With a Utility Knife',
-    number: ["Inquire for details."],
-    hasDiamonds: true
-  },
   DymaSegs: {
     apps: ['paint', 'leveling', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'glue/adhesive', 'high spots', 'sealer', 'thinset'],
-    name: 'Dyma-Segs',
+    name: 'Dyma-Segs 18 Grit',
     machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/DYMA-Segs-MC.jpg',
     CSP: 2,
-    info: 'GRIND',
+    info: 'GRIND,Coarse',
     number: ["Inquire for details."],
     hasDiamonds: true
   },
@@ -375,17 +381,47 @@ export const toolsByApplicationAndMachine: any = {
     machines: ['SEC', 'TG10', 'TL9', 'TMC7'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/QC-PCD1-LB_DymaPCD_Blue-450x450.jpg',
     CSP: 3,
-    info: 'REMOVE,Material That Cannot Be Cut With a Utility Knife',
+    info: 'REMOVE,Textured', //    info: 'REMOVE,Textured,Material That Cannot Be Cut With a Utility Knife',
     number: ["Inquire for details."],
     hasDiamonds: true
   },
   PCDbackingDual: {
     apps: ['industrial', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
-    name: 'PCD w/Backing Segment (L & R)',
+    name: 'PCD w/Backing Segment (Left & Right)',
     machines: ['_2DHD', '_2GC'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/QC-PCD1-LB_DymaPCD_Blue-450x450.jpg',
     CSP: 3,
-    info: 'REMOVE,Material That Cannot Be Cut With a Utility Knife',
+    info: 'REMOVE,Textured', //    info: 'REMOVE,Textured,Material That Cannot Be Cut With a Utility Knife',
+    number: ["Inquire for details."],
+    hasDiamonds: true
+  },
+  DymaDots: {
+    apps: ['paint', 'leveling', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'glue/adhesive', 'high spots', 'sealer', 'thinset'],
+    name: 'Dyma-Dots 30 Grit',
+    machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
+    image: 'https://edcostore.com/wp-content/uploads/2017/04/QC2B-MC-0030_DoubleDotGray-450x450.jpg',
+    CSP: 1,
+    info: 'GRIND,Smooth', //    info: 'GRIND,Smooth,Material That Cannot Be Cut With a Utility Knife',
+    number: ["Inquire for details."],
+    hasDiamonds: true
+  },
+  DymaDots70: {
+    apps: ['paint', 'leveling', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'glue/adhesive', 'high spots', 'sealer', 'thinset'],
+    name: 'Dyma-Dots 70 Grit',
+    machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
+    image: 'https://edcostore.com/wp-content/uploads/2017/04/QC2B-MC-0030_DoubleDotGray-450x450.jpg',
+    CSP: 1,
+    info: 'GRIND,Fine', //info: 'GRIND,Fine,Material That Cannot Be Cut With a Utility Knife,',
+    number: ["Inquire for details."],
+    hasDiamonds: true
+  },
+  DymaDots120: {
+    apps: ['paint', 'leveling', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'glue/adhesive', 'high spots', 'sealer', 'thinset'],
+    name: 'Dyma-Dots 120 Grit',
+    machines: ['SEC', 'TG10', 'TL9', '_2DHD', 'TMC7', '_2GC'],
+    image: 'https://edcostore.com/wp-content/uploads/2017/04/QC2B-MC-0030_DoubleDotGray-450x450.jpg',
+    CSP: 1,
+    info: 'GRIND,Super Fine', //info: 'GRIND,Super Fine,Material That Cannot Be Cut With a Utility Knife,',
     number: ["Inquire for details."],
     hasDiamonds: true
   },
@@ -453,76 +489,119 @@ export const applicationDataObjects: any = {
   vinyl: {
       name: 'Vinyl',
       layers: 4,
-      sublayers: ['vinyl', 'glue/adhesive', 'residual glue/adhesive', 'concrete'],
+      sublayers: ['vinyl', 'glue/adhesive', 'residual glue/adhesive'],
       modelName: 'vinyl'
   },
   linoleum: {
       name: 'Linoleum',
       layers: 4,
-      sublayers: ['linoleum', 'glue/adhesive', 'residual glue/adhesive', 'concrete'],
+      sublayers: ['linoleum', 'glue/adhesive', 'residual glue/adhesive'],
       modelName: 'linoleum'
   },
   ceramic: {
       name: 'Ceramic',
       layers: 4,
-      sublayers: ['ceramic', 'thinset', 'residual glue/adhesive', 'concrete'],
+      sublayers: ['ceramic', 'thinset', 'residual glue/adhesive'],
       modelName: 'ceramic'
   },
   thinset: {
       name: 'Thinset',
       layers: 3,
-      sublayers: ['thinset', 'residual glue/adhesive', 'concrete'],
+      sublayers: ['thinset', 'residual glue/adhesive'],
       modelName: 'glue'
   },
   carpet: {
       name: 'Carpet',
       layers: 4,
-      sublayers: ['carpet', 'glue/adhesive', 'residual glue/adhesive', 'concrete'],
+      sublayers: ['carpet', 'glue/adhesive', 'residual glue/adhesive'],
       modelName: 'carpet'
   },
   mastic: {
       name: 'Mastic',
       layers: 3,
-      sublayers: ['mastic', 'residual glue/adhesive', 'concrete'],
+      sublayers: ['mastic', 'residual glue/adhesive'],
       modelName: 'mastic'
   },
   paint: {
       name: 'Paint',
       layers: 2,
-      sublayers: ['paint', 'concrete'],
+      sublayers: ['paint'],
       modelName: 'paint'
   },
   sealer: {
       name: 'Sealer',
       layers: 2,
-      sublayers: ['sealer', 'concrete'],
+      sublayers: ['sealer'],
       modelName: 'sealer'
   },
   epoxy: {
       name: 'Epoxy Coating',
       layers: 2,
-      sublayers: ['epoxy', 'concrete'],
+      sublayers: ['epoxy'],
       modelName: 'epoxy'
   },
   glue: {
       name: 'Glue/Adhesive',
       layers: 3,
-      sublayers: ['glue/adhesive', 'residual glue/adhesive', 'concrete'],
+      sublayers: ['glue/adhesive', 'residual glue/adhesive'],
       modelName: 'glue'
   },
   residual: {
       name: 'Residual Glue/Adhesive',
       layers: 2,
-      sublayers: ['residual glue/adhesive', 'concrete'],
+      sublayers: ['residual glue/adhesive'],
       modelName: 'residual'
   },
   industrial: {
       name: 'Industrial Buildup',
       layers: 2,
-      sublayers: ['residual glue/adhesive', 'concrete'],
+      sublayers: ['residual glue/adhesive'],
       modelName: 'residual'
   }
 }
+
+export const applicationDataObjectsWood: any = {
+    //====================== on wood apps ======================
+  vinyl: {
+      name: 'Vinyl',
+      layers: 1,
+      sublayers: ['vinyl'],
+      modelName: 'vinyl'
+  },
+  linoleum: {
+      name: 'Linoleum',
+      layers: 1,
+      sublayers: ['linoleum'],
+      modelName: 'linoleum'
+  },
+  ceramic: {
+      name: 'Ceramic',
+      layers: 1,
+      sublayers: ['ceramic'],
+      modelName: 'ceramic'
+  },
+  carpet: {
+      name: 'Carpet',
+      layers: 1,
+      sublayers: ['carpet'],
+      modelName: 'carpet'
+  }
+}
+
+
+
+const getCorrectApplicationList = (layerObject: any) => {
+  if(layerObject !== undefined){
+    const surfaceType = layerObject.getSurfaceType();
+    if(surfaceType == "concrete"){
+      return applicationDataObjects;
+    } else {
+      return applicationDataObjectsWood;
+    }
+  }
+}
+
+
 
 // returns index based on power type
 export const getPowerTypeImageIndexGlobal = (machine: string, layer: any) => {
@@ -591,19 +670,22 @@ export const toolingHasDiamonds = (tooling: string) => {
 
 }
 
-export const getModelNameBySurfacename = (surfaceName: string) => {
+export const getModelNameBySurfacename = (surfaceName: string, layerObject: any) => {
   
   let modelName = undefined;
 
+  if(layerObject !== undefined){
+    let applicationList = getCorrectApplicationList(layerObject);
   
-  for (const [key, value] of Object.entries(applicationDataObjects)) {
-
-    if(surfaceName == value.name.toLowerCase()){
-
-      modelName = value.modelName;
-
-      break;
-
+    for (const [key, value] of Object.entries(applicationList)) {
+  
+      if(surfaceName == value.name.toLowerCase()){
+  
+        modelName = value.modelName;
+  
+        break;
+  
+      }
     }
   }
 
@@ -614,12 +696,16 @@ export const getModelNameBySurfacename = (surfaceName: string) => {
   return modelName;
 }
 
-export const populateMaterialRemovedAnswers = () => {
+export const populateMaterialRemovedAnswers = (layerObject: any) => {
   let arr: string[] = []
 
-  Object.keys(applicationDataObjects).map((key) =>{
-      arr.push(applicationDataObjects[key])
-  })
+  if(layerObject !== undefined){
+    let applicationList = getCorrectApplicationList(layerObject);
+
+    Object.keys(applicationList).map((key) =>{
+        arr.push(applicationList[key])
+    })
+  }
 
   return arr;
 }
@@ -635,4 +721,15 @@ export const isNameMachine = (name:string) => {
   }catch(e){
     return false;
   }
+}
+
+export const getCSPByToolName = (name: string): number | null => {
+  // Iterate through all tools in the object
+  for (const toolKey in toolsByApplicationAndMachine) {
+    const tool = toolsByApplicationAndMachine[toolKey];
+    if (tool.name === name) {
+      return tool.CSP; // Return CSP if the name matches
+    }
+  }
+  return 11; // Return null if no match is found
 }

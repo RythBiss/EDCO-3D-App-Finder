@@ -5,23 +5,28 @@ import { allMachineData, isMachineElectricGlobal } from '../functions';
 
 export default function EditLayer(props: any) {
 
-  const [selectedMachine, setSelectedMachine] = useState<string>('');
   const [selectedLayerState, setSelectedLayerState] = useState<number>();
 
   const [matchingMachinesL1, setmatchingMachinesL1] = useState<any>();
   const [matchingMachinesL2, setmatchingMachinesL2] = useState<any>();
   const [matchingMachinesL3, setmatchingMachinesL3] = useState<any>();
   const [matchingMachinesL4, setmatchingMachinesL4] = useState<any>();
+  const [matchingMachinesF1, setmatchingMachinesF1] = useState<any>();
+  const [matchingMachinesF2, setmatchingMachinesF2] = useState<any>();
 
   const [subdL1, setSubdL1] = useState<boolean>(false);
   const [subdL2, setSubdL2] = useState<boolean>(false);
   const [subdL3, setSubdL3] = useState<boolean>(false);
   const [subdL4, setSubdL4] = useState<boolean>(false);
+  const [subdF1, setSubdF1] = useState<boolean>(false);
+  const [subdF2, setSubdF2] = useState<boolean>(false);
+
+  const [finishLayers, setFinishLayers] = useState<number>(0);
+
 
   //calls the set machine method from Layer object in App.tsx
   const setMachine = (newMachine: string, layer: number, machineNumber: string) => {
       props.layerObject.setMachine(newMachine, layer);
-      setSelectedMachine(newMachine);
   
       if(isMachineElectricGlobal(machineNumber)){
         props.layerObject.setContainsElectric(true);
@@ -152,6 +157,98 @@ export default function EditLayer(props: any) {
     return index
   }
 
+
+  const newLayerWithThickness = (thickness: number) => {
+
+    props.layerObject.generateFinishLayers();
+
+    const length = props.layerObject.getSubLayerLength();
+
+    props.layerObject.getSubLayerByIndex(length - 1).setMaterialRemoved("concrete", 4, ["concrete"]);
+    props.layerObject.getSubLayerByIndex(length - 1).setMaterialThickness(thickness);
+    props.layerObject.getSubLayerByIndex(length - 1).setPowerType(props.layerObject.getPowerforPDF());
+
+    let generatedList = compileMachineList(props.layerObject.getSubLayerByIndex(length - 1));
+
+    return generatedList;
+  }
+
+  const mediumToSmooth = () =>{
+    setFinishLayers((prev: number) => prev + 1);    
+
+    const generatedList = newLayerWithThickness(0);
+
+    if(generatedList.machines.length == 0){
+      setmatchingMachinesF1(substituteMachine(generatedList));
+      setSubdF1(true);
+    }else{
+      setmatchingMachinesF1(generatedList);
+      setSubdF1(false);
+    }
+  }
+
+  const roughToSmooth = () =>{
+    setFinishLayers((prev: number) => prev + 1);
+
+    const generatedList = newLayerWithThickness(2);
+
+    if(generatedList.machines.length == 0){
+      setmatchingMachinesF2(substituteMachine(generatedList));
+      setSubdF2(true);
+    }else{
+      setmatchingMachinesF2(generatedList);
+      setSubdF2(false);
+    }
+
+    mediumToSmooth();
+  }
+
+  const smoothToRough = () =>{
+    setFinishLayers((prev: number) => prev + 1);
+
+    const generatedList = newLayerWithThickness(2);
+
+    if(generatedList.machines.length == 0){
+      setmatchingMachinesF1(substituteMachine(generatedList));
+      setSubdF1(true);
+    }else{
+      setmatchingMachinesF1(generatedList);
+      setSubdF1(false);
+    }
+  }
+
+  const buildFinishLayer = () => {
+
+    const thickness = props.layerObject.getThickness();
+    const desiredFinish = props.layerObject.getFinish();
+    
+    if(desiredFinish == "smooth" && thickness == 0){
+      // console.log("Already smooth")
+    } else if(desiredFinish == "smooth" && (thickness > 0 && thickness <= 2)){
+        props.layerObject.finishLayersMax = 1;
+        mediumToSmooth();
+    } else if(desiredFinish == "smooth" && thickness >= 3){
+        props.layerObject.finishLayersMax = 2;
+        roughToSmooth();
+    } else if(desiredFinish == "textured" && thickness >= 2){
+        props.layerObject.finishLayersMax = 0;
+      // console.log("Already rough")
+    } else if(desiredFinish == "textured" && thickness < 2){
+        props.layerObject.finishLayersMax = 1;
+        smoothToRough();
+    }
+    
+    console.log("max: ");
+    console.log(props.layerObject.finishLayersGenerated + " / " + props.layerObject.finishLayersMax);
+  }
+
+  useEffect(() => {
+
+    buildFinishLayer();
+
+  }, []);
+
+
   //populate layer lists
   useEffect(() => {
 
@@ -170,6 +267,8 @@ export default function EditLayer(props: any) {
         setmatchingMachinesL1(compileMachineList(props.layerObject.sublayerObjects[0]));
         setSubdL1(false);
       }
+
+      
     }
 
     //layer 2
@@ -227,6 +326,16 @@ export default function EditLayer(props: any) {
     if(machinesSelected){
       props.setAllowProgress(2);
     }
+
+    console.log("layer length: ")
+    console.log(props.layerObject.getSubLayerLength())
+
+    console.log(props.layerObject.sublayerObjects);
+
+    //when a single layer app is selected, 1/4 thickness, and smooth texture, the application only has 2 objects when it should have 3.
+    //this causes the machine selection to overlap and mark 2 layers as selected when you have only selected one machine.
+    //see what is causing this.
+    
   })
 
   return (
@@ -339,23 +448,25 @@ export default function EditLayer(props: any) {
               )        
         }
 
-      {/* layer 4 accordion open/close button, if there is a layer 2 */}
-        {props.layerObject.layerNumber >= 4 && matchingMachinesL4 !== undefined  &&
+
+        {/* removed the 4th layer. Code block saved on desktop in "temp code blocks.txt" */}
+
+
+        {/* finish layer 1 accordion open/close button */}
+        {finishLayers >= 2 &&
           <ListButton
-            lable={`Fourth Layer`}
-            active={selectedLayerState == 3 ? true : false}
-            onClick={() => {handleMenuState(3)}}
-            selected={props.layerObject.sublayerObjects[3].machine !== ''}
+            lable={`First Finish Layer`}
+            active={selectedLayerState == 6 ? true : false}
+            onClick={() => {handleMenuState(6)}}
+            selected={props.layerObject.sublayerObjects[props.layerObject.getSubLayerLength() - 2].machine !== ''}
             />
         }
-        {/* substitutes added indicator */}
-        {subdL4 && selectedLayerState == 3 &&
+        {subdF2 && selectedLayerState == 6 &&
           <ListButton lable='No results with current jobsite filter. Try these substitutes:' indent={1} />
         }
-        {/* list of buttons for machines that passed population filters */}
-        {selectedLayerState == 3 && matchingMachinesL4 !== undefined  &&
-          matchingMachinesL4.machines.length > 0 &&
-            matchingMachinesL4.machines.map((item: string, i: number) =>
+        {selectedLayerState == 6 && matchingMachinesF2 !== undefined  &&
+          matchingMachinesF2.machines.length > 0 &&
+            matchingMachinesF2.machines.map((item: string, i: number) =>
               <ListButton
                 key={i}
                 popupOn={props.popupOn}
@@ -364,8 +475,8 @@ export default function EditLayer(props: any) {
                 lable={item}
                 displayName={allMachineData[item].displayName[getPowerTypeImageIndex(item)]}
                 icon={allMachineData[item].image[getPowerTypeImageIndex(item)]}
-                active={props.layerObject.sublayerObjects[3].machine == item ? true : false}
-                onClick={() => setMachine(item, 3, allMachineData[item].number[getPowerTypeImageIndex(item)])}
+                active={false}
+                onClick={() => {setMachine(item, props.layerObject.getSubLayerLength() - 2, allMachineData[item].number[getPowerTypeImageIndex(item)]);}}
                 mouseAction={() => handlePopup(item)}
                 setIsInfoPopupOnupYPos={props.setPopupYPos}
                 popupInfo={allMachineData[item].info}
@@ -374,6 +485,41 @@ export default function EditLayer(props: any) {
                 />
               )        
         }
+
+        {/* finish layer accordion open/close button*/}
+        {finishLayers >= 1 &&
+          <ListButton
+            lable={`${finishLayers > 1 ? "Second" : "First"} Finish Layer`}
+            active={selectedLayerState == 5 ? true : false}
+            onClick={() => {handleMenuState(5)}}
+            selected={props.layerObject.sublayerObjects[props.layerObject.getSubLayerLength() - 1].machine !== ''}
+            />
+        }
+        {subdF1 && selectedLayerState == 5 &&
+          <ListButton lable='No results with current jobsite filter. Try these substitutes:' indent={1} />
+        }
+        {selectedLayerState == 5 && matchingMachinesF1 !== undefined  &&
+          matchingMachinesF1.machines.length > 0 &&
+            matchingMachinesF1.machines.map((item: string, i: number) =>
+              <ListButton
+                key={i}
+                popupOn={props.popupOn}
+                showMenu={true} 
+                indent={1}
+                lable={item}
+                displayName={allMachineData[item].displayName[getPowerTypeImageIndex(item)]}
+                icon={allMachineData[item].image[getPowerTypeImageIndex(item)]}
+                active={false}
+                onClick={() => {setMachine(item, props.layerObject.getSubLayerLength() - 1, allMachineData[item].number[getPowerTypeImageIndex(item)]);}}
+                mouseAction={() => handlePopup(item)}
+                setIsInfoPopupOnupYPos={props.setPopupYPos}
+                popupInfo={allMachineData[item].info}
+                partNumber={allMachineData[item].number[getPowerTypeImageIndex(item)]}
+                layerObject={props.layerObject}
+                />
+              )        
+        }
+
 
         {props.allowProgress == 2 &&
             <NextButton lable={'Next: Tooling'} onClick={() => props.nextFunction()} />

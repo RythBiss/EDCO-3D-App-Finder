@@ -276,6 +276,15 @@ li{
     display: none;
   }
 
+.menu-button{
+    display: block;
+    background-color: var(--primary);
+    color: #fff;
+    border-width: 0;
+    border-radius: 0.25rem;
+    padding: 2px 8px;
+  }
+
 .drop-select{
     border: none;
     background-color: transparent;
@@ -328,6 +337,12 @@ input[type="range"] {
     background-color: #fff;
     height: 0.75rem;
     width: 0.75rem;
+}
+
+.show-menu-right{
+    display: block;
+    position: absolute;
+    right: 0;
 }
 
 @media only screen and (max-width: 991px){

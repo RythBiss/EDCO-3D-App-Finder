@@ -15,15 +15,19 @@ export default function SurfaceMenu(props:any) {
     const puttyKnifeAnswers = ['No', 'Yes'];
     const powerOptionAnswers = ['Gas', ['Electric Residential', 'Electric Commercial', 'Electric Industrial'], 'Propane', 'pneumatic'];
     const finishOptionAnswers = ['Smooth', 'Textured'];
+    const surfaceTypeAnswers = ['Wood', 'Concrete'];
+
 
     const [matSelected, setMatSelected] = useState<boolean>(false);
     const [thickSelected, setThickSelected] = useState<boolean>(false);
     const [sizeSelected, setSizeSelected] = useState<boolean>(false);
     const [greenSelected, setGreenSelected] = useState<boolean>(false);
     const [edgeSelected, setEdgeSelected] = useState<boolean>(false);
-    const [puttyKnifeSelected, setActivePuttyKnifeSelected] = useState<boolean>(false);
+    const [puttyKnifeSelected, setPuttyKnifeSelected] = useState<boolean>(false);
     const [powerSelected, setPowerSelected] = useState<boolean>(false);
     const [finishSelected, setFinishSelected] = useState<boolean>(false);
+    const [surfaceTypeSelected, setSurfaceTypeSelected] = useState<boolean>(false);
+
 
     const [activeMaterial, setActiveMaterial] = useState<string>();
     const [activeThickness, setActiveThickness] = useState<string>();
@@ -33,6 +37,9 @@ export default function SurfaceMenu(props:any) {
     const [activePuttyKnife, setActivePuttyKnife] = useState<string>();
     const [activePower, setActivePower] = useState<string>();
     const [activeFinish, setActiveFinish] = useState<string>();
+    const [activeSurfaceType, setActiveSurfaceType] = useState<string>();
+
+
 
     const [openedMenu, setOpenedMenu] = useState<number>(-1);
 
@@ -150,10 +157,16 @@ export default function SurfaceMenu(props:any) {
         setActivePuttyKnife(res);
     }
 
+    const setSurfaceType = (res: string) => {
+        if (res === 'Wood') props.layerObject.setSurfaceType('wood');
+        else if (res === 'Concrete') props.layerObject.setSurfaceType('concrete');
+
+        setActiveSurfaceType(res);
+    };
+
     const isThicknessRelevant = () => {
         if(props.layerObject){
             return  props.layerObject.materialRemoved == 'concrete' ||
-                    //props.layerObject.materialRemoved == 'trip hazard' ||
                     props.layerObject.materialRemoved == 'high spots' ||
                     props.layerObject.materialRemoved == 'epoxy coating'
         }
@@ -200,6 +213,44 @@ export default function SurfaceMenu(props:any) {
 
     }
 
+    const isConcreteRelevant = () => {
+        return props?.layerObject?.getSurfaceType() !== 'wood';
+    }
+
+
+
+    const onConcreteSelectionSatisfied = () => {
+        return (
+            matSelected == true &&
+            sizeSelected == true &&
+            greenSelected == true &&
+            edgeSelected == true &&
+            powerSelected == true &&
+            finishSelected == true &&
+            props.layerObject.getSurfaceType() == "concrete"
+        )
+    }
+
+    const onWoodSelectionSatisfied = () => {
+        return (
+            matSelected == true && powerSelected == true && props.layerObject.getSurfaceType() == "wood"
+        );
+    }
+
+    const puttyKnifeSatisfied = () => {
+        return (isPuttyKnifeRelevant() == true && puttyKnifeSelected == true) || isPuttyKnifeRelevant() == false;
+    }
+
+    const thicknessSatisfied = () => {
+        return (isThicknessRelevant() == true && thickSelected == true) || isThicknessRelevant() == false;
+    }
+
+    const concreteSatisfied = () => {
+        return ((isConcreteRelevant() == true && surfaceTypeSelected == true) || isConcreteRelevant() == false);
+    }
+
+
+
     useEffect(() => {
         if(props.layerObject){
             setMatSelected(props?.layerObject?.materialRemoved !== '');
@@ -208,28 +259,40 @@ export default function SurfaceMenu(props:any) {
             setEdgeSelected(props?.layerObject?.edger !== null);
             setPowerSelected(props?.layerObject?.powerType !== '');
             setFinishSelected(props?.layerObject?.finishedSurface !== '');
-            setActivePuttyKnifeSelected(props?.layerObject?.puttyKnifeCuts !== null);
+            setPuttyKnifeSelected(props?.layerObject?.puttyKnifeCuts !== null);
+            setSurfaceTypeSelected(props?.layerObject?.surfaceType !== null);
         }
-
     })
 
-    useEffect(() =>{
+    useEffect(() => {
         if(props.layerObject){
-            if( matSelected == true &&
-                sizeSelected == true &&
-                greenSelected == true &&
-                edgeSelected == true &&
-                powerSelected == true &&
-                finishSelected == true &&
-                ((isPuttyKnifeRelevant() == true && puttyKnifeSelected == true) || isPuttyKnifeRelevant() == false) &&
-                ((isThicknessRelevant() == true && thickSelected == true) || isThicknessRelevant() == false) && props.allowProgress == 0){
+            console.log("clearing finishes..")
+            props.layerObject.clearFinishedLayers();          
+        }
+    }, [])
+
+    useEffect(() =>{ //controls 'allow progress'
+        if(props.layerObject){
+            if( ((onConcreteSelectionSatisfied() && puttyKnifeSatisfied() && thicknessSatisfied()) ||
+                (onWoodSelectionSatisfied() && concreteSatisfied())) &&
+                props.allowProgress == 0){
                     props.setAllowProgress(1)
             } else if(  props.layerObject.materialRemoved == 'trip hazard' && matSelected == true && powerSelected == true){
                 props.setAllowProgress(1)
             }
             
         }
-    }, [matSelected, sizeSelected, greenSelected, edgeSelected, powerSelected, finishSelected, thickSelected, puttyKnifeSelected])
+
+    }, [matSelected, sizeSelected, greenSelected, edgeSelected, powerSelected, finishSelected, thickSelected, puttyKnifeSelected, surfaceTypeSelected])
+
+    //clears thickness selection when switching to a material that does not require it.
+    useEffect(() => {
+        if(props.layerObject){
+            if(isThicknessRelevant() == false){
+                setThicknessHandler("1/32");
+            }
+        }
+    }, [activeMaterial]);
 
     useEffect(() => {
         if(props.allowProgress == 0){
@@ -239,16 +302,34 @@ export default function SurfaceMenu(props:any) {
             setEdgeSelected(false);
             setPowerSelected(false);
             setFinishSelected(false);
-            setActivePuttyKnifeSelected(false);
+            setPuttyKnifeSelected(false);
+            setSurfaceTypeSelected(false);
         }
     }, [props.allowProgress])
     
     useEffect(() => {
-        setmaterialRemovedAnswers(populateMaterialRemovedAnswers());
-    }, [])
+        setmaterialRemovedAnswers(populateMaterialRemovedAnswers(props.layerObject));
+    }, [activeSurfaceType])
 
   return (
     <div className='col edit-menu'>
+
+        {/* what is the bottom layer? */}
+        <ListButton lable={'Are you working on wood or concrete?'} onClick={() => handleMenuState(11)} selected={surfaceTypeSelected} />
+        {openedMenu == 11 && (
+            <div className="cluster-btn-container">
+                {surfaceTypeAnswers.map((layer, i) => (
+                    <ClusterButton 
+                        key={i} 
+                        active={activeSurfaceType === layer} 
+                        lable={layer} 
+                        layerObject={props.layerObject} 
+                        onClick={() => setSurfaceType(layer)} 
+                    />
+                ))}
+            </div>
+        )}
+
         {/* what application are you trying to solve? */}
         <ListButton lable={'What is the material being removed?'} onClick={() => handleMenuState(1)} selected={matSelected} />
         {openedMenu == 1 &&
@@ -261,7 +342,7 @@ export default function SurfaceMenu(props:any) {
         }
 
         {/* How thick is the material? (only for concrete, highspots, epoxy coating, and paint). */}
-        {isThicknessRelevant() &&
+        {(isThicknessRelevant() && isConcreteRelevant()) &&
             <>
                 <ListButton lable={'What is the thickness of the material?'} onClick={() => handleMenuState(2)} selected={thickSelected} />
                 {openedMenu == 2 &&
@@ -276,7 +357,7 @@ export default function SurfaceMenu(props:any) {
         }
 
         {/* how big is the site? */} 
-        {isSqftRelevant() &&
+        {(isSqftRelevant() && isConcreteRelevant()) &&
             <>        
                 <ListButton lable={'What is the square footage of your job?'} onClick={() => handleMenuState(4)} selected={sizeSelected} />
                 {openedMenu == 4 &&
@@ -292,7 +373,7 @@ export default function SurfaceMenu(props:any) {
 
 
         {/* is your concrete new? */}
-        {isSqftRelevant() &&
+        {(isSqftRelevant() && isConcreteRelevant()) &&
             <>        
                 <ListButton lable={'Is your concrete older than 28 days?'} onClick={() => handleMenuState(5)} selected={greenSelected} />
                 {openedMenu == 5 &&
@@ -308,7 +389,7 @@ export default function SurfaceMenu(props:any) {
 
 
         {/* are you going to need an edger? */}
-        {isSqftRelevant() &&
+        {(isSqftRelevant() && isConcreteRelevant()) &&
             <>        
                 <ListButton lable={'Do you need to grind or clean along a vertical a wall?'} onClick={() => handleMenuState(7)} selected={edgeSelected} />
                 {openedMenu == 7 &&
@@ -323,7 +404,7 @@ export default function SurfaceMenu(props:any) {
         }
 
         {/* will you need to test your material with a putty knife? */}
-        {isPuttyKnifeRelevant() &&
+        {(isPuttyKnifeRelevant() && isConcreteRelevant()) &&
             <>        
                 <ListButton lable={'Can you cut the adhesive with a utility knife?'} onClick={() => handleMenuState(10)} selected={puttyKnifeSelected} />
                 {openedMenu == 10 &&
@@ -361,7 +442,7 @@ export default function SurfaceMenu(props:any) {
         }
 
         {/* what finish is desired? */}
-        {isTextureRelevant() &&
+        {(isTextureRelevant() && isConcreteRelevant()) &&
             <>
                 <ListButton lable={'What type of surface texture is desired?'} onClick={() => handleMenuState(9)} selected={finishSelected} />
                 {openedMenu == 9 &&

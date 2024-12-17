@@ -4,6 +4,7 @@ import EditLayer from './components/EditLayer'
 import Header from './components/Header'
 import RentalOrder from './components/RentalOrder'
 import Viewport from './components/Viewport'
+import LinksMenu from './components/LinksMenu'
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
   const [updateState, update] = useState(0);
   const [mobileLeft, setLeft] = useState<boolean>(false);
   const [mobileRight, setRight] = useState<boolean>(false);
+  const [mobileMenu, setMenu] = useState<boolean>(false);
   const [popupOn, setPopupOn] = useState<boolean>(false);
   const [popupInfo, setPopupInfo] = useState<string>('blank');
   const [popupYPos, setPopupYPos] = useState<number>(0);
@@ -33,6 +35,8 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
       this.materialRemoved = '';
       this.materialThickness = 0;
       this.finishedSurface = '';
+      this.finishLayersGenerated = 0;
+      this.finishLayersMax = 0;
       this.jobSize = null;
       this.greenConcrete = null;
       this.dustControl = false;
@@ -44,6 +48,7 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
       this.containsElectric = false;
       this.containsDiamonds = false;
       this.puttyKnifeCuts = null;
+      this.surfaceType = null;
     }
 
     machine: string;
@@ -54,6 +59,8 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
     materialRemoved: string;
     materialThickness: number;
     finishedSurface: string;
+    finishLayersGenerated: number;
+    finishLayersMax: number
     jobSize: number | null;
     greenConcrete: boolean | null;
     dustControl: boolean;
@@ -65,11 +72,27 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
     containsElectric: boolean;
     containsDiamonds: boolean;
     puttyKnifeCuts: boolean | null;
+    surfaceType: string | null;
 
     //call for any state change to update react
     requestUpdate = () => {
       //this weird set state is to make sure it always updates this state to a new value, a simple !prevState made it not update in some cases.
       update(prevState => prevState + 1 >= 3 ? 0 : prevState +1);
+    }
+
+    generateFinishLayers(){
+      if(this.finishLayersGenerated < this.finishLayersMax){
+        if(this.sublayerObjects.length > 0){
+          console.log("making a finish layer");
+          this.finishLayersGenerated++;
+          const newLength = this.sublayerObjects.push(new Layer);
+          return newLength;
+        } else {
+          console.log("no layers exist, make base layers first.")
+        }
+      } else {
+        console.log("already created layers");
+      }  
     }
 
     setMaterialRemoved(value: string, layer: number, sublayers: string[]){
@@ -209,7 +232,29 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
       this.requestUpdate();
     }
 
+    setSurfaceType(surface: string){
+      this.clearSelections(1);
+
+      this.surfaceType = surface;
+
+      this.requestUpdate();
+    }
+
+
+
+    clearFinishedLayers = () => {
+      if(this.finishLayersGenerated !== 0){
+        for(let i = this.finishLayersGenerated; i > 0; i--){
+          this.sublayerObjects.pop();
+        }
+
+        this.finishLayersGenerated = 0;
+      }
+    }
+
+
     clearSelections = (range: number) =>{
+      
       this.sublayerObjects.forEach((obj) => {
         if(range == 0) {
           obj.setMachine('', 0)
@@ -222,10 +267,12 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
       })
     }
 
-
-
     getMaterialForPDF = () => {
       return `Removing ${this.materialRemoved}.`;
+    }
+
+    getThickness = () => {
+      return this.materialThickness;
     }
 
     getJobSizeForPDF = () => {
@@ -248,7 +295,7 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
       }
     }
 
-    geteEdgerforPDF = () => {
+    getEdgerforPDF = () => {
 
       if(this.edger == true){
         return "Yes"
@@ -257,9 +304,30 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
       }
     }
 
-    getePowerforPDF = () => {
+    getPowerforPDF = () => {
 
       return this.powerType;
+    }
+
+    getSurfaceType = () => {
+
+      return this.surfaceType;
+    }
+
+    getFinish = () => {
+      return this.finishedSurface;
+    }
+
+    getSubLayerByIndex = (index: number) => {
+      return this.sublayerObjects[index];
+    }
+
+    getSubLayerLength = () => {
+      return this.sublayerObjects.length;
+    }
+
+    getFinishLayersGenerated = () => {
+      return this.finishLayersGenerated;
     }
   }
 
@@ -282,10 +350,6 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
   }, [])
 
   useEffect(() => {
-    console.log("edger " + currentLayer?.edger);
-  })
-
-  useEffect(() => {
     if(mobileLeft == true){
       setRight(false);
     }
@@ -304,12 +368,13 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
 
   return (
     <>
-      <Header setLeft={setLeft} setRight={setRight} />
+      <Header setLeft={setLeft} setRight={setRight} setMenu={setMenu} />
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100' style={{position: 'relative'}}>
           <EditLayer setPopup={setPopupOn} layerObject={currentLayer} mobileLeft={mobileLeft} setPopupInfo={setPopupInfo} setPopupYPos={setPopupYPos} update={updateState} allowProgress={allowProgress} setAllowProgress={setAllowProgress} />
           <Viewport popup={popupOn} popupInfo={popupInfo} popupYPos={popupYPos} history={layerList[layerList.length - 1]} layer={currentLayer} renderLayer={renderLayer} updateTrigger={updateState} />
-          <RentalOrder newLayer={createNewLayer} history={layerList} current={currentLayer} setRenderedLayer={setRenderLayer} mobileRight={mobileRight} />
+          <RentalOrder newLayer={createNewLayer} history={layerList} current={currentLayer} setRenderedLayer={setRenderLayer} mobileRight={mobileRight} mobileMenu={mobileMenu}/>
+          <LinksMenu linksMenu={mobileMenu} />
         </div>
       </div>
     </>

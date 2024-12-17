@@ -13,8 +13,11 @@ export default function Header(props: any) {
             <a className="navbar-brand" href="#" onClick={refreshPage}>
               <img src={'https://www.edcoinc.com/wp-content/uploads/2023/06/Logo.png'} alt="Logo" height="38" />
             </a>
-            {/* mobile button to show/hide solutions pop out */}
-          <button className='mobile-button' onClick={() => props.setRight((prev: boolean) => !prev)} >SOLUTION</button>
+          {/* mobile button to show/hide solutions pop out */}
+          <div style={{display: "flex"}}>
+            <button className='mobile-button' onClick={() => props.setRight((prev: boolean) => !prev)} >SOLUTION</button>
+            <button className='menu-button' onClick={() => props.setMenu((prev: boolean) => !prev)} >MENU</button>
+          </div>
         </div>
     </nav>
   )
