@@ -1,11 +1,35 @@
 :root{
-    --active: #e75a6b;
+    --active: #EF3D5E;
     --hover: #e68490;
     --primary: #D73648;
 }
 
+@font-face {
+    font-family: 'EurostileExtendedBlack';
+    src: url('../public/Fonts/EurostileExtended-Black.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
+}
 html, body{
     overflow-y: hidden;
+}
+/* 
+.arachnid-text{
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    /* font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
+} */ */
+
+.arachnid-background{
+    background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box;
 }
 
 .scroll{
@@ -15,7 +39,7 @@ html, body{
 }
 
 .header{
-    background-color: #D73648;
+    background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box;
 }
 
 .ui-container{
@@ -51,6 +75,13 @@ html, body{
     border: none;
     padding: 1rem 0;
     margin: 0;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 .tab-btn-inactive{
@@ -70,7 +101,7 @@ html, body{
 }
 
 .tab-btn-active{
-    background-color: var(--primary);
+    background: var(--active);
     border: none;
     padding: 1rem 0;
     margin: 0;
@@ -96,11 +127,18 @@ html, body{
 }
 
 .list-btn{
-    background-color: #D73648;
+    background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box;
     border: none;
     color: white;
     padding: 1rem 1.5rem;
     box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 .list-btn-icon{
@@ -111,11 +149,24 @@ html, body{
     padding: 0;
     box-shadow: 3px 3px 3px 3px rgb(0 0 0 / 20%);
     overflow: hidden;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 .list-btn-inner{
     color: white;
-    font-size: 1.25rem;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 .list-btn:hover{
@@ -153,7 +204,7 @@ html, body{
 }
 
 .icon-btn-red-space{
-    background-color: var(--primary);
+    background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box;
     text-align: left;
     align-items:flex-start;
 }
@@ -163,6 +214,13 @@ ul{
 }
 li{
     color: white;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 .machine-icon-frame{
@@ -174,21 +232,49 @@ li{
 .list-btn-title{
     color: white;
     text-align: left;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 .list-btn-bullets{
     margin-bottom: 0;
     padding: 0;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 .list-btn-bullets > li{
     color: white;
     text-align: left;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 .history-item-num{
     text-align: right;
     color: white;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 .new-layer{
@@ -213,10 +299,17 @@ li{
     align-items: center;
     flex-wrap: wrap;
     margin: -0.2rem -0.5rem 0.25rem -0.5rem;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 .cluster-btn-container > *{
-    background-color: var(--primary);
+    background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box;
     border: none;
     color: white;
     padding: 0.25rem 2rem;
@@ -224,6 +317,13 @@ li{
     border-radius: 0.5rem;
     flex-grow: 1;
     box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 .cluster-btn-active{
@@ -244,6 +344,13 @@ li{
     pointer-events: all;
     width: 100%;
     text-align: end;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 .info-pop{
@@ -256,15 +363,36 @@ li{
     max-width: 20rem;
     z-index: 2;
     box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.1);
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 .product-name{
     padding-top: 0.25rem;
     line-height: 1.25rem;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 .product-number{
     font-size: 0.9rem;
     line-height: 0.8rem;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 .menus-container{
@@ -274,6 +402,13 @@ li{
 
 .mobile-button{
     display: none;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
   }
 
 .menu-button{
@@ -283,6 +418,14 @@ li{
     border-width: 0;
     border-radius: 0.25rem;
     padding: 2px 8px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
+    background: transparent;
   }
 
 .drop-select{
@@ -290,6 +433,13 @@ li{
     background-color: transparent;
     color: white;
     margin: 0 0 0 2px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 .drop-option{
@@ -297,6 +447,13 @@ li{
     background-color: #D73648;
     border: none;
     border-radius: 0;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
 }
 
 input[type="range"] {
@@ -413,17 +570,18 @@ input[type="range"] {
     }
 }
 
-
-
-
-
-
-
 /* copied from online
 https://codesandbox.io/s/custom-dropdown-react-7oytw?file=/src/styles.css */
 
 .dropdown {
     background-color: var(--primary);
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
   }
 .dropdown-active {
     background-color: var(--active);
@@ -431,6 +589,13 @@ https://codesandbox.io/s/custom-dropdown-react-7oytw?file=/src/styles.css */
   .dropdown,
   .dropdown * {
     z-index: 10;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
   }
   .dropdown .dropdown-btn {
     cursor: pointer;
@@ -438,11 +603,10 @@ https://codesandbox.io/s/custom-dropdown-react-7oytw?file=/src/styles.css */
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 3px;
     border: none;
-    /* border-radius: 5px; */
     color: white;
     user-select: none;
+    background: transparent;
   }
   .dropdown-active .dropdown-btn {
     cursor: pointer;
@@ -452,7 +616,6 @@ https://codesandbox.io/s/custom-dropdown-react-7oytw?file=/src/styles.css */
     justify-content: space-between;
     padding: 3px;
     border: none;
-    /* border-radius: 5px; */
     color: white;
     user-select: none;
   }
@@ -477,6 +640,6 @@ https://codesandbox.io/s/custom-dropdown-react-7oytw?file=/src/styles.css */
   .dropdown-active:hover .dropdown-btn{
     background-color: var(--hover);
   }
-  .dropdown:hover .dropdown-btn{
+  /* .dropdown:hover .dropdown-btn{
     background-color: var(--hover);
-  }
+  } */

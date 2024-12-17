@@ -172,7 +172,7 @@ const menus = [
             <div className='row'>
                 {/* tab buttons */}
                 <div className='col px-0'>
-                    <button type="button" className={`w-100 tab-btn ${displayMenu == 0 && 'tab-btn-active'}`} onClick={() => setDisplayMenu(0)}>JOBSITE</button>
+                    <button type="button" className={`w-100 tab-btn ${displayMenu == 0 && 'tab-btn-active'} `} onClick={() => setDisplayMenu(0)}>JOBSITE</button>
                 </div>
                 <div className='col px-0'>
                     <button type="button" className={`w-100 tab-btn ${displayMenu == 1 && 'tab-btn-active'} ${props.allowProgress < 1 && 'tab-btn-inactive'}`} onClick={() => {if(props.allowProgress > 0){setDisplayMenu(1)}}} >MACHINES</button>

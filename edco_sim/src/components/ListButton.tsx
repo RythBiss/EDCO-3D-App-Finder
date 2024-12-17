@@ -45,7 +45,7 @@ export default function ListButton(props: any) {
                                 />
                                 <div style={{display: "flex"}} className="col">
                                     <div className={`col row btn-icon-spaces ${props.active == true ? 'btn-active' : 'icon-btn-red-space'}`} style={{paddingLeft: 0, paddingRight: 0}}>
-                                        <div>
+                                        <div className="arachnid-background">
                                             <div className='col-12 list-btn-inner history-item-num product-name' style={{textAlign: "left"}}>{props.displayName}</div>
 
                                             {isNameMachine(props.lable) == true &&
