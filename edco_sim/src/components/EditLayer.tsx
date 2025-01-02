@@ -149,7 +149,7 @@ export default function EditLayer(props: any) {
     doc.text("Small gasoline engines produce high concentrations of carbon monoxide (CO). Never operate gas\npowered equipment indoors.", 10, 275);
 
     // disclaimer
-    doc.text("Recommendations may be inacurate. Please speak with an expert or call our customer support\nto validate information. [workshop this line]", 10, 285);
+    doc.text("Recommendations may be inaccurate. Please speak with an expert or call our customer support\nto validate information. [workshop this line]", 10, 285);
 
     // output PDF
     doc.output('dataurlnewwindow', {filename: 'EDCO App Finder Recommendation'});

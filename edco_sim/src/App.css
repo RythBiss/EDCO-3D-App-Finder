@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: 'EurostileExtendedBlack';
-    src: url('../public/Fonts/EurostileExtended-Black.woff') format('woff');
+    src: url('../Fonts/EurostileExtended-Black.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -409,11 +409,12 @@ li{
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
     text-transform: uppercase;
+    background-color: transparent;
   }
 
 .menu-button{
     display: block;
-    background-color: var(--primary);
+    background-color: transparent;
     color: #fff;
     border-width: 0;
     border-radius: 0.25rem;
@@ -426,7 +427,35 @@ li{
     font-family: 'EurostileExtendedBlack', sans-serif;
     text-transform: uppercase;
     background: transparent;
-  }
+}
+
+.redirect-links{
+    background-color: transparent;
+    border: none;
+    padding: 1rem 1rem;
+    margin: 0;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+}
+
+@media only screen and (min-width: 991px){
+    .menu-button{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 991px){
+    .redirect-links{
+        display: none;
+    }
+}
 
 .drop-select{
     border: none;
@@ -522,7 +551,6 @@ input[type="range"] {
 
     .mobile-button{
         display: block;
-        background-color: var(--primary);
         color: #fff;
         border-width: 0;
         border-radius: 0.25rem;
@@ -558,7 +586,6 @@ input[type="range"] {
     }
 
     .mobile-button{
-        background-color: var(--primary);
         color: #fff;
         border-width: 0;
         border-radius: 0.25rem;

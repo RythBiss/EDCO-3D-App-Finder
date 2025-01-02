@@ -368,7 +368,7 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
 
   return (
     <>
-      <Header setLeft={setLeft} setRight={setRight} setMenu={setMenu} />
+      <Header setLeft={setLeft} setRight={setRight} setMenu={setMenu} mobileMenu={mobileMenu} />
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100' style={{position: 'relative'}}>
           <EditLayer setPopup={setPopupOn} layerObject={currentLayer} mobileLeft={mobileLeft} setPopupInfo={setPopupInfo} setPopupYPos={setPopupYPos} update={updateState} allowProgress={allowProgress} setAllowProgress={setAllowProgress} />

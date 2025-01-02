@@ -44,6 +44,7 @@ export default function RentalOrder(props: any) {
 
   return (
       <div className={`col-lg-2 col-sm-8 shadow scroll h-100 ${props.mobileRight == false ? 'hide-menu' : 'show-menu-right'}`} style={{overflowY: "scroll"}}>
+        <ListButton onClick={() => {}} lable="Suggestion:"/>
         {props.current !== undefined &&
             props.current.sublayerObjects.map((obj: object, key: number) => 
               <RentalItem

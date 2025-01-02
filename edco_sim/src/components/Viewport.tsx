@@ -15,7 +15,7 @@ export default function Viewport(props: any) {
   const [lastRenderedSurface, setLastRenderedSurface] = useState<any>();
 
   const mountRef = useRef<any>(null);
-  const controlsRef = useRef<any>();
+  //const controlsRef = useRef<any>();
   const loadedModels = useRef<any>([]);
   const scene = useRef(new THREE.Scene());
   const camera = useRef(new THREE.PerspectiveCamera(75, 1, 0.01, 1000));
@@ -35,6 +35,30 @@ export default function Viewport(props: any) {
 
 
   const addSlabToScene = (surface: string, isRenderedLayer: boolean) => {
+
+    if (surface === 'trip hazard') {
+      console.log('Trip hazard detected');
+
+      const targetPosition = new THREE.Vector3(-1.25, 0.05, 0.1); // specify the target XYZ position
+      const duration = 2000; // duration of the animation in milliseconds
+
+      const startPosition = camera.current.position.clone();
+      const startTime = performance.now();
+
+      function animateCamera() {
+        const elapsedTime = performance.now() - startTime;
+        const t = Math.min(elapsedTime / duration, 1);
+
+        camera.current.position.lerpVectors(startPosition, targetPosition, t);
+        camera.current.lookAt(0, 0, -0.2);
+
+        if (t < 1) {
+          requestAnimationFrame(animateCamera);
+        }
+      }
+
+      animateCamera();
+    }
 
     loader.load(`Models/${getModelNameBySurfacename(surface, props?.layer)}.gltf`, (gltf) => {
       loadedModels.current.push(gltf.scene)
@@ -183,7 +207,7 @@ export default function Viewport(props: any) {
     renderer.current.shadowMap.type = THREE.PCFSoftShadowMap;
 
     //initialize controls
-    controlsRef.current = new OrbitControls(camera.current, renderer.current.domElement);
+    // controlsRef.current = new OrbitControls(camera.current, renderer.current.domElement);
 
     //build environment
     const ambColor = 0xe8e8e8
@@ -251,45 +275,51 @@ export default function Viewport(props: any) {
     floorMesh.receiveShadow = true;
 
     //load 'Before' and 'After' text in scene
-    fontLoader.load( 'Fonts/Roboto Medium_Regular.json', function ( font ) {
+    fontLoader.load("/Fonts/EurostileExtended-Black.typeface.json",
+      function (font) {
+        const afterGeometry = new TextGeometry('After', {
+          font: font,
+          size: 0.1,
+          height: 0.025,
+          curveSegments: 1,
+          bevelEnabled: false,
+          bevelThickness: 1,
+          bevelSize: 1,
+          bevelOffset: 0,
+          bevelSegments: 0
+        });
 
-      const afterGeometry = new TextGeometry( 'After', {
-        font: font,
-        size: 0.1,
-        height: 0.025,
-        curveSegments: 1,
-        bevelEnabled: false,
-        bevelThickness: 1,
-        bevelSize: 1,
-        bevelOffset: 0,
-        bevelSegments: 0
-      } );
-      const beforeGeometry = new TextGeometry( 'Before', {
-        font: font,
-        size: 0.1,
-        height: 0.025,
-        curveSegments: 3,
-        bevelEnabled: false,
-        bevelThickness: 1,
-        bevelSize: 1,
-        bevelOffset: 0,
-        bevelSegments: 0
-      });
+        const beforeGeometry = new TextGeometry('Before', {
+          font: font,
+          size: 0.1,
+          height: 0.025,
+          curveSegments: 3,
+          bevelEnabled: false,
+          bevelThickness: 1,
+          bevelSize: 1,
+          bevelOffset: 0,
+          bevelSegments: 0
+        });
 
-      const afterMesh = new THREE.Mesh(afterGeometry, new THREE.MeshPhongMaterial({ color: 0x757575 }))
-      const beforeMesh = new THREE.Mesh(beforeGeometry, new THREE.MeshPhongMaterial({ color: 0x757575 }))
+        const afterMesh = new THREE.Mesh(afterGeometry, new THREE.MeshPhongMaterial({ color: 0x757575 }));
+        const beforeMesh = new THREE.Mesh(beforeGeometry, new THREE.MeshPhongMaterial({ color: 0x757575 }));
 
-      afterMesh.position.set(0.3,0.025,-1.05)
-      beforeMesh.position.set(-0.7,0.025,-1.05)
-      afterMesh.rotation.x = -3.14159/2.5
-      beforeMesh.rotation.x = -3.14159/2.5
-      afterMesh.castShadow = true;
-      beforeMesh.castShadow = true;
+        afterMesh.position.set(0.3, 0.025, -1.05);
+        beforeMesh.position.set(-0.8, 0.025, -1.05);
+        afterMesh.rotation.x = THREE.MathUtils.degToRad(-25);
+        beforeMesh.rotation.x = THREE.MathUtils.degToRad(-25);
 
-      scene.current.add(afterMesh);
-      scene.current.add(beforeMesh);
-
-    } );
+        scene.current.add(afterMesh);
+        scene.current.add(beforeMesh);
+      },
+      function (xhr) {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+      },
+      function (err) {
+        console.log('An error happened');
+        console.log(err);
+      }
+    );
 
     //update loops
     function animate() {
@@ -311,7 +341,7 @@ export default function Viewport(props: any) {
 
     return () => {
       if(mountRef.current !== null) mountRef.current.removeChild(renderer.current.domElement);
-      if(controlsRef.current !== undefined) controlsRef.current.dispose();
+      // if(controlsRef.current !== undefined) controlsRef.current.dispose();
     };
   }, []);
 
