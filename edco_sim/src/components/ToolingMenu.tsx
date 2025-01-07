@@ -20,17 +20,74 @@ export default function ToolingMenu(props: any) {
     if(toolingHasDiamonds(newTooling) == true){
       props.layerObject.setContainsDiamonds(true)
     }
+
+    toolSelect(-1);
     //setSelectedSurface(newTooling);
   }
 
-    //opens accordion of currently selected layer.
-    const toolSelect = (num: number) => {
-      if(openTab == num){
-        setOpenTab(-1)
-      }else{
-        setOpenTab(num)
-      }
+  //opens accordion of currently selected layer.
+  const toolSelect = (num: number) => {
+    if(openTab == num){
+      setOpenTab(-1)
+    }else{
+      setOpenTab(num)
     }
+  }
+
+  const getToolsAlgorithm = (layer: any) => {
+    console.log("Starting getToolsAlgorithm for layer:", layer);
+
+    let concatList: string[];
+    const item = props.layerObject.sublayerObjects[layer];
+
+    concatList = [];
+
+    //go through each tooling
+    Object.keys(toolsByApplicationAndMachine).forEach((key) => {
+      console.log(`Checking tool: ${key}`);
+      const machinesArray = toolsByApplicationAndMachine[key].machines;
+      const appsArray = toolsByApplicationAndMachine[key].apps;
+      const toolFitsMachine = machinesArray.includes(item.machine);
+      const toolFitsApplication = appsArray.includes(item.materialRemoved);
+      const hardGlueTool = (key == "DymaDots" || key == "DymaDots70" || key == "DymaDots120" || key == "DymaSegs");
+      const softGlueTool = (key == "MagnaBlades" || key == "MagnaBladesDual");
+      const adhesiveSpecialCase = hardGlueTool || softGlueTool;
+
+      console.log(`Tool: ${key}, Fits Machine: ${toolFitsMachine}, Fits Application: ${toolFitsApplication}, Adhesive Special Case: ${adhesiveSpecialCase}`);
+
+      let removeToolDueToSpecialCase = false;
+
+      console.log(item);
+
+      if(
+        (item.materialRemoved == "glue/adhesive" ||
+        item.materialRemoved == "thinset" ||
+        item.materialRemoved == "mastic")
+        &&
+        adhesiveSpecialCase
+      ){        
+        console.log(`Special case for adhesive: puttyKnifeCuts=${props.layerObject.puttyKnifeCuts}, hardGlueTool=${hardGlueTool}, softGlueTool=${softGlueTool}`);
+        if((props.layerObject.puttyKnifeCuts == true && hardGlueTool) || (props.layerObject.puttyKnifeCuts == false && softGlueTool)){
+          console.log(`Removing tool due to special case (1): ${key}`);
+          removeToolDueToSpecialCase = true;
+        }
+      }
+      
+      if(props.layerObject.getFinish() === 'smooth' && key == "PCDbacking" || key == "PCDbackingDual") {
+        console.log(`Removing tool due to special case (2): ${key}`);
+        removeToolDueToSpecialCase = true;
+      }
+
+      //add tools that fit application
+      if(toolFitsApplication && toolFitsMachine && removeToolDueToSpecialCase == false){
+        concatList.push(key)
+      }
+    });
+
+    console.log("Tools that fit the criteria:", concatList);
+    return concatList;
+
+  }
 
   //checks if tooling has been selected for each layer, and allows the user to access recommendations if so.
   useEffect(()=>{
@@ -48,188 +105,42 @@ export default function ToolingMenu(props: any) {
 
   })
 
-
-  useEffect(() => {
-    //2D array to store tooling options
-    let fourLayers: any[] = [[],[],[],[]]
-    let count = 0;
-   
-    //for each layer
-    props.layerObject.sublayerObjects.forEach((item: { machine: any; materialRemoved: any; }, layerIndex: number) => {
-      count++;
-      let concatList: string[] = [];
-
-      //go through each tooling
-      Object.keys(toolsByApplicationAndMachine).forEach((key) => {
-        const machinesArray = toolsByApplicationAndMachine[key].machines;
-        const appsArray = toolsByApplicationAndMachine[key].apps;
-        const toolFitsMachine = machinesArray.includes(item.machine);
-        const toolFitsApplication = appsArray.includes(item.materialRemoved);
-        const hardGlueTool = (key == "DymaDots" || key == "DymaDots70" || key == "DymaDots120" || key == "DymaSegs");
-        const softGlueTool = (key == "MagnaBlades" || key == "MagnaBladesDual");
-        const adhesiveSpecialCase = hardGlueTool || softGlueTool;
-
-        let removeToolDueToSpecialCase = false;
-
-        if(
-          (item.materialRemoved == "glue/adhesive" ||
-          item.materialRemoved == "thinset" ||
-          item.materialRemoved == "mastic")
-          &&
-          adhesiveSpecialCase
-        ){
-          if((props.layerObject.puttyKnifeCuts == true && hardGlueTool) || (props.layerObject.puttyKnifeCuts == false && softGlueTool)){
-            removeToolDueToSpecialCase = true;
-          }
-        }
-
-        //add tools that fit application
-        if(toolFitsApplication && toolFitsMachine && removeToolDueToSpecialCase == false){
-          concatList.push(key)
-        }
-      });
-
-      //add tools to 2D array
-      fourLayers[layerIndex] = concatList;
-    });
-
-    setMatchingTooling(fourLayers)
-  }, [])
-
-
-  useEffect(() => {
-    console.log(props.layerObject.sublayerObjects[props.layerObject.getSubLayerLength()-1].machine);
-    console.log(props.layerObject.getFinishLayersGenerated());
-  }, [])
-
   return (
     <div className='col edit-menu scroll-on'>
       {/* lists of tooling organized by layer */}
 
-      {/* layer 1 */}
-      <ListButton lable={'First Layer'} onClick={() => toolSelect(0)} selected={props.layerObject.sublayerObjects[0].tooling !== ''} />
-      {openTab == 0 &&
-        matchingTooling.length !== 0 &&
-          matchingTooling[0].map((tool: any, i: any) => 
+        {props.layerObject.sublayerObjects.map((sublayer: any, index: number) => (
+          <div key={index}>
             <ListButton
-              key={i}
-              lable={toolsByApplicationAndMachine[tool].name}
-              displayName={toolsByApplicationAndMachine[tool].name}
-              indent={1}
-              popupOn={props.popupOn}
-              showMenu={true} 
-              icon={toolsByApplicationAndMachine[tool].image}
-              onClick={() =>
-                setTooling(toolsByApplicationAndMachine[tool].name, 0, toolsByApplicationAndMachine[tool].CSP)}
-              mouseAction={() => handlePopup(tool)}
-              setIsInfoPopupOnupYPos={props.setPopupYPos}
-              popupInfo={toolsByApplicationAndMachine[tool].info}
-              partNumber={toolsByApplicationAndMachine[tool].number[0]}
-              layerObject={props.layerObject}
-              />
-        )}
+              lable={`Layer ${index + 1}`} //use number to word here, also move that function to functions.tsx
+              onClick={() => toolSelect(index)}
+              selected={sublayer.tooling !== ''}
+            />
+            {openTab === index && getToolsAlgorithm(index).length !== 0 &&
+              getToolsAlgorithm(index).map((tool: any, i: any) => (
+                <ListButton
+                  key={i}
+                  lable={toolsByApplicationAndMachine[tool].name}
+                  displayName={toolsByApplicationAndMachine[tool].name}
+                  indent={1}
+                  popupOn={props.popupOn}
+                  showMenu={true}
+                  icon={toolsByApplicationAndMachine[tool].image}
+                  onClick={() =>
+                    setTooling(toolsByApplicationAndMachine[tool].name, index, toolsByApplicationAndMachine[tool].CSP)}
+                  mouseAction={() => handlePopup(tool)}
+                  setIsInfoPopupOnupYPos={props.setPopupYPos}
+                  popupInfo={toolsByApplicationAndMachine[tool].info}
+                  partNumber={toolsByApplicationAndMachine[tool].number[0]}
+                  layerObject={props.layerObject}
+                />
+              ))}
+          </div>
+        ))}
 
-      {/* layer 2 */}
-      {props.layerObject.sublayerObjects.length > 1 &&
-        <ListButton lable={'Second Layer'} onClick={() => toolSelect(1)} selected={props.layerObject.sublayerObjects[1].tooling !== ''} />
-      }
-      {openTab == 1 &&
-        matchingTooling.length !== 0 &&
-          matchingTooling[1].map((tool: any, i: any) => 
-            <ListButton
-              key={i}
-              lable={toolsByApplicationAndMachine[tool].name}
-              displayName={toolsByApplicationAndMachine[tool].name}
-              indent={1} popupOn={props.popupOn} 
-              showMenu={true}
-              icon={toolsByApplicationAndMachine[tool].image}
-              onClick={() =>
-                setTooling(toolsByApplicationAndMachine[tool].name, 1, toolsByApplicationAndMachine[tool].CSP)}
-              mouseAction={() => handlePopup(tool)}
-              setIsInfoPopupOnupYPos={props.setPopupYPos}
-              popupInfo={toolsByApplicationAndMachine[tool].info}
-              partNumber={toolsByApplicationAndMachine[tool].number[0]}
-              layerObject={props.layerObject}
-              />
-        )}
-
-      {/* layer 3 */}
-      {props.layerObject.sublayerObjects.length > 2 &&
-        <ListButton lable={'Third Layer'} onClick={() => toolSelect(2)} selected={props.layerObject.sublayerObjects[2].tooling !== ''} />
-      }
-      {openTab == 2 &&
-        matchingTooling.length !== 0 &&
-          matchingTooling[2].map((tool: any, i: any) => 
-            <ListButton
-              key={i}
-              lable={toolsByApplicationAndMachine[tool].name}
-              displayName={toolsByApplicationAndMachine[tool].name}
-              indent={1} popupOn={props.popupOn}
-              showMenu={true}
-              icon={toolsByApplicationAndMachine[tool].image}
-              onClick={() =>
-                setTooling(toolsByApplicationAndMachine[tool].name, 2, toolsByApplicationAndMachine[tool].CSP)}
-              mouseAction={() => handlePopup(tool)}
-              setIsInfoPopupOnupYPos={props.setPopupYPos}
-              popupInfo={toolsByApplicationAndMachine[tool].info}
-              partNumber={toolsByApplicationAndMachine[tool].number[0]}
-              layerObject={props.layerObject}
-              />
-        )}
-      
-      {/* layer 4 */}
-      {props.layerObject.sublayerObjects.length > 3 &&
-        <ListButton lable={'Fourth Layer'} onClick={() => toolSelect(3)} selected={props.layerObject.sublayerObjects[3].tooling !== ''} />
-      }
-      {openTab == 3 &&
-        matchingTooling.length !== 0 &&
-          matchingTooling[3].map((tool: any, i: any) => 
-            <ListButton
-              key={i}
-              lable={toolsByApplicationAndMachine[tool].name}
-              displayName={toolsByApplicationAndMachine[tool].name}
-              indent={1}
-              popupOn={props.popupOn}
-              showMenu={true}
-              icon={toolsByApplicationAndMachine[tool].image} 
-              onClick={() =>
-                setTooling(toolsByApplicationAndMachine[tool].name, 3, toolsByApplicationAndMachine[tool].CSP)}
-              mouseAction={() => handlePopup(tool)}
-              setIsInfoPopupOnupYPos={props.setPopupYPos}
-              popupInfo={toolsByApplicationAndMachine[tool].info}
-              partNumber={toolsByApplicationAndMachine[tool].number[0]}
-              layerObject={props.layerObject}
-              />
-        )}
-      
-      {/* layer 5 */}
-      {props.layerObject.sublayerObjects.length > 4 &&
-        <ListButton lable={'Fourth Layer'} onClick={() => toolSelect(4)} selected={props.layerObject.sublayerObjects[4].tooling !== ''} />
-      }
-      {openTab == 4 &&
-        matchingTooling.length !== 0 &&
-          matchingTooling[4].map((tool: any, i: any) => 
-            <ListButton
-              key={i}
-              lable={toolsByApplicationAndMachine[tool].name}
-              displayName={toolsByApplicationAndMachine[tool].name}
-              indent={1}
-              popupOn={props.popupOn}
-              showMenu={true}
-              icon={toolsByApplicationAndMachine[tool].image} 
-              onClick={() =>
-                setTooling(toolsByApplicationAndMachine[tool].name, 4, toolsByApplicationAndMachine[tool].CSP)}
-              mouseAction={() => handlePopup(tool)}
-              setIsInfoPopupOnupYPos={props.setPopupYPos}
-              popupInfo={toolsByApplicationAndMachine[tool].info}
-              partNumber={toolsByApplicationAndMachine[tool].number[0]}
-              layerObject={props.layerObject}
-              />
-        )}
-
-          {props.allowProgress == 3 &&
-            <NextButton lable={'View Recommendation'} onClick={() => props.printPDF()} />
-          }
+        {props.allowProgress == 3 &&
+          <NextButton lable={'View Recommendation'} onClick={() => props.printPDF()} />
+        }
     </div>
   )
 }

@@ -4,10 +4,6 @@ import { useEffect } from "react";
 
 export default function LinksMenu(props: any) {
 
-    useEffect(()=>{
-        console.log(props.linksMenu);
-    })
-
   return (
     <div className={`col-lg-6 col-sm-8 shadow scroll h-100 ${props.linksMenu == false ? 'hide-menu' : 'show-menu-right'}`} style={{overflowY: "scroll", padding: "0"}}>
       <div style={{display: "flex", flexDirection: "column"}} >

@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+//import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { getModelNameBySurfacename } from '../functions';
-
+import * as TWEEN from '@tweenjs/tween.js';
 
 export default function Viewport(props: any) {
 
@@ -33,32 +33,24 @@ export default function Viewport(props: any) {
   let isLoaded = true;
   let isFirstLoad = true;
 
+  const originalPosition = { x: 0.5, y: 1.5, z: 1.5 };
+  const targetPosition = { x: -1.2, y: 0.05, z: 0.05 }; // Example target position
+
+  let shouldMoveCamera = false; // Replace with your actual condition
+
+  const animateCamera = (target: { x: number, y: number, z: number }) => {
+
+    new TWEEN.Tween(camera.current.position)
+      .to(target, 2000) // 2 seconds duration
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .onUpdate(() => {
+        camera.current.lookAt(0,0,0);
+      })
+      .start();
+      
+  };
 
   const addSlabToScene = (surface: string, isRenderedLayer: boolean) => {
-
-    if (surface === 'trip hazard') {
-      console.log('Trip hazard detected');
-
-      const targetPosition = new THREE.Vector3(-1.25, 0.05, 0.1); // specify the target XYZ position
-      const duration = 2000; // duration of the animation in milliseconds
-
-      const startPosition = camera.current.position.clone();
-      const startTime = performance.now();
-
-      function animateCamera() {
-        const elapsedTime = performance.now() - startTime;
-        const t = Math.min(elapsedTime / duration, 1);
-
-        camera.current.position.lerpVectors(startPosition, targetPosition, t);
-        camera.current.lookAt(0, 0, -0.2);
-
-        if (t < 1) {
-          requestAnimationFrame(animateCamera);
-        }
-      }
-
-      animateCamera();
-    }
 
     loader.load(`Models/${getModelNameBySurfacename(surface, props?.layer)}.gltf`, (gltf) => {
       loadedModels.current.push(gltf.scene)
@@ -83,29 +75,29 @@ export default function Viewport(props: any) {
 
     //initializes prePass, which is used to set lastRenderedSurface, which is used to see if the check if the layers already match as intended before rerendering.
     let prepPassed = subLayerCurrent?.materialRemoved;
-
+    shouldMoveCamera = prepPassed === "trip hazard" ? true : false;
 
     //if layer is concrete, changes surface CSP to match the tooling.
     if( 
         subLayerCurrent?.materialRemoved == 'concrete' ||
-        subLayerCurrent?.materialRemoved == 'trip hazard' ||
+        subLayerCurrent?.materialRemoved == '' || //removed trip hazard since it was causing a visual bug.
         subLayerCurrent?.materialRemoved == 'high spots'
       ){
         
-      prepPassed = `CSP ${subLayerCurrent.CSP}`
+        prepPassed = `CSP ${subLayerCurrent.CSP}`
 
       }
 
-    else if(
+    else if(// this one is causing the visual bug.
         subLayerBelow?.materialRemoved == 'concrete' ||
         subLayerBelow?.materialRemoved == 'trip hazard' ||
         subLayerBelow?.materialRemoved == 'high spots'
       ){
 
-      prepPassed = `CSP ${subLayerBelow?.materialRemoved}`
+        prepPassed = `CSP ${subLayerBelow?.materialRemoved}`
     
       }
-
+      
     //if lastRenderedSurface is not the same as the new render request, begin rerender.
     if(lastRenderedSurface == undefined || lastRenderedSurface !== subLayerCurrent?.materialRemoved){ 
       if(updateView !== props.updateTrigger){
@@ -181,14 +173,15 @@ export default function Viewport(props: any) {
               surface == 'high spots') &&
               props.layer.sublayerObjects[props?.renderLayer].CSP !== ''){
                 modifiedSurface = `CSP ${props.layer.sublayerObjects[props?.renderLayer].CSP}`;
-          }
+            }
 
           addSlabToScene(modifiedSurface, false)
         }
       }
 
       setIsLoaded(true);
-    }
+    } 
+
   };
 
   updateScene();
@@ -222,9 +215,7 @@ export default function Viewport(props: any) {
     const floorMesh = new THREE.Mesh(floor, new THREE.MeshPhongMaterial({ color: ambColor, /*side: THREE.DoubleSide*/ }))
 
     //camera settings
-    camera.current.position.z = 1.5;
-    camera.current.position.y = 1.5;
-    camera.current.position.x = 0.5;
+    camera.current.position.set(originalPosition.x, originalPosition.y, originalPosition.z);
     camera.current.lookAt(0,0,0);
 
     //light 1 settings
@@ -324,6 +315,7 @@ export default function Viewport(props: any) {
     //update loops
     function animate() {
       requestAnimationFrame(animate);
+      TWEEN.update();
       renderer.current.render(scene.current, camera.current);
     }
 
@@ -350,6 +342,15 @@ export default function Viewport(props: any) {
       setpopupHeightValueValue((props.popupYPos)-(popupRef.current.getBoundingClientRect().height/2)-64)
     }
   })
+
+  useEffect(() => {
+    if (shouldMoveCamera) {
+      animateCamera(targetPosition);
+    } else {
+      animateCamera(originalPosition);
+    }
+
+  }, [shouldMoveCamera]);
 
   return (
     <>

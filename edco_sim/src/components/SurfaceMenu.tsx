@@ -60,7 +60,8 @@ export default function SurfaceMenu(props:any) {
 
         props.layerObject.setMaterialRemoved(material, layer, sublayers);
 
-        setActiveMaterial(res)
+        setActiveMaterial(res);
+        handleMenuState(-1);
     }
 
     const setThicknessHandler = (fraction: string) => {
@@ -89,6 +90,7 @@ export default function SurfaceMenu(props:any) {
         }
 
         setThickSelected(true);
+        handleMenuState(-1);
     }
     
     const setJobSize = (res: string) => {
@@ -111,21 +113,24 @@ export default function SurfaceMenu(props:any) {
                 break;
         }
 
-        setActiveSize(res)
+        setActiveSize(res);
+        handleMenuState(-1);
     }
         
     const setGreenConcrete = (res: string) => {
         if(res == 'Yes') props.layerObject.setGreenConcrete(true);
         else props.layerObject.setGreenConcrete(false);
 
-        setActiveGreenConcrete(res)
+        setActiveGreenConcrete(res);
+        handleMenuState(-1);
     }
             
     const setEdger = (res: string) => {
         if(res == 'Yes') props.layerObject.setEdger(true);
         else props.layerObject.setEdger(false);
 
-        setActiveEdgingNeeded(res)
+        setActiveEdgingNeeded(res);
+        handleMenuState(-1);
     }
                 
     const setPowerType = (res: string) => {
@@ -138,6 +143,8 @@ export default function SurfaceMenu(props:any) {
 
         if(power == 'electric residential' || power == 'electric commercial' || power == 'electric industrial')
             props.setElectricValue(res);
+
+        handleMenuState(-1);
     }
                 
     const setFinishType = (res: string) => {
@@ -146,6 +153,7 @@ export default function SurfaceMenu(props:any) {
         props.layerObject.setFinishedSurface(finish);
 
         setActiveFinish(res);
+        handleMenuState(-1);
     }
 
     const setPuttyKnife = (res: string) => {
@@ -155,6 +163,7 @@ export default function SurfaceMenu(props:any) {
             props.layerObject.setPuttyKnifeCuts(false);
 
         setActivePuttyKnife(res);
+        handleMenuState(-1);
     }
 
     const setSurfaceType = (res: string) => {
@@ -162,6 +171,7 @@ export default function SurfaceMenu(props:any) {
         else if (res === 'Concrete') props.layerObject.setSurfaceType('concrete');
 
         setActiveSurfaceType(res);
+        handleMenuState(-1);
     };
 
     const isThicknessRelevant = () => {
@@ -266,7 +276,6 @@ export default function SurfaceMenu(props:any) {
 
     useEffect(() => {
         if(props.layerObject){
-            console.log("clearing finishes..")
             props.layerObject.clearFinishedLayers();          
         }
     }, [])

@@ -83,16 +83,11 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
     generateFinishLayers(){
       if(this.finishLayersGenerated < this.finishLayersMax){
         if(this.sublayerObjects.length > 0){
-          console.log("making a finish layer");
           this.finishLayersGenerated++;
           const newLength = this.sublayerObjects.push(new Layer);
           return newLength;
-        } else {
-          console.log("no layers exist, make base layers first.")
         }
-      } else {
-        console.log("already created layers");
-      }  
+      } 
     }
 
     setMaterialRemoved(value: string, layer: number, sublayers: string[]){
@@ -128,14 +123,14 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
         item.materialThickness = value;
       })
       
-      this.requestUpdate();
+      //this.requestUpdate();
     }
 
     //if anything other than unfinished, then suggest tools that get CSP 3 or less.
     setFinishedSurface = (value: string) => {
       this.finishedSurface = value;
       
-      this.requestUpdate();
+      //this.requestUpdate();
     }
 
     setJobSize = (value: number) => {
@@ -147,7 +142,7 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
         item.jobSize = value;
       })
       
-      this.requestUpdate();
+      //this.requestUpdate();
     }
 
     setGreenConcrete = (value: boolean) => {
@@ -159,7 +154,7 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
         item.greenConcrete = value;
       })
       
-      this.requestUpdate();
+      //this.requestUpdate();
     }
 
     //this question can be skipped, add a vac to the list of any machine requires it.
@@ -175,7 +170,7 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
 
       this.edger = value;
       
-      this.requestUpdate();
+      //this.requestUpdate();
     }
 
     //only show this question if there is more than 1 option with current selection.
@@ -188,7 +183,7 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
         item.powerType = value;
       })
       
-      this.requestUpdate();
+      //this.requestUpdate();
     }
     
     setMachine(newMachine: string, layer: number): void{
@@ -237,7 +232,7 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
 
       this.surfaceType = surface;
 
-      this.requestUpdate();
+      //this.requestUpdate();
     }
 
 

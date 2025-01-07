@@ -49,7 +49,7 @@ export const allMachineData: any = {
       displayName: ['TS-8']
     },
     SEC: {
-      apps: ['glue/adhesive', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer','thinset'],
+      apps: ['glue/adhesive', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer','thinset', 'industrial'],
       depth: 0,
       //recJobSize: 0,
       onCrete: true,
@@ -65,7 +65,7 @@ export const allMachineData: any = {
       displayName: ['SEC-NG']
     },
     _2GC: {
-      apps: ['glue/adhesive', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer','thinset'],
+      apps: ['glue/adhesive', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer','thinset', 'industrial'],
       depth: 0,
       //recJobSize: 0,
       onCrete: true,
@@ -83,7 +83,7 @@ export const allMachineData: any = {
       displayName: ['2GC-NG','2EC-NG','2EC-NG']
     },
     _2DHD: {
-      apps: ['glue/adhesive', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer','thinset'],
+      apps: ['glue/adhesive', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer','thinset', 'industrial'],
       depth: 0,
       //recJobSize: 2,
       onCrete: true,
@@ -100,7 +100,7 @@ export const allMachineData: any = {
       displayName: ['2D-HDE','2D-HDP']
     },
     TL9: {
-      apps: ['leveling', 'rubber', 'concrete', 'high spots', 'sealer'],
+      apps: ['leveling', 'rubber', 'concrete', 'high spots', 'sealer', 'industrial'],
       depth: 0,
       //recJobSize: 0,
       onCrete: true,
@@ -132,7 +132,7 @@ export const allMachineData: any = {
     //   displayName: ['TMC-7E']
     // },
     TG10: {
-      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'high spots', 'sealer'],
+      apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'high spots', 'sealer', 'industrial'],
       depth: 1,
       //recJobSize: 0,
       onCrete: true,
@@ -167,7 +167,7 @@ export const allMachineData: any = {
       number: ['69500', '69300'],
       displayName: ['CPL-8G','CPL-8E']
     },
-    CPM8: {
+    CPM8: { //fixed the CPM8-G showing up for commercial electric options by adding a "new machine" with commercial electric power, but the same info as the industrial electric machine.
       apps: ['leveling', 'concrete', 'trip hazard', 'rubber', 'high spots'],
       depth: 2,
       //recJobSize: 0,
@@ -175,15 +175,16 @@ export const allMachineData: any = {
       //if the machine can achive a CSP 2-3 for new coatings
       surfacePrep: false,
       edges: false,
-      power: ['gas', 'electric industrial', 'propane'],
+      power: ['gas', 'electric commercial', 'electric industrial', 'propane'],
       image: [
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8-Gas-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8-Electric-Machine-Slider.jpg',
+              'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8-Electric-Machine-Slider.jpg',
               'https://portal.edcoinc.com/storage/product-slider/8-walk-behind-crete-planer-r/CPM-8%20Propane%20Machine%20Slider.jpg'
               ], 
-      info: ['500 SQFT. Per Hour, Honda GX270, 1/8" depth per pass, Vac 200 recommended','500 SQFT. Per Hour, 5HP 230V/30A, 1/8" depth per pass, Vac 200 recommended','500 SQFT. Per Hour, PPS 305cc, 1/8" depth per pass, Vac 200 recommended'], // ========================================== VARIES
-      number: ['79300', '79500', '72600'],
-      displayName: ['CPM-8G','CPM-8E','CPM-8P']
+      info: ['500 SQFT. Per Hour, Honda GX270, 1/8" depth per pass, Vac 200 recommended','500 SQFT. Per Hour, 5HP 230V/30A, 1/8" depth per pass, Vac 200 recommended','500 SQFT. Per Hour, 5HP 230V/30A, 1/8" depth per pass, Vac 200 recommended','500 SQFT. Per Hour, PPS 305cc, 1/8" depth per pass, Vac 200 recommended'], // ========================================== VARIES
+      number: ['79300', '79500', '79500', '72600'],
+      displayName: ['CPM-8G','CPM-8E', 'CPM-8E','CPM-8P']
     },
     CPM10: {
       apps: ['leveling', 'concrete', 'trip hazard', 'rubber', 'high spots'],
@@ -217,22 +218,6 @@ export const allMachineData: any = {
       displayName: ['CD-5']
     }
 }
-
-
-
-
-
-/*=====================================================================================================================================
-
-
-
-Try just adding all the tools (each grit) and clarifying that they are different finishes. See if that fixes the finish layer issue.
-
-
-
-=====================================================================================================================================*/
-
-
 
 export const toolsByApplicationAndMachine: any = {
   Scaler4: {
@@ -346,7 +331,7 @@ export const toolsByApplicationAndMachine: any = {
     hasDiamonds: false
   },
   MagnaBlades: {
-    apps: ['glue/adhesive', 'paint', 'mastic', 'thinset'],
+    apps: ['glue/adhesive', 'paint', 'mastic', 'thinset', 'industrial'],
     name: 'Magna-Blades',
     machines: ['SEC', 'TG10'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/12501LC_MagnaBlade-450x450.jpg',
@@ -356,8 +341,8 @@ export const toolsByApplicationAndMachine: any = {
     hasDiamonds: false
   },
   MagnaBladesDual: {
-    apps: ['glue/adhesive', 'paint', 'mastic', 'thinset'],
-    name: 'Magna-Blades (Left & Right)',
+    apps: ['glue/adhesive', 'paint', 'mastic', 'thinset', 'industrial'],
+    name: 'Magna-Blades',
     machines: ['_2DHD', '_2GC'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/12501LC_MagnaBlade-450x450.jpg',
     CSP: 1,
@@ -387,7 +372,7 @@ export const toolsByApplicationAndMachine: any = {
   },
   PCDbackingDual: {
     apps: ['industrial', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
-    name: 'PCD w/Backing Segment (Left & Right)',
+    name: 'PCD w/Backing Segment',
     machines: ['_2DHD', '_2GC'],
     image: 'https://edcostore.com/wp-content/uploads/2017/04/QC-PCD1-LB_DymaPCD_Blue-450x450.jpg',
     CSP: 3,
@@ -427,12 +412,32 @@ export const toolsByApplicationAndMachine: any = {
   },
   CarbideCutter: {
     apps: ['leveling', 'concrete', 'trip hazard', 'high spots'],
-    name: 'Carbide Cutter',
-    machines: ['CPM8', 'CPL8', 'CPM10'],
-    image: 'https://edcostore.com/wp-content/uploads/2017/05/20156_6_PointBlueCutter-450x450.jpg',
+    name: '8" Carbide Cutter Drum',
+    machines: ['CPM8'],
+    image: 'https://edcostore.com/wp-content/uploads/2017/06/65050C-e1578341407835.jpg',
     CSP: 6,
     info: 'REMOVE',
-    number: ['20156'],
+    number: ['65050C'],
+    hasDiamonds: false
+  },
+  CarbideCutter10: {
+    apps: ['leveling', 'concrete', 'trip hazard', 'high spots'],
+    name: '10" Carbide Cutter Drum',
+    machines: ['CPM10'],
+    image: 'https://edcostore.com/wp-content/uploads/2022/01/65270C-scaled-e1725560138505.jpeg',
+    CSP: 6,
+    info: 'REMOVE',
+    number: ['65270C'],
+    hasDiamonds: false
+  },
+  CarbideCutterL: {
+    apps: ['leveling', 'concrete', 'trip hazard', 'high spots'],
+    name: '8" Carbide Cutter Drum',
+    machines: ['CPL8'],
+    image: 'https://edcostore.com/wp-content/uploads/2022/01/66309C-scaled-e1728650023716.jpg',
+    CSP: 6,
+    info: 'REMOVE',
+    number: ['66309C'],
     hasDiamonds: false
   },
   // SteelCutters: {
@@ -555,7 +560,7 @@ export const applicationDataObjects: any = {
   industrial: {
       name: 'Industrial Buildup',
       layers: 2,
-      sublayers: ['residual glue/adhesive'],
+      sublayers: ['industrial'],
       modelName: 'residual'
   }
 }
@@ -601,7 +606,11 @@ const getCorrectApplicationList = (layerObject: any) => {
   }
 }
 
-
+export const getApplicationDatabaseName = (str: string): string => {
+  if(str == 'glue/adhesive') return 'glue';
+  else if(str == 'residual glue/adhesive') return 'residual';
+  else return str.replace(/\s+/g, '');
+}
 
 // returns index based on power type
 export const getPowerTypeImageIndexGlobal = (machine: string, layer: any) => {

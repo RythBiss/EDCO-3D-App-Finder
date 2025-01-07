@@ -75,7 +75,7 @@ export default function EditLayer(props: any) {
     })
 
     let use290 = false;
-    let edger = props.layerObject.getEdgerforPDF();
+    let edger = props.layerObject.edger;
     
 
     machineArray.forEach((i)=>{
@@ -92,7 +92,7 @@ export default function EditLayer(props: any) {
     }
 
     if(isAppOnConcrete()){
-      if(use290 == true){
+      if(use290){
         doc.text('VAC 290 (Dust Control)', 10, getLine());
         doc.text(`ED33280K`, 60, getLineIncrement());
         machineArray.push('VAC 290');
@@ -113,7 +113,6 @@ export default function EditLayer(props: any) {
 
     getLineIncrement();
     getLineIncrement();
-    getLineIncrement();
 
     doc.text(`What is your application: ${props.layerObject.getMaterialForPDF()}`, 10, getLineIncrement());
 
@@ -123,11 +122,24 @@ export default function EditLayer(props: any) {
 
     doc.text(`Do you need to grind or clean against a wall: ${isAppOnConcrete() ? props.layerObject.getEdgerforPDF() : "N/A"}.`, 10, getLineIncrement());
 
-
-
     let power = props.layerObject.getPowerforPDF();
-
     doc.text(`What machine power is desired: ${power.charAt(0).toUpperCase() + power.slice(1)}.`, 10, getLineIncrement());
+
+    getLineIncrement();
+    getLineIncrement();
+
+
+    doc.text('Buy Now: ', 10, getLine());
+    doc.setTextColor(0, 0, 255);
+    doc.textWithLink('https://edcostore.com/', 30, getLineIncrement(), { url: 'https://edcostore.com/' });
+    doc.setTextColor(0, 0, 0);
+    doc.text('Find a Rental Store: 1-800-638-3326', 10, getLineIncrement());
+
+      // surface profile chart
+      doc.setTextColor(0, 0, 255);
+      doc.textWithLink('Click here ', 10, getLine(), { url: 'https://www.tccmaterials.com/wp-content/uploads/2020/06/ConcreteSurfaceProfiles.pdf' });
+      doc.setTextColor(0, 0, 0);
+      doc.text('to learn more about CSP (Concrete Surface Profiles).', 30, getLineIncrement());
     
 
 
@@ -145,11 +157,9 @@ export default function EditLayer(props: any) {
       doc.addImage(diamondChart, 'JPEG', 10, 220, 190, 50);  // Add the image when loaded
     }
 
-    // 
-    doc.text("Small gasoline engines produce high concentrations of carbon monoxide (CO). Never operate gas\npowered equipment indoors.", 10, 275);
-
-    // disclaimer
-    doc.text("Recommendations may be inaccurate. Please speak with an expert or call our customer support\nto validate information. [workshop this line]", 10, 285);
+    // gas engine warning and disclaimer
+    doc.setFont(undefined, "bold");
+    doc.text("Small gasoline engines produce high concentrations of carbon monoxide (CO). Never operate\ngas powered equipment indoors.\nRecommendations may be inaccurate. Please speak with an expert or call our customer\nsupport to validate information.", 105, 275, { align: "center" });
 
     // output PDF
     doc.output('dataurlnewwindow', {filename: 'EDCO App Finder Recommendation'});

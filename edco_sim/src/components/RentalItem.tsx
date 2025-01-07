@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 //import DropDown from './DropDown';
 import { motion } from "framer-motion"
-import { allMachineData, getPowerTypeImageIndexGlobal } from '../functions';
+import { allMachineData, getPowerTypeImageIndexGlobal, applicationDataObjects, getApplicationDatabaseName } from '../functions';
 
 
 export default function RentalItem(props:any) {
@@ -87,7 +87,7 @@ export default function RentalItem(props:any) {
                                     type: "linear",
                                     duration: 1.25
                                 }}
-                            >MATERIAL: {props?.layerObject?.materialRemoved}
+                            >MATERIAL: {applicationDataObjects[getApplicationDatabaseName(props?.layerObject?.materialRemoved)]?.name} 
 
                             </motion.li>
                             <motion.li
