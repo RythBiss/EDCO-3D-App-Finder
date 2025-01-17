@@ -33,7 +33,7 @@ export default function Viewport(props: any) {
   let isLoaded = true;
   let isFirstLoad = true;
 
-  const originalPosition = { x: 0.5, y: 1.5, z: 1.5 };
+  const originalPosition = { x: 0.01, y: 1.5, z: 1.5 };
   const targetPosition = { x: -1.2, y: 0.05, z: 0.05 }; // Example target position
 
   let shouldMoveCamera = false; // Replace with your actual condition
@@ -44,6 +44,9 @@ export default function Viewport(props: any) {
       .to(target, 2000) // 2 seconds duration
       .easing(TWEEN.Easing.Quadratic.InOut)
       .onUpdate(() => {
+        if(target.x == 0.01)
+          camera.current.lookAt(0,0,0.2);
+        else
         camera.current.lookAt(0,0,0);
       })
       .start();
@@ -80,7 +83,7 @@ export default function Viewport(props: any) {
     //if layer is concrete, changes surface CSP to match the tooling.
     if( 
         subLayerCurrent?.materialRemoved == 'concrete' ||
-        subLayerCurrent?.materialRemoved == '' || //removed trip hazard since it was causing a visual bug.
+        subLayerCurrent?.materialRemoved == 'trip hazard' ||
         subLayerCurrent?.materialRemoved == 'high spots'
       ){
         

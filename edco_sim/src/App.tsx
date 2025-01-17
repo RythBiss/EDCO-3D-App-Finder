@@ -347,14 +347,23 @@ const [allowProgress, setAllowProgress] = useState<number>(0);
   useEffect(() => {
     if(mobileLeft == true){
       setRight(false);
+      setMenu(false);
     }
   }, [mobileLeft])
 
   useEffect(() => {
     if(mobileRight == true){
       setLeft(false);
+      setMenu(false);
     }
   }, [mobileRight])
+
+  useEffect(() => {
+    if(mobileMenu == true){
+      setLeft(false);
+      setRight(false);
+    }
+  }, [mobileMenu])
 
   useEffect(() => {
     update(prevState => prevState + 1 >= 3 ? 0 : prevState +1);

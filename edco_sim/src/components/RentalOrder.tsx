@@ -41,6 +41,10 @@ export default function RentalOrder(props: any) {
     props.setRenderedLayer(selectedLayer);
   }, [selectedLayer])
 
+  useEffect(() => {
+    console.log()
+  })
+
 
   return (
       <div className={`col-lg-2 col-sm-8 shadow scroll h-100 ${props.mobileRight == false ? 'hide-menu' : 'show-menu-right'}`} style={{overflowY: "scroll"}}>
@@ -56,6 +60,9 @@ export default function RentalOrder(props: any) {
                 getAltLayers={getAltLayers}
                 />
         )}
+        {props.current !== undefined && props.current.sublayerObjects.length == 0 &&
+          <ListButton lable='Please complete the jobsite questionnaire.' indent={0} />
+        }
       </div>
   )
 }

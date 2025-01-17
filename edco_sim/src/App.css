@@ -40,6 +40,7 @@ html, body{
 
 .header{
     background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box;
+    height: 64px;
 }
 
 .ui-container{
