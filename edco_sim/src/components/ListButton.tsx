@@ -32,7 +32,7 @@ export default function ListButton(props: any) {
         <div className='row bottom-gap'>
             <div className={`col-${props.indent}`}/>
             <div className='col tab-bar'>
-                <button type="button" className={ /*btn-wrapper */` ${props.icon ? 'list-btn-icon' : 'list-btn'} w-100 container`} onClick={handleOnClick}>
+                <button type="button" className={ `btn-wrapper ${props.icon ? 'list-btn-icon' : 'list-btn'} w-100 container`} onClick={handleOnClick}>
                     <div className={`row ` /*${props.icon ? 'justify-content-around' : ''} */}>
                         {props.icon ?
                             <>
@@ -47,15 +47,16 @@ export default function ListButton(props: any) {
                                     <div className={`col row btn-icon-spaces ${props.active == true ? 'btn-active' : 'icon-btn-red-space'}`} style={{paddingLeft: 0, paddingRight: 0}}>
                                         <div className="arachnid-background">
                                             <div className='col-12 list-btn-inner history-item-num product-name' style={{textAlign: "left"}}>{props.displayName}</div>
+                                            <div style={{width: "94%", height: "1px", backgroundColor: "white", marginBottom: "0.3rem", borderRadius: "2px"}}/>
 
                                             {isNameMachine(props.lable) == true &&
-                                                props.popupInfo[getPowerTypeImageIndexGlobal(props.lable, props.layerObject)].split(",").map((item: string) => <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left"}}>- {item}</div>)
+                                                props.popupInfo[getPowerTypeImageIndexGlobal(props.lable, props.layerObject)].split(",").map((item: string) => <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left", fontSize: "0.9rem", lineHeight: "0.7rem"}}>{item}</div>)
                                             }
                                             {isNameMachine(props.lable) == false &&
-                                                props.popupInfo.split(",").map((item: string) => <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left"}} >- {item}</div>)
+                                                props.popupInfo.split(",").map((item: string, index: number) => <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left", fontSize: "0.9rem", lineHeight: "0.7rem"}} >{item}</div>)
                                             }
 
-                                            <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left"}}>- Part Number: {props.partNumber}</div>
+                                            {/* <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left"}}>- Part Number: {props.partNumber}</div> */}
                                             {/* <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left"}}>#{props.partNumber}</div> */}
                                         </div>
                                         {/* <div className={`col btn-icon-spaces ${props.active == true ? 'btn-active' : 'icon-btn-red-space'}`} style={{overflow: 'visible', zIndex: 0, paddingRight: 0, paddingLeft: "0.5rem"}}>
@@ -82,9 +83,9 @@ export default function ListButton(props: any) {
                                 <>
                                     <div className='col text-start list-btn-inner'>{props.lable}</div>
                                     {props.selected ? 
-                                        <div className="col-1" style={{color: 'white'}}>☑</div>
+                                        <div className="col-1" style={{color: 'white', fontSize: "1.5rem"}}>☑</div>
                                         :
-                                        <div className="col-1" style={{color: 'white'}}>☐</div>    
+                                        <div className="col-1" style={{color: 'white', fontSize: "1.5rem"}}>☐</div>    
                                     }
                                 </>
                                 :

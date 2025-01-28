@@ -47,8 +47,15 @@ export default function RentalOrder(props: any) {
 
 
   return (
-      <div className={`col-lg-2 col-sm-8 shadow scroll h-100 ${props.mobileRight == false ? 'hide-menu' : 'show-menu-right'}`} style={{overflowY: "scroll"}}>
-        <ListButton onClick={() => {}} lable="Suggestion:"/>
+    <div className={`col-lg-3 col-sm-8 shadow scroll h-100 ${props.mobileRight == false ? 'hide-menu' : 'show-menu-right'}`} style={{overflowY: "scroll"}}>
+        <div className='suggestion row' >Jobsite Recommendation: </div>
+        {props.current !== undefined && props.current.sublayerObjects.length == 0 ?
+          <div className='suggestion row bottom-gap'>Please complete the jobsite questionnaire. </div>
+
+          :
+          <div className='suggestion row bottom-gap'>Click on a layer to preview.</div>
+
+        }
         {props.current !== undefined &&
             props.current.sublayerObjects.map((obj: object, key: number) => 
               <RentalItem
@@ -60,9 +67,7 @@ export default function RentalOrder(props: any) {
                 getAltLayers={getAltLayers}
                 />
         )}
-        {props.current !== undefined && props.current.sublayerObjects.length == 0 &&
-          <ListButton lable='Please complete the jobsite questionnaire.' indent={0} />
-        }
+
       </div>
   )
 }

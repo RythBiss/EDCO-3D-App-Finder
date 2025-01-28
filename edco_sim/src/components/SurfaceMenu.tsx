@@ -15,7 +15,7 @@ export default function SurfaceMenu(props:any) {
     const puttyKnifeAnswers = ['No', 'Yes'];
     const powerOptionAnswers = ['Gas', ['Electric Residential', 'Electric Commercial', 'Electric Industrial'], 'Propane', 'pneumatic'];
     const finishOptionAnswers = ['Smooth', 'Textured'];
-    const surfaceTypeAnswers = ['Wood', 'Concrete'];
+    const surfaceTypeAnswers = ['Wood', 'Concrete/Asphalt'];
 
 
     const [matSelected, setMatSelected] = useState<boolean>(false);
@@ -168,7 +168,7 @@ export default function SurfaceMenu(props:any) {
 
     const setSurfaceType = (res: string) => {
         if (res === 'Wood') props.layerObject.setSurfaceType('wood');
-        else if (res === 'Concrete') props.layerObject.setSurfaceType('concrete');
+        else if (res === 'Concrete/Asphalt') props.layerObject.setSurfaceType('concrete');
 
         setActiveSurfaceType(res);
         handleMenuState(-1);

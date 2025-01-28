@@ -4,7 +4,7 @@ import MachineMenu from './MachineMenu';
 import ToolingMenu from './ToolingMenu';
 import { jsPDF } from "jspdf";
 import 'jspdf-autotable'
-import { getMachinePartNumberGlobal, getToolingPartNumberGlobal, allMachineData, getPowerTypeImageIndexGlobal } from '../functions';
+import { getMachinePartNumberGlobal, getToolingPartNumberGlobal, allMachineData, getPowerTypeImageIndexGlobal, getToolingKeyByName, toolsByApplicationAndMachine } from '../functions';
 
 export default function EditLayer(props: any) {
 
@@ -59,19 +59,17 @@ export default function EditLayer(props: any) {
       return props.layerObject.getSurfaceType() == "concrete";
     }
 
-    props.layerObject.sublayerObjects.forEach((item: any) =>{ //i think this statement is causing spaces because its skipping layers that have the same machine?
+    props.layerObject.sublayerObjects.forEach((item: any, index: number) =>{ //i think this statement is causing spaces because its skipping layers that have the same machine?
       const currentName = allMachineData[item.machine].displayName[getPowerTypeImageIndexGlobal(item.machine, props.layerObject)];
 
       if(machineArray.includes(item.machine) == false){
         doc.text(currentName, 10, getLine());
-        doc.text(`${getMachinePartNumberGlobal(item.machine, props.layerObject)}`, 60, getLine()); // move machine and tooling tables/algorithms to a seperate functions file so they can be called globally.
+        doc.text(`${props.layerObject.sublayerObjects.length} - ${getMachinePartNumberGlobal(item.machine, props.layerObject)}`, 60, getLine());
         machineArray.push(item.machine);
-
+        getLineIncrement();
       }
 
-      doc.text(item.tooling, 95, getLine());
-      doc.text(`${getToolingPartNumberGlobal(item.tooling)}`, 160, getLine()); // move machine and tooling tables/algorithms to a seperate functions file so they can be called globally.
-      getLineIncrement();
+      
     })
 
     let use290 = false;
@@ -90,6 +88,34 @@ export default function EditLayer(props: any) {
       doc.text(`57200`, 60, getLineIncrement());
       machineArray.push('TMC-7E');
     }
+
+    //prints tool column outside of the normal flow due to it being a second column.
+    props.layerObject.sublayerObjects.forEach((item: any, index: number) =>{
+
+      let toolingKey = getToolingKeyByName(item.tooling);
+      const toolingObject = toolsByApplicationAndMachine[toolingKey];
+      const isToolingEdgerCompatible: boolean = toolingObject.machines.includes("TMC7");
+
+      doc.text(item.tooling + " (grinder)", 95, 55 + (5*index));
+      doc.text(`${getToolingPartNumberGlobal(item.tooling)}`, 160, 55 + (5*index));
+      //getLineIncrement();
+
+      // console.log(toolsByApplicationAndMachine[toolsByApplicationAndMachine[getToolingKeyByName(item.tooling)].singleTool] != undefined)
+      // console.log(isToolingEdgerCompatible)
+
+      if(isToolingEdgerCompatible){
+
+        if(toolsByApplicationAndMachine[toolsByApplicationAndMachine[getToolingKeyByName(item.tooling)].singleTool] != undefined){
+          console.log("test " + toolsByApplicationAndMachine[getToolingKeyByName(item.tooling)].singleTool)
+          toolingKey = toolsByApplicationAndMachine[getToolingKeyByName(item.tooling)].singleTool;
+        }
+        console.log(`adding tool ${toolsByApplicationAndMachine[toolingKey].name} (edger) with number ${getToolingPartNumberGlobal(toolsByApplicationAndMachine[toolingKey].name)}`)// fix part number
+
+        doc.text(toolsByApplicationAndMachine[toolingKey].name + " (edger)", 95, 55 + (5*(index+2)));
+        doc.text(`${getToolingPartNumberGlobal(toolsByApplicationAndMachine[toolingKey].name)}`, 160, 55 + (5*(index+2)));
+        // getLineIncrement();
+      }
+    })
 
     if(isAppOnConcrete()){
       if(use290){
@@ -135,11 +161,11 @@ export default function EditLayer(props: any) {
     doc.setTextColor(0, 0, 0);
     doc.text('Find a Rental Store: 1-800-638-3326', 10, getLineIncrement());
 
-      // surface profile chart
-      doc.setTextColor(0, 0, 255);
-      doc.textWithLink('Click here ', 10, getLine(), { url: 'https://www.tccmaterials.com/wp-content/uploads/2020/06/ConcreteSurfaceProfiles.pdf' });
-      doc.setTextColor(0, 0, 0);
-      doc.text('to learn more about CSP (Concrete Surface Profiles).', 30, getLineIncrement());
+    // surface profile chart
+    doc.setTextColor(0, 0, 255);
+    doc.textWithLink('Click here ', 10, getLine(), { url: 'https://portal.edcoinc.com/storage/EDCO%20Sales%20Rep%20Documents/EDCOCatalog_2.24.pdf#page=9' });
+    doc.setTextColor(0, 0, 0);
+    doc.text('to learn more about CSP, qualifying questions, and cord length recommendations.', 30, getLineIncrement());
     
 
 
@@ -159,7 +185,7 @@ export default function EditLayer(props: any) {
 
     // gas engine warning and disclaimer
     doc.setFont(undefined, "bold");
-    doc.text("Small gasoline engines produce high concentrations of carbon monoxide (CO). Never operate\ngas powered equipment indoors.\nRecommendations may be inaccurate. Please speak with an expert or call our customer\nsupport to validate information.", 105, 275, { align: "center" });
+    doc.text("Small gasoline engines produce high concentrations of carbon monoxide (CO). Never operate\ngas powered equipment indoors.\nAbove recommendation is based on information supplied. Application variables may alter machine\nor tooling requirements.Please speak with an expert or call our customer support\nto validate information.", 105, 275, { align: "center" });
 
     // output PDF
     doc.output('dataurlnewwindow', {filename: 'EDCO App Finder Recommendation'});

@@ -1,6 +1,6 @@
 :root{
     --active: #EF3D5E;
-    --hover: #e68490;
+    --hover: #90192F;
     --primary: #D73648;
 }
 
@@ -127,6 +127,64 @@ html, body{
     position: relative;
 }
 
+.suggestion{
+    background-color: white;
+    border: none;
+    color: #474747;
+    padding: 1rem 1.5rem;
+    /* box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%); */
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
+}
+
+.rental-item{
+    background-color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    /* box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%); */
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.rental-item-inner{
+    color:#474747;
+    border: none;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
+}
+
+.rental-item-inner > *{
+    color:#474747;
+    border: none;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+    text-transform: uppercase;
+}
+
+.rental-item-active{
+    background-color: rgb(241, 241, 241);
+}
+
 .list-btn{
     background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box;
     border: none;
@@ -170,8 +228,9 @@ html, body{
     text-transform: uppercase;
 }
 
+
 .list-btn:hover{
-    background-color: var(--hover);
+    background: transparent linear-gradient(180deg, var(--hover), var(--hover)) 0% 0% no-repeat padding-box;
 }
 
 .icon-cushion{
@@ -180,7 +239,8 @@ html, body{
 }
 
 .list-btn-icon:hover .icon-btn-red-space{
-    background-color: var(--hover);
+    background: transparent linear-gradient(180deg, var(--hover), var(--hover)) 0% 0% no-repeat padding-box;
+
 }
 
 .btn-wrapper > *{
@@ -195,13 +255,10 @@ html, body{
 }
 
 .btn-active{
-    background-color: var(--active);
+    background: transparent linear-gradient(180deg, var(--active), var(--active)) 0% 0% no-repeat padding-box;
+
     text-align: left;
     align-items:flex-start
-}
-
-.btn-active:hover{
-    background-color: var(--active);
 }
 
 .icon-btn-red-space{
@@ -252,6 +309,7 @@ li{
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
     text-transform: uppercase;
+
 }
 
 .list-btn-bullets > li{
@@ -264,18 +322,7 @@ li{
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
     text-transform: uppercase;
-}
-
-.history-item-num{
-    text-align: right;
-    color: white;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 500; /* 'medium' corresponds to 500 */
-    font-size: 14px;
-    line-height: 20px;
-    font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    list-style: none;
 }
 
 .new-layer{
@@ -327,12 +374,17 @@ li{
     text-transform: uppercase;
 }
 
-.cluster-btn-active{
-    background-color: var(--active);
+.cluster-btn{
+    background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box;
 }
 
-.cluster-btn-container > *:hover{
-    background-color: var(--hover);
+.cluster-btn:hover{
+    background: transparent linear-gradient(180deg, var(--hover), var(--hover)) 0% 0% no-repeat padding-box;
+}
+
+.cluster-btn-active{
+    background: transparent linear-gradient(180deg, var(--active), var(--active)) 0% 0% no-repeat padding-box;
+
 }
 
 .product-tag{

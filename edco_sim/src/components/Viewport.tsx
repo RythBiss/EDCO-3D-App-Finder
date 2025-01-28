@@ -357,7 +357,7 @@ export default function Viewport(props: any) {
 
   return (
     <>
-      <div className='col-12 col-lg-7 viewport' ref={mountRef}>
+      <div className='col-12 col-lg-6 viewport' ref={mountRef}>
         {props.popup == true &&
           <p ref={popupRef} className={'info-pop'} style={{ top: `calc(${popupHeightValue / 16}rem + 1rem)`}} >
             {props.popupInfo}

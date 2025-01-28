@@ -2,6 +2,7 @@ import {useEffect, useState } from 'react'
 import ListButton from './ListButton';
 import NextButton from './NextButton';
 import { allMachineData, isMachineElectricGlobal } from '../functions';
+import RentalItem from './RentalItem';
 
 export default function EditLayer(props: any) {
 
@@ -302,6 +303,13 @@ export default function EditLayer(props: any) {
 
         {props.allowProgress == 2 &&
             <NextButton lable={'Next: Tooling'} onClick={() => props.nextFunction()} />
+          }
+
+          {props.layerObject.getEdgerforPDF() == "Yes" &&
+            <div className='row suggestion'>Edge Grinder Added Automatically</div>
+          }
+          {props.layerObject.getSurfaceType() == "concrete" &&
+            <div className='row suggestion'>Dust Control Added Automatically</div>
           }
     </div>
   )

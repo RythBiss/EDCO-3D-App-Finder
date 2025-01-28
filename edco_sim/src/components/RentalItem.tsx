@@ -76,10 +76,21 @@ export default function RentalItem(props:any) {
   return (
     <div className='row bottom-gap' onClick={handleOnClick}>
         <div className='col-12 tab-bar'>
-            <div className={`list-btn w-100 container  ${props.active == true && 'btn-active'}`}>
+            <div className={`rental-item w-100 container  ${props.active == true && 'rental-item-active'}`}>
                 <div className='row justify-content-around align-items-top'>
-                    <div className='col'>
-                        <ul className='list-btn-bullets'>
+                    <div className='col-12 rental-item-inner'>
+
+                        {props.layerIndex > 0 && "Layer " + (props.layerIndex + 1)}
+
+                        {props.layerIndex == 0 && "Layer " + 1}
+
+                        {props.layerIndex == 'Active' && 'Active Layer'}
+
+                    </div>
+                    <div style={{width: "94%", height: "1px", backgroundColor: "#474747", marginBottom: "0.3rem", borderRadius: "2px"}}/>
+
+                    <div className='col rental-item-inner'>
+                        <ul className='rental-item-inner'>
                             <motion.li
                                 initial={{ backgroundColor: '#ffffffCC' }}
                                 animate={{ backgroundColor: '#ffffff00' }}
@@ -124,15 +135,7 @@ export default function RentalItem(props:any) {
 
                         </ul>
                     </div>
-                    <div className='col-1 history-item-num'>
 
-                        {props.layerIndex > 0 && props.layerIndex + 1}
-
-                        {props.layerIndex == 0 && 1}
-
-                        {props.layerIndex == 'Active' && 'Active Layer'}
-
-                    </div>
                     {/* {(props.active && allowThick == true) &&
                         <>
                             <label htmlFor="customRange1" className="form-label list-btn-title" style={{marginBottom: '0', marginTop: '0.5rem'}}>LAYER THICKNESS</label>
