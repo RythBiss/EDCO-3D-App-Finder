@@ -132,6 +132,7 @@ export default function ToolingMenu(props: any) {
                   setIsInfoPopupOnupYPos={props.setPopupYPos}
                   popupInfo={toolsByApplicationAndMachine[tool].info}
                   partNumber={toolsByApplicationAndMachine[tool].number[0]}
+                  link={toolsByApplicationAndMachine[tool].link}
                   layerObject={props.layerObject}
                 />
               ))}

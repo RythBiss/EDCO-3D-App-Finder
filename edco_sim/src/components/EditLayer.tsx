@@ -89,31 +89,28 @@ export default function EditLayer(props: any) {
       machineArray.push('TMC-7E');
     }
 
+    let row = 0;
+
     //prints tool column outside of the normal flow due to it being a second column.
-    props.layerObject.sublayerObjects.forEach((item: any, index: number) =>{
+    props.layerObject.sublayerObjects.forEach((item: any) =>{
 
       let toolingKey = getToolingKeyByName(item.tooling);
       const toolingObject = toolsByApplicationAndMachine[toolingKey];
       const isToolingEdgerCompatible: boolean = toolingObject.machines.includes("TMC7");
 
-      doc.text(item.tooling + " (grinder)", 95, 55 + (5*index));
-      doc.text(`${getToolingPartNumberGlobal(item.tooling)}`, 160, 55 + (5*index));
-      //getLineIncrement();
-
-      // console.log(toolsByApplicationAndMachine[toolsByApplicationAndMachine[getToolingKeyByName(item.tooling)].singleTool] != undefined)
-      // console.log(isToolingEdgerCompatible)
+      doc.text(item.tooling + " (grinder)", 95, 55 + (5*row));
+      doc.text(`${getToolingPartNumberGlobal(item.tooling)}`, 160, 55 + (5*row));
+      row++;
 
       if(isToolingEdgerCompatible){
 
         if(toolsByApplicationAndMachine[toolsByApplicationAndMachine[getToolingKeyByName(item.tooling)].singleTool] != undefined){
-          console.log("test " + toolsByApplicationAndMachine[getToolingKeyByName(item.tooling)].singleTool)
           toolingKey = toolsByApplicationAndMachine[getToolingKeyByName(item.tooling)].singleTool;
         }
-        console.log(`adding tool ${toolsByApplicationAndMachine[toolingKey].name} (edger) with number ${getToolingPartNumberGlobal(toolsByApplicationAndMachine[toolingKey].name)}`)// fix part number
 
-        doc.text(toolsByApplicationAndMachine[toolingKey].name + " (edger)", 95, 55 + (5*(index+2)));
-        doc.text(`${getToolingPartNumberGlobal(toolsByApplicationAndMachine[toolingKey].name)}`, 160, 55 + (5*(index+2)));
-        // getLineIncrement();
+        doc.text(toolsByApplicationAndMachine[toolingKey].name + " (edger)", 95, 55 + (5*(row)));
+        doc.text(`${getToolingPartNumberGlobal(toolsByApplicationAndMachine[toolingKey].name)}`, 160, 55 + (5*(row)));
+        row++;
       }
     })
 

@@ -14,7 +14,8 @@ export const allMachineData: any = {
               ],
       info: ['200 SQFT. Per hour, Pneumatic'],
       number: ['C10301'], //add diferent sizes as different machines.
-      displayName: ['ALR']
+      displayName: ['ALR'],
+      link: 'https://edcostore.com/product-category/machines/chisel-scalers/'
     },
     ALRBS: {
       apps: ['vinyl', 'linoleum', 'ceramic', 'carpet', 'rubber', 'paint', 'ice', 'corrosion', 'oil', 'glue/adhesive'],
@@ -30,7 +31,8 @@ export const allMachineData: any = {
               ],
       info: ['300 SQFT. Per hour, Pneumatic'],
       number: ['27100'], //add ERGO model as seperate machine
-      displayName: ['ALR-BS']
+      displayName: ['ALR-BS'],
+      link: 'https://edcostore.com/product/big-stick-chisel-scalers/'
     },
     TS8: {
       apps: ['vinyl', 'linoleum', 'carpet', 'VCT'],
@@ -46,7 +48,8 @@ export const allMachineData: any = {
               ],
       info: ['200 SQFT/Hour, Electric 3/4HP'],
       number: ['94400'],
-      displayName: ['TS-8']
+      displayName: ['TS-8'],
+      link: 'https://edcostore.com/product/8%e2%80%b3-manual-tile-shark-floor-stripper/'
     },
     SEC: {
       apps: ['glue/adhesive', 'paint', 'flakey paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer','thinset', 'industrial'],
@@ -62,7 +65,8 @@ export const allMachineData: any = {
               ],
       info: ['250 SQFT/Hour,1/32" depth/pass, Electric 1.5HP, Dust control required'],
       number: ['59800'],
-      displayName: ['SEC-NG']
+      displayName: ['SEC-NG'],
+      link: 'https://edcostore.com/product/magna-trap-single-disc-floor-grinder/'
     },
     _2GC: {
       apps: ['glue/adhesive', 'paint', 'flakey paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer','thinset', 'industrial'],
@@ -80,7 +84,8 @@ export const allMachineData: any = {
               ],
       info: ['500 SQFT/Hour, 1/32" depth/pass, Gas, Dust control required','500 SQFT/Hour, 1/32" depth/pass, Electric 1.5 HP, Dust control required','500 SQFT/Hour, 1/32" depth/pass, Electric 3HP, Dust control required'], // ========================================== VARIES
       number: ['59300', '59200', '59600'],
-      displayName: ['2GC-NG','2EC-NG','2EC-NG']
+      displayName: ['2GC-NG','2EC-NG','2EC-NG'],
+      link: 'https://edcostore.com/product-category/machines/magna-trap-floor-grinders/magna-trap-dual-disc-floor-grinders/'
     },
     _2DHD: {
       apps: ['glue/adhesive', 'paint', 'flakey paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer','thinset', 'industrial'],
@@ -97,7 +102,8 @@ export const allMachineData: any = {
               ],
       info: ['1000 SQFT/Hour, 1/32" depth/pass, Electric 5HP, Dust control required','1000 SQFT/Hour, 1/32" depth/pass, Propane, Dust control required'], // ========================================== VARIES
       number: ['58100', '58200'],
-      displayName: ['2D-HDE','2D-HDP']
+      displayName: ['2D-HDE','2D-HDP'],
+      link: 'https://edcostore.com/product-category/machines/magna-trap-floor-grinders/magna-trap-heavy-duty-floor-grinders/'
     },
     TL9: {
       apps: ['leveling', 'rubber', 'concrete', 'high spots', 'sealer', 'industrial'],
@@ -113,7 +119,8 @@ export const allMachineData: any = {
               ],
       info: ['400 SQFT/Hour, 1/32" depth/pass, Electric 1.5HP, Dust control required'],
       number: ['58900'],
-      displayName: ['TL-9']
+      displayName: ['TL-9'],
+      link: 'https://edcostore.com/product/magna-trap-turbo-lite-grinder/'
     },
     // TMC7: {
     //   apps: ['leveling', 'rubber', 'epoxy', 'concrete', 'edges', 'residual glue/adhesive', 'high spots', 'sealer'],
@@ -148,7 +155,8 @@ export const allMachineData: any = {
               ],
       info: ['500 SQFT/Hour, 1/16" depth/pass, Gas, Dust control required','500 SQFT/Hour, 1/16" depth/pass, Electric 5HP, Dust control required','500 SQFT/Hour, 1/16" depth/pass, Propane, Dust control required'], // ========================================== VARIES
       number: ['56600', '56900', '56700'],
-      displayName: ['TG-10G','TG-10E', 'TG-10P']
+      displayName: ['TG-10G','TG-10E', 'TG-10P'],
+      link: 'https://edcostore.com/product/magna-trap-10%e2%80%b3-turbo-grinder/'
     },
     CPL8: {
       apps: ['concrete'],
@@ -165,7 +173,8 @@ export const allMachineData: any = {
               ],
       info: ['250 SQFT/Hour, 1/32" depth/pass, Gas, Dust control required','250 SQFT/Hour, 1/32" depth/pass, Electric 1.5HP, Dust control required'], // ========================================== VARIES
       number: ['69500', '69300'],
-      displayName: ['CPL-8G','CPL-8E']
+      displayName: ['CPL-8G','CPL-8E'],
+      link: 'https://edcostore.com/product/8%e2%80%b3-walk-behind-scari-lite-crete-planer/'
     },
     CPM8: { //fixed the CPM8-G showing up for commercial electric options by adding a "new machine" with commercial electric power, but the same info as the industrial electric machine.
       apps: ['leveling', 'concrete', 'trip hazard', 'rubber', 'high spots'],
@@ -184,7 +193,8 @@ export const allMachineData: any = {
               ], 
       info: ['500 SQFT/Hour, Gas, 1/8" depth/pass, Dust control required','500 SQFT/Hour, 1/8" depth/pass, Electric 5HP, Dust control required','500 SQFT/Hour, 1/8" depth/pass, Electric 5HP, Dust control required','500 SQFT/Hour, 1/8" depth/pass, Propane, Dust control required'], // ========================================== VARIES
       number: ['79300', '79500', '79500', '72600'],
-      displayName: ['CPM-8G','CPM-8E', 'CPM-8E','CPM-8P']
+      displayName: ['CPM-8G','CPM-8E', 'CPM-8E','CPM-8P'],
+      link: 'https://edcostore.com/product/8%e2%80%b3-walk-behind-crete-planer/'
     },
     CPM10: {
       apps: ['leveling', 'concrete', 'rubber', 'high spots'],
@@ -201,7 +211,8 @@ export const allMachineData: any = {
               ],
       info: ['700 SQFT/Hour, 1/8" depth/pass, Gas, Dust control required','700 SQFT/Hour, 1/8" depth/pass, Electric 7.5HP, Dust control required'], // ========================================== VARIES
       number: ['69100', '69200'],
-      displayName: ['CPM-10G','CPM-10E']
+      displayName: ['CPM-10G','CPM-10E'],
+      link: 'https://edcostore.com/product/10%e2%80%b3-walk-behind-crete-planer/'
     },
     CD5: {
       apps: ['leveling', 'concrete', 'trip hazard', 'high spots'],
@@ -215,7 +226,8 @@ export const allMachineData: any = {
       image: ['https://portal.edcoinc.com/storage/product-slider/5-head-crete-crusher-r/CD-5-Machine-Slider.jpg'],
       info: ['250 SQFT/Hour, 1/4" depth/pass, Pneumatic, Dust control required, Only for use on slabs that are 6" thick or greater.'],
       number: ['63100'],
-      displayName: ['CD-5']
+      displayName: ['CD-5'],
+      link: 'https://edcostore.com/product/5-head-crete-crusher/'
     }
 }
 
@@ -228,7 +240,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 1,
     info: 'STRIP',
     number: ['C10302'],
-    hasDiamonds: false
+    hasDiamonds: false,
+    link: 'https://edcostore.com/product/4-steel-chisel/'
   },
   Scaler2: {
     apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue/adhesive'],
@@ -238,7 +251,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 1,
     info: 'STRIP',
     number: ['C10303'],
-    hasDiamonds: false
+    hasDiamonds: false,
+    link: 'https://edcostore.com/product/2-steel-chisel/'
   },
   Scaler114: {
     apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue/adhesive'],
@@ -248,7 +262,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 1,
     info: 'STRIP',
     number: ['C10324'],
-    hasDiamonds: false
+    hasDiamonds: false,
+    link: 'https://edcostore.com/product/1-14-steel-chisel/'
   },
   ChippingPoint: {
     apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue/adhesive'],
@@ -258,7 +273,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 1,
     info: 'STRIP',
     number: ['C10327'],
-    hasDiamonds: false
+    hasDiamonds: false,
+    link: 'https://edcostore.com/product/mpt-chipping-point/'
   },
   Scaler2BS: {
     apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue/adhesive'],
@@ -268,7 +284,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 1,
     info: 'STRIP',
     number: ['27031'],
-    hasDiamonds: false //finish adding all core tooling
+    hasDiamonds: false, //finish adding all core tooling
+    link: 'https://edcostore.com/product/big-stick-2-single-bevel/'
   },
   Scraper: {
     apps: ['vinyl', 'linoleum', 'carpet', 'rubber', 'paint', 'corrosion', 'oil'],
@@ -278,7 +295,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 1,
     info: 'STRIP',
     number: ['C10305'],
-    hasDiamonds: false
+    hasDiamonds: false,
+    link: 'https://edcostore.com/product/12-scraper-blades/'
   }, 
   Scaler3BS: {
     apps: ['vinyl', 'ceramic', 'carpet', 'linoleum', 'ice', 'glue/adhesive'],
@@ -288,7 +306,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 1,
     info: 'STRIP',
     number: ['27033'],
-    hasDiamonds: false //finish adding all core tooling
+    hasDiamonds: false, //finish adding all core tooling
+    link: 'https://edcostore.com/product/big-stick-3-single-bevel/'
   },
   ScraperBS: {
     apps: ['carpet', 'rubber', 'paint', 'corrosion', 'oil'],
@@ -298,7 +317,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 1,
     info: 'STRIP',
     number: ['27035'],
-    hasDiamonds: false
+    hasDiamonds: false,
+    link: 'https://edcostore.com/product/big-stick-6-scraper-blades-5-pack/'
   }, 
   ChippingPointBS: {
     apps: ['carpet', 'rubber', 'paint', 'corrosion', 'oil'],
@@ -308,7 +328,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 1,
     info: 'STRIP',
     number: ['27037'],
-    hasDiamonds: false
+    hasDiamonds: false,
+    link: 'https://edcostore.com/product/big-stick-chipping-point/'
   }, 
   FloorStripperRigid: {
     apps: ['vinyl', 'linoleum', 'carpet', 'VCT'],
@@ -318,7 +339,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 1,
     info: 'STRIP',
     number: ['28040'],
-    hasDiamonds: false
+    hasDiamonds: false,
+    link: 'https://edcostore.com/product/8-rigid-scraper-blade/'
   },
   FloorStripperCarpet: {
     apps: ['linoleum', 'carpet'],
@@ -328,7 +350,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 1,
     info: 'STRIP',
     number: ['28050'],
-    hasDiamonds: false
+    hasDiamonds: false,
+    link: 'https://edcostore.com/product/8-slicer-scraper-blade/'
   },
   MagnaBlades: {
     apps: ['glue/adhesive', 'mastic', 'thinset', 'industrial', 'flakey paint'],
@@ -338,7 +361,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 1,
     info: 'STRIP', //    info: 'STRIP,Material That Can Be Cut With a Utility Knife',
     number: ['12501LC'],
-    hasDiamonds: false
+    hasDiamonds: false,
+    link: 'https://edcostore.com/product/magna-trap-magna-blades/'
   },
   MagnaBladesDual: {
     apps: ['glue/adhesive', 'mastic', 'thinset', 'industrial', 'flakey paint'],
@@ -349,7 +373,8 @@ export const toolsByApplicationAndMachine: any = {
     info: 'STRIP', //    info: 'STRIP,Material That Can Be Cut With a Utility Knife',
     number: ['12501LC & 12501RC'],
     hasDiamonds: false,
-    singleTool: "MagnaBlades"
+    singleTool: "MagnaBlades",
+    link: 'https://edcostore.com/product/magna-trap-magna-blades/'
   },
   DymaSegs: {
     apps: ['paint', 'leveling', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'glue/adhesive', 'high spots', 'sealer', 'thinset'],
@@ -359,7 +384,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 2,
     info: 'GRIND - Coarse finish',
     number: ["Inquire for details."],
-    hasDiamonds: true
+    hasDiamonds: true,
+    link: 'https://edcostore.com/product/magna-trap-dyma-segs/'
   },
   PCDbacking: {
     apps: ['industrial', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'high spots', 'sealer'],
@@ -369,7 +395,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 3,
     info: 'REMOVE - Textured finish', //    info: 'REMOVE,Textured finish,Material That Cannot Be Cut With a Utility Knife',
     number: ["Inquire for details."],
-    hasDiamonds: true
+    hasDiamonds: true,
+    link: 'https://edcostore.com/product/magna-trap-dyma-pcd-wbacking-segment/'
   },
   PCDbackingDual: {
     apps: ['industrial', 'paint', 'leveling', 'epoxy', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'high spots', 'sealer'],
@@ -380,7 +407,8 @@ export const toolsByApplicationAndMachine: any = {
     info: 'REMOVE - Textured finish', //    info: 'REMOVE,Textured finish,Material That Cannot Be Cut With a Utility Knife',
     number: ["Inquire for details."],
     hasDiamonds: true,
-    singleTool: "PCDbacking"
+    singleTool: "PCDbacking",
+    link: 'https://edcostore.com/product/magna-trap-dyma-pcd-wbacking-segment/'
   },
   DymaDots: {
     apps: ['paint', 'leveling', 'mastic', 'concrete', 'rubber', 'residual glue/adhesive', 'glue/adhesive', 'high spots', 'sealer', 'thinset'],
@@ -390,7 +418,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 1,
     info: 'GRIND - Smooth finish', //"Finer grits available" don't know where to put this.
     number: ["Inquire for details."],
-    hasDiamonds: true
+    hasDiamonds: true,
+    link: 'https://edcostore.com/product/magna-trap-double-dyma-dots/'
   },
   CarbideCutter: {
     apps: ['leveling', 'concrete', 'trip hazard', 'high spots'],
@@ -400,7 +429,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 6,
     info: 'REMOVE',
     number: ['65050C'],
-    hasDiamonds: false
+    hasDiamonds: false,
+    link: 'https://edcostore.com/product/cpm-8-drum-assembly-complete/'
   },
   CarbideCutter10: {
     apps: ['leveling', 'concrete', 'trip hazard', 'high spots'],
@@ -410,7 +440,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 6,
     info: 'REMOVE',
     number: ['65270C'],
-    hasDiamonds: false
+    hasDiamonds: false,
+    link: 'https://edcostore.com/product/cpm-10-drum-assembly-complete/'
   },
   CarbideCutterL: {
     apps: ['leveling', 'concrete', 'trip hazard', 'high spots'],
@@ -420,7 +451,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 6,
     info: 'REMOVE',
     number: ['66309C'],
-    hasDiamonds: false
+    hasDiamonds: false,
+    link: 'https://edcostore.com/product/cpl-8-drum-assembly-complete/'
   },
   // SteelCutters: {
   //   apps: ['rubber', 'concrete'],
@@ -440,7 +472,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 9,
     info: 'REMOVE',
     number: ['18810'],
-    hasDiamonds: false
+    hasDiamonds: false,
+    link: 'https://edcostore.com/product/5-point-carbide-bit/'
   },
   NinePoint: {
     apps: ['concrete', 'trip hazard', 'high spots'],
@@ -450,7 +483,8 @@ export const toolsByApplicationAndMachine: any = {
     CSP: 9,
     info: 'REMOVE',
     number: ['18820'],
-    hasDiamonds: false
+    hasDiamonds: false,
+    link: 'https://edcostore.com/product/9-point-carbide-bit/'
   },
 }
 
@@ -596,7 +630,6 @@ const getCorrectApplicationList = (layerObject: any) => {
 
 export const getApplicationDatabaseName = (str: string): string => {
 
-  console.log("app name" + str)
   if(str == 'glue/adhesive') return 'glue';
   else if(str == 'residual glue/adhesive') return 'residual';
   else if(str == 'flakey paint') return 'paintf';

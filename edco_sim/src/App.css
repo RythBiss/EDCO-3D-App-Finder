@@ -17,19 +17,9 @@ body {
 html, body{
     overflow-y: hidden;
 }
-/* 
-.arachnid-text{
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 500; /* 'medium' corresponds to 500 */
-    /* font-size: 14px;
-    line-height: 20px;
-    font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
-} */ */
 
 .arachnid-background{
-    background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box;
+    /* background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box; */
 }
 
 .scroll{
@@ -215,6 +205,10 @@ html, body{
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
     text-transform: uppercase;
+}
+
+.product-name:hover{
+    color: #474747;
 }
 
 .list-btn-inner{

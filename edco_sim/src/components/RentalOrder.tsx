@@ -41,10 +41,6 @@ export default function RentalOrder(props: any) {
     props.setRenderedLayer(selectedLayer);
   }, [selectedLayer])
 
-  useEffect(() => {
-    console.log()
-  })
-
 
   return (
     <div className={`col-lg-3 col-sm-8 shadow scroll h-100 ${props.mobileRight == false ? 'hide-menu' : 'show-menu-right'}`} style={{overflowY: "scroll"}}>

@@ -294,6 +294,7 @@ export default function EditLayer(props: any) {
                   setIsInfoPopupOnupYPos={props.setPopupYPos}
                   popupInfo={allMachineData[item].info}
                   partNumber={allMachineData[item].number[getPowerTypeImageIndex(item)]}
+                  link={allMachineData[item].link}
                   layerObject={props.layerObject}
                   />
                 )        
