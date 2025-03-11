@@ -4,6 +4,7 @@ import NextButton from './NextButton';
 import ClusterButton from './ClusterButton';
 import { populateMaterialRemovedAnswers } from '../functions';
 import DropDown from './DropDown';
+import { AnimatePresence, motion } from 'framer-motion';
 
 
 export default function SurfaceMenu(props:any) {
@@ -39,13 +40,50 @@ export default function SurfaceMenu(props:any) {
     const [activeFinish, setActiveFinish] = useState<string>();
     const [activeSurfaceType, setActiveSurfaceType] = useState<string>();
 
-
-
     const [openedMenu, setOpenedMenu] = useState<number>(-1);
 
     const thicknessRemovedConditional = ['1/32"', '1/16"', '1/8"', '1/4"', '+1/4""'];
 
+    useEffect(() => {
+        console.log(props.resetToggle);
+        resetSelections();
+    }, [props.resetToggle]);
+    
 
+    const resetSelections = () => {
+
+        const activeSelections = [
+            setActiveMaterial,
+            setActiveThickness,
+            setActiveSize,
+            setActiveGreenConcrete,
+            setActiveEdgingNeeded,
+            setActivePuttyKnife,
+            setActivePower,
+            setActiveFinish,
+            setActiveSurfaceType,
+          ];
+
+          const selectedFlags = [
+            setMatSelected,
+            setThickSelected,
+            setSizeSelected,
+            setGreenSelected,
+            setEdgeSelected,
+            setPuttyKnifeSelected,
+            setPowerSelected,
+            setFinishSelected,
+            setSurfaceTypeSelected,
+          ];
+
+          activeSelections.forEach(element => {
+            element(undefined);
+          });
+
+          selectedFlags.forEach(element => {
+            element(false);
+          });
+    }
 
     const handleMenuState = (newState: number) => {
         if(newState == openedMenu){
@@ -322,153 +360,248 @@ export default function SurfaceMenu(props:any) {
 
   return (
     <div className='col edit-menu'>
+    <AnimatePresence mode="wait">
 
+        
         {/* what is the bottom layer? */}
+       <motion.div
+       key="drop8"
+        initial={{ x: '-150%' }} // Start fully off-screen to the left
+        animate={{ x: 0 }} // Move to its normal position
+        exit={{ x: '-150%', position: "absolute" }} // Move fully off-screen when it disappears
+        transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+       >
         <ListButton lable={'Are you working on wood or concrete?'} onClick={() => handleMenuState(11)} selected={surfaceTypeSelected} />
-        {openedMenu == 11 && (
-            <div className="cluster-btn-container">
-                {surfaceTypeAnswers.map((layer, i) => (
-                    <ClusterButton 
-                        key={i} 
-                        active={activeSurfaceType === layer} 
-                        lable={layer} 
-                        layerObject={props.layerObject} 
-                        onClick={() => setSurfaceType(layer)} 
-                    />
-                ))}
-            </div>
-        )}
+            {openedMenu == 11 && (
+                    <>
+                    <p className='suggestion montserrat'>The type of surface underneath the application determines what tools are appropriate.</p>
+                    <div className="cluster-btn-container">
+                        
+                        {surfaceTypeAnswers.map((layer, i) => (
+                            <ClusterButton 
+                                key={i} 
+                                active={activeSurfaceType === layer} 
+                                lable={layer} 
+                                layerObject={props.layerObject} 
+                                onClick={() => setSurfaceType(layer)} 
+                            />
+                        ))}
+                    </div>
+                </>
+            )}
+       </motion.div>
 
-        {/* what application are you trying to solve? */}
-        <ListButton lable={'What is the material being removed?'} onClick={() => handleMenuState(1)} selected={matSelected} />
-        {openedMenu == 1 &&
-            <div className='cluster-btn-container'>
-                {materialRemovedAnswers.map((layer:any, i) => 
-                    <ClusterButton key={i} active={activeMaterial == layer?.name}
-                        lable={layer.name} layerObject={props.layerObject} onClick={() => setMaterialRemoved(layer.name, layer.layers, layer.sublayers)} />
-                )}
-            </div>
-        }
+       </AnimatePresence>
 
-        {/* How thick is the material? (only for concrete, highspots, epoxy coating, and paint). */}
-        {(isThicknessRelevant() && isConcreteRelevant()) &&
+        {activeSurfaceType !== undefined &&
             <>
-                <ListButton lable={'What is the thickness of the material?'} onClick={() => handleMenuState(2)} selected={thickSelected} />
-                {openedMenu == 2 &&
-                    <div className='cluster-btn-container'>
-                        {thicknessRemovedConditional.map((layer:any, i) => 
-                            <ClusterButton key={i} active={activeThickness == thicknessRemovedConditional[i]}
-                                lable={thicknessRemovedConditional[i]} layerObject={props.layerObject} onClick={() => setThicknessHandler(thicknessRemovedConditional[i])} />
-                        )}
-                    </div>
-                }
-            </>
-        }
+            <AnimatePresence>
+                <motion.div
+                key="drop7"
+                initial={{ x: '-150%' }} // Start fully off-screen to the left
+                animate={{ x: 0 }} // Move to its normal position
+                exit={{ x: '-150%', position: "absolute" }} // Move fully off-screen when it disappears
+                transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+                >
+                    {/* what application are you trying to solve? */}
+                    <ListButton lable={'What is the material being removed?'} onClick={() => handleMenuState(1)} selected={matSelected} />
+                    {openedMenu == 1 &&
+                        <><p className='suggestion montserrat'>Choose the application that best describes the material that is being removed.</p>
+                        <div className='cluster-btn-container'>
+                            {materialRemovedAnswers.map((layer:any, i) => 
+                                <ClusterButton key={i} active={activeMaterial == layer?.name}
+                                    lable={layer.name} layerObject={props.layerObject} onClick={() => setMaterialRemoved(layer.name, layer.layers, layer.sublayers)} />
+                            )}
+                        </div></>
+                    }
 
-        {/* how big is the site? */} 
-        {(isSqftRelevant() && isConcreteRelevant()) &&
-            <>        
-                <ListButton lable={'What is the square footage of your job?'} onClick={() => handleMenuState(4)} selected={sizeSelected} />
-                {openedMenu == 4 &&
-                    <div className="cluster-btn-container">
-                    {jobSizeAnswers.map((layer, i) => 
-                            <ClusterButton key={i} active={activeSize == layer}
-                                lable={layer} layerObject={props.layerObject} onClick={() => setJobSize(layer)} />
-                        )}
-                    </div>
-                }
-            </>
-        }
-
-
-        {/* is your concrete new? */}
-        {(isSqftRelevant() && isConcreteRelevant()) &&
-            <>        
-                <ListButton lable={'Is your concrete older than 28 days?'} onClick={() => handleMenuState(5)} selected={greenSelected} />
-                {openedMenu == 5 &&
-                    <div className="cluster-btn-container">
-                        {greenConcreteAnswers.map((layer, i) => 
-                            <ClusterButton key={i} active={activeGreenConcrete == layer}
-                            lable={layer} layerObject={props.layerObject} onClick={() => setGreenConcrete(layer)} />
-                        )}
-                    </div>
-                }
-            </>
-        }
-
-
-        {/* are you going to need an edger? */}
-        {(isSqftRelevant() && isConcreteRelevant()) &&
-            <>        
-                <ListButton lable={'Do you need to grind or clean along a vertical a wall?'} onClick={() => handleMenuState(7)} selected={edgeSelected} />
-                {openedMenu == 7 &&
-                    <div className="cluster-btn-container">
-                        {edgeGrindingAnswers.map((layer, i) => 
-                            <ClusterButton key={i} active={activeEdgingNeeded == layer}
-                            lable={layer} layerObject={props.layerObject} onClick={() => setEdger(layer)} />
-                        )}
-                    </div>
-                }
-            </>
-        }
-
-        {/* will you need to test your material with a putty knife? */}
-        {(isPuttyKnifeRelevant() && isConcreteRelevant()) &&
-            <>        
-                <ListButton lable={'Can you cut the adhesive with a utility knife?'} onClick={() => handleMenuState(10)} selected={puttyKnifeSelected} />
-                {openedMenu == 10 &&
-                    <div className="cluster-btn-container">
-                        {puttyKnifeAnswers.map((layer, i) => 
-                            <ClusterButton key={i} active={activePuttyKnife == layer}
-                            lable={layer} layerObject={props.layerObject} onClick={() => setPuttyKnife(layer)} />
-                        )}
-                    </div>
-                }
-            </>
-        }
-
-
-        {/* what power option is desired? */}
-        <ListButton lable={'What type of machine power is desired?'} onClick={() => handleMenuState(8)} selected={powerSelected} />
-        {openedMenu == 8 &&
-            <div className="cluster-btn-container">
-                {powerOptionAnswers.map((layer: any, i) => {
-                        if(layer.constructor !== Array){
-                            return <ClusterButton key={i} active={activePower == layer}
-                            lable={layer} layerObject={props.layerObject} onClick={() => setPowerType(layer)} />
-                        } else {
-                            let options = [];
-                            let active = props.layerObject.powerType == 'electric residential' || props.layerObject.powerType == 'electric commercial' || props.layerObject.powerType == 'electric industrial';
-
-                            for(let i = 0; i < layer.length; i++){
-                                options.push(layer[i]);
+                    {/* How thick is the material? (only for concrete, highspots, epoxy coating, and paint). */}
+                    {(isThicknessRelevant() && isConcreteRelevant()) &&
+                        <>
+                            <ListButton lable={'What is the thickness of the material?'} onClick={() => handleMenuState(2)} selected={thickSelected} />
+                            {openedMenu == 2 &&
+                                <><p className='suggestion montserrat'>It’s important to know how thick the material being removed is. This is only the thickness of the removed material (high spots, trip hazards, epoxy coatings etc.), not the overall thickness of the slab.</p>
+                                <div className='cluster-btn-container'>
+                                    {thicknessRemovedConditional.map((layer:any, i) => 
+                                        <ClusterButton key={i} active={activeThickness == thicknessRemovedConditional[i]}
+                                            lable={thicknessRemovedConditional[i]} layerObject={props.layerObject} onClick={() => setThicknessHandler(thicknessRemovedConditional[i])} />
+                                    )}
+                                </div></>
                             }
+                        </>
+                    }
+                </motion.div>
 
-                            return <DropDown key={i} optionsStringArray={options} currentValue={props.electricValue} onChange={setPowerType} active={active} />
+                {/* how big is the site? */} 
+                <motion.div
+                key="drop6"
+                initial={{ x: '-150%' }} // Start fully off-screen to the left
+                animate={{ x: 0 }} // Move to its normal position
+                exit={{ x: '-150%', position: "absolute" }} // Move fully off-screen when it disappears
+                transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+                >
+                    {(isSqftRelevant() && isConcreteRelevant()) &&
+                        <>        
+                            <ListButton lable={'What is the square footage of your job?'} onClick={() => handleMenuState(4)} selected={sizeSelected} />
+                            {openedMenu == 4 &&
+                                <><p className='suggestion montserrat'>The size of the application can change what products are recommended for the task.</p>
+                                <div className="cluster-btn-container">
+                                {jobSizeAnswers.map((layer, i) => 
+                                        <ClusterButton key={i} active={activeSize == layer}
+                                            lable={layer} layerObject={props.layerObject} onClick={() => setJobSize(layer)} />
+                                    )}
+                                </div></>
+                            }
+                        </>
+                    }
+                </motion.div>
+
+
+                {/* is your concrete new? */}
+                <motion.div
+                key="drop5"
+                initial={{ x: '-150%' }} // Start fully off-screen to the left
+                animate={{ x: 0 }} // Move to its normal position
+                exit={{ x: '-150%', position: "absolute" }} // Move fully off-screen when it disappears
+                transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+                >
+                {(isSqftRelevant() && isConcreteRelevant()) &&
+                    <>        
+                        <ListButton lable={'Is your concrete older than 28 days?'} onClick={() => handleMenuState(5)} selected={greenSelected} />
+                        {openedMenu == 5 &&
+                            <><p className='suggestion montserrat'>Fresh concrete requires softer tools than old concrete.</p>
+                            <div className="cluster-btn-container">
+                                {greenConcreteAnswers.map((layer, i) => 
+                                    <ClusterButton key={i} active={activeGreenConcrete == layer}
+                                    lable={layer} layerObject={props.layerObject} onClick={() => setGreenConcrete(layer)} />
+                                )}
+                            </div></>
                         }
-                })}
-            </div>
-        }
-
-        {/* what finish is desired? */}
-        {(isTextureRelevant() && isConcreteRelevant()) &&
-            <>
-                <ListButton lable={'What type of surface texture is desired?'} onClick={() => handleMenuState(9)} selected={finishSelected} />
-                {openedMenu == 9 &&
-                    <div className="cluster-btn-container">
-                        {finishOptionAnswers.map((layer, i) => 
-                            <ClusterButton key={i} active={activeFinish == layer}
-                            lable={layer} layerObject={props.layerObject} onClick={() => setFinishType(layer)} />
-                        )}
-                    </div>
+                    </>
                 }
+                </motion.div>
+
+
+                {/* are you going to need an edger? */}
+                <motion.div
+                key="drop4"
+                initial={{ x: '-150%' }} // Start fully off-screen to the left
+                animate={{ x: 0 }} // Move to its normal position
+                exit={{ x: '-150%', position: "absolute" }} // Move fully off-screen when it disappears
+                transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} >
+                {(isSqftRelevant() && isConcreteRelevant()) &&
+                    <>        
+                        <ListButton lable={'Do you need to grind or clean along a vertical a wall?'} onClick={() => handleMenuState(7)} selected={edgeSelected} />
+                        {openedMenu == 7 &&
+                            <><p className='suggestion montserrat'>Some applications may require operating against a wall, curb, or other vertical surface. Specialized products are required to operate near vertical surfaces to avoid damage.</p>
+                            <div className="cluster-btn-container">
+                                {edgeGrindingAnswers.map((layer, i) => 
+                                    <ClusterButton key={i} active={activeEdgingNeeded == layer}
+                                    lable={layer} layerObject={props.layerObject} onClick={() => setEdger(layer)} />
+                                )}
+                            </div></>
+                        }
+                    </>
+                }
+                </motion.div>
+
+                {/* will you need to test your material with a putty knife? */}
+                <motion.div
+                key="drop3"
+                initial={{ x: '-150%' }} // Start fully off-screen to the left
+                animate={{ x: 0 }} // Move to its normal position
+                exit={{ x: '-150%', position: "absolute" }} // Move fully off-screen when it disappears
+                transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+                >
+                {(isPuttyKnifeRelevant() && isConcreteRelevant()) &&
+                    <>        
+                        <ListButton lable={'Can you cut the adhesive with a utility knife?'} onClick={() => handleMenuState(10)} selected={puttyKnifeSelected} />
+                        {openedMenu == 10 &&
+                            <><p className='suggestion montserrat'>Different products will be recommended if your adhesive is malleable than if your adhesive is hard or brittle.</p>
+                            <div className="cluster-btn-container">
+                                {puttyKnifeAnswers.map((layer, i) => 
+                                    <ClusterButton key={i} active={activePuttyKnife == layer}
+                                    lable={layer} layerObject={props.layerObject} onClick={() => setPuttyKnife(layer)} />
+                                )}
+                            </div></>
+                        }
+                    </>
+                }
+                </motion.div>
+
+
+                {/* what power option is desired? */}
+                <motion.div
+                key="drop2"
+                initial={{ x: '-150%' }} // Start fully off-screen to the left
+                animate={{ x: 0 }} // Move to its normal position
+                exit={{ x: '-150%', position: "absolute" }} // Move fully off-screen when it disappears
+                transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+                >
+                <ListButton lable={'What type of machine power is desired?'} onClick={() => handleMenuState(8)} selected={powerSelected} />
+                {openedMenu == 8 &&
+                    <><p className='suggestion montserrat'>The location of the application will determine what power option is needed. Indoor applications should use electric machines due to ventilation restrictions.</p>
+                    <div className="cluster-btn-container">
+                        {powerOptionAnswers.map((layer: any, i) => {
+                                if(layer.constructor !== Array){
+                                    return <ClusterButton key={i} active={activePower == layer}
+                                    lable={layer} layerObject={props.layerObject} onClick={() => setPowerType(layer)} />
+                                } else {
+                                    let options = [];
+                                    let active = props.layerObject.powerType == 'electric residential' || props.layerObject.powerType == 'electric commercial' || props.layerObject.powerType == 'electric industrial';
+
+                                    for(let i = 0; i < layer.length; i++){
+                                        options.push(layer[i]);
+                                    }
+
+                                    return <DropDown key={i} optionsStringArray={options} currentValue={props.electricValue} onChange={setPowerType} active={active} />
+                                }
+                        })}
+                    </div></>
+                }
+                </motion.div>
+
+                {/* what finish is desired? */}
+                <motion.div
+                key="drop1"
+                initial={{ x: '-150%' }} // Start fully off-screen to the left
+                animate={{ x: 0 }} // Move to its normal position
+                exit={{ x: '-150%', position: "absolute" }} // Move fully off-screen when it disappears
+                transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+                >
+                {(isTextureRelevant() && isConcreteRelevant()) &&
+                    <>
+                        <ListButton lable={'What type of surface texture is desired?'} onClick={() => handleMenuState(9)} selected={finishSelected} />
+                        {openedMenu == 9 &&
+                            <><p className='suggestion montserrat'>Choose the finished texture based on what will be applied to the surface after removing the material. Epoxy coatings require rougher finishes than vinyl or ceramic.</p>
+                            <div className="cluster-btn-container">
+                                {finishOptionAnswers.map((layer, i) => 
+                                    <ClusterButton key={i} active={activeFinish == layer}
+                                    lable={layer} layerObject={props.layerObject} onClick={() => setFinishType(layer)} />
+                                )}
+                            </div></>
+                        }
+                    </>
+                }
+                </motion.div>
+                </AnimatePresence>
             </>
         }
 
+            <AnimatePresence>
+                {props.allowProgress === 1 && (
+                    <motion.div
+                    key="nextButton"
+                    initial={{ x: '-150%' }} // Start fully off-screen to the left
+                    animate={{ x: 0 }} // Move to its normal position
+                    exit={{ x: '-150%', position: "absolute" }} // Move fully off-screen when it disappears
+                    transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+                    >
+                    <NextButton lable={'Next: Machines'} onClick={() => props.nextFunction()} clickable={props.allowProgress == 1} />
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
-        {props.allowProgress == 1 &&
-            <NextButton lable={'Next: Machines'} onClick={() => props.nextFunction()} />
-        }
     </div>
   )
 }

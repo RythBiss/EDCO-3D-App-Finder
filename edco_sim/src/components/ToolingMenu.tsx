@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import ListButton from './ListButton'
-import NextButton from './NextButton';
 import { toolsByApplicationAndMachine, toolingHasDiamonds } from '../functions';
+import NextButton from './NextButton';
+import { AnimatePresence, motion } from 'framer-motion';
+
 
 
 export default function ToolingMenu(props: any) {
@@ -9,6 +11,8 @@ export default function ToolingMenu(props: any) {
 
   const [matchingTooling, setMatchingTooling] = useState<string[][]>([]);
   const [openTab, setOpenTab] = useState<number>(-1);
+  const [toolingNoiseMaker, setToolingNoiseMaker] = useState<boolean>(true); //triggers useeffect on every machine click
+
 
   const handlePopup = (item: any) =>{
     props.setPopupInfo(toolsByApplicationAndMachine[item].info)
@@ -21,6 +25,7 @@ export default function ToolingMenu(props: any) {
       props.layerObject.setContainsDiamonds(true)
     }
 
+    setToolingNoiseMaker(prev => !prev);
     toolSelect(-1);
     //setSelectedSurface(newTooling);
   }
@@ -103,45 +108,66 @@ export default function ToolingMenu(props: any) {
       props.setAllowProgress(3);
     }
 
-  })
+  }, [toolingNoiseMaker])
 
   return (
     <div className='col edit-menu scroll-on'>
       {/* lists of tooling organized by layer */}
+        {props.allowProgress >= 3 ?
 
-        {props.layerObject.sublayerObjects.map((sublayer: any, index: number) => (
-          <div key={index}>
-            <ListButton
-              lable={`Layer ${index + 1}`} //use number to word here, also move that function to functions.tsx
-              onClick={() => toolSelect(index)}
-              selected={sublayer.tooling !== ''}
-            />
-            {openTab === index && getToolsAlgorithm(index).length !== 0 &&
-              getToolsAlgorithm(index).map((tool: any, i: any) => (
+
+        <AnimatePresence>
+                {props.allowProgress >= 3 && (
+                    <motion.div
+                    key="nextButton"
+                    initial={{ x: '-150%' }} // Start fully off-screen to the left
+                    animate={{ x: 0 }} // Move to its normal position
+                    exit={{ x: '-150%' }} // Move fully off-screen when it disappears
+                    transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+                    >
+                      <NextButton lable={'View Recommendation'} onClick={() => props.printPDF()} clickable={props.allowProgress >= 3} />
+                    </motion.div>
+                )}
+        </AnimatePresence>
+
+        :
+          <>
+            {props.layerObject.sublayerObjects.map((sublayer: any, index: number) => (
+              <div key={index}>
                 <ListButton
-                  key={i}
-                  lable={toolsByApplicationAndMachine[tool].name}
-                  displayName={toolsByApplicationAndMachine[tool].name}
-                  indent={1}
-                  popupOn={props.popupOn}
-                  showMenu={true}
-                  icon={toolsByApplicationAndMachine[tool].image}
-                  onClick={() =>
-                    setTooling(toolsByApplicationAndMachine[tool].name, index, toolsByApplicationAndMachine[tool].CSP)}
-                  mouseAction={() => handlePopup(tool)}
-                  setIsInfoPopupOnupYPos={props.setPopupYPos}
-                  popupInfo={toolsByApplicationAndMachine[tool].info}
-                  partNumber={toolsByApplicationAndMachine[tool].number[0]}
-                  link={toolsByApplicationAndMachine[tool].link}
-                  layerObject={props.layerObject}
+                  lable={`Layer ${index + 1}`}
+                  onClick={() => toolSelect(index)}
+                  selected={sublayer.tooling !== ''}
                 />
-              ))}
-          </div>
-        ))}
-
-        {props.allowProgress == 3 &&
-          <NextButton lable={'View Recommendation'} onClick={() => props.printPDF()} />
+                {openTab === index && getToolsAlgorithm(index).length !== 0 &&
+                  getToolsAlgorithm(index).map((tool: any, i: any) => (
+                    <ListButton
+                      key={i}
+                      lable={toolsByApplicationAndMachine[tool].name}
+                      displayName={toolsByApplicationAndMachine[tool].name}
+                      indent={1}
+                      popupOn={props.popupOn}
+                      showMenu={true}
+                      icon={toolsByApplicationAndMachine[tool].image}
+                      onClick={() =>
+                        setTooling(toolsByApplicationAndMachine[tool].name, index, toolsByApplicationAndMachine[tool].CSP)}
+                      mouseAction={() => handlePopup(tool)}
+                      setIsInfoPopupOnupYPos={props.setPopupYPos}
+                      popupInfo={toolsByApplicationAndMachine[tool].info}
+                      partNumber={toolsByApplicationAndMachine[tool].number[0]}
+                      link={toolsByApplicationAndMachine[tool].link}
+                      layerObject={props.layerObject}
+                    />
+                  ))}
+              </div>
+            ))}
+          </>
         }
+
+
+        
+
+        
     </div>
   )
 }

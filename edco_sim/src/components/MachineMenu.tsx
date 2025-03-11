@@ -3,10 +3,12 @@ import ListButton from './ListButton';
 import NextButton from './NextButton';
 import { allMachineData, isMachineElectricGlobal } from '../functions';
 import RentalItem from './RentalItem';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export default function EditLayer(props: any) {
 
   const [selectedLayerState, setSelectedLayerState] = useState<number>();
+  const [machineNoiseMaker, setMachineNoiseMaker] = useState<boolean>(true); //triggers useeffect on every machine click
 
   // const [matchingMachinesL1, setmatchingMachinesL1] = useState<any>();
   // const [matchingMachinesL2, setmatchingMachinesL2] = useState<any>();
@@ -33,6 +35,7 @@ export default function EditLayer(props: any) {
         props.layerObject.setContainsElectric(true);
       }
 
+      setMachineNoiseMaker(prev => !prev);
       handleMenuState(-1);
     }
 
@@ -262,13 +265,14 @@ export default function EditLayer(props: any) {
       props.setAllowProgress(2);
     }
     
-  })
+  }, [machineNoiseMaker])
 
   return (
     <div className='col edit-menu scroll-on'>
         {props.layerObject.sublayerObjects.map((subLayer: any, index: number) => (
           <>
             <ListButton
+              key={index}
               lable={`${numberToWord(index + 1)} Layer`}
               active={selectedLayerState == index ? true : false}
               onClick={() => {handleMenuState(index)}}
@@ -302,15 +306,26 @@ export default function EditLayer(props: any) {
           </>
         ))}
 
-        {props.allowProgress == 2 &&
-            <NextButton lable={'Next: Tooling'} onClick={() => props.nextFunction()} />
-          }
+
+          <AnimatePresence>
+                {props.allowProgress === 2 && (
+                    <motion.div
+                    key="nextButton"
+                    initial={{ x: '-150%' }} // Start fully off-screen to the left
+                    animate={{ x: 0 }} // Move to its normal position
+                    exit={{ x: '-150%' }} // Move fully off-screen when it disappears
+                    transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+                    >
+                      <NextButton lable={'Next: Tooling'} onClick={() => props.nextFunction()} clickable={props.allowProgress == 2} />
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
           {props.layerObject.getEdgerforPDF() == "Yes" &&
-            <div className='row suggestion'>Edge Grinder Added Automatically</div>
+            <div className='row suggestion montserrat'>Edge Grinder Added Automatically</div>
           }
           {props.layerObject.getSurfaceType() == "concrete" &&
-            <div className='row suggestion'>Dust Control Added Automatically</div>
+            <div className='row suggestion montserrat'>Dust Control Added Automatically</div>
           }
     </div>
   )

@@ -10,12 +10,74 @@
     font-weight: normal;
     font-style: normal;
 }
+
 body {
     font-family: 'EurostileExtendedBlack', sans-serif;
     text-transform: uppercase;
 }
 html, body{
     overflow-y: hidden;
+}
+
+.next-btn-disabled{
+    pointer-events: none;
+    background-color: #474747;
+    color: rgb(140, 140, 140);
+    border: none;
+    padding: 0.5rem 0;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 1rem;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+}
+
+.next-btn{
+    pointer-events: initial;
+    background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box;
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 0.5rem 0;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 1rem;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+}
+
+.next-btn:hover{
+    background: transparent linear-gradient(180deg, #a52837 0%, #90192F 100%) 0% 0% no-repeat padding-box;
+}
+
+.next-btn-inner{
+    pointer-events: initial;
+    background: transparent;
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 0.5rem 0;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 1rem;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+}
+
+.montserrat{
+    font-family: "Teko", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.25rem;
+}
+
+.montserrat-red{
+    font-family: "Teko", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.25rem;
+    color: #D73648;
 }
 
 .arachnid-background{
@@ -30,11 +92,11 @@ html, body{
 
 .header{
     background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box;
-    height: 64px;
+    padding: 0;
 }
 
 .ui-container{
-    height: calc(100% - 64px);
+    height: calc(100%);
 }
 
 .ui-row{
@@ -63,6 +125,7 @@ html, body{
 
 .tab-btn{
     background-color: white;
+    background-color: rgb(240, 240, 240);
     border: none;
     padding: 1rem 0;
     margin: 0;
@@ -81,6 +144,7 @@ html, body{
     padding: 1rem 0;
     margin: 0;
     color: white;
+    pointer-events: none;
 }
 
 .tab-btn-inactive-light{
@@ -89,10 +153,11 @@ html, body{
     padding: 1rem 0;
     margin: 0;
     color: white;
+    pointer-events: none;
 }
 
 .tab-btn-active{
-    background: var(--active);
+    background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box;
     border: none;
     padding: 1rem 0;
     margin: 0;
@@ -100,7 +165,7 @@ html, body{
 }
 
 .tab-btn:hover{
-    background-color:var(--hover);
+    background: transparent linear-gradient(180deg, #a52837 0%, #90192F 100%) 0% 0% no-repeat padding-box;;
     color: white;
 }
 
@@ -121,28 +186,24 @@ html, body{
     background-color: white;
     border: none;
     color: #474747;
-    padding: 1rem 1.5rem;
+    padding: 0.5rem 1rem;
     /* box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%); */
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 500; /* 'medium' corresponds to 500 */
-    font-size: 14px;
-    line-height: 20px;
-    font-family: 'EurostileExtendedBlack', sans-serif;
     text-transform: uppercase;
+    margin: 0;
+
 }
 
 .rental-item{
     background-color: white;
     border: none;
-    padding: 1rem 1.5rem;
+    padding: 0rem 1.5rem;
+    padding-top: 0.25rem;
     /* box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%); */
+    font-family: "Teko", sans-serif;
+    font-weight: 300;
     font-style: normal;
-    font-variant: normal;
-    font-weight: 500; /* 'medium' corresponds to 500 */
-    font-size: 14px;
+    font-size: 1.25rem;
     line-height: 20px;
-    font-family: 'EurostileExtendedBlack', sans-serif;
     text-transform: uppercase;
     cursor: pointer;
 }
@@ -150,25 +211,17 @@ html, body{
 .rental-item-inner{
     color:#474747;
     border: none;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 500; /* 'medium' corresponds to 500 */
-    font-size: 14px;
-    line-height: 20px;
-    font-family: 'EurostileExtendedBlack', sans-serif;
     text-transform: uppercase;
 }
 
 .rental-item-inner > *{
     color:#474747;
     border: none;
+    font-family: "Teko", sans-serif;
+    font-weight: 300;
     font-style: normal;
-    font-variant: normal;
-    font-weight: 500; /* 'medium' corresponds to 500 */
-    font-size: 14px;
-    line-height: 20px;
-    font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    font-size: 1.25rem;
+    list-style-type: none;
 }
 
 .rental-item-active{
@@ -176,9 +229,10 @@ html, body{
 }
 
 .list-btn{
-    background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box;
+    /* background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box; */
+    background: white;
     border: none;
-    color: white;
+    color: rgb(145, 145, 145);
     padding: 1rem 1.5rem;
     box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
     font-style: normal;
@@ -186,7 +240,6 @@ html, body{
     font-weight: 500; /* 'medium' corresponds to 500 */
     font-size: 14px;
     line-height: 20px;
-    font-family: 'EurostileExtendedBlack', sans-serif;
     text-transform: uppercase;
 }
 
@@ -194,7 +247,7 @@ html, body{
     background-color: white;
     border: none;
     border-radius: 16px 0 0 16px;
-    color: white;
+    color: rgb(145, 145, 145);
     padding: 0;
     box-shadow: 3px 3px 3px 3px rgb(0 0 0 / 20%);
     overflow: hidden;
@@ -212,7 +265,7 @@ html, body{
 }
 
 .list-btn-inner{
-    color: white;
+    color: #474747;
     font-style: normal;
     font-variant: normal;
     font-weight: 500; /* 'medium' corresponds to 500 */
@@ -224,7 +277,7 @@ html, body{
 
 
 .list-btn:hover{
-    background: transparent linear-gradient(180deg, var(--hover), var(--hover)) 0% 0% no-repeat padding-box;
+    background: rgb(236, 236, 236);
 }
 
 .icon-cushion{
@@ -325,7 +378,7 @@ li{
 }
 
 .active-layer-tab{
-    background-color: #e75a6b;
+    background-color: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box;;
     margin: 0;
     padding: 0;
     position: absolute;
@@ -371,6 +424,15 @@ li{
 .cluster-btn{
     background: transparent linear-gradient(180deg, #EF3D5E 0%, #90192F 100%) 0% 0% no-repeat padding-box;
 }
+.cluster-btn > *{
+    color: white;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
+}
 
 .cluster-btn:hover{
     background: transparent linear-gradient(180deg, var(--hover), var(--hover)) 0% 0% no-repeat padding-box;
@@ -378,7 +440,16 @@ li{
 
 .cluster-btn-active{
     background: transparent linear-gradient(180deg, var(--active), var(--active)) 0% 0% no-repeat padding-box;
+}
 
+.cluster-btn-active > *{
+    color: white;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500; /* 'medium' corresponds to 500 */
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'EurostileExtendedBlack', sans-serif;
 }
 
 .product-tag{

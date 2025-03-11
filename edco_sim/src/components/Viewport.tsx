@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-//import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
@@ -14,8 +14,12 @@ export default function Viewport(props: any) {
   const [popupHeightValue, setpopupHeightValueValue] = useState<number>(0);
   const [lastRenderedSurface, setLastRenderedSurface] = useState<any>();
 
+
+  //update viewport so it resets to ceramic on reset, then continue with clarifying left and right menus
+
+
   const mountRef = useRef<any>(null);
-  //const controlsRef = useRef<any>();
+  const controlsRef = useRef<any>();
   const loadedModels = useRef<any>([]);
   const scene = useRef(new THREE.Scene());
   const camera = useRef(new THREE.PerspectiveCamera(75, 1, 0.01, 1000));
@@ -34,7 +38,7 @@ export default function Viewport(props: any) {
   let isFirstLoad = true;
 
   const originalPosition = { x: 0.01, y: 1.5, z: 1.5 };
-  const targetPosition = { x: -1.2, y: 0.05, z: 0.05 }; // Example target position
+  const targetPosition = { x: -1.2, y: 0.05, z: 0.1 }; // Example target position
 
   let shouldMoveCamera = false; // Replace with your actual condition
 
@@ -203,7 +207,7 @@ export default function Viewport(props: any) {
     renderer.current.shadowMap.type = THREE.PCFSoftShadowMap;
 
     //initialize controls
-    // controlsRef.current = new OrbitControls(camera.current, renderer.current.domElement);
+    controlsRef.current = new OrbitControls(camera.current, renderer.current.domElement);
 
     //build environment
     const ambColor = 0xe8e8e8
@@ -325,7 +329,7 @@ export default function Viewport(props: any) {
     let onWindowResize = function () {
       camera.current.aspect = mountRef.current.offsetWidth / mountRef.current.offsetHeight;
       camera.current.updateProjectionMatrix();
-      renderer.current.setSize(mountRef.current.offsetWidth, window.innerHeight - 64);
+      renderer.current.setSize(mountRef.current.offsetWidth, window.innerHeight);
     };
 
     window.addEventListener("resize", onWindowResize, false);
@@ -336,7 +340,7 @@ export default function Viewport(props: any) {
 
     return () => {
       if(mountRef.current !== null) mountRef.current.removeChild(renderer.current.domElement);
-      // if(controlsRef.current !== undefined) controlsRef.current.dispose();
+      if(controlsRef.current !== undefined) controlsRef.current.dispose();
     };
   }, []);
 

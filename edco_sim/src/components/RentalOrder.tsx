@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import RentalItem from './RentalItem'
 import "jspdf/dist/polyfills.es.js";
 import ListButton from './ListButton';
+import { AnimatePresence, motion } from 'framer-motion';
 
 
 export default function RentalOrder(props: any) {
@@ -44,25 +45,71 @@ export default function RentalOrder(props: any) {
 
   return (
     <div className={`col-lg-3 col-sm-8 shadow scroll h-100 ${props.mobileRight == false ? 'hide-menu' : 'show-menu-right'}`} style={{overflowY: "scroll"}}>
-        <div className='suggestion row' >Jobsite Recommendation: </div>
-        {props.current !== undefined && props.current.sublayerObjects.length == 0 ?
-          <div className='suggestion row bottom-gap'>Please complete the jobsite questionnaire. </div>
+        
+        <AnimatePresence>
+          {props.current !== undefined && props.current.sublayerObjects.length === 0 ? (
+            <motion.p
+              key="no-selections"
+              className="suggestion bottom-gap montserrat"
+              initial={{ x: '150%' }} // Start fully off-screen to the left
+              animate={{ x: 0 }} // Move to its normal position
+              exit={{ x: '150%', position: "absolute" }} // Move fully off-screen when it disappears
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+            >
+              Product selections for each layer of the application will appear here once all <span className="montserrat-red">tabs</span> on the menu on the left is complete.
+            </motion.p>
+          ) : (
+            <>
+              <motion.div
+                key="preview-text"
+                className="row"
+                initial={{ x: '150%' }} // Start fully off-screen to the left
+              animate={{ x: 0 }} // Move to its normal position
+              exit={{ x: '150%', position: "absolute" }} // Move fully off-screen when it disappears
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+              >
+                <div className="col-12 tab-bar" style={{ display: "flex", alignItems: "center", height: "106px" }}>
+                  <div className="suggestion montserrat">Click on a <span className="montserrat-red">layer</span> to preview.</div>
+                </div>
+              </motion.div>
 
-          :
-          <div className='suggestion row bottom-gap'>Click on a layer to preview.</div>
+              <motion.div
+                key="recommendations"
+                className="row"
+                initial={{ x: '150%' }} // Start fully off-screen to the left
+              animate={{ x: 0 }} // Move to its normal position
+              exit={{ x: '150%', position: "absolute" }} // Move fully off-screen when it disappears
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+              >
+                <div className="col-12 tab-bar">
+                  <div className="suggestion montserrat tab-btn-active" style={{ backgroundColor: "#EF3D5E", color: "white" }}>
+                    Jobsite Recommendations:
+                  </div>
+                </div>
+              </motion.div>
 
-        }
-        {props.current !== undefined &&
-            props.current.sublayerObjects.map((obj: object, key: number) => 
-              <RentalItem
-                key={key}
-                layerObject={obj}
-                layerIndex={key}
-                active={selectedLayer == key}
-                onClick={() => activateLayer(key)}
-                getAltLayers={getAltLayers}
-                />
-        )}
+              {props.current !== undefined &&
+                props.current.sublayerObjects.map((obj: object, key: number) => (
+                  <motion.div
+                    key={key}
+                    initial={{ x: '150%' }} // Start fully off-screen to the left
+              animate={{ x: 0 }} // Move to its normal position
+              exit={{ x: '150%', position: "absolute" }} // Move fully off-screen when it disappears
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+                  >
+                    <RentalItem
+                      layerObject={obj}
+                      layerIndex={key}
+                      active={selectedLayer === key}
+                      onClick={() => activateLayer(key)}
+                      getAltLayers={getAltLayers}
+                    />
+                  </motion.div>
+                ))}
+            </>
+          )}
+        </AnimatePresence>
+        
 
       </div>
   )

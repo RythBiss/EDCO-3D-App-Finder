@@ -4,6 +4,7 @@ export default function Header(props: any) {
   const refreshPage = () => {
     location.reload();
   }
+  
   const learnMoreSVG = 
     <>
       {/* Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools */}
@@ -54,7 +55,7 @@ export default function Header(props: any) {
   </svg>
 
   return (
-    <nav className="navbar header shadow z-1">
+    <nav className="navbar header shadow z-1" style={{margin: "0"}}>
         <div className="container-fluid">
           {/* mobile button to show/hide jobsite questions */}
           <button className='mobile-button' onClick={() => props.setLeft((prev: boolean) => !prev)} >JOBSITE</button>
@@ -67,6 +68,7 @@ export default function Header(props: any) {
             <button className='menu-button' onClick={() => props.setMenu((prev: boolean) => !prev)} >{props.mobileMenu ? closeSVG : openSVG}</button>
             <a className='redirect-links' href="https://www.edcoinc.com/" target="_blank">{learnMoreSVG}</a>
             <a className='redirect-links' href="https://edcostore.com/" target="_blank" >{buyNowSVG}</a>
+            <button className="redirect-links" onClick={props.createNewLayer}>reset</button>
           </div>
         </div>
     </nav>

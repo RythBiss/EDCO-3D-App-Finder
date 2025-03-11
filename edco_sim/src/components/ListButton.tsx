@@ -65,17 +65,17 @@ export default function ListButton(props: any) {
                                                 title={`Go to product page`}
                                                 href={props.link}
                                                 className='col-12 list-btn-inner history-item-num product-name'
-                                                style={{textAlign: "left", pointerEvents: "auto"}}
+                                                style={{textAlign: "left", pointerEvents: "auto", color: "white"}}
                                                 onClick={(e) => e.stopPropagation()}
                                                 onMouseEnter={(e) => e.stopPropagation()} 
                                                 >{props.displayName}{" "}{linkSVG}</a>
                                             <div style={{width: "94%", height: "1px", backgroundColor: "white", marginBottom: "0.3rem", borderRadius: "2px"}}/>
 
                                             {isNameMachine(props.lable) == true &&
-                                                props.popupInfo[getPowerTypeImageIndexGlobal(props.lable, props.layerObject)].split(",").map((item: string) => <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left", fontSize: "0.9rem", lineHeight: "0.7rem"}}>{item}</div>)
+                                                props.popupInfo[getPowerTypeImageIndexGlobal(props.lable, props.layerObject)].split(",").map((item: string) => <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left", fontSize: "0.9rem", lineHeight: "0.7rem", color: "white"}}>{item}</div>)
                                             }
                                             {isNameMachine(props.lable) == false &&
-                                                props.popupInfo.split(",").map((item: string, index: number) => <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left", fontSize: "0.9rem", lineHeight: "0.7rem"}} >{item}</div>)
+                                                props.popupInfo.split(",").map((item: string, index: number) => <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left", fontSize: "0.9rem", lineHeight: "0.7rem", color: "white"}} >{item}</div>)
                                             }
 
                                         </div>
@@ -90,9 +90,9 @@ export default function ListButton(props: any) {
                                 <>
                                     <div className='col text-start list-btn-inner'>{props.lable}</div>
                                     {props.selected ? 
-                                        <div className="col-1" style={{color: 'white', fontSize: "1.5rem"}}>☑</div>
+                                        <div className="col-1" style={{color: '#474747', fontSize: "1.5rem"}}>☑</div>
                                         :
-                                        <div className="col-1" style={{color: 'white', fontSize: "1.5rem"}}>☐</div>    
+                                        <div className="col-1" style={{color: '#474747', fontSize: "1.5rem"}}>☐</div>    
                                     }
                                 </>
                                 :

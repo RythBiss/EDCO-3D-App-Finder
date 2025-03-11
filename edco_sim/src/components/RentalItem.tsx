@@ -78,7 +78,7 @@ export default function RentalItem(props:any) {
         <div className='col-12 tab-bar'>
             <div className={`rental-item w-100 container  ${props.active == true && 'rental-item-active'}`}>
                 <div className='row justify-content-around align-items-top'>
-                    <div className='col-12 rental-item-inner'>
+                    <div className='col-12 rental-item-inner montserrat'>
 
                         {props.layerIndex > 0 && "Layer " + (props.layerIndex + 1)}
 

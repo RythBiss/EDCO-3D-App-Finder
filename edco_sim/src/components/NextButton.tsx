@@ -11,10 +11,10 @@ export default function ListButton(props: any) {
         <motion.div
             className='row bottom-gap'
         >
-            <div className='col tab-bar'>
-                <button type="button" className={ /*btn-wrapper */` ${props.icon ? 'list-btn-icon' : 'list-btn'} w-100 container`} onClick={handleOnClick}>
+            <div className={`col tab-bar ${props.clickable ? 'next-btn' : 'next-btn-disabled'}`}>
+                <button type="button" className={` w-100 container ${props.clickable ? 'next-btn' : 'next-btn-disabled'}`} onClick={handleOnClick}>
                     <div className={`row ` /*${props.icon ? 'justify-content-around' : ''} */}>
-                        <div className='col-12 list-btn-inner'>{props.lable}</div>
+                        <div className={`col-12 ${props.clickable ? 'next-btn-inner' : 'next-btn-disabled'}` }>{props.lable}</div>
                     </div>
                 </button>
             </div>
