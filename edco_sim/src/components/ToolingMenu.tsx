@@ -178,7 +178,7 @@ export default function ToolingMenu(props: any) {
               className="suggestion montserrat"
 
             >
-              Select tooling in each tab to continue.
+              Click on a layer above to select tooling. Select tooling in each layer to continue.
             </motion.p>
             
             </AnimatePresence>

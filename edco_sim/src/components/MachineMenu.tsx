@@ -328,7 +328,7 @@ export default function EditLayer(props: any) {
                 transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
                 className="suggestion montserrat"
               >
-                Select a machine in each tab to continue.
+                Click on a layer above to select a machine. Select a machine in each layer to continue.
               </motion.p>
               }
             </AnimatePresence>

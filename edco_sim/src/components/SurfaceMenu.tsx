@@ -610,7 +610,7 @@ export default function SurfaceMenu(props:any) {
                 transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
                 className="suggestion montserrat"
               >
-                Complete all questions above to continue.
+                Click on a question to answer. Complete all questions above to continue.
               </motion.p>
             }
             </AnimatePresence>

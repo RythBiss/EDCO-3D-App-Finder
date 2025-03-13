@@ -69,7 +69,7 @@ export default function RentalOrder(props: any) {
               transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
               >
                 <div className="col-12 tab-bar" style={{ display: "flex", alignItems: "center", height: "106px" }}>
-                  <div className="suggestion montserrat">Click on a <span className="montserrat-red">layer</span> to preview.</div>
+                  <div className="suggestion montserrat">Click on a <span className="montserrat-red">layer</span> below to preview in the 3D viewer. <span className="montserrat-red">Hold click and drag</span> in the 3D viewer to rotate. <span className="montserrat-red">Scroll</span> in the 3D viewer to zoom.</div>
                 </div>
               </motion.div>
 
