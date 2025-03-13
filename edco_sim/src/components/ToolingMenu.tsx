@@ -116,51 +116,72 @@ export default function ToolingMenu(props: any) {
         {props.allowProgress >= 3 ?
 
 
-        <AnimatePresence>
-                {props.allowProgress >= 3 && (
-                    <motion.div
-                    key="nextButton"
-                    initial={{ x: '-150%' }} // Start fully off-screen to the left
-                    animate={{ x: 0 }} // Move to its normal position
-                    exit={{ x: '-150%' }} // Move fully off-screen when it disappears
-                    transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
-                    >
-                      <NextButton lable={'View Recommendation'} onClick={() => props.printPDF()} clickable={props.allowProgress >= 3} />
-                    </motion.div>
-                )}
-        </AnimatePresence>
+          <AnimatePresence>
+            <motion.div
+            key="nextButton"
+            initial={{ x: '-150%' }} // Start fully off-screen to the left
+            animate={{ x: 0 }} // Move to its normal position
+            exit={{  x: '-150%', position: "absolute"  }} // Move fully off-screen when it disappears
+            transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+            >
+              <NextButton lable={'View Recommendation'} onClick={() => props.printPDF()} clickable={props.allowProgress >= 3} />
+            </motion.div>
+
+          </AnimatePresence>
 
         :
+
           <>
-            {props.layerObject.sublayerObjects.map((sublayer: any, index: number) => (
-              <div key={index}>
-                <ListButton
-                  lable={`Layer ${index + 1}`}
-                  onClick={() => toolSelect(index)}
-                  selected={sublayer.tooling !== ''}
-                />
-                {openTab === index && getToolsAlgorithm(index).length !== 0 &&
-                  getToolsAlgorithm(index).map((tool: any, i: any) => (
-                    <ListButton
-                      key={i}
-                      lable={toolsByApplicationAndMachine[tool].name}
-                      displayName={toolsByApplicationAndMachine[tool].name}
-                      indent={1}
-                      popupOn={props.popupOn}
-                      showMenu={true}
-                      icon={toolsByApplicationAndMachine[tool].image}
-                      onClick={() =>
-                        setTooling(toolsByApplicationAndMachine[tool].name, index, toolsByApplicationAndMachine[tool].CSP)}
-                      mouseAction={() => handlePopup(tool)}
-                      setIsInfoPopupOnupYPos={props.setPopupYPos}
-                      popupInfo={toolsByApplicationAndMachine[tool].info}
-                      partNumber={toolsByApplicationAndMachine[tool].number[0]}
-                      link={toolsByApplicationAndMachine[tool].link}
-                      layerObject={props.layerObject}
-                    />
-                  ))}
-              </div>
-            ))}
+          <AnimatePresence>
+            <motion.div
+              initial={{ x: '-150%' }} // Start fully off-screen to the left
+              animate={{ x: 0 }} // Move to its normal position
+              exit={{ x: '-150%', position: "absolute" }} // Move fully off-screen when it disappears
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+            >
+              {props.layerObject.sublayerObjects.map((sublayer: any, index: number) => (
+                <div key={index} >
+                  <ListButton
+                    lable={`Layer ${index + 1}`}
+                    onClick={() => toolSelect(index)}
+                    selected={sublayer.tooling !== ''}
+                  />
+                  {openTab === index && getToolsAlgorithm(index).length !== 0 &&
+                    getToolsAlgorithm(index).map((tool: any, i: any) => (
+                      <ListButton
+                        key={i}
+                        lable={toolsByApplicationAndMachine[tool].name}
+                        displayName={toolsByApplicationAndMachine[tool].name}
+                        indent={1}
+                        popupOn={props.popupOn}
+                        showMenu={true}
+                        icon={toolsByApplicationAndMachine[tool].image}
+                        onClick={() =>
+                          setTooling(toolsByApplicationAndMachine[tool].name, index, toolsByApplicationAndMachine[tool].CSP)}
+                        mouseAction={() => handlePopup(tool)}
+                        setIsInfoPopupOnupYPos={props.setPopupYPos}
+                        popupInfo={toolsByApplicationAndMachine[tool].info}
+                        partNumber={toolsByApplicationAndMachine[tool].number[0]}
+                        link={toolsByApplicationAndMachine[tool].link}
+                        layerObject={props.layerObject}
+                      />
+                    ))}
+                </div>
+              ))}
+            </motion.div>
+
+            <motion.p
+              initial={{ x: '-150%' }} // Start fully off-screen to the left
+              animate={{ x: 0 }} // Move to its normal position
+              exit={{ x: '-150%', position: "absolute" }} // Move fully off-screen when it disappears
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+              className="suggestion montserrat"
+
+            >
+              Select tooling in each tab to continue.
+            </motion.p>
+            
+            </AnimatePresence>
           </>
         }
 

@@ -589,7 +589,7 @@ export default function SurfaceMenu(props:any) {
         }
 
             <AnimatePresence>
-                {props.allowProgress === 1 && (
+                {props.allowProgress === 1 ? (
                     <motion.div
                     key="nextButton"
                     initial={{ x: '-150%' }} // Start fully off-screen to the left
@@ -599,7 +599,20 @@ export default function SurfaceMenu(props:any) {
                     >
                     <NextButton lable={'Next: Machines'} onClick={() => props.nextFunction()} clickable={props.allowProgress == 1} />
                     </motion.div>
-                )}
+                )
+            
+            :
+            <motion.p
+                key="nextButtonDisabled"
+                initial={{ x: '-150%' }} // Start fully off-screen to the left
+                animate={{ x: 0 }} // Move to its normal position
+                exit={{ x: '-150%', position: "absolute" }} // Move fully off-screen when it disappears
+                transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+                className="suggestion montserrat"
+              >
+                Complete all questions above to continue.
+              </motion.p>
+            }
             </AnimatePresence>
 
     </div>

@@ -308,7 +308,7 @@ export default function EditLayer(props: any) {
 
 
           <AnimatePresence>
-                {props.allowProgress === 2 && (
+                {props.allowProgress === 2 ? (
                     <motion.div
                     key="nextButton"
                     initial={{ x: '-150%' }} // Start fully off-screen to the left
@@ -318,7 +318,19 @@ export default function EditLayer(props: any) {
                     >
                       <NextButton lable={'Next: Tooling'} onClick={() => props.nextFunction()} clickable={props.allowProgress == 2} />
                     </motion.div>
-                )}
+                )
+              :
+              <motion.p
+                key="nextButtonDisabled"
+                initial={{ x: '-150%' }} // Start fully off-screen to the left
+                animate={{ x: 0 }} // Move to its normal position
+                exit={{ x: '-150%', position: "absolute" }} // Move fully off-screen when it disappears
+                transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+                className="suggestion montserrat"
+              >
+                Select a machine in each tab to continue.
+              </motion.p>
+              }
             </AnimatePresence>
 
           {props.layerObject.getEdgerforPDF() == "Yes" &&
