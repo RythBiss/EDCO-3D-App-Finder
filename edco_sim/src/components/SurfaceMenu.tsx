@@ -424,7 +424,7 @@ export default function SurfaceMenu(props:any) {
                                 <div className='cluster-btn-container'>
                                     {thicknessRemovedConditional.map((layer:any, i) => 
                                         <ClusterButton key={i} active={activeThickness == thicknessRemovedConditional[i]}
-                                            lable={thicknessRemovedConditional[i]} layerObject={props.layerObject} onClick={() => setThicknessHandler(thicknessRemovedConditional[i])} />
+                                            lable={thicknessRemovedConditional[i]} layerObject={props.layerObject} onClick={() => setThicknessHandler(thicknessRemovedConditional[i])} layer={layer} />
                                     )}
                                 </div></>
                             }

@@ -1,33 +1,31 @@
-import { useEffect, useRef, useState } from "react";
-import { getPowerTypeImageIndexGlobal, isNameMachine, allMachineData } from '../functions';
-import { TGALoader } from "three/examples/jsm/loaders/TGALoader.js";
+import { getPowerTypeImageIndexGlobal, isNameMachine } from '../functions';
 
 export default function ListButton(props: any) { 
 
-    const [isInfoPopupOn, setIsInfoPopupOn] = useState<boolean>(false);
-    const infoPopupRef = useRef<HTMLInputElement>(null)
+    // const [isInfoPopupOn, setIsInfoPopupOn] = useState<boolean>(false);
+    // const infoPopupRef = useRef<HTMLInputElement>(null)
 
     //execute function given by props
     const handleOnClick = () => {
         props.onClick();
     }
 
-    //handles information popup states and positions popup next to hover button.
-    const handlePop = () => {
-        props.mouseAction();
-        setIsInfoPopupOn(true);
+    // //handles information popup states and positions popup next to hover button.
+    // const handlePop = () => {
+    //     props.mouseAction();
+    //     setIsInfoPopupOn(true);
 
-        if(infoPopupRef.current !== null){
-            const popupPositionY = infoPopupRef.current.getBoundingClientRect().y;
+    //     if(infoPopupRef.current !== null){
+    //         const popupPositionY = infoPopupRef.current.getBoundingClientRect().y;
             
-            props.setIsInfoPopupOnupYPos(popupPositionY)
-        }
-    }
+    //         props.setIsInfoPopupOnupYPos(popupPositionY)
+    //     }
+    // }
 
     //sets popup state up the prop chain.
-    useEffect(() => {
-        if(props.popupOn) props.popupOn(isInfoPopupOn)
-    }, [isInfoPopupOn])
+    // useEffect(() => {
+    //     if(props.popupOn) props.popupOn(isInfoPopupOn)
+    // }, [isInfoPopupOn])
 
     const linkSVG =
     <>
@@ -72,10 +70,10 @@ export default function ListButton(props: any) {
                                             <div style={{width: "94%", height: "1px", backgroundColor: "white", marginBottom: "0.3rem", borderRadius: "2px"}}/>
 
                                             {isNameMachine(props.lable) == true &&
-                                                props.popupInfo[getPowerTypeImageIndexGlobal(props.lable, props.layerObject)].split(",").map((item: string) => <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left", fontSize: "0.9rem", lineHeight: "0.7rem", color: "white"}}>{item}</div>)
+                                                props.popupInfo[getPowerTypeImageIndexGlobal(props.lable, props.layerObject)].split(",").map((item: string) => <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left", fontSize: "0.9rem", lineHeight: "0.9rem", color: "white"}}>{item}</div>)
                                             }
                                             {isNameMachine(props.lable) == false &&
-                                                props.popupInfo.split(",").map((item: string, index: number) => <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left", fontSize: "0.9rem", lineHeight: "0.7rem", color: "white"}} >{item}</div>)
+                                                props.popupInfo.split(",").map((item: string) => <div className='col-12 list-btn-inner history-item-num product-number' style={{textAlign: "left", fontSize: "0.9rem", lineHeight: "0.9rem", color: "white"}} >{item}</div>)
                                             }
 
                                         </div>
@@ -90,9 +88,9 @@ export default function ListButton(props: any) {
                                 <>
                                     <div className='col text-start list-btn-inner'>{props.lable}</div>
                                     {props.selected ? 
-                                        <div className="col-1" style={{color: '#474747', fontSize: "1.5rem"}}>☑</div>
+                                        <div className="col-1" style={{color: '#D73648', fontSize: "1.5rem", fontWeight: "700"}}>🗸</div>
                                         :
-                                        <div className="col-1" style={{color: '#474747', fontSize: "1.5rem"}}>☐</div>    
+                                        <div className="col-1" style={{color: '#D73648', fontSize: "1.5rem"}}></div>    
                                     }
                                 </>
                                 :

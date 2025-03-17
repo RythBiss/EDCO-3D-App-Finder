@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import RentalItem from './RentalItem'
 import "jspdf/dist/polyfills.es.js";
-import ListButton from './ListButton';
 import { AnimatePresence, motion } from 'framer-motion';
 
 
@@ -56,7 +55,7 @@ export default function RentalOrder(props: any) {
               exit={{ x: '150%', position: "absolute" }} // Move fully off-screen when it disappears
               transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
             >
-              Product selections for each layer of the application will appear here once all <span className="montserrat-red">tabs</span> on the menu on the left is complete.
+              Product selections for each layer of the application will appear here once all <span className="montserrat-red">TABS</span> on the menu on the left is complete.
             </motion.p>
           ) : (
             <>
@@ -69,7 +68,7 @@ export default function RentalOrder(props: any) {
               transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
               >
                 <div className="col-12 tab-bar" style={{ display: "flex", alignItems: "center", height: "106px" }}>
-                  <div className="suggestion montserrat">Click on a <span className="montserrat-red">layer</span> below to preview in the 3D viewer. <span className="montserrat-red">Hold click and drag</span> in the 3D viewer to rotate. <span className="montserrat-red">Scroll</span> in the 3D viewer to zoom.</div>
+                  <div className="suggestion montserrat">Click on a <span className="montserrat-red">LAYER</span> below to preview in the 3D viewer. <span className="montserrat-red">HOLD CLICK AND DRAG</span> in the 3D viewer to rotate. <span className="montserrat-red">SCROLL</span> in the 3D viewer to zoom.</div>
                 </div>
               </motion.div>
 

@@ -60,16 +60,17 @@ const printPDF = () => {
     return props.layerObject.getSurfaceType() == "concrete";
   }
 
-  props.layerObject.sublayerObjects.forEach((item: any, index: number) =>{ //i think this statement is causing spaces because its skipping layers that have the same machine?
+  props.layerObject.sublayerObjects.forEach((item: any) =>{ //i think this statement is causing spaces because its skipping layers that have the same machine?
     const currentName = allMachineData[item.machine].displayName[getPowerTypeImageIndexGlobal(item.machine, props.layerObject)];
 
-    if(machineArray.includes(item.machine) == false){
-      doc.text(currentName, 10, getLine());
-      doc.text(`${props.layerObject.sublayerObjects.length} - ${getMachinePartNumberGlobal(item.machine, props.layerObject)}`, 60, getLine());
-      machineArray.push(item.machine);
-      getLineIncrement();
+    if(machineArray !== null && machineArray !== undefined){
+      if(machineArray.includes(item.machine) == false){
+        doc.text(currentName, 10, getLine());
+        doc.text(`${props.layerObject.sublayerObjects.length} - ${getMachinePartNumberGlobal(item.machine, props.layerObject)}`, 60, getLine());
+        machineArray.push(item.machine);
+        getLineIncrement();
+      }
     }
-
     
   })
 
@@ -182,7 +183,7 @@ const printPDF = () => {
   }
 
   // gas engine warning and disclaimer
-  doc.setFont(undefined, "bold");
+  doc.setFont("Arial", "bold");
   doc.text("Small gasoline engines produce high concentrations of carbon monoxide (CO). Never operate\ngas powered equipment indoors.\nAbove recommendation is based on information supplied. Application variables may alter machine\nor tooling requirements.Please speak with an expert or call our customer support\nto validate information.", 105, 275, { align: "center" });
 
   // output PDF
@@ -220,7 +221,7 @@ const menus = [
     <div className={`col-lg-3 col-sm-8 shadow scroll h-100 ${props.mobileLeft == false ? 'hide-menu' : 'show-menu'}`} >
         <div className='edit-layer'>
 
-                <div style={{display: "flex", alignItems: 'center', height: "106px"}}>
+              <div style={{display: "flex", alignItems: 'center', height: "106px"}}>
                 <AnimatePresence mode="wait">
                   {props.allowProgress === 0 && (
                     <motion.p
@@ -231,7 +232,7 @@ const menus = [
                       transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
                       className="suggestion montserrat"
                     >
-                      Complete the questionnaire in the <span className="montserrat-red">jobsite</span> tab to unlock the machines and tooling tabs.
+                      Complete the questionnaire in the <span className="montserrat-red">JOBSITE</span> tab to unlock the machines and tooling tabs.
                     </motion.p>
                   )}
                   {props.allowProgress === 1 && (
@@ -243,7 +244,7 @@ const menus = [
                       transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
                       className="suggestion montserrat"
                     >
-                      Select products for all layers in the <span className="montserrat-red">machines</span> tab to unlock the tooling tab.
+                      Select products for all layers in the <span className="montserrat-red">MACHINES</span> tab to unlock the tooling tab. You can return to previous tabs by clicking on them.
                     </motion.p>
                   )}
                   {props.allowProgress === 2 && (
@@ -255,7 +256,7 @@ const menus = [
                       transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
                       className="suggestion montserrat"
                     >
-                      Select products for all layers in the <span className="montserrat-red">tooling</span> tab to get product recommendations.
+                      Select products for all layers in the <span className="montserrat-red">TOOLING</span> tab to get product recommendations. You can return to previous tabs by clicking on them.
                     </motion.p>
                   )}
                   {props.allowProgress >= 3 && (
@@ -267,12 +268,12 @@ const menus = [
                       transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
                       className="suggestion montserrat"
                     >
-                      View recommendation by clicking <span className="montserrat-red">view recommendation</span> below.
+                      View recommendation by clicking <span className="montserrat-red">VIEW RECOMMENDATION</span> below.
                     </motion.p>
                   )}
                 </AnimatePresence>
 
-                </div>
+              </div>
 
             <div className='row'>
                 {/* tab buttons */}

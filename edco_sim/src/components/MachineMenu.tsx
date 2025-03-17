@@ -2,7 +2,6 @@ import {useEffect, useState } from 'react'
 import ListButton from './ListButton';
 import NextButton from './NextButton';
 import { allMachineData, isMachineElectricGlobal } from '../functions';
-import RentalItem from './RentalItem';
 import { AnimatePresence, motion } from 'framer-motion';
 
 export default function EditLayer(props: any) {
@@ -223,7 +222,7 @@ export default function EditLayer(props: any) {
   }
 
   const numberToWord = (num: number): string => {
-    const words = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
+    const words = ["First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth", "Tenth"];
     return words[num - 1];
   };
 

@@ -5,6 +5,7 @@ import Header from './components/Header'
 import RentalOrder from './components/RentalOrder'
 import Viewport from './components/Viewport'
 import LinksMenu from './components/LinksMenu'
+import { AnimatePresence, motion } from 'framer-motion'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
   const [popupInfo, setPopupInfo] = useState<string>('blank');
   const [popupYPos, setPopupYPos] = useState<number>(0);
   const [resetToggle, reset] = useState<boolean>(true);
+  const [splashScreen, setSplashscreen] = useState<boolean>(true);
 
   //locks clicking on tabs when previous selections have not been made.
   const [allowProgress, setAllowProgress] = useState<number>(0);
@@ -392,6 +394,50 @@ function App() {
 
   return (
     <>
+    <AnimatePresence>
+      {splashScreen && 
+      <>
+        <motion.div
+          key="splash"
+          initial={{ opacity: 0.6 }}
+          animate={{ opacity: 0.6 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+          className='splash-screen'/>
+        <motion.div
+          key="splash"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }} 
+          className='splash-screen-inner'
+          >
+          <h1 className='splash-screen-text splash-screen-h1'>EDCO Application solver</h1>
+          <div className='splash-screen-center-text'>
+            <h2 className='splash-screen-h2 splash-screen-text'>Step 1: Describe your jobsite needs</h2>
+            <p className='montserrat splash-screen-text'>Answer all the questions under the jobsite tab on the left side of the screen. These answers are used to select products for your application.</p>
+          </div>
+          <div className='splash-screen-center-text'>
+            <h2 className='splash-screen-h2 splash-screen-text'>Step 2: Select Recommended Products</h2>
+            <p className='montserrat splash-screen-text'>Choose a machine and tooling for each layer of the application from within the machines and tooling tabs on the left of the screen.</p>
+          </div>
+          <div className='splash-screen-center-text'>
+            <h2 className='splash-screen-h2 splash-screen-text'>Step 3: Get your recommendation</h2>
+            <p className='montserrat splash-screen-text'>Generate a rental ticket recommendation and provide it to an EDCO vendor or order online at edcostore.com</p>
+          </div>
+
+          <button
+            className='tab-btn' style={{padding: "1rem", borderRadius: "0.5rem", boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.4)"}}
+            onClick={() => {setSplashscreen(false)}}
+            >START
+          </button>
+        </motion.div>
+          
+
+      </>
+      
+      }
+      </AnimatePresence>
       <Header createNewLayer={resetAppFinder} setLeft={setLeft} setRight={setRight} setMenu={setMenu} mobileMenu={mobileMenu} />
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100' style={{position: 'relative'}}>

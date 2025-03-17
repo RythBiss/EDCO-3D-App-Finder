@@ -13,10 +13,68 @@
 
 body {
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
 }
 html, body{
     overflow-y: hidden;
+}
+
+.splash-screen {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+}
+
+.splash-screen-inner {
+    background-color: var(--primary);
+    min-height: 50%;
+    max-height: 90%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
+    padding: 1rem;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+}
+
+.splash-screen-text {
+    width: 75%;
+    color: white;
+    text-align: center;
+}
+
+.splash-screen-h1 {
+    font-family: "Teko", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 4rem;
+}
+
+.splash-screen-h2 {
+    font-family: "Teko", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2rem;
+}
+
+.splash-screen-center-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .next-btn-disabled{
@@ -135,7 +193,7 @@ html, body{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
 }
 
 .tab-btn-inactive{
@@ -188,7 +246,7 @@ html, body{
     color: #474747;
     padding: 0.5rem 1rem;
     /* box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%); */
-    text-transform: uppercase;
+    /*  */
     margin: 0;
 
 }
@@ -204,14 +262,14 @@ html, body{
     font-style: normal;
     font-size: 1.25rem;
     line-height: 20px;
-    text-transform: uppercase;
+    
     cursor: pointer;
 }
 
 .rental-item-inner{
     color:#474747;
     border: none;
-    text-transform: uppercase;
+    
 }
 
 .rental-item-inner > *{
@@ -240,7 +298,7 @@ html, body{
     font-weight: 500; /* 'medium' corresponds to 500 */
     font-size: 14px;
     line-height: 20px;
-    text-transform: uppercase;
+    
 }
 
 .list-btn-icon{
@@ -257,7 +315,7 @@ html, body{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
 }
 
 .product-name:hover{
@@ -272,7 +330,7 @@ html, body{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
 }
 
 
@@ -325,7 +383,7 @@ li{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
 }
 
 .machine-icon-frame{
@@ -343,7 +401,7 @@ li{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
 }
 
 .list-btn-bullets{
@@ -355,7 +413,7 @@ li{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
 
 }
 
@@ -368,7 +426,7 @@ li{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
     list-style: none;
 }
 
@@ -400,7 +458,7 @@ li{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
 }
 
 .cluster-btn-container > *{
@@ -418,7 +476,7 @@ li{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
 }
 
 .cluster-btn{
@@ -435,7 +493,8 @@ li{
 }
 
 .cluster-btn:hover{
-    background: transparent linear-gradient(180deg, var(--hover), var(--hover)) 0% 0% no-repeat padding-box;
+    background: none;
+    background-color: #5e0f1e;
 }
 
 .cluster-btn-active{
@@ -468,7 +527,7 @@ li{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
 }
 
 .info-pop{
@@ -487,7 +546,7 @@ li{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
 }
 
 .product-name{
@@ -499,7 +558,7 @@ li{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
 }
 .product-number{
     font-size: 0.9rem;
@@ -510,7 +569,7 @@ li{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
 }
 
 .menus-container{
@@ -526,7 +585,7 @@ li{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
     background-color: transparent;
   }
 
@@ -543,7 +602,7 @@ li{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
     background: transparent;
 }
 
@@ -558,7 +617,7 @@ li{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
     color: white;
     text-decoration: none;
 }
@@ -586,7 +645,7 @@ li{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
 }
 
 .drop-option{
@@ -600,7 +659,7 @@ li{
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
 }
 
 input[type="range"] {
@@ -726,7 +785,7 @@ https://codesandbox.io/s/custom-dropdown-react-7oytw?file=/src/styles.css */
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
   }
 .dropdown-active {
     background-color: var(--active);
@@ -740,7 +799,7 @@ https://codesandbox.io/s/custom-dropdown-react-7oytw?file=/src/styles.css */
     font-size: 14px;
     line-height: 20px;
     font-family: 'EurostileExtendedBlack', sans-serif;
-    text-transform: uppercase;
+    
   }
   .dropdown .dropdown-btn {
     cursor: pointer;

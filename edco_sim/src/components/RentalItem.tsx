@@ -5,40 +5,39 @@ import { allMachineData, getPowerTypeImageIndexGlobal, applicationDataObjects, g
 
 
 export default function RentalItem(props:any) {
-    const [thick, setThick] = useState<string>('1/32');
-    const [value, setValue] = useState<number>(0);
-    const [allowThick, setAllowThick] = useState<boolean>(false);
-    const [optionList, setOptionList] = useState(['']);
+    // const [thick, setThick] = useState<string>('1/32');
+    // const [value, setValue] = useState<number>(0);
+    // const [allowThick, setAllowThick] = useState<boolean>(false);
     const [machine, setMachine] = useState<string>('');
     const [tool, setTool] = useState<string>('');
 
-    //assigns layer thickness, takes slider event result.
-    const handleSetThick = (value: string) => {
+    // //assigns layer thickness, takes slider event result.
+    // const handleSetThick = (value: string) => {
 
-        props.layerObject.setMaterialThickness(value)
+    //     props.layerObject.setMaterialThickness(value)
         
-        switch(value){
-            case '0':
-                setThick('1/32')
-                setValue(0)
-                break;
-            case '1':
-                setThick('1/16')
-                setValue(1)
-                break;
-            case '2':
-                setThick('1/8')
-                setValue(2)
-                break;
-            case '3':
-                setThick('1/4')
-                setValue(3)
-                break;
-            default:
-                setThick('1/32')
-                setValue(0)
-        }
-    }
+    //     switch(value){
+    //         case '0':
+    //             setThick('1/32')
+    //             setValue(0)
+    //             break;
+    //         case '1':
+    //             setThick('1/16')
+    //             setValue(1)
+    //             break;
+    //         case '2':
+    //             setThick('1/8')
+    //             setValue(2)
+    //             break;
+    //         case '3':
+    //             setThick('1/4')
+    //             setValue(3)
+    //             break;
+    //         default:
+    //             setThick('1/32')
+    //             setValue(0)
+    //     }
+    // }
 
     //execute function given by props
     const handleOnClick = () => {
@@ -80,9 +79,9 @@ export default function RentalItem(props:any) {
                 <div className='row justify-content-around align-items-top'>
                     <div className='col-12 rental-item-inner montserrat'>
 
-                        {props.layerIndex > 0 && "Layer " + (props.layerIndex + 1)}
+                        {props.layerIndex > 0 && "LAYER - " + (props.layerIndex + 1)}
 
-                        {props.layerIndex == 0 && "Layer " + 1}
+                        {props.layerIndex == 0 && "LAYER - " + 1}
 
                         {props.layerIndex == 'Active' && 'Active Layer'}
 
@@ -121,7 +120,7 @@ export default function RentalItem(props:any) {
                                 }}
                             >TOOLING: {props?.layerObject?.tooling}</motion.li>
 
-                            {allowThick == true &&
+                            {/* {allowThick == true &&
                                 <motion.li
                                 key={thick} //this one did not have the same problem as machine.
                                 initial={{ backgroundColor: '#ffffffCC' }}
@@ -131,7 +130,7 @@ export default function RentalItem(props:any) {
                                     duration: 1.25
                                 }}
                                 >THICKNESS: {thick}</motion.li>
-                            }
+                            } */}
 
                         </ul>
                     </div>

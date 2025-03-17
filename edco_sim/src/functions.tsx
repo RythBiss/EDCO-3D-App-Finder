@@ -705,7 +705,7 @@ export const isMachineElectricGlobal = (number: string) => {
 
 export const toolingHasDiamonds = (tooling: string) => {
 
-  let toolingObjectID: string;
+  let toolingObjectID: string = '';
 
   Object.keys(toolsByApplicationAndMachine).forEach((element: any) => {
     if(toolsByApplicationAndMachine[element].name == tooling){
@@ -725,10 +725,14 @@ export const getModelNameBySurfacename = (surfaceName: string, layerObject: any)
     let applicationList = getCorrectApplicationList(layerObject);
   
     for (const [key, value] of Object.entries(applicationList)) {
+
+      console.log(key);
+
+      const app = value as { name: string; modelName: string }; //assert type
   
-      if(surfaceName == value.name.toLowerCase()){
+      if(surfaceName == app.name.toLowerCase()){
   
-        modelName = value.modelName;
+        modelName = app.modelName;
   
         break;
   

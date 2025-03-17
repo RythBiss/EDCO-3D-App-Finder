@@ -1,5 +1,4 @@
 import "jspdf/dist/polyfills.es.js";
-import { useEffect } from "react";
 
 
 export default function LinksMenu(props: any) {

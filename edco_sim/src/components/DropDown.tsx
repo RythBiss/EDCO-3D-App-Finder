@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function DropDown(props) {
+export default function DropDown(props:any) {
   const [isActive, setIsActive] = useState(false);
   const [selected, setIsSelected] = useState(props.currentValue);
 
@@ -32,13 +32,13 @@ export default function DropDown(props) {
     <>
       <label htmlFor="changeLayer" style={{display: 'none'}}>change layer</label>
       <div className={`dropdown ${props.active && 'dropdown-active'}`} id="changeLayer">
-        <div onClick={(e) => {setIsActive(!isActive)}} className="dropdown-btn" >
+        <div onClick={() => {setIsActive(!isActive)}} className="dropdown-btn" >
           {selected}
           <span>
             {isActive? caretUp : caretDw}
           </span>
         </div>
-        <div className="dropdown-content" style={{ display: isActive ? "block" : "none" }} > {props.optionsStringArray.map((item, i)=> 
+        <div className="dropdown-content" style={{ display: isActive ? "block" : "none" }} > {props.optionsStringArray.map((item:any, i:number)=> 
           <div key={i} onClick={(e) => handleActive(e, item)} className="item" >
             {item}
           </div> 

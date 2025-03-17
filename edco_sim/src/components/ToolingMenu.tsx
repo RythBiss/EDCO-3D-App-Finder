@@ -9,7 +9,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 export default function ToolingMenu(props: any) {
   //temporary tooling data table until backend is developed.
 
-  const [matchingTooling, setMatchingTooling] = useState<string[][]>([]);
   const [openTab, setOpenTab] = useState<number>(-1);
   const [toolingNoiseMaker, setToolingNoiseMaker] = useState<boolean>(true); //triggers useeffect on every machine click
 
@@ -94,6 +93,12 @@ export default function ToolingMenu(props: any) {
 
   }
 
+  
+  const numberToWord = (num: number): string => {
+    const words = ["First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth", "Tenth"];
+    return words[num - 1];
+  };
+
   //checks if tooling has been selected for each layer, and allows the user to access recommendations if so.
   useEffect(()=>{
     let machinesSelected: boolean = true;
@@ -142,7 +147,7 @@ export default function ToolingMenu(props: any) {
               {props.layerObject.sublayerObjects.map((sublayer: any, index: number) => (
                 <div key={index} >
                   <ListButton
-                    lable={`Layer ${index + 1}`}
+                    lable={`${numberToWord(index + 1)} Layer`}
                     onClick={() => toolSelect(index)}
                     selected={sublayer.tooling !== ''}
                   />

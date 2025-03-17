@@ -1,9 +1,5 @@
 
 export default function Header(props: any) {
-
-  const refreshPage = () => {
-    location.reload();
-  }
   
   const learnMoreSVG = 
     <>
@@ -68,7 +64,7 @@ export default function Header(props: any) {
             <button className='menu-button' onClick={() => props.setMenu((prev: boolean) => !prev)} >{props.mobileMenu ? closeSVG : openSVG}</button>
             <a className='redirect-links' href="https://www.edcoinc.com/" target="_blank">{learnMoreSVG}</a>
             <a className='redirect-links' href="https://edcostore.com/" target="_blank" >{buyNowSVG}</a>
-            <button className="redirect-links" onClick={props.createNewLayer}>reset</button>
+            <button className="redirect-links" onClick={props.createNewLayer}>Reset</button>
           </div>
         </div>
     </nav>
