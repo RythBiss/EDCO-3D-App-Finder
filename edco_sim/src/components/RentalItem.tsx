@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 //import DropDown from './DropDown';
 import { motion } from "framer-motion"
-import { allMachineData, getPowerTypeImageIndexGlobal, applicationDataObjects, getApplicationDatabaseName } from '../functions';
+import { allMachineData, getPowerTypeImageIndexGlobal, applicationDataObjects, getApplicationDatabaseName, toolsByApplicationAndMachine, getToolingKeyByName } from '../functions';
 
 
 export default function RentalItem(props:any) {
@@ -109,7 +109,14 @@ export default function RentalItem(props:any) {
                                     duration: 1.25
                                   }}
 
-                            >MACHINE: {props?.layerObject?.machine == "" ? "" : allMachineData[props?.layerObject?.machine].displayName[getPowerTypeImageIndexGlobal(props?.layerObject?.machine, props?.layerObject)]}</motion.li>
+                            >MACHINE: {props?.layerObject?.machine == "" ? "" :
+                                <a className='montserrat' target="_blank" href={allMachineData[props?.layerObject?.machine].link}>
+                                    {
+                                        allMachineData[props?.layerObject?.machine].displayName[getPowerTypeImageIndexGlobal(props?.layerObject?.machine, props?.layerObject)]
+                                    }
+                                </a>
+                            
+                                }</motion.li>
                             <motion.li
                                 key={tool} //this one did not have the same problem as machine.
                                 initial={{ backgroundColor: '#ffffffCC' }}
@@ -118,7 +125,19 @@ export default function RentalItem(props:any) {
                                     type: "linear",
                                     duration: 1.25
                                 }}
-                            >TOOLING: {props?.layerObject?.tooling}</motion.li>
+                            >TOOLING: {props?.layerObject?.tooling == "" ? "" :
+                                <a className='montserrat' target="_blank" href={toolsByApplicationAndMachine[getToolingKeyByName(props?.layerObject?.tooling)].link}>
+                                    {toolsByApplicationAndMachine[getToolingKeyByName(props?.layerObject?.tooling)].name }
+                                </a>
+                            }
+{/* 
+                            <a className='montserrat' target="_blank" href={toolsByApplicationAndMachine[props?.layerObject?.tooling].link}>
+                                    {
+                                        toolsByApplicationAndMachine[props?.layerObject?.tooling].name                                  
+                                    }
+                                </a> */}
+                                
+                            </motion.li>
 
                             {/* {allowThick == true &&
                                 <motion.li

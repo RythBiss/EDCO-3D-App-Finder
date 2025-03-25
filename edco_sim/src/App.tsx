@@ -438,15 +438,21 @@ function App() {
       
       }
       </AnimatePresence>
+      
       <Header createNewLayer={resetAppFinder} setLeft={setLeft} setRight={setRight} setMenu={setMenu} mobileMenu={mobileMenu} />
       <div className='container-fluid ui-container'>
         <div className='row ui-row h-100' style={{position: 'relative'}}>
           <EditLayer resetToggle={resetToggle} createNewLayer={createNewLayer} setPopup={setPopupOn} layerObject={currentLayer} mobileLeft={mobileLeft} setPopupInfo={setPopupInfo} setPopupYPos={setPopupYPos} update={updateState} allowProgress={allowProgress} setAllowProgress={setAllowProgress} />
           <Viewport popup={popupOn} popupInfo={popupInfo} popupYPos={popupYPos} history={layerList[layerList.length - 1]} layer={currentLayer} renderLayer={renderLayer} updateTrigger={updateState} />
           <RentalOrder newLayer={createNewLayer} history={layerList} current={currentLayer} setRenderedLayer={setRenderLayer} mobileRight={mobileRight} mobileMenu={mobileMenu}/>
-          <LinksMenu linksMenu={mobileMenu} />
+          {mobileMenu && 
+            <LinksMenu linksMenu={mobileMenu} />
+          }
+          
         </div>
+        
       </div>
+      
     </>
   )
 }

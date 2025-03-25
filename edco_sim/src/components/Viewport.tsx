@@ -192,6 +192,12 @@ export default function Viewport(props: any) {
   };
 
   updateScene();
+
+  let onWindowResize = function () {
+    camera.current.aspect = mountRef.current.offsetWidth / mountRef.current.offsetHeight;
+    camera.current.updateProjectionMatrix();
+    renderer.current.setSize(mountRef.current.offsetWidth, window.innerHeight);
+  };
   
   useEffect(() => {
     //append renderer to dom
@@ -326,11 +332,11 @@ export default function Viewport(props: any) {
       renderer.current.render(scene.current, camera.current);
     }
 
-    let onWindowResize = function () {
-      camera.current.aspect = mountRef.current.offsetWidth / mountRef.current.offsetHeight;
-      camera.current.updateProjectionMatrix();
-      renderer.current.setSize(mountRef.current.offsetWidth, window.innerHeight);
-    };
+    // let onWindowResize = function () {
+    //   camera.current.aspect = mountRef.current.offsetWidth / mountRef.current.offsetHeight;
+    //   camera.current.updateProjectionMatrix();
+    //   renderer.current.setSize(mountRef.current.offsetWidth, window.innerHeight);
+    // };
 
     window.addEventListener("resize", onWindowResize, false);
     window.addEventListener("maximize", onWindowResize, false);
@@ -358,6 +364,10 @@ export default function Viewport(props: any) {
     }
 
   }, [shouldMoveCamera]);
+
+  useEffect(() => {
+    onWindowResize();
+  }, [props.updateState]);
 
   return (
     <>
