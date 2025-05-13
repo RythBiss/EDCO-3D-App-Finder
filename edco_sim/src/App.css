@@ -77,6 +77,62 @@ html, body{
     align-items: center;
 }
 
+@media only screen and (max-width: 1200px) {   
+    .splash-screen-inner {
+        width: 72%;
+    }
+}
+
+@media only screen and (max-width: 770px) {   
+    .splash-screen-inner {
+        width: 72%;
+    }
+    .splash-screen-h1 {
+        font-size: 2rem;
+        line-height: 1.6rem;
+    }
+
+    .splash-screen-h2 {
+        font-size: 1rem;
+        line-height: 1rem;
+    }
+
+    .splash-screen-text-def{
+        line-height: 1rem;
+    }
+}
+
+@media only screen and (max-height: 900px) {
+    .splash-screen-h1 {
+        font-size: default;
+    }
+
+    .splash-screen-h2 {
+        font-size: default;
+    }
+}
+
+@media only screen and (max-height: 700px) {
+    .splash-screen-h1 {
+        font-size: 2rem;
+        line-height: 1.6rem;
+    }
+
+    .splash-screen-inner {
+        width: 99%;
+    }
+
+    .splash-screen-h2 {
+        font-size: 1rem;
+        line-height: 1rem;
+    }
+
+    .splash-screen-text-def{
+        line-height: 1rem;
+        font-size: 0.9rem !important;
+    }
+}
+
 .next-btn-disabled{
     pointer-events: none;
     background-color: #474747;

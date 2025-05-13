@@ -415,15 +415,15 @@ function App() {
           <h1 className='splash-screen-text splash-screen-h1'>EDCO Application solver</h1>
           <div className='splash-screen-center-text'>
             <h2 className='splash-screen-h2 splash-screen-text'>Step 1: Describe your jobsite needs</h2>
-            <p className='montserrat splash-screen-text'>Answer all the questions under the jobsite tab on the left side of the screen. These answers are used to select products for your application.</p>
+            <p className='montserrat splash-screen-text splash-screen-text-def'>Answer all the questions under the jobsite tab on the left side of the screen. These answers are used to select products for your application.</p>
           </div>
           <div className='splash-screen-center-text'>
             <h2 className='splash-screen-h2 splash-screen-text'>Step 2: Select Recommended Products</h2>
-            <p className='montserrat splash-screen-text'>Choose a machine and tooling for each layer of the application from within the machines and tooling tabs on the left of the screen.</p>
+            <p className='montserrat splash-screen-text splash-screen-text-def'>Choose a machine and tooling for each layer of the application from within the machines and tooling tabs on the left of the screen.</p>
           </div>
           <div className='splash-screen-center-text'>
             <h2 className='splash-screen-h2 splash-screen-text'>Step 3: Get your recommendation</h2>
-            <p className='montserrat splash-screen-text'>Generate a rental ticket recommendation and provide it to an EDCO vendor or order online at edcostore.com</p>
+            <p className='montserrat splash-screen-text splash-screen-text-def'>Generate a rental ticket recommendation and provide it to an EDCO vendor or order online at edcostore.com</p>
           </div>
 
           <button
